@@ -1,0 +1,16 @@
+stat,value
+pop. users,3.0
+conversations,12909.0
+tweets,520263.0
+words,588039.0
+conv. threads,65274.0
+utterances,345277.0
+turns,331971.0
+min. turns,1.0
+avg. turns,5.085807519073445
+max. turns,64.0
+median turns,4.0
+min. context words,5.0
+avg. context words,68.22882
+max. context words,1720.0
+median context words,57.0
