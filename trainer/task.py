@@ -195,6 +195,15 @@ def initialise_hyper_params(args_parser):
     ###########################################
 
     # Estimator arguments
+
+    args_parser.add_argument(
+        '--estimator',
+        help="Learning rate value for the optimizers",
+        choices=[model.MODEL_RNN, model.MODEL_LSTM, model.MODEL_BiLSTM],
+        default=model.MODEL_LSTM,
+        type=str,
+    )
+    
     args_parser.add_argument(
         '--learning-rate',
         help="Learning rate value for the optimizers",

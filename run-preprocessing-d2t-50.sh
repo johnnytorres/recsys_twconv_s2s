@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
-#profiles
-
 python3 -m preprocessing.profiles_builder \
     --input=data/convusersec/timelines_raw.csv \
-    --output=data/convusersec/timelines.csv \
+    --output=data/convusersec/timelines50.csv \
     --tokenize-tweets \
-    --n=10
+    --n=50
 
 #conversations
 # "dialogs" dataset is provided by crawler
@@ -14,8 +12,8 @@ python3 -m preprocessing.profiles_builder \
 #train
 python3 -m preprocessing.csv_builder \
     --data-root=data/convusersec/dialogs \
-    --profiles-path=data/convusersec/timelines.csv \
-    --output=data/convusersec/twconvrsu_csv_v2/train.csv \
+    --profiles-path=data/convusersec/timelines50.csv \
+    --output=data/convusersec/twconvrsu_csv_v2t_50/train.csv \
     --text-field=2 \
     --min-context-length=2 \
     --tokenize-tweets \
@@ -25,8 +23,8 @@ python3 -m preprocessing.csv_builder \
 #valid
 python3 -m preprocessing.csv_builder \
     --data-root=data/convusersec/dialogs \
-    --profiles-path=data/convusersec/timelines.csv \
-    --output=data/convusersec/twconvrsu_csv_v2/valid.csv \
+    --profiles-path=data/convusersec/timelines50.csv \
+    --output=data/convusersec/twconvrsu_csv_v2t_50/valid.csv \
     --text-field=2 \
     --min-context-length=2 \
     --tokenize-tweets \
@@ -36,8 +34,8 @@ python3 -m preprocessing.csv_builder \
 #test
 python3 -m preprocessing.csv_builder \
     --data-root=data/convusersec/dialogs \
-    --profiles-path=data/convusersec/timelines.csv \
-    --output=data/convusersec/twconvrsu_csv_v2/test.csv \
+    --profiles-path=data/convusersec/timelines50.csv \
+    --output=data/convusersec/twconvrsu_csv_v2t_50/test.csv \
     --text-field=2 \
     --min-context-length=2 \
     --tokenize-tweets \
@@ -46,12 +44,12 @@ python3 -m preprocessing.csv_builder \
 
 # tf records builder
 python3 -m preprocessing.tfrecords_builder \
-    --input_dir=data/convusersec/twconvrsu_csv_v2 \
-    --output_dir=data/convusersec/twconvrsu_tf_v2 \
+    --input_dir=data/convusersec/twconvrsu_csv_v2t_50 \
+    --output_dir=data/convusersec/twconvrsu_tf_v2t_50 \
     --max_sentence_len=1400
 
 python3 -m preprocessing.embeddings_builder \
-    data/convusersec/twconvrsu_tf_v2/vocabulary.txt \
+    data/convusersec/twconvrsu_tf_v2t_50/vocabulary.txt \
     embeddings/fasttext/cc.es.300.vec
 
 

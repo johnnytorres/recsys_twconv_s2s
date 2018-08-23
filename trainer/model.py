@@ -28,6 +28,10 @@ from trainer import metadata
 from trainer import task
 
 
+MODEL_RNN = 'rnn'
+MODEL_LSTM = 'lstm'
+MODEL_BiLSTM = 'bilstm'
+
 # ****************************************************************************************
 # YOU MAY MODIFY THESE FUNCTIONS TO USE DIFFERENT ESTIMATORS OR CONFIGURE THE CURRENT ONES
 # ****************************************************************************************
@@ -289,21 +293,56 @@ def create_estimator(config):
 		
 		# create sequence layer based on LSTM
 		with tf.variable_scope('rnn') as vs:
-			cell = tf.nn.rnn_cell.LSTMCell(
-				num_units=task.HYPER_PARAMS.rnn_dim,
-				forget_bias=2.0,  # todo: hyperparameter?
-				use_peepholes=True,
-				state_is_tuple=True
-			)
-		
-			rnn_outputs, rnn_states = tf.nn.dynamic_rnn(
-				cell=cell,
-				inputs=tf.concat([context_embedded, utterance_embedded], 0),
-				sequence_length=tf.concat([context_len, utterance_len], 0),
-				dtype=tf.float32
-			)
-		
-			context_encoded, utterance_encoded = tf.split(rnn_states.h, 2, 0)
+			
+			if task.HYPER_PARAMS.estimator == MODEL_RNN:
+				cell = tf.nn.rnn_cell.BasicRNNCell(
+					num_units=task.HYPER_PARAMS.rnn_dim,
+				)
+			elif task.HYPER_PARAMS.estimator == MODEL_LSTM:
+				cell = tf.nn.rnn_cell.LSTMCell(
+					num_units=task.HYPER_PARAMS.rnn_dim,
+					# todo: hyperparameters?
+					forget_bias=2.0,
+					use_peepholes=True,
+					state_is_tuple=True
+				)
+			else:
+				cell_fw = tf.nn.rnn_cell.BasicLSTMCell(
+					num_units=task.HYPER_PARAMS.rnn_dim,
+					forget_bias=2.0,
+					state_is_tuple=True
+				)
+				cell_bw = tf.nn.rnn_cell.BasicLSTMCell(
+					num_units=task.HYPER_PARAMS.rnn_dim,
+					forget_bias=2.0,
+					state_is_tuple=True
+				)
+			
+			if task.HYPER_PARAMS.estimator == MODEL_BiLSTM:
+				rnn_outputs, rnn_states = tf.nn.bidirectional_dynamic_rnn(
+					cell_fw=cell_fw,
+					cell_bw=cell_bw,
+					inputs=tf.concat([context_embedded, utterance_embedded], 0),
+					sequence_length=tf.concat([context_len, utterance_len], 0),
+					dtype=tf.float32
+				)
+			else:
+				rnn_outputs, rnn_states = tf.nn.dynamic_rnn(
+					cell=cell,
+					inputs=tf.concat([context_embedded, utterance_embedded], 0),
+					sequence_length=tf.concat([context_len, utterance_len], 0),
+					dtype=tf.float32
+				)
+			
+			if task.HYPER_PARAMS.estimator == MODEL_RNN:
+				context_encoded, utterance_encoded = tf.split(rnn_states, 2, 0)
+			elif task.HYPER_PARAMS.estimator == MODEL_LSTM:
+				context_encoded, utterance_encoded = tf.split(rnn_states.h, 2, 0)
+			else:
+				rnn_state_fw , rnn_state_bw = rnn_states
+				# todo: other strategy is to concat, but M must match
+				rnn_states = (rnn_state_fw.h + rnn_state_bw.h)/2
+				context_encoded, utterance_encoded = tf.split(rnn_states, 2, 0)
 			
 		with tf.variable_scope('F') as vs:
 			M = tf.get_variable(

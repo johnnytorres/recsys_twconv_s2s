@@ -33,6 +33,7 @@ def build_profiles(args):
 				tl_tweets = [t.replace('\r', ' ').replace('\n', ' ') for t in tl_tweets]
 				tweet_text = ' '.join(tl_tweets)
 				profiles[prior_screen_name] = tokenize_utterance(tweet_text, args)
+				#todo: check why there is sequences "[ ? ]" after tokenize, my guest are emoticons
 				prior_screen_name = screen_name
 				tweets =[]
 			
@@ -52,6 +53,10 @@ def build_profiles(args):
 
 
 if __name__ == '__main__':
+	
+
+	
+	
 	parser = argparse.ArgumentParser()
 	parser.add_argument('--input', type=lambda x: os.path.expanduser(x))
 	parser.add_argument('--output', type=lambda x: os.path.expanduser(x))
@@ -78,6 +83,28 @@ if __name__ == '__main__':
 	parser.set_defaults(func=build_profiles)
 
 	args = parser.parse_args()
+	
+	
+	# ISSUE with only urls
+	
+	# from html.parser import HTMLParser
+	#
+	# from bs4 import BeautifulSoup as Soup
+	# import re
+	#
+	# GRUBER_URLINTEXT_PAT = re.compile(
+	# 	r'(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:\'".,<>?\xab\xbb\u201c\u201d\u2018\u2019]))')
+	#
+	# with open('data/issue.txt', 'r') as f:
+	# 	tweet_text = f.read()
+	# 	#urls = re.findall('https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', tweet_text)
+	# 	urls = GRUBER_URLINTEXT_PAT.findall(tweet_text)
+	# 	#html = Soup(tweet_text, 'html.parser')
+	# 	#for u in urls:
+	# 		# tweet_text = tweet_text.rep
+	# 	tweet_text = GRUBER_URLINTEXT_PAT.sub( '', tweet_text)
+	#
+	# 	tokenize_utterance(tweet_text,args )
 	
 	args.func(args)
 	
