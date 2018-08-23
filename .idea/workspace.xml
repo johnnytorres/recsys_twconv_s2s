@@ -2,35 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="19142417-1ae3-427a-b4fe-33bbbb363179" name="Default" comment="- add RNN , bi-LSTM models&#10;- fix bugs in preprocessing&#10;- update experiments scripts">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run-cloudml-submit-v1d2i-10k.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run-cloudml-submit-v1d2i-20k.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run-cloudml-submit-v1d2i-60k.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run-cloudml-submit-v1d2t-50.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run-cloudml-submit-v2d2p3.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run-cloudml-submit-v3d2p3.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run-preprocessing-d2i-10k.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run-preprocessing-d2i-20k.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run-preprocessing-d2i-60k.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run-preprocessing-d2t-50.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/task.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/task.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/analysis/results_analysis.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/results_analysis.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/conversation_samples.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/exploratory.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/generate prediction samples.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/oov analysis.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocessing/csv_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/csv_builder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocessing/local-preprocessing.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocessing/profiles_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/profiles_builder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/loss_iterations.eps" beforeDir="false" afterPath="$PROJECT_DIR$/results/loss_iterations.eps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/trainable_embeddings_loss.eps" beforeDir="false" afterPath="$PROJECT_DIR$/results/trainable_embeddings_loss.eps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run-local-debug.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run-local-debug.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run-preprocessing-d1.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run-preprocessing-d1.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run-preprocessing-d2.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run-preprocessing-d2.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run-preprocessing-v2-50.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainer/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/trainer/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainer/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/trainer/task.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocessing/tfrecords_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/tfrecords_builder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/loss_iterations.eps" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/recall_results.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/results/recall_results.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/trainable_embeddings_loss.eps" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/trainable_embeddings_recall.eps" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d1-eval-loss.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d1-eval-recall_at_1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d1-eval-recall_at_2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d1-eval-recall_at_5.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d1-training-loss.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d1p2-eval-loss.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d1p2-eval-recall_at_1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d1p2-eval-recall_at_2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d1p2-eval-recall_at_5.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d1p2-training-loss.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2-eval-loss.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2-eval-recall_at_1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2-eval-recall_at_2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2-eval-recall_at_5.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2-training-loss.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2p2-eval-loss.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2p2-eval-recall_at_1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2p2-eval-recall_at_2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2p2-eval-recall_at_5.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2p2-training-loss.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2p3-nweu-eval-loss.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2p3-nweu-eval-recall_at_1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2p3-nweu-eval-recall_at_2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2p3-nweu-eval-recall_at_5.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2p3-nweu-training-loss.csv" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,7 +44,7 @@
     <session id="-1246948215">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.3" value="1" />
@@ -57,62 +59,40 @@
           <entry key="gitignore" value="1" />
           <entry key="ipynb" value="1" />
           <entry key="md" value="2" />
-          <entry key="py" value="69" />
+          <entry key="py" value="71" />
           <entry key="pyi" value="2" />
-          <entry key="sh" value="64" />
+          <entry key="sh" value="68" />
           <entry key="txt" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Bash" value="64" />
+          <entry key="Bash" value="68" />
           <entry key="Markdown" value="2" />
           <entry key="PLAIN_TEXT" value="7" />
-          <entry key="Python" value="69" />
+          <entry key="Python" value="71" />
           <entry key="PythonStub" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Bash" value="515" />
-          <entry key="PLAIN_TEXT" value="100" />
-          <entry key="Python" value="1415" />
+          <entry key="PLAIN_TEXT" value="103" />
+          <entry key="Python" value="1540" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Python Console" value="289" />
-          <entry key="py" value="1126" />
+          <entry key="py" value="1251" />
           <entry key="sh" value="515" />
-          <entry key="txt" value="100" />
+          <entry key="txt" value="103" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/run-preprocessing-d2t-50.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/trainer/model.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="342" column="69" selection-start-line="342" selection-start-column="69" selection-end-line="342" selection-end-column="69" />
-              <folding>
-                <element signature="e#621#633#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -173,7 +153,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/local-debug.sh" />
         <option value="$PROJECT_DIR$/trainer/metadata.py" />
         <option value="$PROJECT_DIR$/trainer/featurizer.py" />
@@ -224,6 +203,7 @@
         <option value="$PROJECT_DIR$/preprocessing/profiles_builder.py" />
         <option value="$PROJECT_DIR$/run-preprocessing-d2t-50.sh" />
         <option value="$PROJECT_DIR$/trainer/model.py" />
+        <option value="$PROJECT_DIR$/preprocessing/tfrecords_builder.py" />
       </list>
     </option>
   </component>
@@ -424,7 +404,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534965392172</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="- add RNN , bi-LSTM models&#10;- fix bugs in preprocessing&#10;- update experiments scripts">
+      <created>1535031687029</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1535031687029</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -438,9 +425,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24947146" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24947146" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -449,9 +435,9 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.42289156" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info active="true" anchor="bottom" id="TODO" order="6" sideWeight="0.49964765" visible="true" weight="0.32891566" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49964765" weight="0.32891566" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32969698" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49964765" weight="0.22409639" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49964765" visible="true" weight="0.22409639" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5003524" side_tool="true" weight="0.32891566" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -485,7 +471,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/preprocessing/tfrecords_builder.py</url>
-          <line>162</line>
+          <line>163</line>
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -530,13 +516,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/run-cloudml-submit-v1d2.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="17" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/run-cloudml-submit-v1d1p2.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="479">
@@ -692,27 +671,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run-cloudml-submit-v1d2i-10k.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run-cloudml-submit-v1d2i-20k.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="44" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run-cloudml-submit-v1d2i-60k.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="44" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/run-cloudml-submit-v1d2t-50.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
@@ -787,13 +745,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
           <caret line="17" column="44" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run-cloudml-submit-v2d2p3.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -1036,13 +987,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/preprocessing/tfrecords_builder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2964">
-          <caret line="162" column="24" selection-start-line="162" selection-start-column="12" selection-end-line="162" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/preprocessing/profiles_builder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="291">
@@ -1060,10 +1004,50 @@
     <entry file="file://$PROJECT_DIR$/trainer/model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="169">
-          <caret line="342" column="69" selection-start-line="342" selection-start-column="69" selection-end-line="342" selection-end-column="69" />
+          <caret line="342" selection-start-line="342" selection-end-line="342" />
           <folding>
             <element signature="e#621#633#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run-cloudml-submit-v1d2i-10k.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-474">
+          <caret line="12" column="31" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run-cloudml-submit-v1d2i-20k.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="31" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run-cloudml-submit-v1d2i-60k.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="31" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/preprocessing/embeddings_builder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-870" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/preprocessing/tfrecords_builder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="162" selection-start-line="162" selection-end-line="162" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run-cloudml-submit-v2d2p3.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>

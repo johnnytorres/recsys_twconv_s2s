@@ -160,6 +160,7 @@ def create_tfrecords():
 	logging.info("Creating vocabulary...")
 	input_iter = create_csv_iter(TRAIN_PATH, TEST_PATH, VALIDATION_PATH)
 	input_iter = (x[0] + " " + x[1] for x in input_iter)
+	# todo: validate if the vocabulary is considering all text fields , specially distractors in test and validation sets
 	vocab = create_vocab(input_iter, min_frequency=FLAGS.min_word_frequency)
 	vocab_size = len(vocab.vocabulary_)
 	logging.info("Total vocabulary size: {}".format(vocab_size))
