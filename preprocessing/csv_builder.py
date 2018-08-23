@@ -89,6 +89,8 @@ def translate_dialog_to_lists(dialog_filename):
 	
 	return list(zip(users,dialog))
 
+import re
+GRUBER_URLINTEXT_PAT = re.compile(r'(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:\'".,<>?\xab\xbb\u201c\u201d\u2018\u2019]))')
 
 def tokenize_utterance(tweet_text, args):
 	utterance_text = unidecode.unidecode(tweet_text)
@@ -97,6 +99,9 @@ def tokenize_utterance(tweet_text, args):
 	if args.tokenize or args.tokenize_punk or args.tokenize_tweets:
 		
 		if args.tokenize_tweets:
+			
+			utterance_text = GRUBER_URLINTEXT_PAT.sub('URL', utterance_text)
+			
 			utterance_text = tokenize(utterance_text)
 			# todo: expand contractions
 			utterance_text = remove_accented_chars(utterance_text)

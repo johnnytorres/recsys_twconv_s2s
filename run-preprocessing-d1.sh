@@ -2,10 +2,7 @@
 
 #profiles
 
-python3 -m preprocessing.profiles_builder clean \
-    --input=data/convusersec/timelines_raw.csv
-
-python3 -m preprocessing.profiles_builder build \
+python3 -m preprocessing.profiles_builder \
     --input=data/convusersec/timelines_raw.csv \
     --output=data/convusersec/timelines.csv \
     --n=10
