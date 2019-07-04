@@ -166,6 +166,13 @@ def initialise_hyper_params(args_parser):
         type=int,
         default=9
     )
+
+    args_parser.add_argument(
+        '--predict-batch-size',
+        help='Batch size for each prediction step',
+        type=int,
+        default=100
+    )
     ###########################################
 
     # Features processing arguments
@@ -411,7 +418,7 @@ def get_predict_input_fn():
         file_names_pattern=HYPER_PARAMS.predict_files,
         file_encoding=HYPER_PARAMS.file_encoding,
         mode=tf.estimator.ModeKeys.TRAIN,
-        batch_size=HYPER_PARAMS.train_batch_size
+        batch_size=HYPER_PARAMS.predict_batch_size
     )
     return predict_input_fn
 
@@ -450,7 +457,7 @@ def train_model(run_config):
         eval_input_fn,
         steps=HYPER_PARAMS.eval_steps,
         exporters=[exporter],
-        name='estimator-eval',
+        name='training',
         throttle_secs=HYPER_PARAMS.eval_every_secs,
         hooks=hooks
     )
@@ -508,7 +515,8 @@ def test_model(run_config):
 
     estimator.evaluate(
         input_fn=test_input_fn,
-        hooks=hooks
+        hooks=hooks,
+        name='test'
     )
     
 # PREDICT EXAMPLE INSTANCES
@@ -518,7 +526,7 @@ def predict_instances(run_config):
     tf.logging.info("===========================")
     tf.logging.info("* PREDICT configurations")
     tf.logging.info("===========================")
-    tf.logging.info(("Predict batch size: {}".format(HYPER_PARAMS.train_batch_size)))
+    tf.logging.info(("Predict batch size: {}".format(HYPER_PARAMS.predict_batch_size)))
     tf.logging.info(("Predict steps: {} ({})".format(None, "computed (all predict instances)")))
     tf.logging.info("===========================")
 
