@@ -2,37 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="19142417-1ae3-427a-b4fe-33bbbb363179" name="Default" comment="- add RNN , bi-LSTM models&#10;- fix bugs in preprocessing&#10;- update experiments scripts">
+      <change afterPath="$PROJECT_DIR$/results/recall_domains.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run-local-domains.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run-preprocessing-domains.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/task.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/task.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/eda_conversations.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/eda_conversations.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/eda_timelines.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/eda_timelines.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/analysis/results_analysis.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/results_analysis.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocessing/tfrecords_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/tfrecords_builder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/loss_iterations.eps" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/conversations_distribution.eps" beforeDir="false" afterPath="$PROJECT_DIR$/results/conversations_distribution.eps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/ds_stats.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/results/ds_stats.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/results/recall_results.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/results/recall_results.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/trainable_embeddings_loss.eps" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/trainable_embeddings_recall.eps" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d1-eval-loss.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d1-eval-recall_at_1.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d1-eval-recall_at_2.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d1-eval-recall_at_5.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d1-training-loss.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d1p2-eval-loss.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d1p2-eval-recall_at_1.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d1p2-eval-recall_at_2.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d1p2-eval-recall_at_5.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d1p2-training-loss.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2-eval-loss.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2-eval-recall_at_1.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2-eval-recall_at_2.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2-eval-recall_at_5.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2-training-loss.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2p2-eval-loss.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2p2-eval-recall_at_1.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2p2-eval-recall_at_2.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2p2-eval-recall_at_5.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2p2-training-loss.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2p3-nweu-eval-loss.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2p3-nweu-eval-recall_at_1.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2p3-nweu-eval-recall_at_2.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2p3-nweu-eval-recall_at_5.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/twconvrsu-v1d2p3-nweu-training-loss.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run-local-debug.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run-local-debug.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trainer/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/trainer/task.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,59 +22,8 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="-1246948215">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="4" />
-          <entry key="project.open.time.1" value="1" />
-          <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.3" value="1" />
-          <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="4" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="LICENSE" value="2" />
-          <entry key="csv" value="1" />
-          <entry key="gitignore" value="1" />
-          <entry key="ipynb" value="1" />
-          <entry key="md" value="2" />
-          <entry key="py" value="71" />
-          <entry key="pyi" value="2" />
-          <entry key="sh" value="68" />
-          <entry key="txt" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="Bash" value="68" />
-          <entry key="Markdown" value="2" />
-          <entry key="PLAIN_TEXT" value="7" />
-          <entry key="Python" value="71" />
-          <entry key="PythonStub" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="Bash" value="515" />
-          <entry key="PLAIN_TEXT" value="103" />
-          <entry key="Python" value="1540" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="Python Console" value="289" />
-          <entry key="py" value="1251" />
-          <entry key="sh" value="515" />
-          <entry key="txt" value="103" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -103,7 +34,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>f'</find>
       <find>tqdm</find>
       <find>TEXT_FEATURE_SIZE</find>
       <find>INPUT_NUMERIC_FEATURES</find>
@@ -125,6 +55,15 @@
       <find>profiles50.csv</find>
       <find>twconvrsu_tf_v1</find>
       <find>max_sentence_len</find>
+      <find>rnn_dim</find>
+      <find>learning_rate</find>
+      <find>twconvrsu_tf_v2/</find>
+      <find>feature_stats_file</find>
+      <find>predict_batch_size</find>
+      <find>data/convusersec/twconvrsu_tf_v2i_60k</find>
+      <find>twconvrsu_tf_politics</find>
+      <find>twconvrsu_tf_sports</find>
+      <find>conversations.csv</find>
     </findStrings>
     <replaceStrings>
       <replace>twconvrsu_csv_v1</replace>
@@ -139,6 +78,10 @@
       <replace>twconvrsu_csv_v2i_60k</replace>
       <replace>timelines50.csv</replace>
       <replace>twconvrsu_tf_v2</replace>
+      <replace>twconvrsu_tf_v2i_60k</replace>
+      <replace>data/convusersec/twconvrsu_tf_politics</replace>
+      <replace>twconvrsu_tf_sports</replace>
+      <replace>twconvrsu_tf_activism</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -153,9 +96,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/local-debug.sh" />
-        <option value="$PROJECT_DIR$/trainer/metadata.py" />
-        <option value="$PROJECT_DIR$/trainer/featurizer.py" />
         <option value="$PROJECT_DIR$/preprocessing/local-preprocessing-twconv.sh" />
         <option value="$PROJECT_DIR$/local-debug-ubuntu.sh" />
         <option value="$PROJECT_DIR$/local-debug-twconv.sh" />
@@ -196,20 +136,25 @@
         <option value="$PROJECT_DIR$/run-cloudml-submit-v1d2t-50.sh" />
         <option value="$PROJECT_DIR$/run-preprocessing-dsample.sh" />
         <option value="$PROJECT_DIR$/run-cloudml-submit-v2d2p3.sh" />
-        <option value="$PROJECT_DIR$/trainer/task.py" />
-        <option value="$PROJECT_DIR$/run-local-debug.sh" />
         <option value="$PROJECT_DIR$/preprocessing/csv_builder.py" />
         <option value="$PROJECT_DIR$/run-cloudml-submit-v3d2p3.sh" />
         <option value="$PROJECT_DIR$/preprocessing/profiles_builder.py" />
         <option value="$PROJECT_DIR$/run-preprocessing-d2t-50.sh" />
         <option value="$PROJECT_DIR$/trainer/model.py" />
         <option value="$PROJECT_DIR$/preprocessing/tfrecords_builder.py" />
+        <option value="$PROJECT_DIR$/run-preprocessing-domains.sh" />
+        <option value="$PROJECT_DIR$/run-local-debug.sh" />
+        <option value="$PROJECT_DIR$/run-local-domains.sh" />
+        <option value="$PROJECT_DIR$/results/recall_domains.csv" />
+        <option value="$PROJECT_DIR$/trainer/task.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="width" value="1440" />
-    <option name="height" value="900" />
+    <option name="x" value="720" />
+    <option name="y" value="22" />
+    <option name="width" value="720" />
+    <option name="height" value="829" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -219,21 +164,23 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="twconvrsu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="twconvrsu" type="462c0819:PsiDirectoryNode" />
+              <item name="crisis_conv_recusers" type="b2602c69:ProjectViewProjectNode" />
+              <item name="crisis_conv_recusers" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
@@ -259,8 +206,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.profiles_builder">
-    <configuration name="csv_builder" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.task">
+    <configuration name="csv_builder" type="PythonConfigurationType" factoryName="Python">
       <module name="twconvrsu" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -272,6 +219,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/preprocessing/csv_builder.py" />
       <option name="PARAMETERS" value="--data-root=~/data/twitter/convusersec/dialogs --output=~/data/twitter/convusersec/twconvrsu_csv_v2/test.csv --text-field=2 --min-context-length=2 --tokenize-tweets -e=5000 test" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -293,6 +241,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/preprocessing/embeddings_builder.py" />
       <option name="PARAMETERS" value="~/data/twitter/convusersec/twconvrsu_tf_v2/vocabulary.txt ~/data/fasttext/cc.es.300.vec" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -314,6 +263,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/preprocessing/profiles_builder.py" />
       <option name="PARAMETERS" value="--input=data/convusersec/timelines_raw.csv --output=data/convusersec/timelines50.csv --tokenize-tweets --n=50" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -335,6 +285,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/preprocessing/profiles_clean.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -356,6 +307,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/preprocessing/tfrecords_builder.py" />
       <option name="PARAMETERS" value="--input_dir=~/data/twitter/convusersec/twconvrsu_csv_v2 --output_dir=~/data/twitter/convusersec/twconvrsu_tf_v2 --max_sentence_len=1400" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -377,7 +329,6 @@
       <list>
         <item itemvalue="Python.profiles_builder" />
         <item itemvalue="Python.embeddings_builder" />
-        <item itemvalue="Python.csv_builder" />
         <item itemvalue="Python.profiles_clean" />
       </list>
     </recent_temporary>
@@ -389,6 +340,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527277125935</updated>
+      <workItem from="1557167768064" duration="736000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1527277164186</created>
@@ -414,6 +366,9 @@
     <option name="localTasksCounter" value="4" />
     <servers />
   </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="736000" />
+  </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
@@ -426,9 +381,11 @@
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24947146" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2532189" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Docker" />
+      <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32891566" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -436,17 +393,19 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49964765" weight="0.32891566" />
-      <window_info anchor="bottom" id="Python Console" order="7" weight="0.32969698" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49964765" visible="true" weight="0.22409639" />
+      <window_info anchor="bottom" id="Python Console" order="7" weight="0.25783134" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49964765" weight="0.22409639" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5003524" side_tool="true" weight="0.32891566" />
       <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="SciView" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
@@ -480,10 +439,17 @@
           <line>36</line>
           <option name="timeStamp" value="68" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/trainer/task.py</url>
+          <line>499</line>
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/trainer/task.py</url>
+          <line>538</line>
+          <option name="timeStamp" value="71" />
+        </line-breakpoint>
       </breakpoints>
-      <breakpoints-dialog>
-        <breakpoints-dialog />
-      </breakpoints-dialog>
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
@@ -516,95 +482,10 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/run-cloudml-submit-v1d1p2.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="61" selection-start-line="61" selection-end-line="61" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run-cloudml-deploy.sh">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run-cloudml-local.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-148">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.6/site-packages/tensorflow/python/training/coordinator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="262" selection-start-line="262" selection-end-line="262" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.6/site-packages/tensorflow/python/training/monitored_session.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="646" selection-start-line="646" selection-end-line="646" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.6/site-packages/tensorflow/python/client/session.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="1339" selection-start-line="1339" selection-end-line="1339" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.6/site-packages/tensorflow/python/framework/graph_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="70" selection-start-line="70" selection-end-line="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.6/site-packages/tensorflow/python/training/basic_session_run_hooks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="439" selection-start-line="439" selection-end-line="439" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.6/site-packages/google/protobuf/text_format.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="403" selection-start-line="403" selection-end-line="403" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.6/site-packages/google/protobuf/text_encoding.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="81" column="29" lean-forward="true" selection-start-line="81" selection-start-column="29" selection-end-line="81" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="228">
-            <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/LICENSE">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/preprocessing/local-preprocessing.sh">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run-preprocessing-d1.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="41" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/preprocessing/local-preprocessing.sh" />
     <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2018.2/python_stubs/1437855905/builtins.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="118">
@@ -664,20 +545,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run-preprocessing-d2i-60k.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="52" selection-start-line="52" selection-end-line="54" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run-cloudml-submit-v1d2t-50.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="20" lean-forward="true" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/lib/python3.6/site-packages/tensorflow/python/framework/errors_impl.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="163">
@@ -685,45 +552,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/lib/python3.6/site-packages/graph_tool/inference/blockmodel_em.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3553">
-          <caret line="188" column="8" selection-start-line="188" selection-start-column="8" selection-end-line="188" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file:///usr/local/lib/python3.6/site-packages/graph_tool/inference/blockmodel_em.py" />
     <entry file="file:///usr/local/lib/python3.6/site-packages/tensorflow/contrib/estimator/python/estimator/extenders.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="112">
           <caret line="86" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.6/site-packages/tensorflow/python/estimator/training.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="438" selection-start-line="438" selection-end-line="438" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.6/site-packages/tensorflow/python/estimator/estimator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="804" selection-start-line="804" selection-end-line="804" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run-cloudml-submit-v1d2p3.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="65" column="14" selection-start-line="65" selection-start-column="10" selection-end-line="65" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run-preprocessing-d2i-10k.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="988">
-          <caret line="52" selection-start-line="52" selection-end-line="54" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -734,220 +567,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run-preprocessing-d2.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run-preprocessing-dsample.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="17" column="44" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trainer/task.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="201" column="70" selection-start-line="201" selection-start-column="70" selection-end-line="201" selection-end-column="70" />
-          <folding>
-            <element signature="e#622#637#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/run-preprocessing-dsample.sh" />
     <entry file="file:///usr/local/lib/python3.6/site-packages/tensorflow/python/ops/rnn_cell_impl.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="206">
           <caret line="498" column="50" selection-start-line="498" selection-start-column="44" selection-end-line="498" selection-end-column="50" />
-          <folding>
-            <element signature="n#!!doc" />
-            <element signature="e#689#1069#1" />
-            <element signature="e#2363#2592#0" />
-            <element signature="e#2447#2567#0" />
-            <element signature="e#2640#4837#0" />
-            <element signature="e#2640#3417#1" />
-            <element signature="e#3459#3737#0" />
-            <element signature="e#3620#3737#0" />
-            <element signature="e#3637#3732#0" />
-            <element signature="e#3750#3950#0" />
-            <element signature="e#3992#4270#0" />
-            <element signature="e#4153#4270#0" />
-            <element signature="e#4170#4265#0" />
-            <element signature="e#4283#4483#0" />
-            <element signature="e#4502#4628#0" />
-            <element signature="e#4641#4822#0" />
-            <element signature="e#4674#4782#0" />
-            <element signature="e#4898#5334#0" />
-            <element signature="e#5002#5277#0" />
-            <element signature="e#5184#5261#0" />
-            <element signature="e#5406#10503#0" />
-            <element signature="e#5406#6503#1" />
-            <element signature="e#6558#7891#0" />
-            <element signature="e#6558#7302#1" />
-            <element signature="e#7335#7514#0" />
-            <element signature="e#7531#7891#0" />
-            <element signature="e#7646#7813#0" />
-            <element signature="e#7953#8578#0" />
-            <element signature="e#8114#8326#0" />
-            <element signature="e#8620#8818#0" />
-            <element signature="e#8620#8769#1" />
-            <element signature="e#8861#8978#0" />
-            <element signature="e#9006#9124#0" />
-            <element signature="e#9006#9063#0" />
-            <element signature="e#9173#10503#0" />
-            <element signature="e#9173#9729#1" />
-            <element signature="e#9734#9807#0" />
-            <element signature="e#10002#10251#0" />
-            <element signature="e#10003#10067#0" />
-            <element signature="e#10537#12366#0" />
-            <element signature="e#10537#11185#1" />
-            <element signature="e#11257#12366#0" />
-            <element signature="e#11257#12050#1" />
-            <element signature="e#12055#12120#0" />
-            <element signature="e#13307#13329#0" />
-            <element signature="e#13372#13394#0" />
-            <element signature="e#13433#13945#0" />
-            <element signature="e#13473#13583#0" />
-            <element signature="e#13984#14282#0" />
-            <element signature="e#14350#17658#0" />
-            <element signature="e#14350#15072#1" />
-            <element signature="e#15289#15611#0" />
-            <element signature="e#15653#15675#0" />
-            <element signature="e#15718#15740#0" />
-            <element signature="e#15779#16997#0" />
-            <element signature="e#15819#15929#0" />
-            <element signature="e#17036#17658#0" />
-            <element signature="e#17816#18273#0" />
-            <element signature="e#17816#18044#1" />
-            <element signature="e#18098#18273#0" />
-            <element signature="e#18145#18254#0" />
-            <element signature="e#18353#18821#1" />
-            <element signature="e#20108#20247#0" />
-            <element signature="e#20121#20240#0" />
-            <element signature="e#20539#20657#0" />
-            <element signature="e#20700#20722#0" />
-            <element signature="e#20761#21303#0" />
-            <element signature="e#20801#20911#0" />
-            <element signature="e#21342#23120#0" />
-            <element signature="e#21342#21874#1" />
-            <element signature="e#22569#22638#0" />
-            <element signature="e#23190#32381#0" />
-            <element signature="e#23190#23864#1" />
-            <element signature="e#24186#27596#0" />
-            <element signature="e#24186#26220#1" />
-            <element signature="e#26314#26453#0" />
-            <element signature="e#26327#26446#0" />
-            <element signature="e#26527#26739#0" />
-            <element signature="e#26551#26732#0" />
-            <element signature="e#27272#27428#0" />
-            <element signature="e#27445#27596#0" />
-            <element signature="e#27638#27661#0" />
-            <element signature="e#27704#27728#0" />
-            <element signature="e#27767#29527#0" />
-            <element signature="e#27807#27917#0" />
-            <element signature="e#28611#29054#0" />
-            <element signature="e#29097#29504#0" />
-            <element signature="e#29566#32381#0" />
-            <element signature="e#29566#30466#1" />
-            <element signature="e#30652#30790#0" />
-            <element signature="e#31337#31480#0" />
-            <element signature="e#31497#31588#0" />
-            <element signature="e#31632#31797#0" />
-            <element signature="e#31985#32243#0" />
-            <element signature="e#32074#32243#0" />
-            <element signature="e#32467#32723#0" />
-            <element signature="e#32530#32604#0" />
-            <element signature="e#32781#33004#0" />
-            <element signature="e#32826#32914#0" />
-            <element signature="e#33081#43337#0" />
-            <element signature="e#33398#39813#0" />
-            <element signature="e#33398#36812#1" />
-            <element signature="e#37251#38017#0" />
-            <element signature="e#37290#37435#0" />
-            <element signature="e#37460#37626#0" />
-            <element signature="e#37636#38017#0" />
-            <element signature="e#37736#37952#0" />
-            <element signature="e#37785#37895#0" />
-            <element signature="e#38349#39813#0" />
-            <element signature="e#38375#38463#0" />
-            <element signature="e#38510#38749#0" />
-            <element signature="e#38510#38562#0" />
-            <element signature="e#38797#38908#0" />
-            <element signature="e#39023#39407#0" />
-            <element signature="e#39056#39208#0" />
-            <element signature="e#39088#39207#0" />
-            <element signature="e#39862#40067#0" />
-            <element signature="e#40111#40128#0" />
-            <element signature="e#40170#40198#0" />
-            <element signature="e#40241#40270#0" />
-            <element signature="e#40319#40449#0" />
-            <element signature="e#40544#40908#0" />
-            <element signature="e#41036#42156#0" />
-            <element signature="e#41161#41344#0" />
-            <element signature="e#41161#41224#0" />
-            <element signature="e#41392#41770#0" />
-            <element signature="e#41431#41622#0" />
-            <element signature="e#41492#41589#0" />
-            <element signature="e#41787#42156#0" />
-            <element signature="e#41829#41991#0" />
-            <element signature="e#42211#43337#0" />
-            <element signature="e#42292#42334#0" />
-            <element signature="e#42389#42538#0" />
-            <element signature="e#42655#43101#0" />
-            <element signature="e#42655#42718#0" />
-            <element signature="e#43156#43308#0" />
-            <element signature="e#43416#45272#0" />
-            <element signature="e#43540#43947#0" />
-            <element signature="e#43540#43889#1" />
-            <element signature="e#43989#44017#0" />
-            <element signature="e#44060#44089#0" />
-            <element signature="e#44138#44268#0" />
-            <element signature="e#44323#45272#0" />
-            <element signature="e#44323#44730#1" />
-            <element signature="e#44865#44923#0" />
-            <element signature="e#44976#45158#0" />
-            <element signature="e#45347#46304#0" />
-            <element signature="e#45456#45763#0" />
-            <element signature="e#45456#45715#1" />
-            <element signature="e#45805#45833#0" />
-            <element signature="e#45876#45905#0" />
-            <element signature="e#45954#46123#0" />
-            <element signature="e#46037#46123#0" />
-            <element signature="e#46178#46304#0" />
-            <element signature="e#46377#49758#0" />
-            <element signature="e#46495#48081#0" />
-            <element signature="e#46495#47048#1" />
-            <element signature="e#47225#47306#0" />
-            <element signature="e#47391#47724#0" />
-            <element signature="e#47391#47462#0" />
-            <element signature="e#47596#47724#0" />
-            <element signature="e#47800#48081#0" />
-            <element signature="e#47869#48081#0" />
-            <element signature="e#47886#48012#0" />
-            <element signature="e#48123#48277#0" />
-            <element signature="e#48320#48354#0" />
-            <element signature="e#48403#48819#0" />
-            <element signature="e#48486#48819#0" />
-            <element signature="e#48612#48819#0" />
-            <element signature="e#48612#48674#0" />
-            <element signature="e#48858#49758#0" />
-            <element signature="e#49034#49609#0" />
-            <element signature="e#49081#49609#0" />
-            <element signature="e#49116#49335#0" />
-            <element signature="e#49160#49304#0" />
-            <element signature="e#49360#49518#0" />
-            <element signature="e#49792#51343#0" />
-            <element signature="e#49871#51037#0" />
-            <element signature="e#49871#50282#1" />
-            <element signature="e#50747#50873#0" />
-            <element signature="e#50913#51037#0" />
-            <element signature="e#51079#51102#0" />
-            <element signature="e#51145#51169#0" />
-            <element signature="e#51224#51343#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -958,63 +582,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/notebooks/results_analysis.ipynb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4954" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/preprocessing/csv_builder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1052">
-          <caret line="102" column="58" selection-start-line="102" selection-start-column="58" selection-end-line="102" selection-end-column="58" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run-local-debug.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="18" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run-cloudml-submit-v3d2p3.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="60" column="26" selection-start-line="60" selection-start-column="26" selection-end-line="60" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/preprocessing/profiles_builder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="35" column="98" selection-start-line="35" selection-start-column="98" selection-end-line="35" selection-end-column="98" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/notebooks/results_analysis.ipynb" />
     <entry file="file://$PROJECT_DIR$/run-preprocessing-d2t-50.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
           <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trainer/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="342" selection-start-line="342" selection-end-line="342" />
-          <folding>
-            <element signature="e#621#633#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run-cloudml-submit-v1d2i-10k.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-474">
-          <caret line="12" column="31" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -1044,10 +616,187 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/run-cloudml-submit-v1d2p3.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1064">
+          <caret line="56" column="29" selection-start-line="56" selection-start-column="26" selection-end-line="56" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.6/site-packages/tensorflow/python/training/adam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="39" column="6" selection-start-line="39" selection-start-column="6" selection-end-line="39" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run-cloudml-submit-v1d2i-10k.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-361">
+          <caret line="12" column="31" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run-cloudml-submit-v1d2t-50.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1121">
+          <caret line="59" column="30" selection-start-line="59" selection-start-column="26" selection-end-line="59" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/preprocessing/profiles_builder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="531">
+          <caret line="35" column="98" selection-start-line="35" selection-start-column="98" selection-end-line="35" selection-end-column="98" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.6/site-packages/tensorflow/python/ops/gen_io_ops.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="396" selection-start-line="396" selection-end-line="396" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trainer/input.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-234">
+          <caret line="237" column="40" selection-start-line="237" selection-start-column="22" selection-end-line="237" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.6/site-packages/tensorflow/python/framework/op_def_library.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="787" selection-start-line="787" selection-end-line="787" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/preprocessing/csv_builder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1672">
+          <caret line="102" column="58" selection-start-line="102" selection-start-column="58" selection-end-line="102" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run-preprocessing-d2i-10k.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="988">
+          <caret line="52" selection-start-line="52" selection-end-line="54" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run-preprocessing-d2i-60k.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.6/site-packages/tensorflow/python/estimator/estimator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="916" selection-start-line="916" selection-end-line="916" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.6/site-packages/tensorflow/python/client/session.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="1339" selection-start-line="1339" selection-end-line="1339" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run-preprocessing-domains.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" column="14" lean-forward="true" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/recall_domains.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="28" lean-forward="true" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run-cloudml-submit-v3d2p3.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1216">
+          <caret line="64" column="27" selection-start-line="64" selection-start-column="26" selection-end-line="64" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/run-cloudml-submit-v2d2p3.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cloudml-submit-train-job.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trainer/task.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8550">
+          <caret line="459" column="22" selection-start-line="459" selection-start-column="22" selection-end-line="459" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.6/site-packages/tensorflow/python/estimator/training.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4655">
+          <caret line="266" column="4" selection-start-line="266" selection-start-column="4" selection-end-line="266" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/evaluable.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="741">
+          <caret line="43" column="6" selection-start-line="43" selection-start-column="6" selection-end-line="43" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run-preprocessing-d1.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="41" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run-preprocessing-d2.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run-local-domains.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run-local-debug.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" selection-start-line="2" selection-end-line="23" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trainer/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="308" column="17" lean-forward="true" selection-start-line="308" selection-start-column="17" selection-end-line="308" selection-end-column="17" />
+          <folding>
+            <element signature="e#621#633#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
