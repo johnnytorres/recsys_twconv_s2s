@@ -22,9 +22,9 @@ import tensorflow as tf
 import tensorflow.contrib as tfc
 from tensorflow import data
 
-from trainer import metadata
-from trainer import featurizer
-from trainer import task
+from convrecsys import metadata
+from convrecsys import featurizer
+from convrecsys import task
 
 
 # **************************************************************************

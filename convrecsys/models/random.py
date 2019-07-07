@@ -1,11 +1,11 @@
 
 import numpy as np
 
-from data_handler import DataHandler
-from evaluation_handler import EvaluationHandler
+from convrecsys.models.data_handler import DataHandler
+from convrecsys.models.evaluation_handler import EvaluationHandler
 
 
-class RandomPredictor:
+class RandomConversationRecommender:
 	def __init__(self):
 		pass
 
@@ -14,10 +14,10 @@ class RandomPredictor:
 		return np.random.choice(n_utt, n_utt, replace=False)
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
 	data_handler = DataHandler()
-	predictor = RandomPredictor()
-	train, valid, test = data_handler.load_data('~/data/ubuntu')
+	predictor = RandomConversationRecommender()
+	train, valid, test = data_handler.load_data('~/data/nlp/microblog_conversation/trec')
 	y_pred = [predictor.predict(row['Context'], row[1:]) for ix, row in test.iterrows()]
 	y_true = np.zeros(test.shape[0])
 	EvaluationHandler.evaluate_predictor(y_true, y_pred)
