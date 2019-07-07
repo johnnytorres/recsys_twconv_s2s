@@ -23,9 +23,9 @@ import tensorflow.contrib as tfc
 from tensorflow.python.ops.losses import losses
 
 from preprocessing import embeddings_builder
-from trainer import featurizer
-from trainer import metadata
-from trainer import task
+from convrecsys import featurizer
+from convrecsys import metadata
+from convrecsys import task
 
 
 MODEL_RNN = 'rnn'

@@ -18,8 +18,8 @@
 import tensorflow as tf
 from tensorflow.python.feature_column import feature_column
 
-from trainer import input
-from trainer import metadata
+from convrecsys import input
+from convrecsys import metadata
 
 
 # **************************************************************************

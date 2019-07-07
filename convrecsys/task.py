@@ -22,9 +22,9 @@ from datetime import datetime
 import tensorflow as tf
 from tensorflow.python import debug as tf_debug
 
-from trainer import input
-from trainer import metadata
-from trainer import model
+from convrecsys import input
+from convrecsys import metadata
+from convrecsys import model
 
 
 # ******************************************************************************
