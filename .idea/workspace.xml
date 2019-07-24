@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2c25c6c6-8cd1-4139-a355-a4f62ad57c3c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/scripts/getdata.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/twconvrecusers/preprocessing/dialogs_builder.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/twconvrecusers/preprocessing/tweets_tokenizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/Untitled.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/eda_conversations.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/eda_conversations.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/eda_timelines.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/eda_timelines.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/microblogs_conversations.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/microblogs_conversations.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/featurizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/featurizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/inference.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/input.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/input.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/metadata.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/metadata.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/models/data_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/data_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/models/evaluation_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/evaluation_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/models/model_base.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/model_base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/models/model_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/model_factory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/models/model_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/model_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/models/model_tfidf.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/model_tfidf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/models/random.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/random.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/preprocessing/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/preprocessing/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/preprocessing/csv_builder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/preprocessing/embeddings_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/preprocessing/embeddings_builder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/preprocessing/prepare_data.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/preprocessing/profiles_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/preprocessing/profiles_builder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/preprocessing/tfrecords_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/preprocessing/tfrecords_builder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/seq2seq.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/seq2seq.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/task.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/test/recall.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/test/recall.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/test/tf_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/test/tf_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convrecsys/test/tfrecords.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/test/tfrecords.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/cloudml-submit-train-job.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-cloudml-submit-train-job.sh" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="johnnytorres &lt;johnnytorres83@gmail.com&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1440" />
+    <option name="height" value="900" />
+  </component>
+  <component name="ProjectId" id="1OGKCuv8ccUk0Ho9Mr9E8M9XxAq" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/scripts" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/run-cloudml-submit-v1d1p2.sh" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/analysis" />
+      <recent name="$PROJECT_DIR$/convrecsys/baselines" />
+      <recent name="$PROJECT_DIR$/scripts" />
+      <recent name="$PROJECT_DIR$/recsysconv" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.dialogs_builder">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="crisis_conv_recusers" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="dialogs_builder" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="crisis_conv_recusers" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/twconvrecusers/preprocessing/dialogs_builder.py" />
+      <option name="PARAMETERS" value="--data-dir=~/data/twconv/trec/dialogs" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="prepare_data" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="crisis_conv_recusers" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/convrecsys/preprocessing" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/convrecsys/preprocessing/prepare_data.py" />
+      <option name="PARAMETERS" value="~/data/nlp/microblog_conversation/trec.csv  ~/data/nlp/microblog_conversation/trec" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="profiles_builder" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="crisis_conv_recusers" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/twconvrecusers/preprocessing" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/twconvrecusers/preprocessing/profiles_builder.py" />
+      <option name="PARAMETERS" value="--input=~/data/twconv/trec/dialogs --output=~/data/twconv/trec/stagging --tokenize-tweets --lowercase buildfromconv" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="random" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="crisis_conv_recusers" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/convrecsys/models/random.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.random" />
+      <item itemvalue="Python.prepare_data" />
+      <item itemvalue="Python.profiles_builder" />
+      <item itemvalue="Python.dialogs_builder" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.dialogs_builder" />
+        <item itemvalue="Python.profiles_builder" />
+        <item itemvalue="Python.prepare_data" />
+        <item itemvalue="Python.random" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2c25c6c6-8cd1-4139-a355-a4f62ad57c3c" name="Default Changelist" comment="" />
+      <created>1562336542091</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1562336542091</updated>
+      <workItem from="1562336543485" duration="621000" />
+      <workItem from="1562349285364" duration="4000" />
+      <workItem from="1562429804017" duration="6130000" />
+      <workItem from="1563598373070" duration="377000" />
+      <workItem from="1563646593973" duration="822000" />
+      <workItem from="1563761221921" duration="210000" />
+      <workItem from="1563828059428" duration="138000" />
+      <workItem from="1563828768409" duration="1578000" />
+      <workItem from="1563850377155" duration="3924000" />
+      <workItem from="1563860698325" duration="300000" />
+      <workItem from="1563905048188" duration="2225000" />
+      <workItem from="1563933308927" duration="7510000" />
+    </task>
+    <task id="LOCAL-00001" summary="refactor project">
+      <created>1562518129393</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1562518129393</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="refactor project" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor project" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/twconvrecusers/preprocessing/profiles_builder.py</url>
+          <line>69</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/twconvrecusers/preprocessing/profiles_builder.py</url>
+          <line>52</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/twconvrecusers/preprocessing/profiles_builder.py</url>
+          <line>61</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/twconvrecusers/preprocessing/dialogs_builder.py</url>
+          <line>13</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/twconvrecusers/preprocessing/dialogs_builder.py</url>
+          <line>47</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/twconvrecusers$profiles_builder.coverage" NAME="profiles_builder Coverage Results" MODIFIED="1563854659441" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecusers/preprocessing" />
+    <SUITE FILE_PATH="coverage/twconvrecusers$dialogs_builder.coverage" NAME="dialogs_builder Coverage Results" MODIFIED="1563944890625" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
+    <SUITE FILE_PATH="coverage/crisis_conv_recusers$prepare_data.coverage" NAME="prepare_data Coverage Results" MODIFIED="1562447148991" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/convrecsys/preprocessing" />
+    <SUITE FILE_PATH="coverage/crisis_conv_recusers$model_random.coverage" NAME="model_random Coverage Results" MODIFIED="1562446129085" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
+  </component>
+</project>

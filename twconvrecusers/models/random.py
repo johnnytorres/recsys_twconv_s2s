@@ -1,8 +1,8 @@
 
 import numpy as np
 
-from convrecsys.models.data_handler import DataHandler
-from convrecsys.models.evaluation_handler import EvaluationHandler
+from twconvrecusers.models.data_handler import DataHandler
+from twconvrecusers.models.evaluation_handler import EvaluationHandler
 
 
 class RandomConversationRecommender:
