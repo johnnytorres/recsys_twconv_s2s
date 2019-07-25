@@ -8,13 +8,26 @@ from tqdm import tqdm
 
 logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG)
 
-tf.flags.DEFINE_integer("min_word_frequency", 5, "Minimum frequency of words in the vocabulary")
-tf.flags.DEFINE_integer("max_sentence_len", 160, "Maximum Sentence Length")
-tf.flags.DEFINE_string("input_dir", os.path.abspath("./data"),
-                       "Input directory containing original CSV data files (default = './data')")
-tf.flags.DEFINE_string("output_dir", os.path.abspath("./data"),
-                       "Output directory for TFrEcord files (default = './data')")
-tf.flags.DEFINE_boolean('example', False, 'indicates if create only a sample file for prediction')
+tf.flags.DEFINE_string(
+	name="input_dir", 
+	default="~/data",
+	help="Input directory contakining original CSV data files"
+	)
+tf.flags.DEFINE_integer(
+	name="min_word_frequency", 
+	default=5, 
+	help="Minimum frequency of words in the vocabulary"
+	)
+tf.flags.DEFINE_integer(
+	name="max_sentence_len", 
+	default=160, 
+	help="Maximum Sentence Length"
+	)
+tf.flags.DEFINE_boolean(
+	name='example', 
+	default=False, 
+	help='indicates if create only a sample file for prediction'
+	)
 
 FLAGS = tf.flags.FLAGS
 
@@ -22,10 +35,12 @@ train_prefix = 'train'
 valid_prefix = 'valid'
 test_prefix = 'test'
 
-TRAIN_PATH = os.path.join(os.path.expanduser(FLAGS.input_dir), f"{train_prefix}.csv")
-VALIDATION_PATH = os.path.join(os.path.expanduser(FLAGS.input_dir), f"{valid_prefix}.csv")
-TEST_PATH = os.path.join(os.path.expanduser(FLAGS.input_dir), f"{test_prefix}.csv")
-FLAGS.output_dir = os.path.expanduser(FLAGS.output_dir)
+input_dir=os.path.expanduser(FLAGS.input_dir)
+TRAIN_PATH = os.path.join(input_dir, f"{train_prefix}.csv")
+VALID_PATH = os.path.join(input_dir, f"{valid_prefix}.csv")
+TEST_PATH = os.path.join(input_dir, f"{test_prefix}.csv")
+#FLAGS.output_dir = os.path.expanduser(FLAGS.output_dir)
+FLAGS.input_dir=input_dir
 
 
 def tokenizer_fn(iterator):
@@ -36,16 +51,26 @@ def create_csv_iter(trainfile, testfile=None, validfile=None):
 	"""
 	Returns an iterator over a CSV file. Skips the header.
 	"""
-	for fpath in [trainfile, testfile, validfile]:
-		if fpath is None:
+	# define which fields to include
+	files_fields = [
+		range(2), # for training (context, profile) 
+		range(2 + 9), # for validation and testing (context, profile , distractors...)
+		range(2 + 9), # for validation and testing (context, profile , distractors...)
+		]
+	files_paths = [
+		trainfile, 
+		testfile, validfile]
+
+	for path, fields in zip(files_paths, files_fields):
+		if path is None:
 			continue
-		num_lines = wccount(fpath)
-		with open(fpath) as csvfile:
+		num_lines = wccount(path)
+		with open(path) as csvfile:
 			reader = csv.reader(csvfile)
 			# Skip the header
 			next(reader)
-			for row in tqdm(reader, f'{os.path.split(fpath)[1]}', total=num_lines):
-				yield row
+			for row in tqdm(reader, f'{os.path.split(path)[1]}', total=num_lines):
+				yield ' '.join([row[i] for i in fields])
 
 
 def create_vocab(input_iter, min_frequency):
@@ -135,7 +160,7 @@ def create_tfrecords_file(input_filename, output_filename, example_fn):
 	Creates a TFRecords file for the given input data and
 	example transofmration function
 	"""
-	writer = tf.python_io.TFRecordWriter(output_filename)
+	writer = tf.io.TFRecordWriter(output_filename)
 	num_examples = wccount(input_filename)
 	
 	for i, row in enumerate(create_csv_iter(input_filename)):
@@ -156,39 +181,6 @@ def write_vocabulary(vocab_processor, outfile):
 	logging.info("Saved vocabulary to {}".format(outfile))
 
 
-def create_tfrecords():
-	logging.info("Creating vocabulary...")
-	input_iter = create_csv_iter(TRAIN_PATH, TEST_PATH, VALIDATION_PATH)
-	input_iter = (x[0] + " " + x[1] for x in input_iter)
-	# todo: validate if the vocabulary is considering all text fields , specially distractors in test and validation sets
-	vocab = create_vocab(input_iter, min_frequency=FLAGS.min_word_frequency)
-	vocab_size = len(vocab.vocabulary_)
-	logging.info("Total vocabulary size: {}".format(vocab_size))
-	with open(os.path.join(FLAGS.output_dir, 'vocab_size.txt'), 'w') as f:
-		f.write(str(vocab_size))
-	# Create vocabulary.txt file
-	write_vocabulary(
-		vocab, os.path.join(FLAGS.output_dir, "vocabulary.txt"))
-	# Save vocab processor
-	vocab.save(os.path.join(FLAGS.output_dir, "vocab_processor.bin"))
-	# Create validation.tfrecords
-	logging.info('Creating tfrecords...')
-	create_tfrecords_file(
-		input_filename=VALIDATION_PATH,
-		output_filename=os.path.join(FLAGS.output_dir, f"{valid_prefix}.tfrecords"),
-		example_fn=functools.partial(create_example_test, vocab=vocab))
-	# Create test.tfrecords
-	create_tfrecords_file(
-		input_filename=TEST_PATH,
-		output_filename=os.path.join(FLAGS.output_dir, f"{test_prefix}.tfrecords"),
-		example_fn=functools.partial(create_example_test, vocab=vocab))
-	# Create train.tfrecords
-	create_tfrecords_file(
-		input_filename=TRAIN_PATH,
-		output_filename=os.path.join(FLAGS.output_dir, f"{train_prefix}.tfrecords"),
-		example_fn=functools.partial(create_example_train, vocab=vocab))
-
-
 def create_example():
 	vocab = tf.contrib.learn.preprocessing.VocabularyProcessor.restore(
 		os.path.join(FLAGS.output_dir, "vocab_processor.bin"))
@@ -201,8 +193,39 @@ def create_example():
 		example_fn=functools.partial(create_example_train, vocab=vocab))
 
 
-if __name__ == "__main__":
+def create_tfrecords():
+	logging.info("Creating vocabulary...")
+	input_iter = create_csv_iter(TRAIN_PATH, VALID_PATH, TEST_PATH)#
+	vocab = create_vocab(input_iter, min_frequency=FLAGS.min_word_frequency)
+	vocab_size = len(vocab.vocabulary_)
+	logging.info("Total vocabulary size: {}".format(vocab_size))
+	with open(os.path.join(FLAGS.input_dir, 'vocab_size.txt'), 'w') as f:
+		f.write(str(vocab_size))
+	# Create vocabulary.txt file
+	write_vocabulary(
+		vocab, os.path.join(FLAGS.input_dir, "vocabulary.txt"))
+	# Save vocab processor
+	vocab.save(os.path.join(FLAGS.input_dir, "vocab_processor.bin"))
+	# Create validation.tfrecords
+	logging.info('Creating tfrecords...')
+	create_tfrecords_file(
+		input_filename=VALID_PATH,
+		output_filename=os.path.join(FLAGS.input_dir, f"{valid_prefix}.tfrecords"),
+		example_fn=functools.partial(create_example_test, vocab=vocab))
+	# Create test.tfrecords
+	create_tfrecords_file(
+		input_filename=TEST_PATH,
+		output_filename=os.path.join(FLAGS.input_dir, f"{test_prefix}.tfrecords"),
+		example_fn=functools.partial(create_example_test, vocab=vocab))
+	# Create train.tfrecords
+	create_tfrecords_file(
+		input_filename=TRAIN_PATH,
+		output_filename=os.path.join(FLAGS.input_dir, f"{train_prefix}.tfrecords"),
+		example_fn=functools.partial(create_example_train, vocab=vocab))
+
 	if FLAGS.example:
 		create_example()
-	else:
-		create_tfrecords()
+
+
+if __name__ == "__main__":
+	create_tfrecords()

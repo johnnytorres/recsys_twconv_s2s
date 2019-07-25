@@ -5,7 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Module",
+            "name": "Python: tfrecords_builder",
+            "type": "python",
+            "request": "launch",
+            "module": "twconvrecusers.preprocessing.tfrecords_builder",
+            "args": [
+                "--input_dir=~/data/twconv/trec/dialogs"
+            ]
+        },
+        {
+            "name": "Python: dialogs_builder",
             "type": "python",
             "request": "launch",
             "module": "twconvrecusers.preprocessing.dialogs_builder",
