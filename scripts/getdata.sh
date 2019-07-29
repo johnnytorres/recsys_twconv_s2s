@@ -8,7 +8,7 @@ BASE_DIR=$HOME/data
 DATASET=trec
 DATA_DIR=$BASE_DIR/twconv/$DATASET
 DIALOGS_DIR=$DATA_DIR/dialogs
-STAGGING_DIR=${DATA_DIR}/stagging
+STAGGING_DIR=${DATA_DIR}/datastagging
 
 # download datasets
 

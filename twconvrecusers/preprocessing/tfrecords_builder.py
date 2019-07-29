@@ -6,7 +6,6 @@ import logging
 import subprocess
 from tqdm import tqdm
 
-logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG)
 
 tf.flags.DEFINE_string(
 	name="input_dir", 
@@ -23,6 +22,11 @@ tf.flags.DEFINE_integer(
 	default=160, 
 	help="Maximum Sentence Length"
 	)
+tf.flags.DEFINE_integer(
+	name="num_distractors", 
+	default=9,
+	help="Number of distractor"
+	)	
 tf.flags.DEFINE_boolean(
 	name='example', 
 	default=False, 
@@ -39,7 +43,6 @@ input_dir=os.path.expanduser(FLAGS.input_dir)
 TRAIN_PATH = os.path.join(input_dir, f"{train_prefix}.csv")
 VALID_PATH = os.path.join(input_dir, f"{valid_prefix}.csv")
 TEST_PATH = os.path.join(input_dir, f"{test_prefix}.csv")
-#FLAGS.output_dir = os.path.expanduser(FLAGS.output_dir)
 FLAGS.input_dir=input_dir
 
 
@@ -47,19 +50,21 @@ def tokenizer_fn(iterator):
 	return (x.split(" ") for x in iterator)
 
 
-def create_csv_iter(trainfile, testfile=None, validfile=None):
+def textfields_csv_iter(trainfile, testfile=None, validfile=None):
 	"""
 	Returns an iterator over a CSV file. Skips the header.
 	"""
 	# define which fields to include
 	files_fields = [
 		range(2), # for training (context, profile) 
-		range(2 + 9), # for validation and testing (context, profile , distractors...)
-		range(2 + 9), # for validation and testing (context, profile , distractors...)
+		range(2 + FLAGS.num_distractors), # for validation and testing (context, profile , distractors...)
+		range(2 + FLAGS.num_distractors), # for validation and testing (context, profile , distractors...)
 		]
 	files_paths = [
 		trainfile, 
-		testfile, validfile]
+		testfile, 
+		validfile
+		]
 
 	for path, fields in zip(files_paths, files_fields):
 		if path is None:
@@ -71,6 +76,16 @@ def create_csv_iter(trainfile, testfile=None, validfile=None):
 			next(reader)
 			for row in tqdm(reader, f'{os.path.split(path)[1]}', total=num_lines):
 				yield ' '.join([row[i] for i in fields])
+
+
+def fields_csv_iter(trainfile):
+	path = trainfile
+	num_lines = wccount(path)
+	with open(path) as csvfile:
+		reader = csv.reader(csvfile)
+		next(reader)
+		for row in tqdm(reader, f'{os.path.split(path)[1]}', total=num_lines):
+			yield row
 
 
 def create_vocab(input_iter, min_frequency):
@@ -163,9 +178,10 @@ def create_tfrecords_file(input_filename, output_filename, example_fn):
 	writer = tf.io.TFRecordWriter(output_filename)
 	num_examples = wccount(input_filename)
 	
-	for i, row in enumerate(create_csv_iter(input_filename)):
+	for i, row in enumerate(fields_csv_iter(input_filename)):
 		x = example_fn(row)
 		writer.write(x.SerializeToString())
+
 	writer.close()
 
 
@@ -194,20 +210,20 @@ def create_example():
 
 
 def create_tfrecords():
-	logging.info("Creating vocabulary...")
-	input_iter = create_csv_iter(TRAIN_PATH, VALID_PATH, TEST_PATH)#
+	print("Creating vocabulary...")
+	input_iter = textfields_csv_iter(TRAIN_PATH, VALID_PATH, TEST_PATH)
 	vocab = create_vocab(input_iter, min_frequency=FLAGS.min_word_frequency)
 	vocab_size = len(vocab.vocabulary_)
-	logging.info("Total vocabulary size: {}".format(vocab_size))
+	print("Total vocabulary size: {}".format(vocab_size))
 	with open(os.path.join(FLAGS.input_dir, 'vocab_size.txt'), 'w') as f:
-		f.write(str(vocab_size))
+		f.write(str(vocab_size)+'\n')
 	# Create vocabulary.txt file
 	write_vocabulary(
 		vocab, os.path.join(FLAGS.input_dir, "vocabulary.txt"))
 	# Save vocab processor
 	vocab.save(os.path.join(FLAGS.input_dir, "vocab_processor.bin"))
 	# Create validation.tfrecords
-	logging.info('Creating tfrecords...')
+	print('Creating tfrecords...')
 	create_tfrecords_file(
 		input_filename=VALID_PATH,
 		output_filename=os.path.join(FLAGS.input_dir, f"{valid_prefix}.tfrecords"),
@@ -226,6 +242,10 @@ def create_tfrecords():
 	if FLAGS.example:
 		create_example()
 
+	print('done')
+
 
 if __name__ == "__main__":
+	logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG)
+
 	create_tfrecords()

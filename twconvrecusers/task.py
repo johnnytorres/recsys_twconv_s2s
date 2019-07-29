@@ -18,7 +18,9 @@
 import argparse
 import os
 from datetime import datetime
-
+from tqdm import tqdm
+import numpy as np
+import csv
 import tensorflow as tf
 from tensorflow.python import debug as tf_debug
 
@@ -94,12 +96,7 @@ def initialise_hyper_params(args_parser):
         help='Path to vocabulary file',
         type=lambda x: os.path.expanduser(x)
     )
-    args_parser.add_argument(
-        '--vocab-proc',
-        help='Path to vocabulary preprocessor file',
-        type=lambda x: os.path.expanduser(x)
-    )
-    
+
     ###########################################
 
     # Experiment arguments - training
@@ -189,7 +186,7 @@ def initialise_hyper_params(args_parser):
             If set to True, the embeddings will be fine tuned during training
             """,
         action='store_true',
-        default=False,
+        default=True,
     )
     args_parser.add_argument(
         '--vocab-size',
@@ -283,7 +280,7 @@ def initialise_hyper_params(args_parser):
     args_parser.add_argument(
         '--rnn-dim',
         help='Dimensionality of the RNN cell',
-        default=256,
+        default=50,
         type=int
     )
 
@@ -373,8 +370,8 @@ def clean_job_dir():
     # If job_dir_reuse is False then remove the job_dir if it exists
     tf.logging.info(("Resume training:", HYPER_PARAMS.reuse_job_dir))
     if not HYPER_PARAMS.reuse_job_dir:
-        if tf.gfile.Exists(HYPER_PARAMS.job_dir):
-            tf.gfile.DeleteRecursively(HYPER_PARAMS.job_dir)
+        if tf.io.gfile.exists(HYPER_PARAMS.job_dir):
+            tf.io.gfile.rmtree(HYPER_PARAMS.job_dir)
             tf.logging.info(("Deleted job_dir {} to avoid re-use".format(HYPER_PARAMS.job_dir)))
         else:
             tf.logging.info("No job_dir available to delete")
@@ -518,6 +515,27 @@ def test_model(run_config):
         hooks=hooks,
         name='test'
     )
+
+    predictions = estimator.predict(input_fn=test_input_fn)
+    predictions_probs = []
+    num_instances_recall = HYPER_PARAMS.num_distractors + 1
+
+    count = 0
+    path = os.path.join(HYPER_PARAMS.job_dir, 'predictions.csv')
+    with open(path, 'w') as f:
+        csvwriter = csv.writer(f)
+        for instance_prediction in tqdm( predictions ):
+            tf.logging.info(str(instance_prediction))
+            predictions_probs.append(instance_prediction['logistic'][0])
+            count+=1
+            if count%num_instances_recall == 0:
+                csvwriter.writerow(predictions_probs)
+                predictions_probs = []
+
+
+    #predictions_probs= np.split(predictions_probs, num_instances_recall, 0)
+    #predictions_probs = np.concatenate(predictions_probs, 1)
+
     
 # PREDICT EXAMPLE INSTANCES
 
@@ -559,7 +577,7 @@ def main():
     tf.logging.set_verbosity(HYPER_PARAMS.verbosity)
 
     # Set C++ Graph Execution level verbosity
-    os.environ['TF_CPP_MIN_LOG_LEVEL'] = str(tf.logging.__dict__[HYPER_PARAMS.verbosity] / 10)
+    # os.environ['TF_CPP_MIN_LOG_LEVEL'] = str(tf.logging.__dict__[HYPER_PARAMS.verbosity] / 10)
 
     # Directory to store output model and checkpoints
     model_dir = HYPER_PARAMS.job_dir
@@ -567,10 +585,13 @@ def main():
 
     run_config = tf.estimator.RunConfig(
         tf_random_seed=19830610,
-        log_step_count_steps=1000,
-        save_checkpoints_secs=120,  # change if you want to change frequency of saving checkpoints
+        save_checkpoints_steps=1, #TODO: allow to config this parameters
+        log_step_count_steps=1,
+        #save_checkpoints_secs=120,  #TODO: param to change if you want to change frequency of saving checkpoints
         keep_checkpoint_max=3,
-        model_dir=model_dir
+        model_dir=model_dir,
+        save_summary_steps=1,
+
     )
 
     run_config = run_config.replace(model_dir=model_dir)

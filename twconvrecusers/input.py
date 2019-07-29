@@ -283,7 +283,7 @@ def generate_input_fn(file_names_pattern,
         tf.logging.info("================")
         tf.logging.info("")
 
-        file_names = tf.matching_files(file_names_pattern)
+        file_names = tf.io.matching_files(file_names_pattern)
 
         if file_encoding == 'csv':
             dataset = data.TextLineDataset(filenames=file_names)

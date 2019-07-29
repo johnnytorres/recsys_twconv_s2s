@@ -10,16 +10,18 @@
             "request": "launch",
             "module": "twconvrecusers.preprocessing.tfrecords_builder",
             "args": [
-                "--input_dir=~/data/twconv/trec/dialogs"
+                "--input_dir=~/data/twconv/trec/datastagging"
             ]
         },
         {
             "name": "Python: dialogs_builder",
             "type": "python",
             "request": "launch",
+            "console": "integratedTerminal",
             "module": "twconvrecusers.preprocessing.dialogs_builder",
             "args": [
-                "--data-dir=~/data/twconv/trec/dialogs"
+                "--dialogs-file=~/data/twconv/trec/dialogs.csv",
+                "--data-dir=~/data/twconv/trec/datastagging"
             ]
         },
         {
