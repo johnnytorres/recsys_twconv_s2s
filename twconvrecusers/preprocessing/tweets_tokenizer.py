@@ -6,7 +6,7 @@ import unicodedata
 import nltk
 import pandas as pd
 
-
+from sklearn.feature_extraction.text import CountVectorizer
 from tqdm import tqdm
 from nltk.stem import SnowballStemmer, WordNetLemmatizer
 from nltk.tokenize import wordpunct_tokenize, word_tokenize
@@ -79,8 +79,8 @@ class DataTokenizer:
                 tweet_text = self.GRUBER_URLINTEXT_PAT.sub('URL', tweet_text)
                 uttterance_tokens = self.tweet_tokenizer.tokenize(tweet_text)
 
-            if self.tokenizer == 4:
-                tweet_text = clean(tweet_text)
+            if self.tokenizer == 4 or self.tokenizer==10:
+                tweet_text = tokenize(tweet_text)
                 tweet_text = self.remove_accented_chars(tweet_text)
                 uttterance_tokens = self.tweetokenizer.tokenize(tweet_text)
                 uttterance_tokens = self.remove_duplicated_sequential_words(uttterance_tokens)
@@ -124,18 +124,41 @@ class DataTokenizer:
 
     def remove_accented_chars(self, text):
         text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('utf-8', 'ignore')
-
+        text = text.replace('$', '')
         return text
 
     def run(self):
+
+
         ds = pd.read_csv(
             self.input_file,
             sep=self.args.sep
         )
         desc = os.path.split(self.input_file)[1]
         comments_tokenized = []
+
         for i, row in tqdm(ds.iterrows(), 'tokenize {}'.format(desc), total=ds.shape[0]):
             comments_tokenized.append(self.tokenize_short_text(row[self.text_field]))
+
+
+        if self.args.tokenizer==10:
+            vectorizer = CountVectorizer(
+                strip_accents='ascii',
+                stop_words=self.stopword_list,
+                max_df=0.9,
+                min_df=1,
+                max_features=200
+            )
+            vectorizer.fit(comments_tokenized)
+            comments_vec = []
+
+            for tweet in tqdm(comments_tokenized, 'vectorizing', total=len(comments_tokenized)):
+                tweet_vec = [word for word in tweet.split() if word in vectorizer.vocabulary_]
+                comments_vec.append(' '.join(tweet_vec))
+
+            comments_tokenized = comments_vec
+
+
 
         ds[self.text_field] = comments_tokenized
         output_file = os.path.expanduser(self.output_file)

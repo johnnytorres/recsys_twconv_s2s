@@ -2,37 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c25c6c6-8cd1-4139-a355-a4f62ad57c3c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/scripts/getdata.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twconvrecusers/preprocessing/dialogs_builder.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twconvrecusers/preprocessing/tweets_tokenizer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/Untitled.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/eda_conversations.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/eda_conversations.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/eda_timelines.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/eda_timelines.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/microblogs_conversations.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/microblogs_conversations.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/featurizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/featurizer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/inference.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/input.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/input.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/metadata.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/metadata.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/models/data_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/data_handler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/models/evaluation_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/evaluation_handler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/models/model_base.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/model_base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/models/model_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/model_factory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/models/model_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/model_handler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/models/model_tfidf.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/model_tfidf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/models/random.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/random.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/preprocessing/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/preprocessing/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/preprocessing/csv_builder.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/preprocessing/embeddings_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/preprocessing/embeddings_builder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/preprocessing/prepare_data.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/preprocessing/profiles_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/preprocessing/profiles_builder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/preprocessing/tfrecords_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/preprocessing/tfrecords_builder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/seq2seq.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/seq2seq.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/task.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/test/recall.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/test/recall.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/test/tf_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/test/tf_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convrecsys/test/tfrecords.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/test/tfrecords.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/cloudml-submit-train-job.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-cloudml-submit-train-job.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/launch.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/getdata.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/getdata.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/input.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/input.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/preprocessing/dialogs_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/preprocessing/dialogs_builder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/preprocessing/tfrecords_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/preprocessing/tfrecords_builder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/preprocessing/tweets_tokenizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/preprocessing/tweets_tokenizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/seq2seq.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/task.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,10 +34,6 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="width" value="1440" />
-    <option name="height" value="900" />
-  </component>
   <component name="ProjectId" id="1OGKCuv8ccUk0Ho9Mr9E8M9XxAq" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -66,25 +41,29 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/scripts" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="pyconsole" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/run-cloudml-submit-v1d1p2.sh" />
   </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myShowVariablesByDefault" value="false" />
+    <option name="myIpythonEnabled" value="false" />
+  </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/scripts" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/analysis" />
       <recent name="$PROJECT_DIR$/convrecsys/baselines" />
       <recent name="$PROJECT_DIR$/scripts" />
       <recent name="$PROJECT_DIR$/recsysconv" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -99,7 +78,53 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.dialogs_builder">
+  <component name="RunManager" selected="Python.task">
+    <configuration default="true" type="DjangoTestsConfigurationType">
+      <module name="twittercs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
+      <module name="twittercs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PyLettuceRunConfigurationType" factoryName="Lettuce">
+      <module name="twittercs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="crisis_conv_recusers" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -136,29 +161,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/twconvrecusers/preprocessing/dialogs_builder.py" />
-      <option name="PARAMETERS" value="--data-dir=~/data/twconv/trec/dialogs" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="prepare_data" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="crisis_conv_recusers" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/convrecsys/preprocessing" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/convrecsys/preprocessing/prepare_data.py" />
-      <option name="PARAMETERS" value="~/data/nlp/microblog_conversation/trec.csv  ~/data/nlp/microblog_conversation/trec" />
+      <option name="PARAMETERS" value="--dialogs-file=~/data/twconv/trec/datastagging/dialogs.csv --data-dir=~/data/twconv/trec/datastagging" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -166,7 +169,29 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="profiles_builder" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="task" type="PythonConfigurationType" factoryName="Python">
+      <module name="crisis_conv_recusers" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/twconvrecusers" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/twconvrecusers/task.py" />
+      <option name="PARAMETERS" value="--job-dir=~/data/twconv/trec/resultstagging/model_uniforminit_noreg_50it --train-files=~/data/twconv/trec/datastagging/train.tfrecords --eval-files=~/data/twconv/trec/datastagging/valid.tfrecords --test-files=~/data/twconv/trec/datastagging/test.tfrecords --vocab-path=~/data/twconv/trec/datastagging/vocabulary.txt --num-distractor=5 --max-content-len=10 --max-utterance-len=10 --file-encoding=tf --test --train-steps=50 --train-batch-size=2 --num-epochs=1 --eval-every-secs=1 --eval-batch-size=10 --eval-steps=1" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="tfrecords_builder" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="crisis_conv_recusers" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -179,30 +204,8 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/twconvrecusers/preprocessing/profiles_builder.py" />
-      <option name="PARAMETERS" value="--input=~/data/twconv/trec/dialogs --output=~/data/twconv/trec/stagging --tokenize-tweets --lowercase buildfromconv" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="random" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="crisis_conv_recusers" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/convrecsys/models/random.py" />
-      <option name="PARAMETERS" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/twconvrecusers/preprocessing/tfrecords_builder.py" />
+      <option name="PARAMETERS" value="--input_dir=~/data/twconv/trec/datastagging --num_distractors=5 --max_sentence_len=10" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -210,18 +213,99 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="tweets_tokenizer" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="crisis_conv_recusers" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/twconvrecusers/preprocessing" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/twconvrecusers/preprocessing/tweets_tokenizer.py" />
+      <option name="PARAMETERS" value="--input-file=~/data/twconv/trec/datastagging/dialogs_sample.csv --output-file=~/data/twconv/trec/datastagging/dialogs_preprocessed.csv --sep=, --text-field=text --language=english --remove-stopwords --tokenizer=4" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Python.FlaskServer">
+      <module name="twittercs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <module name="twittercs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <module name="twittercs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Nosetests">
+      <module name="twittercs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_regexPattern" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Python.random" />
-      <item itemvalue="Python.prepare_data" />
-      <item itemvalue="Python.profiles_builder" />
+      <item itemvalue="Python.task" />
       <item itemvalue="Python.dialogs_builder" />
+      <item itemvalue="Python.tfrecords_builder" />
+      <item itemvalue="Python.tweets_tokenizer" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.tfrecords_builder" />
         <item itemvalue="Python.dialogs_builder" />
-        <item itemvalue="Python.profiles_builder" />
-        <item itemvalue="Python.prepare_data" />
-        <item itemvalue="Python.random" />
+        <item itemvalue="Python.tweets_tokenizer" />
       </list>
     </recent_temporary>
   </component>
@@ -247,6 +331,11 @@
       <workItem from="1563860698325" duration="300000" />
       <workItem from="1563905048188" duration="2225000" />
       <workItem from="1563933308927" duration="7510000" />
+      <workItem from="1564161328918" duration="61000" />
+      <workItem from="1564161436377" duration="666000" />
+      <workItem from="1564166796149" duration="11744000" />
+      <workItem from="1564268501865" duration="12352000" />
+      <workItem from="1564416596998" duration="3474000" />
     </task>
     <task id="LOCAL-00001" summary="refactor project">
       <created>1562518129393</created>
@@ -282,37 +371,53 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/twconvrecusers/preprocessing/profiles_builder.py</url>
-          <line>69</line>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/twconvrecusers/task.py</url>
+          <line>446</line>
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/twconvrecusers/preprocessing/profiles_builder.py</url>
-          <line>52</line>
-          <option name="timeStamp" value="3" />
+          <url>file://$PROJECT_DIR$/twconvrecusers/task.py</url>
+          <line>370</line>
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/twconvrecusers/preprocessing/profiles_builder.py</url>
-          <line>61</line>
-          <option name="timeStamp" value="4" />
+          <url>file://$PROJECT_DIR$/twconvrecusers/preprocessing/tweets_tokenizer.py</url>
+          <line>151</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/twconvrecusers/preprocessing/tweets_tokenizer.py</url>
+          <line>158</line>
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/twconvrecusers/preprocessing/dialogs_builder.py</url>
-          <line>13</line>
-          <option name="timeStamp" value="6" />
+          <line>22</line>
+          <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/twconvrecusers/preprocessing/dialogs_builder.py</url>
-          <line>47</line>
-          <option name="timeStamp" value="10" />
+          <url>file://$PROJECT_DIR$/twconvrecusers/model.py</url>
+          <line>403</line>
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
+      <default-breakpoints>
+        <breakpoint enabled="true" type="python-exception">
+          <properties notifyOnTerminate="true" ignoreLibraries="true" exception="BaseException">
+            <option name="ignoreLibraries" value="true" />
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/twconvrecusers$profiles_builder.coverage" NAME="profiles_builder Coverage Results" MODIFIED="1563854659441" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecusers/preprocessing" />
-    <SUITE FILE_PATH="coverage/twconvrecusers$dialogs_builder.coverage" NAME="dialogs_builder Coverage Results" MODIFIED="1563944890625" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
+    <SUITE FILE_PATH="coverage/twconvrecusers$task.coverage" NAME="task Coverage Results" MODIFIED="1564420916909" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecusers" />
+    <SUITE FILE_PATH="coverage/twconvrecusers$dialogs_builder.coverage" NAME="dialogs_builder Coverage Results" MODIFIED="1564315196823" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
     <SUITE FILE_PATH="coverage/crisis_conv_recusers$prepare_data.coverage" NAME="prepare_data Coverage Results" MODIFIED="1562447148991" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/convrecsys/preprocessing" />
+    <SUITE FILE_PATH="coverage/twconvrecusers$tfrecords_builder.coverage" NAME="tfrecords_builder Coverage Results" MODIFIED="1564315261817" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecusers/preprocessing" />
     <SUITE FILE_PATH="coverage/crisis_conv_recusers$model_random.coverage" NAME="model_random Coverage Results" MODIFIED="1562446129085" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
+    <SUITE FILE_PATH="coverage/twconvrecusers$tweets_tokenizer.coverage" NAME="tweets_tokenizer Coverage Results" MODIFIED="1564315029404" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecusers/preprocessing" />
   </component>
 </project>
