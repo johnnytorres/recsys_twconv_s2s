@@ -4,11 +4,24 @@
 set -e
 
 BASE_DIR=$HOME/data
+<<<<<<< HEAD
 DATA_DIR=$BASE_DIR/twconv/trec
+=======
+
+DATASET=trec
+DATA_DIR=$BASE_DIR/twconv/$DATASET
+DIALOGS_DIR=$DATA_DIR/dialogs
+>>>>>>> a3c530d9bc372fd6db73a8da3c165b5132deae23
 STAGGING_DIR=${DATA_DIR}/datastagging
 
 # download datasets
 
+<<<<<<< HEAD
+=======
+
+# it's not necessary as scripts should be run from root project dir
+
+>>>>>>> a3c530d9bc372fd6db73a8da3c165b5132deae23
 python -m twconvrecusers.preprocessing.tweet_tokenizer \
     --input-file=${DIALOGS_DIR}/dialogs.csv \
     --output-file=${STAGGING_DIR}/dialogs.csv \

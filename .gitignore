@@ -2,8 +2,11 @@
 data/
 embeddings/
 results/
+<<<<<<< HEAD
 
 *.DS_Store
+=======
+>>>>>>> a3c530d9bc372fd6db73a8da3c165b5132deae23
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

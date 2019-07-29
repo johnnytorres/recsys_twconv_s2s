@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c25c6c6-8cd1-4139-a355-a4f62ad57c3c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/analysis/data_collection.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/data_collection.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/analysis/ds_samples.xlsx" beforeDir="false" />
@@ -332,7 +333,7 @@
       <workItem from="1564161436377" duration="666000" />
       <workItem from="1564166796149" duration="11744000" />
       <workItem from="1564268501865" duration="12352000" />
-      <workItem from="1564416596998" duration="8946000" />
+      <workItem from="1564416596998" duration="9192000" />
     </task>
     <task id="LOCAL-00001" summary="refactor project">
       <created>1562518129393</created>
