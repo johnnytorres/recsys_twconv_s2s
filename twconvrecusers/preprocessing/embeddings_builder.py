@@ -6,7 +6,6 @@ import array
 import numpy as np
 import tensorflow as tf
 from collections import defaultdict
-#from tqdm import tqdm
 
 
 def load_vocab(filename):
