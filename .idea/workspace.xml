@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c25c6c6-8cd1-4139-a355-a4f62ad57c3c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/data_collection.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/data_collection.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/ds_samples.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/ds_stats.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/recall_results.xlsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/getdata.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/getdata.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/preprocessing/dialogs_builder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/preprocessing/embeddings_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/preprocessing/embeddings_builder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/preprocessing/profiles_builder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/preprocessing/tweets_tokenizer.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -76,7 +75,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.task">
+  <component name="RunManager" selected="Python.tweets_tokenizer">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="twittercs" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -139,28 +138,6 @@
       <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="dialogs_builder" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="crisis_conv_recusers" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/twconvrecusers/preprocessing/dialogs_builder.py" />
-      <option name="PARAMETERS" value="--dialogs-file=~/data/twconv/trec/datastagging/dialogs.csv --data-dir=~/data/twconv/trec/datastagging" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
@@ -295,14 +272,12 @@
     </configuration>
     <list>
       <item itemvalue="Python.task" />
-      <item itemvalue="Python.dialogs_builder" />
       <item itemvalue="Python.tfrecords_builder" />
       <item itemvalue="Python.tweets_tokenizer" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.tfrecords_builder" />
-        <item itemvalue="Python.dialogs_builder" />
         <item itemvalue="Python.tweets_tokenizer" />
       </list>
     </recent_temporary>
@@ -333,7 +308,7 @@
       <workItem from="1564161436377" duration="666000" />
       <workItem from="1564166796149" duration="11744000" />
       <workItem from="1564268501865" duration="12352000" />
-      <workItem from="1564416596998" duration="9192000" />
+      <workItem from="1564416596998" duration="12589000" />
     </task>
     <task id="LOCAL-00001" summary="refactor project">
       <created>1562518129393</created>
@@ -379,17 +354,17 @@
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/twconvrecusers/preprocessing/tweets_tokenizer.py</url>
+          <url>file://$PROJECT_DIR$/../../data/twittercs/twittercs/preprocessing/tweets_tokenizer.py</url>
           <line>151</line>
           <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/twconvrecusers/preprocessing/tweets_tokenizer.py</url>
+          <url>file://$PROJECT_DIR$/../../data/twittercs/twittercs/preprocessing/tweets_tokenizer.py</url>
           <line>158</line>
           <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/twconvrecusers/preprocessing/dialogs_builder.py</url>
+          <url>file://$PROJECT_DIR$/../../data/twittercs/twittercs/preprocessing/dialogs_vsplitter.py</url>
           <line>22</line>
           <option name="timeStamp" value="32" />
         </line-breakpoint>
