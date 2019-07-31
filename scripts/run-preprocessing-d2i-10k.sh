@@ -2,7 +2,7 @@
 
 # profiles
 
-python3 -m preprocessing.profiles_builder \
+python3 -m data.profiles_builder \
     --input=data/convusersec/timelines_raw.csv \
     --output=data/convusersec/timelines.csv \
     --tokenize-tweets \
@@ -12,7 +12,7 @@ python3 -m preprocessing.profiles_builder \
 # "dialogs" dataset is provided by crawler
 
 #train
-python3 -m preprocessing.csv_builder \
+python3 -m data.csv_builder \
     --data-root=data/convusersec/dialogs \
     --profiles-path=data/convusersec/timelines.csv \
     --output=data/convusersec/twconvrsu_csv_v2i_10k/train.csv \
@@ -23,7 +23,7 @@ python3 -m preprocessing.csv_builder \
     train
 
 #valid
-python3 -m preprocessing.csv_builder \
+python3 -m data.csv_builder \
     --data-root=data/convusersec/dialogs \
     --profiles-path=data/convusersec/timelines.csv \
     --output=data/convusersec/twconvrsu_csv_v2i_10k/valid.csv \
@@ -33,24 +33,24 @@ python3 -m preprocessing.csv_builder \
     -e=5000 \
     valid
 
-#test
-python3 -m preprocessing.csv_builder \
+#tests
+python3 -m data.csv_builder \
     --data-root=data/convusersec/dialogs \
     --profiles-path=data/convusersec/timelines.csv \
-    --output=data/convusersec/twconvrsu_csv_v2i_10k/test.csv \
+    --output=data/convusersec/twconvrsu_csv_v2i_10k/tests.csv \
     --text-field=2 \
     --min-context-length=2 \
     --tokenize-tweets \
     -e=5000 \
-    test
+    tests
 
 # tf records builder
-python3 -m preprocessing.tfrecords_builder \
+python3 -m data.tfrecords_builder \
     --input_dir=data/convusersec/twconvrsu_csv_v2i_10k \
     --output_dir=data/convusersec/twconvrsu_tf_v2i_10k \
     --max_sentence_len=1400
 
-python3 -m preprocessing.embeddings_builder \
+python3 -m data.embeddings_builder \
     data/convusersec/twconvrsu_tf_v2i_10k/vocabulary.txt \
     embeddings/fasttext/cc.es.300.vec
 

@@ -23,7 +23,7 @@ import tensorflow.contrib as tfc
 from tensorflow.python.ops.losses import losses
 from keras.layers.recurrent import LSTM
 
-from preprocessing import embeddings_builder
+from twconvrecusers.data import embeddings_builder
 from twconvrecusers import featurizer
 from twconvrecusers import metadata
 from twconvrecusers import task

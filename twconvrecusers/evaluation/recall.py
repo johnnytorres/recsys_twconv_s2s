@@ -1,4 +1,7 @@
 
+import numpy as np
+
+
 class EvaluationHandler:
 	@staticmethod
 	def evaluate_recall(y_true, y_pred, k=1):
@@ -11,12 +14,18 @@ class EvaluationHandler:
 
 	@staticmethod
 	def evaluate_predictor(y_true, y_pred):
-		for k in [1, 2, 5, 10]:
+		num_elements = y_pred.shape[1]
+		klist = np.array( [1, 2, 5, 10])
+		klist = klist[klist < num_elements]
+		metrics = []
+		for k in klist:
 			r = EvaluationHandler.evaluate_recall(y_true, y_pred, k)
-			print(f'recall@({k}, 10): {r}')
+			print(f'recall@({k}, {num_elements}): {r}')
+			metrics.append(['recall', k, num_elements, r])
+		return metrics
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
 	labels = [1, 0, 2, 4]
 	predictions = [
 		[1, 2, 3, 0],

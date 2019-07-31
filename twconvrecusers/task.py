@@ -1,37 +1,270 @@
-#!/usr/bin/env python
-
-# Copyright 2017 Google Inc. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-
-import argparse
 import os
-from datetime import datetime
-from tqdm import tqdm
-import numpy as np
 import csv
+import argparse
+from datetime import datetime
+
+import numpy as np
+from tqdm import tqdm
+
 import tensorflow as tf
 from tensorflow.python import debug as tf_debug
 
 from twconvrecusers import input
 from twconvrecusers import metadata
 from twconvrecusers import model
+from twconvrecusers.data.data_handler import DataHandler
+from twconvrecusers.evaluation.recall import EvaluationHandler
+from twconvrecusers.models import random
+from twconvrecusers.models.random import RandomConversationRecommender
 
 
-# ******************************************************************************
-# YOU MAY MODIFY THIS FUNCTION TO ADD/REMOVE PARAMS OR CHANGE THE DEFAULT VALUES
-# ******************************************************************************
+def clean_job_dir():
+    # If job_dir_reuse is False then remove the job_dir if it exists
+    tf.logging.info(("Resume training:", HYPER_PARAMS.reuse_job_dir))
+    if not HYPER_PARAMS.reuse_job_dir:
+        if tf.io.gfile.exists(HYPER_PARAMS.job_dir):
+            tf.io.gfile.rmtree(HYPER_PARAMS.job_dir)
+            tf.logging.info(("Deleted job_dir {} to avoid re-use".format(HYPER_PARAMS.job_dir)))
+        else:
+            tf.logging.info("No job_dir available to delete")
+    else:
+        tf.logging.info(("Reusing job_dir {} if it exists".format(HYPER_PARAMS.job_dir)))
+
+
+def get_train_input_fn():
+    train_input_fn = input.generate_input_fn(
+        file_names_pattern=HYPER_PARAMS.train_files,
+        file_encoding=HYPER_PARAMS.file_encoding,
+        mode=tf.estimator.ModeKeys.TRAIN,
+        num_epochs=HYPER_PARAMS.num_epochs,
+        batch_size=HYPER_PARAMS.train_batch_size
+    )
+    return train_input_fn
+
+
+def get_eval_input_fn():
+    eval_input_fn = input.generate_input_fn(
+        file_names_pattern=HYPER_PARAMS.eval_files,
+        file_encoding=HYPER_PARAMS.file_encoding,
+        mode=tf.estimator.ModeKeys.EVAL,
+        batch_size=HYPER_PARAMS.eval_batch_size
+    )
+    return eval_input_fn
+
+
+def get_test_input_fn():
+    test_input_fn = input.generate_input_fn(
+        file_names_pattern=HYPER_PARAMS.test_files,
+        file_encoding=HYPER_PARAMS.file_encoding,
+        mode=tf.estimator.ModeKeys.EVAL,
+        batch_size=HYPER_PARAMS.eval_batch_size
+    )
+    return test_input_fn
+
+
+def get_predict_input_fn():
+    predict_input_fn = input.generate_input_fn(
+        file_names_pattern=HYPER_PARAMS.predict_files,
+        file_encoding=HYPER_PARAMS.file_encoding,
+        mode=tf.estimator.ModeKeys.TRAIN,
+        batch_size=HYPER_PARAMS.predict_batch_size
+    )
+    return predict_input_fn
+
+
+def train_model(run_config):
+    """Train, evaluate, and export the model using tf.estimator.train_and_evaluate API"""
+
+    train_input_fn = get_train_input_fn()
+
+    eval_input_fn = get_eval_input_fn()
+
+    exporter = tf.estimator.FinalExporter(
+        'estimator',
+        input.SERVING_FUNCTIONS[HYPER_PARAMS.export_format],
+        as_text=False  # change to true if you want to export the model as readable text
+    )
+
+    # compute the number of training steps based on num_epoch, train_size, and train_batch_size
+    if HYPER_PARAMS.train_size is not None and HYPER_PARAMS.num_epochs is not None:
+        train_steps = (HYPER_PARAMS.train_size / HYPER_PARAMS.train_batch_size) * \
+                      HYPER_PARAMS.num_epochs
+    else:
+        train_steps = HYPER_PARAMS.train_steps
+
+    hooks = []
+    if HYPER_PARAMS.debug:
+        hooks = [tf_debug.LocalCLIDebugHook()]
+
+    train_spec = tf.estimator.TrainSpec(
+        train_input_fn,
+        max_steps=int(train_steps),
+        hooks=hooks
+    )
+
+    eval_spec = tf.estimator.EvalSpec(
+        eval_input_fn,
+        steps=HYPER_PARAMS.eval_steps,
+        exporters=[exporter],
+        name='training',
+        throttle_secs=HYPER_PARAMS.eval_every_secs,
+        hooks=hooks
+    )
+
+    tf.logging.info("===========================")
+    tf.logging.info("* TRAINING configurations")
+    tf.logging.info("===========================")
+    tf.logging.info(("Train size: {}".format(HYPER_PARAMS.train_size)))
+    tf.logging.info(("Epoch count: {}".format(HYPER_PARAMS.num_epochs)))
+    tf.logging.info(("Train batch size: {}".format(HYPER_PARAMS.train_batch_size)))
+    tf.logging.info(("Training steps: {} ({})".format(int(train_steps),
+                                                      "supplied" if HYPER_PARAMS.train_size is None else "computed")))
+    tf.logging.info(("Evaluate every {} seconds".format(HYPER_PARAMS.eval_every_secs)))
+    tf.logging.info("===========================")
+
+    if metadata.TASK_TYPE == "classification":
+        estimator = model.create_classifier(
+            config=run_config
+        )
+    elif metadata.TASK_TYPE == "regression":
+        estimator = model.create_regressor(
+            config=run_config
+        )
+    else:
+        estimator = model.create_estimator(
+            config=run_config
+        )
+
+    # train and evaluate
+    tf.estimator.train_and_evaluate(
+        estimator,
+        train_spec,
+        eval_spec
+    )
+
+
+def test_model(run_config):
+    # EVALUATE MODEL WITH TEST DATA
+    test_input_fn = get_test_input_fn()
+    tf.logging.info("===========================")
+    tf.logging.info("* TESTING configurations")
+    tf.logging.info("===========================")
+    tf.logging.info(("Test batch size: {}".format(HYPER_PARAMS.eval_batch_size)))
+    tf.logging.info(("Test steps: {} ({})".format(None, "computed (all tests instances)")))
+    tf.logging.info("===========================")
+
+    estimator = model.create_estimator(
+        config=run_config
+    )
+
+    hooks = []
+    if HYPER_PARAMS.debug:
+        hooks = [tf_debug.LocalCLIDebugHook()]
+
+    estimator.evaluate(
+        input_fn=test_input_fn,
+        hooks=hooks,
+        name='tests'
+    )
+
+    predictions = estimator.predict(input_fn=test_input_fn)
+    predictions_probs = []
+    num_instances_recall = HYPER_PARAMS.num_distractors + 1
+
+    count = 0
+    path = os.path.join(HYPER_PARAMS.job_dir, 'predictions.csv')
+    with open(path, 'w') as f:
+        csvwriter = csv.writer(f)
+        for instance_prediction in tqdm(predictions):
+            tf.logging.info(str(instance_prediction))
+            predictions_probs.append(instance_prediction['logistic'][0])
+            count += 1
+            if count % num_instances_recall == 0:
+                csvwriter.writerow(predictions_probs)
+                predictions_probs = []
+
+    # predictions_probs= np.split(predictions_probs, num_instances_recall, 0)
+    # predictions_probs = np.concatenate(predictions_probs, 1)
+
+
+def predict_instances(run_config):
+    # PREDICT EXAMPLE INSTANCES
+    tf.logging.info("===========================")
+    tf.logging.info("* PREDICT configurations")
+    tf.logging.info("===========================")
+    tf.logging.info(("Predict batch size: {}".format(HYPER_PARAMS.predict_batch_size)))
+    tf.logging.info(("Predict steps: {} ({})".format(None, "computed (all predict instances)")))
+    tf.logging.info("===========================")
+
+    predict_input_fn = get_predict_input_fn()
+
+    estimator = model.create_estimator(
+        config=run_config
+    )
+
+    predictions = estimator.predict(input_fn=predict_input_fn)
+
+    for instance_prediction in predictions:
+        tf.logging.info(str(instance_prediction))
+
+    tf.logging.info("Done.")
+
+
+def main(args):
+    # ******************************************************************************
+    # THIS IS ENTRY POINT FOR THE TRAINER TASK
+    # ******************************************************************************
+
+    tf.logging.info('---------------------')
+    tf.logging.info('Hyper-parameters:')
+    tf.logging.info(HYPER_PARAMS)
+    tf.logging.info('---------------------')
+
+    # Set python level verbosity
+    tf.logging.set_verbosity(HYPER_PARAMS.verbosity)
+
+    # Set C++ Graph Execution level verbosity
+    # os.environ['TF_CPP_MIN_LOG_LEVEL'] = str(tf.logging.__dict__[HYPER_PARAMS.verbosity] / 10)
+
+    # Directory to store output model and checkpoints
+    model_dir = HYPER_PARAMS.job_dir
+    metadata.HYPER_PARAMS = HYPER_PARAMS
+
+    run_config = tf.estimator.RunConfig(
+        tf_random_seed=19830610,
+        save_checkpoints_steps=1,  # TODO: allow to config this parameters
+        log_step_count_steps=1,
+        # save_checkpoints_secs=120,  #TODO: param to change if you want to change frequency of saving checkpoints
+        keep_checkpoint_max=3,
+        model_dir=model_dir,
+        save_summary_steps=1,
+
+    )
+
+    run_config = run_config.replace(model_dir=model_dir)
+    tf.logging.info(("Model Directory:", run_config.model_dir))
+
+    # Run the train and evaluate experiment
+    time_start = datetime.utcnow()
+    tf.logging.info("")
+    tf.logging.info(("Experiment started at {}".format(time_start.strftime("%H:%M:%S"))))
+    tf.logging.info(".......................................")
+
+    if HYPER_PARAMS.train:
+        clean_job_dir()
+        train_model(run_config)
+    if HYPER_PARAMS.test:
+        test_model(run_config)
+    if HYPER_PARAMS.predict:
+        predict_instances(run_config)
+
+    time_end = datetime.utcnow()
+    tf.logging.info(".......................................")
+    tf.logging.info(("Experiment finished at {}".format(time_end.strftime("%H:%M:%S"))))
+    tf.logging.info("")
+    time_elapsed = time_end - time_start
+    tf.logging.info(("Experiment elapsed time: {} seconds".format(time_elapsed.total_seconds())))
+    tf.logging.info("")
 
 
 def initialise_hyper_params(args_parser):
@@ -49,28 +282,28 @@ def initialise_hyper_params(args_parser):
         '--train-files',
         help='GCS or local paths to training data',
         nargs='+',
-        #required=True,
+        # required=True,
         type=lambda x: os.path.expanduser(x)
     )
     args_parser.add_argument(
         '--eval-files',
         help='GCS or local paths to evaluation data',
         nargs='+',
-        #required=True,
+        # required=True,
         type=lambda x: os.path.expanduser(x)
     )
     args_parser.add_argument(
-        '--test-files',
-        help='GCS or local paths to test data',
+        '--tests-files',
+        help='GCS or local paths to tests data',
         nargs='+',
-        #required=True,
+        # required=True,
         type=lambda x: os.path.expanduser(x)
     )
     args_parser.add_argument(
         '--predict-files',
         help='GCS or local paths to predict data',
         nargs='+',
-        #required=True,
+        # required=True,
         type=lambda x: os.path.expanduser(x)
     )
     args_parser.add_argument(
@@ -82,10 +315,10 @@ def initialise_hyper_params(args_parser):
     args_parser.add_argument(
         '--file-encoding',
         help='file encoding',
-        choices=['csv','tf'],
+        choices=['csv', 'tf'],
         default='csv'
     )
-    
+
     args_parser.add_argument(
         '--embedding-path',
         help='Path to embeddings file',
@@ -190,11 +423,10 @@ def initialise_hyper_params(args_parser):
     )
     args_parser.add_argument(
         '--vocab-size',
-        help='Max number of features to use (-1: use all)', #todo: pending implementation
+        help='Max number of features to use (-1: use all)',  # todo: pending implementation
         default=-1,
         type=int
     )
-
 
     ###########################################
 
@@ -207,7 +439,7 @@ def initialise_hyper_params(args_parser):
         default=model.MODEL_LSTM,
         type=str,
     )
-    
+
     args_parser.add_argument(
         '--learning-rate',
         help="Learning rate value for the optimizers",
@@ -348,7 +580,7 @@ def initialise_hyper_params(args_parser):
         help='training'
     )
     args_parser.add_argument(
-        '--test',
+        '--tests',
         action='store_true',
         help='testing'
     )
@@ -357,271 +589,34 @@ def initialise_hyper_params(args_parser):
         action='store_true',
         help='prediction'
     )
-    
 
-    return args_parser.parse_args()
-
-
-# ******************************************************************************
-# YOU NEED NOT TO CHANGE THE FUNCTION TO RUN THE EXPERIMENT
-# ******************************************************************************
-
-def clean_job_dir():
-    # If job_dir_reuse is False then remove the job_dir if it exists
-    tf.logging.info(("Resume training:", HYPER_PARAMS.reuse_job_dir))
-    if not HYPER_PARAMS.reuse_job_dir:
-        if tf.io.gfile.exists(HYPER_PARAMS.job_dir):
-            tf.io.gfile.rmtree(HYPER_PARAMS.job_dir)
-            tf.logging.info(("Deleted job_dir {} to avoid re-use".format(HYPER_PARAMS.job_dir)))
-        else:
-            tf.logging.info("No job_dir available to delete")
-    else:
-        tf.logging.info(("Reusing job_dir {} if it exists".format(HYPER_PARAMS.job_dir)))
-        
-        
-def get_train_input_fn():
-    train_input_fn = input.generate_input_fn(
-        file_names_pattern=HYPER_PARAMS.train_files,
-        file_encoding=HYPER_PARAMS.file_encoding,
-        mode=tf.estimator.ModeKeys.TRAIN,
-        num_epochs=HYPER_PARAMS.num_epochs,
-        batch_size=HYPER_PARAMS.train_batch_size
-    )
-    return train_input_fn
+    # return args_parser.parse_args()
 
 
-def get_eval_input_fn():
-    eval_input_fn = input.generate_input_fn(
-        file_names_pattern=HYPER_PARAMS.eval_files,
-        file_encoding=HYPER_PARAMS.file_encoding,
-        mode=tf.estimator.ModeKeys.EVAL,
-        batch_size=HYPER_PARAMS.eval_batch_size
-    )
-    return eval_input_fn
+def run_random_recsys(args):
+    data_handler = DataHandler()
+    predictor = RandomConversationRecommender()
+    train, valid, test = data_handler.load_data(args.data_dir)
+    y_pred = [predictor.predict(row['context'], row[1:]) for ix, row in test.iterrows()]
+    y_pred = np.array(y_pred)
+    y_true = np.zeros(test.shape[0])
+    metrics = EvaluationHandler.evaluate_predictor(y_true, y_pred)
+    # TODO: save metrics
 
-
-def get_test_input_fn():
-    test_input_fn = input.generate_input_fn(
-        file_names_pattern=HYPER_PARAMS.test_files,
-        file_encoding=HYPER_PARAMS.file_encoding,
-        mode=tf.estimator.ModeKeys.EVAL,
-        batch_size=HYPER_PARAMS.eval_batch_size
-    )
-    return test_input_fn
-
-
-def get_predict_input_fn():
-    predict_input_fn = input.generate_input_fn(
-        file_names_pattern=HYPER_PARAMS.predict_files,
-        file_encoding=HYPER_PARAMS.file_encoding,
-        mode=tf.estimator.ModeKeys.TRAIN,
-        batch_size=HYPER_PARAMS.predict_batch_size
-    )
-    return predict_input_fn
-
-
-def train_model(run_config):
-    """Train, evaluate, and export the model using tf.estimator.train_and_evaluate API"""
-
-    train_input_fn = get_train_input_fn()
-
-    eval_input_fn = get_eval_input_fn()
-
-    exporter = tf.estimator.FinalExporter(
-        'estimator',
-        input.SERVING_FUNCTIONS[HYPER_PARAMS.export_format],
-        as_text=False  # change to true if you want to export the model as readable text
-    )
-
-    # compute the number of training steps based on num_epoch, train_size, and train_batch_size
-    if HYPER_PARAMS.train_size is not None and HYPER_PARAMS.num_epochs is not None:
-        train_steps = (HYPER_PARAMS.train_size / HYPER_PARAMS.train_batch_size) * \
-                      HYPER_PARAMS.num_epochs
-    else:
-        train_steps = HYPER_PARAMS.train_steps
-
-    hooks = []
-    if HYPER_PARAMS.debug:
-        hooks =[tf_debug.LocalCLIDebugHook()]
-
-    train_spec = tf.estimator.TrainSpec(
-        train_input_fn,
-        max_steps=int(train_steps),
-        hooks = hooks
-    )
-
-    eval_spec = tf.estimator.EvalSpec(
-        eval_input_fn,
-        steps=HYPER_PARAMS.eval_steps,
-        exporters=[exporter],
-        name='training',
-        throttle_secs=HYPER_PARAMS.eval_every_secs,
-        hooks=hooks
-    )
-
-    tf.logging.info("===========================")
-    tf.logging.info("* TRAINING configurations")
-    tf.logging.info("===========================")
-    tf.logging.info(("Train size: {}".format(HYPER_PARAMS.train_size)))
-    tf.logging.info(("Epoch count: {}".format(HYPER_PARAMS.num_epochs)))
-    tf.logging.info(("Train batch size: {}".format(HYPER_PARAMS.train_batch_size)))
-    tf.logging.info(("Training steps: {} ({})".format(int(train_steps),
-                                           "supplied" if HYPER_PARAMS.train_size is None else "computed")))
-    tf.logging.info(("Evaluate every {} seconds".format(HYPER_PARAMS.eval_every_secs)))
-    tf.logging.info("===========================")
-
-    if metadata.TASK_TYPE == "classification":
-        estimator = model.create_classifier(
-            config=run_config
-        )
-    elif metadata.TASK_TYPE == "regression":
-        estimator = model.create_regressor(
-            config=run_config
-        )
-    else:
-        estimator = model.create_estimator(
-            config=run_config
-        )
-
-    # train and evaluate
-    tf.estimator.train_and_evaluate(
-        estimator,
-        train_spec,
-        eval_spec
-    )
-
-# EVALUATE MODEL WITH TEST DATA
-
-
-def test_model(run_config):
-    test_input_fn = get_test_input_fn()
-    tf.logging.info("===========================")
-    tf.logging.info("* TESTING configurations")
-    tf.logging.info("===========================")
-    tf.logging.info(("Test batch size: {}".format(HYPER_PARAMS.eval_batch_size)))
-    tf.logging.info(("Test steps: {} ({})".format(None, "computed (all test instances)")))
-    tf.logging.info("===========================")
-
-    estimator = model.create_estimator(
-        config=run_config
-    )
-
-    hooks = []
-    if HYPER_PARAMS.debug:
-        hooks = [tf_debug.LocalCLIDebugHook()]
-
-    estimator.evaluate(
-        input_fn=test_input_fn,
-        hooks=hooks,
-        name='test'
-    )
-
-    predictions = estimator.predict(input_fn=test_input_fn)
-    predictions_probs = []
-    num_instances_recall = HYPER_PARAMS.num_distractors + 1
-
-    count = 0
-    path = os.path.join(HYPER_PARAMS.job_dir, 'predictions.csv')
-    with open(path, 'w') as f:
-        csvwriter = csv.writer(f)
-        for instance_prediction in tqdm( predictions ):
-            tf.logging.info(str(instance_prediction))
-            predictions_probs.append(instance_prediction['logistic'][0])
-            count+=1
-            if count%num_instances_recall == 0:
-                csvwriter.writerow(predictions_probs)
-                predictions_probs = []
-
-
-    #predictions_probs= np.split(predictions_probs, num_instances_recall, 0)
-    #predictions_probs = np.concatenate(predictions_probs, 1)
-
-    
-# PREDICT EXAMPLE INSTANCES
-
-    
-def predict_instances(run_config):
-    tf.logging.info("===========================")
-    tf.logging.info("* PREDICT configurations")
-    tf.logging.info("===========================")
-    tf.logging.info(("Predict batch size: {}".format(HYPER_PARAMS.predict_batch_size)))
-    tf.logging.info(("Predict steps: {} ({})".format(None, "computed (all predict instances)")))
-    tf.logging.info("===========================")
-
-    predict_input_fn= get_predict_input_fn()
-    
-    estimator = model.create_estimator(
-        config=run_config
-    )
-
-    predictions = estimator.predict(input_fn=predict_input_fn)
-    
-    for instance_prediction in predictions:
-        tf.logging.info(str(instance_prediction))
-
-    tf.logging.info("Done.")
-
-# ******************************************************************************
-# THIS IS ENTRY POINT FOR THE TRAINER TASK
-# ******************************************************************************
-
-
-def main():
-
-    tf.logging.info('---------------------')
-    tf.logging.info('Hyper-parameters:')
-    tf.logging.info(HYPER_PARAMS)
-    tf.logging.info('---------------------')
-
-    # Set python level verbosity
-    tf.logging.set_verbosity(HYPER_PARAMS.verbosity)
-
-    # Set C++ Graph Execution level verbosity
-    # os.environ['TF_CPP_MIN_LOG_LEVEL'] = str(tf.logging.__dict__[HYPER_PARAMS.verbosity] / 10)
-
-    # Directory to store output model and checkpoints
-    model_dir = HYPER_PARAMS.job_dir
-    metadata.HYPER_PARAMS = HYPER_PARAMS
-
-    run_config = tf.estimator.RunConfig(
-        tf_random_seed=19830610,
-        save_checkpoints_steps=1, #TODO: allow to config this parameters
-        log_step_count_steps=1,
-        #save_checkpoints_secs=120,  #TODO: param to change if you want to change frequency of saving checkpoints
-        keep_checkpoint_max=3,
-        model_dir=model_dir,
-        save_summary_steps=1,
-
-    )
-
-    run_config = run_config.replace(model_dir=model_dir)
-    tf.logging.info(("Model Directory:", run_config.model_dir))
-
-    # Run the train and evaluate experiment
-    time_start = datetime.utcnow()
-    tf.logging.info("")
-    tf.logging.info(("Experiment started at {}".format(time_start.strftime("%H:%M:%S"))))
-    tf.logging.info(".......................................")
-
-    if HYPER_PARAMS.train:
-        clean_job_dir()
-        train_model(run_config)
-    if HYPER_PARAMS.test:
-        test_model(run_config)
-    if HYPER_PARAMS.predict:
-        predict_instances(run_config)
-
-    time_end = datetime.utcnow()
-    tf.logging.info(".......................................")
-    tf.logging.info(("Experiment finished at {}".format(time_end.strftime("%H:%M:%S"))))
-    tf.logging.info("")
-    time_elapsed = time_end - time_start
-    tf.logging.info(("Experiment elapsed time: {} seconds".format(time_elapsed.total_seconds())))
-    tf.logging.info("")
-
-
-args_parser = argparse.ArgumentParser()
-HYPER_PARAMS = initialise_hyper_params(args_parser)
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    subparsers = parser.add_subparsers()
+
+    subparser = subparsers.add_parser('deeplearning')
+    initialise_hyper_params(subparser)
+    subparser.set_defaults(func=main)
+
+    subparser = subparsers.add_parser('random')
+    subparser.add_argument('--data-dir', type=lambda p: os.path.expanduser(p))
+    subparser.add_argument('--job-dir', type=lambda p: os.path.expanduser(p))
+    subparser.set_defaults(func=run_random_recsys)
+
+    HYPER_PARAMS = parser.parse_args()
+    HYPER_PARAMS.func(HYPER_PARAMS)
+    # main()

@@ -9,8 +9,8 @@ python3 -m trainer.task
     --eval-files=data/convusersec/twconvrsu_tf_politics/eval.tfrecords
     --eval-batch-size=10
     --eval-steps=1
-    --test-files=data/convusersec/twconvrsu_tf_politics/test.tfrecords
-    --predict-files=data/convusersec/twconvrsu_tf_politics/test.tfrecords
+    --tests-files=data/convusersec/twconvrsu_tf_politics/tests.tfrecords
+    --predict-files=data/convusersec/twconvrsu_tf_politics/tests.tfrecords
     --job-dir=data/convusersec/twconvrsu_tf_politics/models/
     --vocab-path=data/convusersec/twconvrsu_tf_politics/vocabulary.txt
     --vocab-proc=data/convusersec/twconvrsu_tf_politics/vocab_processor.bin
@@ -21,7 +21,7 @@ python3 -m trainer.task
     --max-utterance-len=1400
     --num-distractors=9
     --learning-rate=0.001
-    --test
+    --tests
 
 python3 -m trainer.task
     --file-encoding=tf
@@ -32,8 +32,8 @@ python3 -m trainer.task
     --eval-files=data/convusersec/twconvrsu_tf_sports/eval.tfrecords
     --eval-batch-size=10
     --eval-steps=1
-    --test-files=data/convusersec/twconvrsu_tf_sports/test.tfrecords
-    --predict-files=data/convusersec/twconvrsu_tf_sports/test.tfrecords
+    --tests-files=data/convusersec/twconvrsu_tf_sports/tests.tfrecords
+    --predict-files=data/convusersec/twconvrsu_tf_sports/tests.tfrecords
     --job-dir=data/convusersec/twconvrsu_tf_sports/models/
     --vocab-path=data/convusersec/twconvrsu_tf_sports/vocabulary.txt
     --vocab-proc=data/convusersec/twconvrsu_tf_sports/vocab_processor.bin
@@ -44,7 +44,7 @@ python3 -m trainer.task
     --max-utterance-len=1400
     --num-distractors=9
     --learning-rate=0.001
-    --test
+    --tests
 
 
 python3 -m trainer.task
@@ -56,8 +56,8 @@ python3 -m trainer.task
     --eval-files=data/convusersec/twconvrsu_tf_activism/eval.tfrecords
     --eval-batch-size=10
     --eval-steps=1
-    --test-files=data/convusersec/twconvrsu_tf_activism/test.tfrecords
-    --predict-files=data/convusersec/twconvrsu_tf_activism/test.tfrecords
+    --tests-files=data/convusersec/twconvrsu_tf_activism/tests.tfrecords
+    --predict-files=data/convusersec/twconvrsu_tf_activism/tests.tfrecords
     --job-dir=data/convusersec/twconvrsu_tf_activism/models/
     --vocab-path=data/convusersec/twconvrsu_tf_activism/vocabulary.txt
     --vocab-proc=data/convusersec/twconvrsu_tf_activism/vocab_processor.bin
@@ -68,4 +68,4 @@ python3 -m trainer.task
     --max-utterance-len=1400
     --num-distractors=9
     --learning-rate=0.001
-    --test
+    --tests

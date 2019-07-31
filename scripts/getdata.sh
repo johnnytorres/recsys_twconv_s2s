@@ -4,22 +4,29 @@
 set -e
 
 BASE_DIR=$HOME/data
+
+# PREPARE EMBEDDINGS
+EMBEDDINGS_DIR=${BASE_DIR}/embeddings/fasttext
+mkdir -p ${EMBEDDINGS_DIR}
+# fasttext english download
+EMBEDDINGS_FILE=crawl-300d-2M.vec
+if [[ ! -f ${EMBEDDINGS_FILE} ]]
+then
+    echo "downloading fasttext embeddings..."
+    URL=https://dl.fbaipublicfiles.com/fasttext/vectors-english/${EMBEDDINGS_FILE}.zip
+    wget -O ${EMBEDDINGS_DIR}/${EMBEDDINGS_FILE}.zip $URL
+    echo "decompressing fasttext embeddings..."
+    unzip -d ${EMBEDDINGS_DIR} ${EMBEDDINGS_FILE}.zip
+fi
+
+# PREPARE DATASETS
 DATA_DIR=$BASE_DIR/twconv/trec
-STAGGING_DIR=${DATA_DIR}/datastagging
-
-# download datasets
-
-
-
+DATA_STAGGING=${DATA_DIR}/datastagging
+# TODO: download datasets
 # tf records builder
-python -m twconvrecusers.preprocessing.tfrecords_builder \
-   --input_dir=data/convusersec/twconvrsu_csv_v1 \
-   --output_dir=data/convusersec/twconvrsu_tf_v1 \
-   --max_sentence_len=1400
+python -m twconvrecusers.data.tfrecords_builder \
+   --input_dir=${DATA_STAGGING} \
+   --num_distractors=5 \
+   --max_sentence_len=10
 
-#python3 -m preprocessing.embeddings_builder \
-#    data/convusersec/twconvrsu_tf_v1/vocabulary.txt \
-#    embeddings/fasttext/cc.es.300.vec
-#
-#
-#
+

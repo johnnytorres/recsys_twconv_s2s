@@ -14,7 +14,7 @@ TF_DIR=data/convusersec/twconvrsu_tf_$DOMAIN
 mkdir $CSV_DIR
 mkdir $TF_DIR
 
-python3 -m preprocessing.csv_builder \
+python3 -m data.csv_builder \
     --data-root=$DATA_DIR \
     --profiles-path=$PROFILES_PATH \
     --output=$CSV_DIR/train.csv \
@@ -25,7 +25,7 @@ python3 -m preprocessing.csv_builder \
     train
 
 #valid
-python3 -m preprocessing.csv_builder \
+python3 -m data.csv_builder \
     --data-root=$DATA_DIR \
     --profiles-path=$PROFILES_PATH \
     --output=$CSV_DIR/valid.csv \
@@ -35,24 +35,24 @@ python3 -m preprocessing.csv_builder \
     -e=5000 \
     valid
 
-#test
-python3 -m preprocessing.csv_builder \
+#tests
+python3 -m data.csv_builder \
     --data-root=$DATA_DIR \
     --profiles-path=$PROFILES_PATH \
-    --output=$CSV_DIR/test.csv \
+    --output=$CSV_DIR/tests.csv \
     --text-field=2 \
     --min-context-length=2 \
     --tokenize-tweets \
     -e=5000 \
-    test
+    tests
 
 # tf records builder
-python3 -m preprocessing.tfrecords_builder \
+python3 -m data.tfrecords_builder \
     --input_dir=$CSV_DIR \
     --output_dir=$TF_DIR \
     --max_sentence_len=1400
 
-#python3 -m preprocessing.embeddings_builder \
+#python3 -m data.embeddings_builder \
 #    $TF_DIR/vocabulary.txt \
 #    embeddings/fasttext/cc.es.300.vec
 

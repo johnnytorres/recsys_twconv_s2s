@@ -8,7 +8,7 @@ PACKAGE_PATH=trainer
 DATA_DIR=data/convusersec/twconvrsu_tf_v1
 TRAIN_FILES=${DATA_DIR}/train.tfrecords
 VALID_FILES=${DATA_DIR}/valid.tfrecords
-TEST_FILES=${DATA_DIR}/test.tfrecords
+TEST_FILES=${DATA_DIR}/tests.tfrecords
 PREDICT_FILES=${DATA_DIR}/example.tfrecords
 MODEL_DIR=${DATA_DIR}/models/${MODEL_NAME}
 VOCAB_FILE=${DATA_DIR}/vocab_size.txt
@@ -21,7 +21,7 @@ gcloud ml-engine local train \
         -- \
         --train-files=${TRAIN_FILES} \
         --eval-files=${VALID_FILES} \
-        --test-files=${TEST_FILES} \
+        --tests-files=${TEST_FILES} \
         --vocab-path=${VOCAB_FILE} \
         --vocab-proc=${VOCAB_PROC} \
         --job-dir=${MODEL_DIR} \
@@ -36,7 +36,7 @@ gcloud ml-engine local train \
         --learning-rate=0.001 \
         --train \
         #--predict
-        #--test \
+        #--tests \
         #--predict-files=${PREDICT_FILES} \
 
 

@@ -22,7 +22,7 @@ MODEL_DIR=${DATA_DIR}/models/${MODEL_NAME}
 PACKAGE_PATH=trainer # this can be a gcs location to a zipped and uploaded package
 TRAIN_FILES=${DATA_DIR}/train.tfrecords
 VALID_FILES=${DATA_DIR}/valid.tfrecords
-TEST_FILES=${DATA_DIR}/test.tfrecords
+TEST_FILES=${DATA_DIR}/tests.tfrecords
 PREDICT_FILES=${DATA_DIR}/example.tfrecords
 VOCAB_FILE=${DATA_DIR}/vocabulary.txt
 VOCAB_PROC=${DATA_DIR}/vocab_processor.bin
@@ -45,7 +45,7 @@ gcloud ml-engine jobs submit training ${JOB_NAME} \
         -- \
         --train-files=${TRAIN_FILES} \
         --eval-files=${VALID_FILES} \
-        --test-files=${TEST_FILES} \
+        --tests-files=${TEST_FILES} \
         --vocab-path=${VOCAB_FILE} \
         --vocab-proc=${VOCAB_PROC} \
         --embedding-path=${EMBEDDING_FILE} \
@@ -63,7 +63,7 @@ gcloud ml-engine jobs submit training ${JOB_NAME} \
         --num-distractors=9 \
         --learning-rate=0.001 \
         --train \
-        --test \
+        --tests \
         #--predict
 
         #--predict-files=${PREDICT_FILES} \
