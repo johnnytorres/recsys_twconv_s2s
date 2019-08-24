@@ -2,9 +2,9 @@
 import numpy as np
 
 
-class EvaluationHandler:
+class RecallEvaluator:
 	@staticmethod
-	def evaluate_recall(y_true, y_pred, k=1):
+	def calculate_recall(y_true, y_pred, k=1):
 		num_examples = len(y_true)
 		num_correct = 0
 		for label, predictions in zip(y_true, y_pred):
@@ -13,13 +13,13 @@ class EvaluationHandler:
 		return num_correct/num_examples
 
 	@staticmethod
-	def evaluate_predictor(y_true, y_pred):
+	def evaluate(y_true, y_pred):
 		num_elements = y_pred.shape[1]
 		klist = np.array( [1, 2, 5, 10])
 		klist = klist[klist < num_elements]
 		metrics = []
 		for k in klist:
-			r = EvaluationHandler.evaluate_recall(y_true, y_pred, k)
+			r = RecallEvaluator.calculate_recall(y_true, y_pred, k)
 			print(f'recall@({k}, {num_elements}): {r}')
 			metrics.append(['recall', k, num_elements, r])
 		return metrics
@@ -33,5 +33,5 @@ if __name__ == '__main__':
 		[2, 3, 1, 0],
 		[0, 1, 2, 3]
 	]
-	score = EvaluationHandler.evaluate_recall(labels, predictions)
+	score = RecallEvaluator.calculate_recall(labels, predictions)
 	print (score)

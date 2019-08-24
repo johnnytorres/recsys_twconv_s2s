@@ -24,8 +24,14 @@ from tensorflow import data
 
 from twconvrecusers import metadata
 from twconvrecusers import featurizer
-from twconvrecusers import task
+#from twconvrecusers import task
 
+
+# HYPERPARAMS = None
+#
+# def set_hyperparams(hyperparams):
+#     global HYPERPARAMS
+#     HYPERPARAMS=hyperparams
 
 # **************************************************************************
 # YOU NEED NOT TO CHANGE THESE FUNCTIONS TO PARSE THE INPUT RECORDS
@@ -59,7 +65,7 @@ def parse_csv(csv_row, is_serving=False):
     return features
 
 
-def parse_tf_example(example_proto, is_serving=False, mode=tfc.learn.ModeKeys.TRAIN):
+def parse_tf_example(example_proto, HYPER_PARAMS, is_serving=False, mode=tfc.learn.ModeKeys.TRAIN):
     """Takes the string input tensor (example proto) and returns a dict of rank-2 tensors.
 
     Takes a rank-1 tensor and converts it into rank-2 tensor, with respect to its data type
@@ -82,7 +88,7 @@ def parse_tf_example(example_proto, is_serving=False, mode=tfc.learn.ModeKeys.TR
         feature_spec[feature_name] = tf.FixedLenFeature(shape=1, dtype=tf.string)
         
     if mode == tfc.learn.ModeKeys.EVAL:
-        num_distractors = task.HYPER_PARAMS.num_distractors
+        num_distractors = HYPER_PARAMS.num_distractors
         for i in range(num_distractors):
             feature_name = 'distractor_{}'.format(i)
             feature_name_len = 'distractor_{}_len'.format(i)
@@ -103,7 +109,7 @@ def parse_tf_example(example_proto, is_serving=False, mode=tfc.learn.ModeKeys.TR
 # **************************************************************************
 
 
-def process_features(features, mode = tfc.learn.ModeKeys.TRAIN):
+def process_features(features, HYPER_PARAMS, mode = tfc.learn.ModeKeys.TRAIN):
     """ Use to implement custom feature engineering logic, e.g. polynomial expansion, etc.
 
     Default behaviour is to return the original feature tensors dictionary as-is.
@@ -123,7 +129,7 @@ def process_features(features, mode = tfc.learn.ModeKeys.TRAIN):
     features['utterance_len'] = tf.squeeze(features['utterance_len'], squeeze_dims=[0])
 
     if mode == tfc.learn.ModeKeys.EVAL:
-        num_distractors = task.HYPER_PARAMS.num_distractors
+        num_distractors = HYPER_PARAMS.num_distractors
         
         for i in range(num_distractors):
             feature_name = 'distractor_{}'.format(i)
@@ -185,9 +191,9 @@ def get_features_target_tuple(features, mode=tfc.learn.ModeKeys.TRAIN):
     return features, target
 
 
-def posprocessing(features, target, mode):
+def posprocessing(features, target, mode, HYPER_PARAMS):
     if mode == tfc.learn.ModeKeys.EVAL:
-        num_distractors = task.HYPER_PARAMS.num_distractors
+        num_distractors = HYPER_PARAMS.num_distractors
         
         context = features['context']
         context_len = features['context_len']
@@ -236,13 +242,14 @@ def posprocessing(features, target, mode):
 
 
 def generate_input_fn(file_names_pattern,
+                     HYPER_PARAMS,
                      file_encoding='csv',
                      mode=tf.estimator.ModeKeys.EVAL,
                      skip_header_lines=0,
                      num_epochs=1,
                      batch_size=200,
                      multi_threading=True):
-    """Generates an input function for reading training and evaluation data file(s).
+    """Generates an input function for reading training and metrics data file(s).
     This uses the tf.data APIs.
 
     Args:
@@ -263,7 +270,7 @@ def generate_input_fn(file_names_pattern,
 
         shuffle = True if mode == tf.estimator.ModeKeys.TRAIN else False
 
-        data_size = task.HYPER_PARAMS.train_size if mode == tf.estimator.ModeKeys.TRAIN else None
+        data_size = HYPER_PARAMS.train_size if mode == tf.estimator.ModeKeys.TRAIN else None
 
         num_threads = multiprocessing.cpu_count() if multi_threading else 1
 
@@ -292,12 +299,12 @@ def generate_input_fn(file_names_pattern,
 
         else:
             dataset = data.TFRecordDataset(filenames=file_names)
-            dataset = dataset.map(lambda tf_example: parse_tf_example(tf_example, mode=mode),
+            dataset = dataset.map(lambda tf_example: parse_tf_example(tf_example, HYPER_PARAMS, mode=mode),
                                   num_parallel_calls=num_threads)
 
         dataset = dataset.map(lambda features: get_features_target_tuple(features, mode=mode),
                               num_parallel_calls=num_threads)
-        dataset = dataset.map(lambda features, target: (process_features(features, mode=mode), target),
+        dataset = dataset.map(lambda features, target: (process_features(features, HYPER_PARAMS=HYPER_PARAMS, mode=mode), target),
                               num_parallel_calls=num_threads)
 
         if shuffle:
@@ -310,7 +317,7 @@ def generate_input_fn(file_names_pattern,
         iterator = dataset.make_one_shot_iterator()
         features, target = iterator.get_next()
 
-        features, target = posprocessing(features, target, mode)
+        features, target = posprocessing(features, target, mode, HYPER_PARAMS)
 
         return features, target
 
@@ -322,7 +329,7 @@ def generate_input_fn(file_names_pattern,
 # **************************************************************************
 
 
-def load_feature_stats():
+def load_feature_stats(HYPER_PARAMS):
     """
     Load numeric column pre-computed statistics (mean, stdv, min, max, etc.)
     in order to be used for scaling/stretching numeric columns.
@@ -339,8 +346,8 @@ def load_feature_stats():
 
     feature_stats = None
     try:
-        if task.HYPER_PARAMS.feature_stats_file is not None and tf.gfile.Exists(task.HYPER_PARAMS.feature_stats_file):
-            with tf.gfile.Open(task.HYPER_PARAMS.feature_stats_file) as file:
+        if HYPER_PARAMS.feature_stats_file is not None and tf.gfile.Exists(HYPER_PARAMS.feature_stats_file):
+            with tf.gfile.Open(HYPER_PARAMS.feature_stats_file) as file:
                 content = file.read()
             feature_stats = json.loads(content)
             tf.logging.info("feature stats were successfully loaded from local file...")
@@ -403,36 +410,40 @@ def csv_serving_input_fn():
     )
 
 
-def example_serving_input_fn():
-    feature_columns = featurizer.create_feature_columns()
-    input_feature_columns = [feature_columns[feature_name] for feature_name in metadata.INPUT_FEATURE_NAMES]
-
-    example_bytestring = tf.placeholder(
-        shape=[None],
-        dtype=tf.string,
-    )
-    
-    feature_scalars = tf.parse_example(
-        example_bytestring,
-        tf.feature_column.make_parse_example_spec(input_feature_columns)
-    )
-
-    # features = {
-    #     key: tf.expand_dims(tensor, -1)
-    #     for key, tensor in feature_scalars.items()
-    # }
-    
-    features = feature_scalars
-
-    return tf.estimator.export.ServingInputReceiver(
-        features=process_features(features),
-        receiver_tensors={'example_proto': example_bytestring}
-    )
 
 
-SERVING_FUNCTIONS = {
-    'JSON': json_serving_input_fn,
-    'EXAMPLE': example_serving_input_fn,
-    'CSV': csv_serving_input_fn
-}
+def get_serving_function(HYPER_PARAMS):
+    def example_serving_input_fn():
+        feature_columns = featurizer.create_feature_columns(HYPER_PARAMS)
+        input_feature_columns = [feature_columns[feature_name] for feature_name in metadata.INPUT_FEATURE_NAMES]
+
+        example_bytestring = tf.placeholder(
+            shape=[None],
+            dtype=tf.string,
+        )
+
+        feature_scalars = tf.parse_example(
+            example_bytestring,
+            tf.feature_column.make_parse_example_spec(input_feature_columns)
+        )
+
+        # features = {
+        #     key: tf.expand_dims(tensor, -1)
+        #     for key, tensor in feature_scalars.items()
+        # }
+
+        features = feature_scalars
+
+        return tf.estimator.export.ServingInputReceiver(
+            features=process_features(features, HYPER_PARAMS),
+            receiver_tensors={'example_proto': example_bytestring}
+        )
+
+
+    SERVING_FUNCTIONS = {
+        'JSON': json_serving_input_fn,
+        'EXAMPLE': example_serving_input_fn,
+        'CSV': csv_serving_input_fn
+    }
+    return SERVING_FUNCTIONS[HYPER_PARAMS.export_format]
 

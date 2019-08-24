@@ -6,6 +6,9 @@ class RandomConversationRecommender:
 	def __init__(self):
 		pass
 
+	def train(self, train_set):
+		pass
+
 	def predict(self, context, utterances):
 		n_utt = len(utterances)
 		return np.random.choice(n_utt, n_utt, replace=False)

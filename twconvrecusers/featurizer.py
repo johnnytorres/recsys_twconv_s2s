@@ -74,7 +74,7 @@ def extend_feature_columns(feature_columns):
 # **************************************************************************
 
 
-def create_feature_columns():
+def create_feature_columns(HYPER_PARAMS):
     """Creates tensorFlow feature_column(s) based on the metadata of the input features.
 
     The tensorFlow feature_column objects are created based on the data types of the features
@@ -92,7 +92,7 @@ def create_feature_columns():
     """
 
     # load the numeric feature stats (if exists)
-    feature_stats = input.load_feature_stats()
+    feature_stats = input.load_feature_stats(HYPER_PARAMS)
 
     # all the numerical features including the input and constructed ones
     #numeric_feature_names = set(metadata.INPUT_NUMERIC_FEATURE_NAMES + metadata.CONSTRUCTED_NUMERIC_FEATURE_NAMES)

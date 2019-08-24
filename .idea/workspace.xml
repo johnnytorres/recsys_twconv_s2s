@@ -2,46 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c25c6c6-8cd1-4139-a355-a4f62ad57c3c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/runexperiments.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/twconvrecusers/models/factory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/crisis_conv_recusers.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/crisis_conv_recusers.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/getdata.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/getdata.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/run-cloudml-local.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-cloudml-local.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run-cloudml-submit-train-job.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-cloudml-submit-train-job.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run-cloudml-submit-v1d1.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-cloudml-submit-v1d1.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run-cloudml-submit-v1d1p2.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-cloudml-submit-v1d1p2.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run-cloudml-submit-v1d2.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-cloudml-submit-v1d2.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run-cloudml-submit-v1d2i-10k.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-cloudml-submit-v1d2i-10k.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run-cloudml-submit-v1d2i-20k.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-cloudml-submit-v1d2i-20k.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run-cloudml-submit-v1d2i-60k.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-cloudml-submit-v1d2i-60k.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run-cloudml-submit-v1d2p2.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-cloudml-submit-v1d2p2.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run-cloudml-submit-v1d2p3.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-cloudml-submit-v1d2p3.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run-cloudml-submit-v1d2t-50.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-cloudml-submit-v1d2t-50.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run-cloudml-submit-v2d2p3.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-cloudml-submit-v2d2p3.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run-cloudml-submit-v3d2p3.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-cloudml-submit-v3d2p3.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/run-local-debug.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-local-debug.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run-local-domains.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-local-domains.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run-preprocessing-d1.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-preprocessing-d1.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run-preprocessing-d2.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-preprocessing-d2.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run-preprocessing-d2i-10k.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-preprocessing-d2i-10k.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run-preprocessing-d2i-20k.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-preprocessing-d2i-20k.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run-preprocessing-d2i-60k.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-preprocessing-d2i-60k.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run-preprocessing-d2t-50.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-preprocessing-d2t-50.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run-preprocessing-domains.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-preprocessing-domains.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/evaluation/recall.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/metrics/recall.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/featurizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/featurizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/input.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/input.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/twconvrecusers/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/models/data_handler.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/models/evaluation_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/evaluation/recall.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/models/model_base.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/models/model_factory.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/models/model_handler.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/models/model_tfidf.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/tfidf.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/twconvrecusers/models/random.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/random.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/preprocessing/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/preprocessing/embeddings_builder.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/preprocessing/tfrecords_builder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/models/tfidf.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/tfidf.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/twconvrecusers/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/task.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/test/recall.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/tests/recall.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/test/tf_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/tests/tf_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/test/tfrecords.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/tests/tfrecords.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -186,20 +160,22 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="$USER_HOME$/.virtualenvs/twconvrecusers/bin/python" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/twconvrecusers" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/twconvrecusers/task.py" />
-      <option name="PARAMETERS" value="random --data-dir=~/data/twconv/trec/datastagging --job-dir=~/data/twconv/trec/resultstagging" />
+      <option name="PARAMETERS" value="--data-dir=~/data/twconv/trec/datastagging --job-dir=~/data/twconv/trec/resultstagging/bilstm bilstm --train --test --embedding-trainable --num-distractor=5 --max-content-len=10 --max-utterance-len=10 --train-steps=50 --train-batch-size=6 --num-epochs=1 --eval-every-secs=1 --eval-batch-size=20 --eval-steps=1" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
-      <method v="2" />
+      <method v="2">
+        <option name="ToolBeforeRunTask" enabled="true" actionId="Tool_External Tools_env" />
+      </method>
     </configuration>
     <configuration name="tfrecords_builder" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="crisis_conv_recusers" />
@@ -209,12 +185,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/twconvrecusers/preprocessing" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/twconvrecusers/preprocessing/tfrecords_builder.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/twconvrecusers/data/tfrecords_builder.py" />
       <option name="PARAMETERS" value="--input_dir=~/data/twconv/trec/datastagging --num_distractors=5 --max_sentence_len=10" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -322,7 +298,17 @@
       <workItem from="1564416596998" duration="12677000" />
       <workItem from="1564452387284" duration="36000" />
       <workItem from="1564504884442" duration="4950000" />
-      <workItem from="1564511915514" duration="568000" />
+      <workItem from="1564511915514" duration="632000" />
+      <workItem from="1564671069453" duration="34000" />
+      <workItem from="1566502789451" duration="1123000" />
+      <workItem from="1566505111149" duration="31000" />
+      <workItem from="1566519743861" duration="285000" />
+      <workItem from="1566522527476" duration="17000" />
+      <workItem from="1566522667039" duration="158000" />
+      <workItem from="1566577441130" duration="323000" />
+      <workItem from="1566578050945" duration="5757000" />
+      <workItem from="1566586766540" duration="12002000" />
+      <workItem from="1566664906536" duration="3369000" />
     </task>
     <task id="LOCAL-00001" summary="refactor project">
       <created>1562518129393</created>
@@ -343,6 +329,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -365,16 +361,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/twconvrecusers/task.py</url>
-          <line>98</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/twconvrecusers/task.py</url>
-          <line>22</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/../../data/twittercs/twittercs/preprocessing/tweets_tokenizer.py</url>
           <line>151</line>
           <option name="timeStamp" value="30" />
@@ -390,19 +376,24 @@
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/twconvrecusers/task.py</url>
+          <line>627</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/twconvrecusers/task.py</url>
+          <line>615</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/twconvrecusers/task.py</url>
+          <line>613</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/twconvrecusers/model.py</url>
-          <line>403</line>
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/twconvrecusers/task.py</url>
-          <line>608</line>
-          <option name="timeStamp" value="35" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/twconvrecusers/task.py</url>
-          <line>596</line>
-          <option name="timeStamp" value="36" />
+          <line>222</line>
+          <option name="timeStamp" value="47" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -417,10 +408,10 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/twconvrecusers$profiles_builder.coverage" NAME="profiles_builder Coverage Results" MODIFIED="1563854659441" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecusers/preprocessing" />
-    <SUITE FILE_PATH="coverage/twconvrecusers$task.coverage" NAME="task Coverage Results" MODIFIED="1564512368609" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecusers" />
+    <SUITE FILE_PATH="coverage/twconvrecusers$task.coverage" NAME="task Coverage Results" MODIFIED="1566671059443" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecusers" />
     <SUITE FILE_PATH="coverage/twconvrecusers$dialogs_builder.coverage" NAME="dialogs_builder Coverage Results" MODIFIED="1564315196823" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
     <SUITE FILE_PATH="coverage/crisis_conv_recusers$prepare_data.coverage" NAME="prepare_data Coverage Results" MODIFIED="1562447148991" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/convrecsys/preprocessing" />
-    <SUITE FILE_PATH="coverage/twconvrecusers$tfrecords_builder.coverage" NAME="tfrecords_builder Coverage Results" MODIFIED="1564315261817" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecusers/preprocessing" />
+    <SUITE FILE_PATH="coverage/twconvrecusers$tfrecords_builder.coverage" NAME="tfrecords_builder Coverage Results" MODIFIED="1566618197086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
     <SUITE FILE_PATH="coverage/crisis_conv_recusers$model_random.coverage" NAME="model_random Coverage Results" MODIFIED="1562446129085" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
     <SUITE FILE_PATH="coverage/twconvrecusers$tweets_tokenizer.coverage" NAME="tweets_tokenizer Coverage Results" MODIFIED="1564315029404" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecusers/preprocessing" />
   </component>

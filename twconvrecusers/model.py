@@ -1,18 +1,3 @@
-#!/usr/bin/env python
-
-# Copyright 2017 Google Inc. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
 
 import array
 from collections import defaultdict
@@ -21,76 +6,82 @@ import numpy as np
 import tensorflow as tf
 import tensorflow.contrib as tfc
 from tensorflow.python.ops.losses import losses
-from keras.layers.recurrent import LSTM
+
 
 from twconvrecusers.data import embeddings_builder
 from twconvrecusers import featurizer
 from twconvrecusers import metadata
-from twconvrecusers import task
 
 MODEL_RNN = 'rnn'
 MODEL_LSTM = 'lstm'
 MODEL_BiLSTM = 'bilstm'
 
+EMBEDDING_LAYER_NAME = 'word_embeddings'
+vocab_array = None
+vocab_dict = None
+vocab_size = None
+embedding_vectors = None
+embbeding_dict = None
 
-# ****************************************************************************************
-# YOU MAY MODIFY THESE FUNCTIONS TO USE DIFFERENT ESTIMATORS OR CONFIGURE THE CURRENT ONES
-# ****************************************************************************************
 
 
-def metric_fn(labels, predictions):
-    """ Defines extra evaluation metrics to canned and custom estimators.
-	By default, this returns an empty dictionary
 
-	Args:
-		labels: A Tensor of the same shape as predictions
-		predictions: A Tensor of arbitrary shape
+def construct_hidden_units():
+    """ Create the number of hidden units in each layer
+
+	if the HYPER_PARAMS.layer_sizes_scale_factor > 0 then it will use a "decay" mechanism
+	to define the number of units in each layer. Otherwise, task.HYPER_PARAMS.hidden_units
+	will be used as-is.
+
 	Returns:
-		dictionary of string:metric
+		list of int
 	"""
-    metrics = {}
+    hidden_units = list(map(int, task.HYPER_PARAMS.hidden_units.split(',')))
 
-    num_instances_recall = task.HYPER_PARAMS.num_distractors + 1
-    # probs = tf.tf.logging.info(predictions, [predictions], 'calculating metric recall @k predictions')
+    if task.HYPER_PARAMS.layer_sizes_scale_factor > 0:
+        first_layer_size = hidden_units[0]
+        scale_factor = task.HYPER_PARAMS.layer_sizes_scale_factor
+        num_layers = task.HYPER_PARAMS.num_layers
 
-    probs = predictions['logistic']
+        hidden_units = [
+            max(2, int(first_layer_size * scale_factor ** i))
+            for i in range(num_layers)
+        ]
 
-    split_predictions = tf.split(probs, num_instances_recall, 0)
-    concat_predictions = tf.concat(split_predictions, 1)
+    tf.logging.info(("Hidden units structure: {}".format(hidden_units)))
 
-    recall_labels = tf.zeros(shape=(tf.shape(concat_predictions)[0], 1), dtype=tf.int64, name='recall_labels')
+    return hidden_units
 
-    concat_predictions = tf.Print(
-        concat_predictions,
-        [concat_predictions, recall_labels],
-        'calculating metric recall @k split probs',
-        summarize=10)
 
-    # TODO: the k metrics depends of the number of distractors
-    for k in [1, 2, 5]:  # , 10]:
-        metric_name = "recall_at_%d" % k
-        metrics[metric_name] = tf.metrics.recall_at_k(
-            recall_labels,
-            concat_predictions,
-            k,
-            name=metric_name
-        )
+def update_learning_rate(HYPER_PARAMS):
+    """ Updates learning rate using an exponential decay method
 
-    # Example of implementing Root Mean Squared Error for regression
+	Returns:
+	   float - updated (decayed) learning rate
+	"""
+    initial_learning_rate = HYPER_PARAMS.learning_rate
+    decay_steps = HYPER_PARAMS.train_steps  # decay after each training step
+    decay_factor = HYPER_PARAMS.learning_rate_decay_factor  # if set to 1, then no decay.
 
-    # pred_values = predictions['predictions']
-    # metrics['rmse'] = tf.metrics.root_mean_squared_error(labels=labels,
-    #                                                      predictions=pred_values)
+    global_step = tf.train.get_global_step()
 
-    # Example of implementing Mean per Class Accuracy for classification
+    # decayed_learning_rate = learning_rate * decay_rate ^ (global_step / decay_steps)
+    learning_rate = tf.train.exponential_decay(initial_learning_rate,
+                                               global_step,
+                                               decay_steps,
+                                               decay_factor)
 
-    # indices = parse_label_column(labels)
-    # pred_class = predictions['class_ids']
-    # metrics['mirco_accuracy'] = tf.metrics.mean_per_class_accuracy(labels=indices,
-    #                                                                predictions=pred_class,
-    #                                                                num_classes=len(metadata.TARGET_LABELS))
+    return learning_rate
 
-    return metrics
+
+def parse_label_column(label_string_tensor):
+    """ Convert string class labels to indices
+
+	Returns:
+	   Tensor of type int
+	"""
+    table = tf.contrib.lookup.index_table_from_tensor(tf.constant(metadata.TARGET_LABELS))
+    return table.lookup(label_string_tensor)
 
 
 def create_classifier(config):
@@ -182,25 +173,7 @@ def create_regressor(config):
     return estimator
 
 
-# ***************************************************************************************
-# YOU NEED TO MODIFY THIS FUNCTIONS IF YOU WANT TO IMPLEMENT A CUSTOM ESTIMATOR
-# ***************************************************************************************
-EMBEDDING_LAYER_NAME = 'word_embeddings'
-vocab_array = None
-vocab_dict = None
-vocab_size = None
-embedding_vectors = None
-embbeding_dict = None
-
-
-def create_estimator(config):
-    """ Create a custom estimator based on _model_fn
-
-	Args:
-		config - used for model directory
-	Returns:
-		Estimator
-	"""
+def create_estimator(config, HYPER_PARAMS):
 
     def load_vocab(filename):
         vocab = None
@@ -244,31 +217,31 @@ def create_estimator(config):
         global vocab_array, vocab_dict, vocab_size, embedding_vectors, embbeding_dict
 
         if vocab_array is None:
-            vocab_array, vocab_dict, vocab_size = embeddings_builder.load_vocab(task.HYPER_PARAMS.vocab_path)
+            vocab_array, vocab_dict, vocab_size = embeddings_builder.load_vocab(HYPER_PARAMS.vocab_path)
 
-        if task.HYPER_PARAMS.embedding_path:
+        if HYPER_PARAMS.embedding_path:
             tf.logging.info('loading embeddings...')
             if embedding_vectors is None:
                 embedding_vectors, embbeding_dict = embeddings_builder.load_embedding_vectors(
-                    task.HYPER_PARAMS.embedding_path, set(vocab_array))
+                    HYPER_PARAMS.embedding_path, set(vocab_array))
             initializer = build_initial_embedding_matrix(vocab_dict, embbeding_dict, embedding_vectors,
-                                                         task.HYPER_PARAMS.embedding_size)
+                                                         HYPER_PARAMS.embedding_size)
             embedding_layer = tf.get_variable(
                 name=EMBEDDING_LAYER_NAME,
                 initializer=initializer,
-                trainable=task.HYPER_PARAMS.embedding_trainable
+                trainable=HYPER_PARAMS.embedding_trainable
             )
         else:
             tf.logging.info('No embeddings specified, starting with random embeddings!')
             initializer = tf.random_normal_initializer(-0.25, 0.25)  # todo: maybe hyperparam?
             #initializer = tf.glorot_uniform_initializer()
 
-            if task.HYPER_PARAMS.vocab_size == -1:
-                task.HYPER_PARAMS.vocab_size = vocab_size
+            if HYPER_PARAMS.vocab_size == -1:
+                HYPER_PARAMS.vocab_size = vocab_size
 
             embedding_layer = tf.get_variable(
                 name=EMBEDDING_LAYER_NAME,
-                shape=[task.HYPER_PARAMS.vocab_size, task.HYPER_PARAMS.embedding_size],
+                shape=[HYPER_PARAMS.vocab_size, HYPER_PARAMS.embedding_size],
                 initializer=initializer
             )
 
@@ -295,13 +268,13 @@ def create_estimator(config):
         # create sequence layer based on LSTM
         with tf.variable_scope('rnn') as vs:
 
-            if task.HYPER_PARAMS.estimator == MODEL_RNN:
+            if HYPER_PARAMS.estimator == MODEL_RNN:
                 cell = tf.nn.rnn_cell.BasicRNNCell(
-                    num_units=task.HYPER_PARAMS.rnn_dim,
+                    num_units=HYPER_PARAMS.rnn_dim,
                 )
-            elif task.HYPER_PARAMS.estimator == MODEL_LSTM:
+            elif HYPER_PARAMS.estimator == MODEL_LSTM:
                 cell = tf.nn.rnn_cell.LSTMCell(
-                    num_units=task.HYPER_PARAMS.rnn_dim,
+                    num_units=HYPER_PARAMS.rnn_dim,
                     initializer=tf.glorot_uniform_initializer(),
                     # todo: hyperparameters?
                     forget_bias=2.0,
@@ -310,17 +283,17 @@ def create_estimator(config):
                 )
             else:
                 cell_fw = tf.nn.rnn_cell.BasicLSTMCell(
-                    num_units=task.HYPER_PARAMS.rnn_dim,
+                    num_units=HYPER_PARAMS.rnn_dim,
                     forget_bias=2.0,
                     state_is_tuple=True
                 )
                 cell_bw = tf.nn.rnn_cell.BasicLSTMCell(
-                    num_units=task.HYPER_PARAMS.rnn_dim,
+                    num_units=HYPER_PARAMS.rnn_dim,
                     forget_bias=2.0,
                     state_is_tuple=True
                 )
 
-            if task.HYPER_PARAMS.estimator == MODEL_BiLSTM:
+            if HYPER_PARAMS.estimator == MODEL_BiLSTM:
                 rnn_outputs, rnn_states = tf.nn.bidirectional_dynamic_rnn(
                     cell_fw=cell_fw,
                     cell_bw=cell_bw,
@@ -336,9 +309,9 @@ def create_estimator(config):
                     dtype=tf.float32
                 )
 
-            if task.HYPER_PARAMS.estimator == MODEL_RNN:
+            if HYPER_PARAMS.estimator == MODEL_RNN:
                 context_encoded, utterance_encoded = tf.split(rnn_states, 2, 0)
-            elif task.HYPER_PARAMS.estimator == MODEL_LSTM:
+            elif HYPER_PARAMS.estimator == MODEL_LSTM:
                 context_encoded, utterance_encoded = tf.split(rnn_states.h, 2, 0)
             else:
                 rnn_state_fw, rnn_state_bw = rnn_states
@@ -348,7 +321,7 @@ def create_estimator(config):
 
         with tf.variable_scope('F') as vs:
             M = tf.get_variable(
-                'M', shape=[task.HYPER_PARAMS.rnn_dim, task.HYPER_PARAMS.rnn_dim],
+                'M', shape=[HYPER_PARAMS.rnn_dim,HYPER_PARAMS.rnn_dim],
                 initializer=tf.truncated_normal_initializer(),
                 #regularizer=tf.re
                 #regularizer=tf.contrib.layers.l2_regularizer(0.001)
@@ -370,30 +343,19 @@ def create_estimator(config):
         # utterance=features['utterance']
         context, contex_len = _get_feature(
             features, 'context', 'context_len',
-            task.HYPER_PARAMS.max_content_len)
+            HYPER_PARAMS.max_content_len)
         utterance, utterance_len = _get_feature(
             features, 'utterance', 'utterance_len',
-            task.HYPER_PARAMS.max_utterance_len
+            HYPER_PARAMS.max_utterance_len
         )
 
         return _dual_encoder(context, utterance, contex_len, utterance_len)
-
-    # Create input layer based on features
-    # input_layer = None
-
-    # Create hidden layers (dense, fully_connected, cnn, rnn, dropouts, etc.) given the input layer
-    # hidden_layers = None
-
-    # Create output (logits) layer given the hidden layers (usually without applying any activation functions)
-    # logits = None
-
-    # return logits
 
     def _train_op_fn(loss):
         """Returns the op to optimize the loss."""
 
         # Update learning rate using exponential decay method
-        current_learning_rate = update_learning_rate()
+        current_learning_rate = update_learning_rate(HYPER_PARAMS)
 
         # Create Optimiser
         optimizer = tf.train.AdamOptimizer(
@@ -410,9 +372,67 @@ def create_estimator(config):
 
         return train_op
 
+    def metric_fn(labels, predictions):
+        """ Defines extra metrics metrics to canned and custom estimators.
+    	By default, this returns an empty dictionary
+
+    	Args:
+    		labels: A Tensor of the same shape as predictions
+    		predictions: A Tensor of arbitrary shape
+    	Returns:
+    		dictionary of string:metric
+    	"""
+        metrics = {}
+
+        num_instances_recall = HYPER_PARAMS.num_distractors + 1
+        # probs = tf.tf.logging.info(predictions, [predictions], 'calculating metric recall @k predictions')
+
+        probs = predictions['logistic']
+
+        split_predictions = tf.split(probs, num_instances_recall, 0)
+        concat_predictions = tf.concat(split_predictions, 1)
+
+        recall_labels = tf.zeros(shape=(tf.shape(concat_predictions)[0], 1), dtype=tf.int64, name='recall_labels')
+
+        # concat_predictions = tf.Print(
+        #     concat_predictions,
+        #     [concat_predictions, recall_labels],
+        #     'calculating metric recall @k split probs',
+        #     summarize=10)
+
+        # TODO: the k metrics depends of the number of distractors
+        for k in [1, 2, 5]:  # , 10]:
+            metric_name = "recall_at_%d" % k
+            metrics[metric_name] = tf.metrics.recall_at_k(
+                recall_labels,
+                concat_predictions,
+                k,
+                name=metric_name
+            )
+
+        # Example of implementing Root Mean Squared Error for regression
+
+        # pred_values = predictions['predictions']
+        # metrics['rmse'] = tf.metrics.root_mean_squared_error(labels=labels,
+        #                                                      predictions=pred_values)
+
+        # Example of implementing Mean per Class Accuracy for classification
+
+        # indices = parse_label_column(labels)
+        # pred_class = predictions['class_ids']
+        # metrics['mirco_accuracy'] = tf.metrics.mean_per_class_accuracy(labels=indices,
+        #                                                                predictions=pred_class,
+        #                                                                num_classes=len(metadata.TARGET_LABELS))
+
+        return metrics
+
     def _model_fn(features, labels, mode):
         """ model function for the custom estimator"""
         logits = _inference(features)
+
+        if mode == tfc.learn.ModeKeys.EVAL:
+            logits = tf.Print(logits, [logits])
+
         head = tfc.estimator.binary_classification_head(
             loss_reduction=losses.Reduction.MEAN,
         )
@@ -433,65 +453,3 @@ def create_estimator(config):
 
     return estimator
 
-
-# ***************************************************************************************
-# YOU NEED NOT TO CHANGE THESE HELPER FUNCTIONS USED FOR CONSTRUCTING THE MODELS
-# ***************************************************************************************
-
-
-def construct_hidden_units():
-    """ Create the number of hidden units in each layer
-
-	if the HYPER_PARAMS.layer_sizes_scale_factor > 0 then it will use a "decay" mechanism
-	to define the number of units in each layer. Otherwise, task.HYPER_PARAMS.hidden_units
-	will be used as-is.
-
-	Returns:
-		list of int
-	"""
-    hidden_units = list(map(int, task.HYPER_PARAMS.hidden_units.split(',')))
-
-    if task.HYPER_PARAMS.layer_sizes_scale_factor > 0:
-        first_layer_size = hidden_units[0]
-        scale_factor = task.HYPER_PARAMS.layer_sizes_scale_factor
-        num_layers = task.HYPER_PARAMS.num_layers
-
-        hidden_units = [
-            max(2, int(first_layer_size * scale_factor ** i))
-            for i in range(num_layers)
-        ]
-
-    tf.logging.info(("Hidden units structure: {}".format(hidden_units)))
-
-    return hidden_units
-
-
-def update_learning_rate():
-    """ Updates learning rate using an exponential decay method
-
-	Returns:
-	   float - updated (decayed) learning rate
-	"""
-    initial_learning_rate = task.HYPER_PARAMS.learning_rate
-    decay_steps = task.HYPER_PARAMS.train_steps  # decay after each training step
-    decay_factor = task.HYPER_PARAMS.learning_rate_decay_factor  # if set to 1, then no decay.
-
-    global_step = tf.train.get_global_step()
-
-    # decayed_learning_rate = learning_rate * decay_rate ^ (global_step / decay_steps)
-    learning_rate = tf.train.exponential_decay(initial_learning_rate,
-                                               global_step,
-                                               decay_steps,
-                                               decay_factor)
-
-    return learning_rate
-
-
-def parse_label_column(label_string_tensor):
-    """ Convert string class labels to indices
-
-	Returns:
-	   Tensor of type int
-	"""
-    table = tf.contrib.lookup.index_table_from_tensor(tf.constant(metadata.TARGET_LABELS))
-    return table.lookup(label_string_tensor)

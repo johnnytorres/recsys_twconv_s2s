@@ -13,9 +13,8 @@ from twconvrecusers import input
 from twconvrecusers import metadata
 from twconvrecusers import model
 from twconvrecusers.data.data_handler import DataHandler
-from twconvrecusers.evaluation.recall import EvaluationHandler
-from twconvrecusers.models import random
-from twconvrecusers.models.random import RandomConversationRecommender
+from twconvrecusers.metrics.recall import RecallEvaluator
+from twconvrecusers.models.factory import get_model
 
 
 def clean_job_dir():
@@ -34,6 +33,7 @@ def clean_job_dir():
 def get_train_input_fn():
     train_input_fn = input.generate_input_fn(
         file_names_pattern=HYPER_PARAMS.train_files,
+        HYPER_PARAMS=HYPER_PARAMS,
         file_encoding=HYPER_PARAMS.file_encoding,
         mode=tf.estimator.ModeKeys.TRAIN,
         num_epochs=HYPER_PARAMS.num_epochs,
@@ -45,6 +45,7 @@ def get_train_input_fn():
 def get_eval_input_fn():
     eval_input_fn = input.generate_input_fn(
         file_names_pattern=HYPER_PARAMS.eval_files,
+        HYPER_PARAMS=HYPER_PARAMS,
         file_encoding=HYPER_PARAMS.file_encoding,
         mode=tf.estimator.ModeKeys.EVAL,
         batch_size=HYPER_PARAMS.eval_batch_size
@@ -55,6 +56,7 @@ def get_eval_input_fn():
 def get_test_input_fn():
     test_input_fn = input.generate_input_fn(
         file_names_pattern=HYPER_PARAMS.test_files,
+        HYPER_PARAMS=HYPER_PARAMS,
         file_encoding=HYPER_PARAMS.file_encoding,
         mode=tf.estimator.ModeKeys.EVAL,
         batch_size=HYPER_PARAMS.eval_batch_size
@@ -81,7 +83,8 @@ def train_model(run_config):
 
     exporter = tf.estimator.FinalExporter(
         'estimator',
-        input.SERVING_FUNCTIONS[HYPER_PARAMS.export_format],
+        #input.SERVING_FUNCTIONS[HYPER_PARAMS.export_format],
+        input.get_serving_function(HYPER_PARAMS),
         as_text=False  # change to true if you want to export the model as readable text
     )
 
@@ -105,7 +108,7 @@ def train_model(run_config):
     eval_spec = tf.estimator.EvalSpec(
         eval_input_fn,
         steps=HYPER_PARAMS.eval_steps,
-        exporters=[exporter],
+        #exporters=[exporter],
         name='training',
         throttle_secs=HYPER_PARAMS.eval_every_secs,
         hooks=hooks
@@ -132,7 +135,8 @@ def train_model(run_config):
         )
     else:
         estimator = model.create_estimator(
-            config=run_config
+            config=run_config,
+            HYPER_PARAMS=HYPER_PARAMS
         )
 
     # train and evaluate
@@ -154,7 +158,8 @@ def test_model(run_config):
     tf.logging.info("===========================")
 
     estimator = model.create_estimator(
-        config=run_config
+        config=run_config,
+        HYPER_PARAMS=HYPER_PARAMS
     )
 
     hooks = []
@@ -210,10 +215,22 @@ def predict_instances(run_config):
     tf.logging.info("Done.")
 
 
-def main(args):
+def run_deep_recsys(args):
     # ******************************************************************************
     # THIS IS ENTRY POINT FOR THE TRAINER TASK
     # ******************************************************************************
+
+    # fill paths based on data directory
+    args.train_files = os.path.join(args.data_dir, 'train.tfrecords')
+    args.eval_files = os.path.join(args.data_dir, 'valid.tfrecords')
+    args.test_files = os.path.join(args.data_dir, 'test.tfrecords')
+    args.vocab_path = os.path.join(args.data_dir, 'vocabulary.txt')
+    args.vocab_proc = os.path.join(args.data_dir, 'vocab_processor.bin')
+    embedding_path = os.path.join(args.data_dir, 'embeddings.vec')
+    if os.path.exists(embedding_path):
+        args.embedding_path = embedding_path
+
+    #input.set_hyperparams(HYPER_PARAMS)
 
     tf.logging.info('---------------------')
     tf.logging.info('Hyper-parameters:')
@@ -287,7 +304,7 @@ def initialise_hyper_params(args_parser):
     )
     args_parser.add_argument(
         '--eval-files',
-        help='GCS or local paths to evaluation data',
+        help='GCS or local paths to metrics data',
         nargs='+',
         # required=True,
         type=lambda x: os.path.expanduser(x)
@@ -316,7 +333,7 @@ def initialise_hyper_params(args_parser):
         '--file-encoding',
         help='file encoding',
         choices=['csv', 'tf'],
-        default='csv'
+        default='tf'
     )
 
     args_parser.add_argument(
@@ -368,31 +385,31 @@ def initialise_hyper_params(args_parser):
     )
     ###########################################
 
-    # Experiment arguments - evaluation
+    # Experiment arguments - metrics
     args_parser.add_argument(
         '--eval-every-secs',
-        help='How long to wait before running the next evaluation',
+        help='How long to wait before running the next metrics',
         default=120,
         type=int
     )
     args_parser.add_argument(
         '--eval-steps',
         help="""\
-        Number of steps to run evaluation for at each checkpoint',
-        Set to None to evaluate on the whole evaluation data
+        Number of steps to run metrics for at each checkpoint',
+        Set to None to evaluate on the whole metrics data
         """,
         default=None,
         type=int
     )
     args_parser.add_argument(
         '--eval-batch-size',
-        help='Batch size for evaluation steps',
+        help='Batch size for metrics steps',
         type=int,
         default=200
     )
     args_parser.add_argument(
         '--num-distractors',
-        help='Number of distractors in evaluation dataset',
+        help='Number of distractors in metrics dataset',
         type=int,
         default=9
     )
@@ -419,7 +436,7 @@ def initialise_hyper_params(args_parser):
             If set to True, the embeddings will be fine tuned during training
             """,
         action='store_true',
-        default=True,
+        #default=True,
     )
     args_parser.add_argument(
         '--vocab-size',
@@ -432,18 +449,18 @@ def initialise_hyper_params(args_parser):
 
     # Estimator arguments
 
-    args_parser.add_argument(
-        '--estimator',
-        help="Learning rate value for the optimizers",
-        choices=[model.MODEL_RNN, model.MODEL_LSTM, model.MODEL_BiLSTM],
-        default=model.MODEL_LSTM,
-        type=str,
-    )
+    # args_parser.add_argument(
+    #     '--estimator',
+    #     help="Learning rate value for the optimizers",
+    #     choices=[model.MODEL_RNN, model.MODEL_LSTM, model.MODEL_BiLSTM],
+    #     default=model.MODEL_LSTM,
+    #     type=str,
+    # )
 
     args_parser.add_argument(
         '--learning-rate',
         help="Learning rate value for the optimizers",
-        default=0.1,
+        default=0.001,
         type=float
     )
     args_parser.add_argument(
@@ -533,12 +550,12 @@ def initialise_hyper_params(args_parser):
     ###########################################
 
     # Saved model arguments
-    args_parser.add_argument(
-        '--job-dir',
-        help='GCS location to write checkpoints and export models',
-        required=True,
-        type=lambda x: os.path.expanduser(x)
-    )
+    # args_parser.add_argument(
+    #     '--job-dir',
+    #     help='GCS location to write checkpoints and export models',
+    #     required=True,
+    #     type=lambda x: os.path.expanduser(x)
+    # )
     args_parser.add_argument(
         '--reuse-job-dir',
         action='store_true',
@@ -580,7 +597,7 @@ def initialise_hyper_params(args_parser):
         help='training'
     )
     args_parser.add_argument(
-        '--tests',
+        '--test',
         action='store_true',
         help='testing'
     )
@@ -593,29 +610,54 @@ def initialise_hyper_params(args_parser):
     # return args_parser.parse_args()
 
 
-def run_random_recsys(args):
+def run_baseline_recsys(args):
     data_handler = DataHandler()
-    predictor = RandomConversationRecommender()
+    predictor = get_model(args)
     train, valid, test = data_handler.load_data(args.data_dir)
+    predictor.train(train)
     y_pred = [predictor.predict(row['context'], row[1:]) for ix, row in test.iterrows()]
     y_pred = np.array(y_pred)
     y_true = np.zeros(test.shape[0])
-    metrics = EvaluationHandler.evaluate_predictor(y_true, y_pred)
-    # TODO: save metrics
+    metrics = RecallEvaluator.evaluate(y_true, y_pred)
+    print(metrics)
+    # save predictions
+    fname = os.path.join(args.job_dir, f'results_{args.model}.csv')
+    with open(fname, 'w') as f:
+        writer = csv.writer(f)
+        writer.writerows(y_pred)
+    print('done')
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument('--seed', type=int, default=1234) # for reproducibility
+    parser.add_argument('--job-dir', required=True, type=lambda x: os.path.expanduser(x))
+    parser.add_argument('--data-dir', type=lambda x: os.path.expanduser(x))
+    #parser.add_argument('--estimator', choices=['random', 'tfidf'])
     subparsers = parser.add_subparsers()
 
-    subparser = subparsers.add_parser('deeplearning')
-    initialise_hyper_params(subparser)
-    subparser.set_defaults(func=main)
-
     subparser = subparsers.add_parser('random')
-    subparser.add_argument('--data-dir', type=lambda p: os.path.expanduser(p))
-    subparser.add_argument('--job-dir', type=lambda p: os.path.expanduser(p))
-    subparser.set_defaults(func=run_random_recsys)
+    subparser.add_argument('--estimator', default='random')
+    subparser.set_defaults(func=run_baseline_recsys)
+
+    subparser = subparsers.add_parser('tfidf')
+    subparser.add_argument('--estimator', default='tfidf')
+    subparser.set_defaults(func=run_baseline_recsys)
+
+    subparser = subparsers.add_parser('rnn')
+    initialise_hyper_params(subparser)
+    subparser.add_argument('--estimator', default='rnn')
+    subparser.set_defaults(func=run_deep_recsys)
+
+    subparser = subparsers.add_parser('lstm')
+    initialise_hyper_params(subparser)
+    subparser.add_argument('--estimator', default='lstm')
+    subparser.set_defaults(func=run_deep_recsys)
+
+    subparser = subparsers.add_parser('bilstm')
+    initialise_hyper_params(subparser)
+    subparser.add_argument('--estimator', default='bilstm')
+    subparser.set_defaults(func=run_deep_recsys)
 
     HYPER_PARAMS = parser.parse_args()
     HYPER_PARAMS.func(HYPER_PARAMS)

@@ -27,7 +27,7 @@ gcloud ml-engine local train \
         --job-dir=${MODEL_DIR} \
         --file-encoding=tf \
         --train-batch-size=32 \
-	    --train-steps=10 \
+	      --train-steps=10 \
         --eval-batch-size=32 \
         --eval-steps=1 \
         --num-distractors=9 \

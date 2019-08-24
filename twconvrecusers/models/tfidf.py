@@ -2,8 +2,8 @@
 
 import numpy as np
 
-from data_handler import DataHandler
-from evaluation_handler import EvaluationHandler
+from twconvrecusers.data.data_handler import DataHandler
+from twconvrecusers.metrics.recall import RecallEvaluator
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 
@@ -11,10 +11,10 @@ class TfidfPredictor:
 	def __init__(self):
 		self.vectorizer = TfidfVectorizer()
 
-	def train(self, training_set):
+	def train(self, train_set):
 		m = np.append(
-			training_set.Context.values,
-			training_set.Utterance.values)
+			train_set.context.values,
+			train_set.profile.values)
 		self.vectorizer.fit(m)
 
 	def predict(self, context, utterances):
@@ -29,11 +29,4 @@ class TfidfPredictor:
 		return result
 
 
-if __name__=='__main__':
-	data_handler = DataHandler()
-	predictor = TfidfPredictor()
-	train, valid, test = data_handler.load_data('~/data/ubuntu')
-	predictor.train(train)
-	y_pred = [predictor.predict(row['Context'], row[1:]) for ix, row in test.iterrows()]
-	y_true = np.zeros(test.shape[0])
-	EvaluationHandler.evaluate_predictor(y_true, y_pred)
+
