@@ -14,26 +14,46 @@ python -m twconvrecusers.task \
   random
 
 RESULTS_DIR=$DATA_DIR/resultstagging/tfidf
-python twconvrecusers.task \
+mkdir -p ${RESULTS_DIR}
+python -m twconvrecusers.task \
   --data-dir=${DATA_STAGGING} \
   --job-dir=${RESULTS_DIR} \
   tfidf
 
+# NEURAL MODELS
+
+# debug
+#--data-dir=~/data/twconv/trec/sampledata
+#--job-dir=~/data/twconv/trec/sampleresults/rnn
+#rnn
+#--train
+#--test
+#--force-tb-logs
+#--num-distractor=5
+#--max-content-len=10
+#--max-utterance-len=10
+#--train-steps=50
+#--train-batch-size=6
+#--num-epochs=1
+#--eval-every-secs=1
+#--eval-batch-size=20
+#--eval-steps=1
+
 RESULTS_DIR=$DATA_DIR/resultstagging/rnn
-python twconvrecusers.task \
+mkdir -p ${RESULTS_DIR}
+python -m twconvrecusers.task \
   --data-dir=${DATA_STAGGING} \
   --job-dir=${RESULTS_DIR} \
   rnn \
   --train \
   --test \
-  --embedding-trainable \
-  --num-distractor=5 \
-  --max-content-len=10 \
-  --max-utterance-len=10 \
-  --train-steps=50 \
-  --train-batch-size=6 \
+  --num-distractors=9 \
+  --max-content-len=160 \
+  --max-utterance-len=160 \
+  --train-steps=550 \
+  --train-batch-size=64 \
   --num-epochs=1 \
-  --eval-every-secs=1 \
-  --eval-batch-size=20 \
-  --eval-steps=1
+  --eval-every-secs=60 \
+  --eval-batch-size=128 \
+  --eval-steps=313
 

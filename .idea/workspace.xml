@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c25c6c6-8cd1-4139-a355-a4f62ad57c3c" name="Default Changelist" comment="refactor project">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/getdata.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/getdata.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/runexperiments.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/runexperiments.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/dataset/tfrecords.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/dataset/tfrecords.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -308,7 +305,7 @@
       <workItem from="1566578050945" duration="5757000" />
       <workItem from="1566586766540" duration="12002000" />
       <workItem from="1566664906536" duration="6790000" />
-      <workItem from="1566837247787" duration="2415000" />
+      <workItem from="1566837247787" duration="2762000" />
     </task>
     <task id="LOCAL-00001" summary="refactor project">
       <created>1562518129393</created>

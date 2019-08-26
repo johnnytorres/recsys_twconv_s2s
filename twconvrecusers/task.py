@@ -246,16 +246,21 @@ def run_deep_recsys(args):
     model_dir = HYPER_PARAMS.job_dir
     metadata.HYPER_PARAMS = HYPER_PARAMS
 
-    run_config = tf.estimator.RunConfig(
-        tf_random_seed=19830610,
-        save_checkpoints_steps=1,  # TODO: allow to config this parameters
-        log_step_count_steps=1,
-        # save_checkpoints_secs=120,  #TODO: param to change if you want to change frequency of saving checkpoints
-        keep_checkpoint_max=3,
-        model_dir=model_dir,
-        save_summary_steps=1,
-
-    )
+    if HYPER_PARAMS.force_tb_logs:
+        run_config = tf.estimator.RunConfig(
+            tf_random_seed=19830610,
+            save_checkpoints_steps=1,  # TODO: allow to config this parameters
+            log_step_count_steps=1,
+            # save_checkpoints_secs=120,  #TODO: param to change if you want to change frequency of saving checkpoints
+            keep_checkpoint_max=3,
+            model_dir=model_dir,
+            save_summary_steps=1,
+        )
+    else:
+        run_config = tf.estimator.RunConfig(
+            tf_random_seed=19830610,
+            model_dir=model_dir,
+        )
 
     run_config = run_config.replace(model_dir=model_dir)
     tf.logging.info(("Model Directory:", run_config.model_dir))
@@ -590,6 +595,12 @@ def initialise_hyper_params(args_parser):
         action='store_true',
         help='allow to use tfdbg'
     )
+    args_parser.add_argument(
+        '--force-tb-logs',
+        action='store_true',
+        help='allow to save to logs for small datasets'
+    )
+
     args_parser.add_argument(
         '--train',
         action='store_true',
