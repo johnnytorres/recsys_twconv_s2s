@@ -18,8 +18,7 @@
 import tensorflow as tf
 from tensorflow.python.feature_column import feature_column
 
-from twconvrecusers import input
-from twconvrecusers import metadata
+from twconvrecusers.dataset import input, metadata
 
 
 # **************************************************************************
@@ -77,11 +76,11 @@ def extend_feature_columns(feature_columns):
 def create_feature_columns(HYPER_PARAMS):
     """Creates tensorFlow feature_column(s) based on the metadata of the input features.
 
-    The tensorFlow feature_column objects are created based on the data types of the features
+    The tensorFlow feature_column objects are created based on the dataset types of the features
     defined in the metadata.py module.
 
     The feature_column(s) are created based on the input features,
-    and the constructed features (process_features method in input.py), during reading data files.
+    and the constructed features (process_features method in input.py), during reading dataset files.
     Both type of features (input and constructed) should be defined in metadata.py.
 
     Extended features (if any) are created, based on the base features, as the extend_feature_columns

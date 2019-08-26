@@ -2,19 +2,19 @@
 
 #profiles
 
-python3 -m data.profiles_builder \
-    --input=data/convusersec/timelines_raw.csv \
-    --output=data/convusersec/timelines.csv \
+python3 -m dataset.profiles_builder \
+    --input=dataset/convusersec/timelines_raw.csv \
+    --output=dataset/convusersec/timelines.csv \
     --n=10
 
 
 #conversations
 
 # trainset
-python3 -m data.csv_builder \
-    --data-root=data/convusersec/dialogs \
-    --profiles-path=data/convusersec/timelines.csv \
-    --output=data/convusersec/twconvrsu_csv_v1/train.csv \
+python3 -m dataset.csv_builder \
+    --dataset-root=dataset/convusersec/dialogs \
+    --profiles-path=dataset/convusersec/timelines.csv \
+    --output=dataset/convusersec/twconvrsu_csv_v1/train.csv \
     --text-field=2 \
     --min-context-length=2 \
     --tokenize-punk \
@@ -22,10 +22,10 @@ python3 -m data.csv_builder \
     train
 
 # valid set
-python3 -m data.csv_builder \
-    --data-root=data/convusersec/dialogs \
-    --profiles-path=data/convusersec/timelines.csv \
-    --output=data/convusersec/twconvrsu_csv_v1/valid.csv \
+python3 -m dataset.csv_builder \
+    --dataset-root=dataset/convusersec/dialogs \
+    --profiles-path=dataset/convusersec/timelines.csv \
+    --output=dataset/convusersec/twconvrsu_csv_v1/valid.csv \
     --text-field=2 \
     --min-context-length=2 \
     --tokenize-punk \
@@ -33,10 +33,10 @@ python3 -m data.csv_builder \
     valid
 
 #tests
-python3 -m data.csv_builder \
-    --data-root=data/convusersec/dialogs \
-    --profiles-path=data/convusersec/timelines.csv \
-    --output=data/convusersec/twconvrsu_csv_v1/tests.csv \
+python3 -m dataset.csv_builder \
+    --dataset-root=dataset/convusersec/dialogs \
+    --profiles-path=dataset/convusersec/timelines.csv \
+    --output=dataset/convusersec/twconvrsu_csv_v1/tests.csv \
     --text-field=2 \
     --min-context-length=2 \
     --tokenize-punk \
@@ -44,13 +44,13 @@ python3 -m data.csv_builder \
     tests
 
 # tf records builder
-python3 -m data.tfrecords_builder \
-    --input_dir=data/convusersec/twconvrsu_csv_v1 \
-    --output_dir=data/convusersec/twconvrsu_tf_v1 \
+python3 -m dataset.tfrecords_builder \
+    --input_dir=dataset/convusersec/twconvrsu_csv_v1 \
+    --output_dir=dataset/convusersec/twconvrsu_tf_v1 \
     --max_sentence_len=1400
 
-python3 -m data.embeddings_builder \
-    data/convusersec/twconvrsu_tf_v1/vocabulary.txt \
+python3 -m dataset.embeddings_builder \
+    dataset/convusersec/twconvrsu_tf_v1/vocabulary.txt \
     embeddings/fasttext/cc.es.300.vec
 
 

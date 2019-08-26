@@ -3,7 +3,7 @@
 # exit on error
 set -e
 
-BASE_DIR=$HOME/data
+BASE_DIR=$HOME/dataset
 
 # PREPARE EMBEDDINGS
 EMBEDDINGS_DIR=${BASE_DIR}/embeddings/fasttext
@@ -25,19 +25,20 @@ DATA_DIR=$BASE_DIR/twconv/trec
 mkdir -p ${DATA_DIR}
 URL=https://storage.googleapis.com/ml-research-datasets/convai/trec.zip
 wget -O ${DATA_DIR}/trec.zip $URL
+unzip -d ${DATA_DIR} ${DATA_DIR}/trec.zip
 # TODO: download other datasets
 
 # tf records builder
 
 DATA_STAGGING=${DATA_DIR}/sampledata
-python -m twconvrecusers.data.tfrecords_builder \
+python -m twconvrecusers.dataset.tfrecords_builder \
    --input_dir=${DATA_STAGGING} \
    --num_distractors=5 \
    --max_sentence_len=10
 
 
 DATA_STAGGING=${DATA_DIR}/staggingdata
-python -m twconvrecusers.data.tfrecords_builder \
+python -m twconvrecusers.dataset.tfrecords_builder \
    --input_dir=${DATA_STAGGING} \
    --num_distractors=9 \
    --max_sentence_len=160

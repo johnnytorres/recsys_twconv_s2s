@@ -2,12 +2,12 @@
 
 python3 -m trainer.task
 --file-encoding=tf
---train-files=data/convusersec/twconvrsu_tf_activism/train.tfrecords
---eval-files=data/convusersec/twconvrsu_tf_activism/eval.tfrecords
---tests-files=data/convusersec/twconvrsu_tf_activism/tests.tfrecords
---vocab-path=data/convusersec/twconvrsu_tf_activism/vocabulary.txt
---vocab-proc=data/convusersec/twconvrsu_tf_activism/vocab_processor.bin
---embedding-path=data/convusersec/twconvrsu_tf_activism/embeddings.vec
+--train-files=dataset/convusersec/twconvrsu_tf_activism/train.tfrecords
+--eval-files=dataset/convusersec/twconvrsu_tf_activism/eval.tfrecords
+--tests-files=dataset/convusersec/twconvrsu_tf_activism/tests.tfrecords
+--vocab-path=dataset/convusersec/twconvrsu_tf_activism/vocabulary.txt
+--vocab-proc=dataset/convusersec/twconvrsu_tf_activism/vocab_processor.bin
+--embedding-path=dataset/convusersec/twconvrsu_tf_activism/embeddings.vec
 --train-batch-size=8
 --train-steps=1
 --num-epochs=1
@@ -26,15 +26,15 @@ python3 -m trainer.task
 #--predict
 #
 
-#--embedding-path=~/data/ubuntu/bigtp_tf/embeddings.vec
-#--predict-files=data/convusersec/twconvrsu_tf_activismexample.tfrecords
+#--embedding-path=~/dataset/ubuntu/bigtp_tf/embeddings.vec
+#--predict-files=dataset/convusersec/twconvrsu_tf_activismexample.tfrecords
 
 
---job-dir=~/data/twconv/trec/resultstagging/model_uniforminit_noreg_50it
---train-files=~/data/twconv/trec/datastagging/train.tfrecords
---eval-files=~/data/twconv/trec/datastagging/valid.tfrecords
---test-files=~/data/twconv/trec/datastagging/test.tfrecords
---vocab-path=~/data/twconv/trec/datastagging/vocabulary.txt
+--job-dir=~/dataset/twconv/trec/resultstagging/model_uniforminit_noreg_50it
+--train-files=~/dataset/twconv/trec/datastagging/train.tfrecords
+--eval-files=~/dataset/twconv/trec/datastagging/valid.tfrecords
+--test-files=~/dataset/twconv/trec/datastagging/test.tfrecords
+--vocab-path=~/dataset/twconv/trec/datastagging/vocabulary.txt
 --file-encoding=tf
 --test
 --num-distractor=5
@@ -48,8 +48,8 @@ python3 -m trainer.task
 --eval-steps=1
 
 python -m twconvrecusers.task \
-  --data-dir=~/data/twconv/trec/datastagging \
-  --job-dir=~/data/twconv/trec/resultstagging/rnn \
+  --dataset-dir=~/dataset/twconv/trec/datastagging \
+  --job-dir=~/dataset/twconv/trec/resultstagging/rnn \
   lstm \
   --train \
   --num-distractor=5 \

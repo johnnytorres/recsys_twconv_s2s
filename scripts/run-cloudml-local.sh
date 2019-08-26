@@ -5,7 +5,7 @@ echo "Training local ML model"
 MODEL_NAME="twconvrsu_v1" # change to your model name
 
 PACKAGE_PATH=trainer
-DATA_DIR=data/convusersec/twconvrsu_tf_v1
+DATA_DIR=dataset/convusersec/twconvrsu_tf_v1
 TRAIN_FILES=${DATA_DIR}/train.tfrecords
 VALID_FILES=${DATA_DIR}/valid.tfrecords
 TEST_FILES=${DATA_DIR}/tests.tfrecords
@@ -48,5 +48,5 @@ gcloud ml-engine local train \
 #echo ${MODEL_LOCATION}
 #ls ${MODEL_LOCATION}
 
-# invoke trained model to make prediction given new data instances
-#gcloud ml-engine local predict --model-dir=${MODEL_LOCATION} --example-instances=data/new-data.json
+# invoke trained model to make prediction given new dataset instances
+#gcloud ml-engine local predict --model-dir=${MODEL_LOCATION} --example-instances=dataset/new-dataset.json

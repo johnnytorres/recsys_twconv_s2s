@@ -8,9 +8,7 @@ import tensorflow.contrib as tfc
 from tensorflow.python.ops.losses import losses
 
 
-from twconvrecusers.data import embeddings_builder
-from twconvrecusers import featurizer
-from twconvrecusers import metadata
+from twconvrecusers.dataset import embeddings, featurizer, metadata
 
 MODEL_RNN = 'rnn'
 MODEL_LSTM = 'lstm'
@@ -217,12 +215,12 @@ def create_estimator(config, HYPER_PARAMS):
         global vocab_array, vocab_dict, vocab_size, embedding_vectors, embbeding_dict
 
         if vocab_array is None:
-            vocab_array, vocab_dict, vocab_size = embeddings_builder.load_vocab(HYPER_PARAMS.vocab_path)
+            vocab_array, vocab_dict, vocab_size = embeddings.load_vocab(HYPER_PARAMS.vocab_path)
 
         if HYPER_PARAMS.embedding_path:
             tf.logging.info('loading embeddings...')
             if embedding_vectors is None:
-                embedding_vectors, embbeding_dict = embeddings_builder.load_embedding_vectors(
+                embedding_vectors, embbeding_dict = embeddings.load_embedding_vectors(
                     HYPER_PARAMS.embedding_path, set(vocab_array))
             initializer = build_initial_embedding_matrix(vocab_dict, embbeding_dict, embedding_vectors,
                                                          HYPER_PARAMS.embedding_size)

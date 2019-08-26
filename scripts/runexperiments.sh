@@ -2,25 +2,25 @@
 # exit on error
 set -e
 
-BASE_DIR=$HOME/data
+BASE_DIR=$HOME/dataset
 DATA_DIR=$BASE_DIR/twconv/trec
 DATA_STAGGING=${DATA_DIR}/datastagging
 
 RESULTS_DIR=$DATA_DIR/resultstagging/random
 python twconvrecusers.task \
-  --data-dir=${DATA_STAGGING} \
+  --dataset-dir=${DATA_STAGGING} \
   --job-dir=${RESULTS_DIR} \
   random
 
 RESULTS_DIR=$DATA_DIR/resultstagging/tfidf
 python twconvrecusers.task \
-  --data-dir=${DATA_STAGGING} \
+  --dataset-dir=${DATA_STAGGING} \
   --job-dir=${RESULTS_DIR} \
   tfidf
 
 RESULTS_DIR=$DATA_DIR/resultstagging/rnn
 python twconvrecusers.task \
-  --data-dir=${DATA_STAGGING} \
+  --dataset-dir=${DATA_STAGGING} \
   --job-dir=${RESULTS_DIR} \
   rnn \
   --train \

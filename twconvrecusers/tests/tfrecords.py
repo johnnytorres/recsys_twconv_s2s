@@ -4,7 +4,7 @@ def create_tfrecord_pickle():
 	my_dict = {'features' : {
 	    'my_ints': [5, 6],
 	    'my_float': [2.7],
-	    'my_bytes': ['data']
+	    'my_bytes': ['dataset']
 	}}
 	
 	
@@ -26,7 +26,7 @@ def create_tfrecord():
 	my_example = tf.train.Example(features=tf.train.Features(feature={
 	    'my_ints': tf.train.Feature(int64_list=tf.train.Int64List(value=[5, 6])),
 	    'my_float': tf.train.Feature(float_list=tf.train.FloatList(value=[2.7])),
-	    'my_bytes': tf.train.Feature(bytes_list=tf.train.BytesList(value=[bytes('data', 'utf-8')]))
+	    'my_bytes': tf.train.Feature(bytes_list=tf.train.BytesList(value=[bytes('dataset', 'utf-8')]))
 	}))
 	
 	my_example_str = my_example.SerializeToString()
@@ -67,7 +67,7 @@ def read_train_file():
 	import tensorflow as tf
 	tf.enable_eager_execution()
 	
-	reader = tf.python_io.tf_record_iterator('/users/johnny/data/ubuntu/ubuntu_small/example.tfrecords')
+	reader = tf.python_io.tf_record_iterator('/users/johnny/dataset/ubuntu/ubuntu_small/example.tfrecords')
 	
 	# feature_spec = {
 	# 	'my_ints': tf.FixedLenFeature(shape=[], dtype=tf.int64),

@@ -22,5 +22,5 @@ gcloud ml-engine models create ${MODEL_NAME} --regions=${REGION}
 # deploy model version
 gcloud ml-engine versions create ${MODEL_VERSION} --model=${MODEL_NAME} --origin=${MODEL_BINARIES} --runtime-version=1.4
 
-# invoke deployed model to make prediction given new data instances
-gcloud ml-engine predict --model=${MODEL_NAME} --version=${MODEL_VERSION} --json-instances=data/new-data.json
+# invoke deployed model to make prediction given new dataset instances
+gcloud ml-engine predict --model=${MODEL_NAME} --version=${MODEL_VERSION} --json-instances=dataset/new-dataset.json

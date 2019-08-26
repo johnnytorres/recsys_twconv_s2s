@@ -9,11 +9,10 @@ from tqdm import tqdm
 import tensorflow as tf
 from tensorflow.python import debug as tf_debug
 
-from twconvrecusers import input
-from twconvrecusers import metadata
-from twconvrecusers import model
-from twconvrecusers.data.data_handler import DataHandler
+from twconvrecusers.dataset import input, metadata
+from twconvrecusers.dataset.csvreader import DataHandler
 from twconvrecusers.metrics.recall import RecallEvaluator
+from twconvrecusers.models import neural
 from twconvrecusers.models.factory import get_model
 
 
@@ -126,15 +125,15 @@ def train_model(run_config):
     tf.logging.info("===========================")
 
     if metadata.TASK_TYPE == "classification":
-        estimator = model.create_classifier(
+        estimator = neural.create_classifier(
             config=run_config
         )
     elif metadata.TASK_TYPE == "regression":
-        estimator = model.create_regressor(
+        estimator = neural.create_regressor(
             config=run_config
         )
     else:
-        estimator = model.create_estimator(
+        estimator = neural.create_estimator(
             config=run_config,
             HYPER_PARAMS=HYPER_PARAMS
         )
@@ -157,7 +156,7 @@ def test_model(run_config):
     tf.logging.info(("Test steps: {} ({})".format(None, "computed (all tests instances)")))
     tf.logging.info("===========================")
 
-    estimator = model.create_estimator(
+    estimator = neural.create_estimator(
         config=run_config,
         HYPER_PARAMS=HYPER_PARAMS
     )
@@ -203,7 +202,7 @@ def predict_instances(run_config):
 
     predict_input_fn = get_predict_input_fn()
 
-    estimator = model.create_estimator(
+    estimator = neural.create_estimator(
         config=run_config
     )
 
@@ -220,7 +219,7 @@ def run_deep_recsys(args):
     # THIS IS ENTRY POINT FOR THE TRAINER TASK
     # ******************************************************************************
 
-    # fill paths based on data directory
+    # fill paths based on dataset directory
     args.train_files = os.path.join(args.data_dir, 'train.tfrecords')
     args.eval_files = os.path.join(args.data_dir, 'valid.tfrecords')
     args.test_files = os.path.join(args.data_dir, 'test.tfrecords')
@@ -297,28 +296,28 @@ def initialise_hyper_params(args_parser):
     # Data files arguments
     args_parser.add_argument(
         '--train-files',
-        help='GCS or local paths to training data',
+        help='GCS or local paths to training dataset',
         nargs='+',
         # required=True,
         type=lambda x: os.path.expanduser(x)
     )
     args_parser.add_argument(
         '--eval-files',
-        help='GCS or local paths to metrics data',
+        help='GCS or local paths to metrics dataset',
         nargs='+',
         # required=True,
         type=lambda x: os.path.expanduser(x)
     )
     args_parser.add_argument(
         '--tests-files',
-        help='GCS or local paths to tests data',
+        help='GCS or local paths to tests dataset',
         nargs='+',
         # required=True,
         type=lambda x: os.path.expanduser(x)
     )
     args_parser.add_argument(
         '--predict-files',
-        help='GCS or local paths to predict data',
+        help='GCS or local paths to predict dataset',
         nargs='+',
         # required=True,
         type=lambda x: os.path.expanduser(x)
@@ -376,7 +375,7 @@ def initialise_hyper_params(args_parser):
     args_parser.add_argument(
         '--num-epochs',
         help="""\
-        Maximum number of training data epochs on which to train.
+        Maximum number of training dataset epochs on which to train.
         If both --train-size and --num-epochs are specified,
         --train-steps will be: (train-size/train-batch-size) * num-epochs.\
         """,
@@ -396,7 +395,7 @@ def initialise_hyper_params(args_parser):
         '--eval-steps',
         help="""\
         Number of steps to run metrics for at each checkpoint',
-        Set to None to evaluate on the whole metrics data
+        Set to None to evaluate on the whole metrics dataset
         """,
         default=None,
         type=int
