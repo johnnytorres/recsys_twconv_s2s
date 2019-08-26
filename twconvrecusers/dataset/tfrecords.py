@@ -9,7 +9,7 @@ from tqdm import tqdm
 
 tf.flags.DEFINE_string(
 	name="input_dir", 
-	default="~/dataset",
+	default="~/data",
 	help="Input directory contakining original CSV dataset files"
 	)
 tf.flags.DEFINE_integer(

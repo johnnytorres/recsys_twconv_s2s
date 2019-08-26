@@ -31,14 +31,16 @@ unzip -d ${DATA_DIR} ${DATA_DIR}/trec.zip
 # tf records builder
 
 DATA_STAGGING=${DATA_DIR}/sampledata
-python -m twconvrecusers.dataset.tfrecords_builder \
+mkdir -p ${DATA_STAGGING}
+python -m twconvrecusers.dataset.tfrecords \
    --input_dir=${DATA_STAGGING} \
    --num_distractors=5 \
    --max_sentence_len=10
 
 
 DATA_STAGGING=${DATA_DIR}/staggingdata
-python -m twconvrecusers.dataset.tfrecords_builder \
+mkdir -p ${DATA_STAGGING}
+python -m twconvrecusers.dataset.tfrecords \
    --input_dir=${DATA_STAGGING} \
    --num_distractors=9 \
    --max_sentence_len=160

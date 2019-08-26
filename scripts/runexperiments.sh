@@ -4,23 +4,24 @@ set -e
 
 BASE_DIR=$HOME/dataset
 DATA_DIR=$BASE_DIR/twconv/trec
-DATA_STAGGING=${DATA_DIR}/datastagging
+DATA_STAGGING=${DATA_DIR}/staggingdata
 
-RESULTS_DIR=$DATA_DIR/resultstagging/random
-python twconvrecusers.task \
-  --dataset-dir=${DATA_STAGGING} \
+RESULTS_DIR=$DATA_DIR/staggingresults/random
+mkdir -p ${RESULTS_DIR}
+python -m twconvrecusers.task \
+  --data-dir=${DATA_STAGGING} \
   --job-dir=${RESULTS_DIR} \
   random
 
 RESULTS_DIR=$DATA_DIR/resultstagging/tfidf
 python twconvrecusers.task \
-  --dataset-dir=${DATA_STAGGING} \
+  --data-dir=${DATA_STAGGING} \
   --job-dir=${RESULTS_DIR} \
   tfidf
 
 RESULTS_DIR=$DATA_DIR/resultstagging/rnn
 python twconvrecusers.task \
-  --dataset-dir=${DATA_STAGGING} \
+  --data-dir=${DATA_STAGGING} \
   --job-dir=${RESULTS_DIR} \
   rnn \
   --train \

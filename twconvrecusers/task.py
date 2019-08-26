@@ -620,7 +620,7 @@ def run_baseline_recsys(args):
     metrics = RecallEvaluator.evaluate(y_true, y_pred)
     print(metrics)
     # save predictions
-    fname = os.path.join(args.job_dir, f'results_{args.model}.csv')
+    fname = os.path.join(args.job_dir, f'results_{args.estimator}.csv')
     with open(fname, 'w') as f:
         writer = csv.writer(f)
         writer.writerows(y_pred)

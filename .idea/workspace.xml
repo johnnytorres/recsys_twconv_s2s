@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c25c6c6-8cd1-4139-a355-a4f62ad57c3c" name="Default Changelist" comment="refactor project">
-      <change afterPath="$PROJECT_DIR$/twconvrecusers/models/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twconvrecusers/tests/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/getdata.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/getdata.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/featurizer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/tests/inference.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/input.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/metadata.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/neural.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/task.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/runexperiments.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/runexperiments.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/dataset/tfrecords.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/dataset/tfrecords.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -58,15 +51,15 @@
     <option name="myIpythonEnabled" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/twconvrecusers/tests" />
       <recent name="$PROJECT_DIR$/twconvrecusers/models" />
       <recent name="$PROJECT_DIR$/twconvrecusers/io" />
       <recent name="$PROJECT_DIR$/twconvrecusers/evaluation" />
       <recent name="$PROJECT_DIR$/twconvrecusers" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/scripts" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -315,7 +308,7 @@
       <workItem from="1566578050945" duration="5757000" />
       <workItem from="1566586766540" duration="12002000" />
       <workItem from="1566664906536" duration="6790000" />
-      <workItem from="1566837247787" duration="885000" />
+      <workItem from="1566837247787" duration="2415000" />
     </task>
     <task id="LOCAL-00001" summary="refactor project">
       <created>1562518129393</created>
@@ -410,7 +403,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/twconvrecusers$profiles_builder.coverage" NAME="profiles_builder Coverage Results" MODIFIED="1563854659441" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecusers/preprocessing" />
-    <SUITE FILE_PATH="coverage/twconvrecusers$task.coverage" NAME="task Coverage Results" MODIFIED="1566837902174" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecusers" />
+    <SUITE FILE_PATH="coverage/twconvrecusers$task.coverage" NAME="task Coverage Results" MODIFIED="1566838517613" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecusers" />
     <SUITE FILE_PATH="coverage/twconvrecusers$dialogs_builder.coverage" NAME="dialogs_builder Coverage Results" MODIFIED="1564315196823" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
     <SUITE FILE_PATH="coverage/crisis_conv_recusers$prepare_data.coverage" NAME="prepare_data Coverage Results" MODIFIED="1562447148991" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/convrecsys/preprocessing" />
     <SUITE FILE_PATH="coverage/twconvrecusers$tfrecords_builder.coverage" NAME="tfrecords_builder Coverage Results" MODIFIED="1566837650134" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
