@@ -2,20 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c25c6c6-8cd1-4139-a355-a4f62ad57c3c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/scripts/runexperiments.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twconvrecusers/models/factory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/crisis_conv_recusers.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/crisis_conv_recusers.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run-cloudml-local.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-cloudml-local.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run-local-debug.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-local-debug.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/evaluation/recall.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/metrics/recall.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/featurizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/featurizer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/input.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/input.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/models/random.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/random.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/models/tfidf.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/tfidf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/task.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/data_collection.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/getdata.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/getdata.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,7 +42,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="pyconsole" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/run-cloudml-submit-v1d1p2.sh" />
   </component>
   <component name="PyConsoleOptionsProvider">
@@ -308,7 +297,7 @@
       <workItem from="1566577441130" duration="323000" />
       <workItem from="1566578050945" duration="5757000" />
       <workItem from="1566586766540" duration="12002000" />
-      <workItem from="1566664906536" duration="3369000" />
+      <workItem from="1566664906536" duration="5586000" />
     </task>
     <task id="LOCAL-00001" summary="refactor project">
       <created>1562518129393</created>

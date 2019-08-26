@@ -20,13 +20,26 @@ then
 fi
 
 # PREPARE DATASETS
+# TREC dataset
 DATA_DIR=$BASE_DIR/twconv/trec
-DATA_STAGGING=${DATA_DIR}/datastagging
-# TODO: download datasets
+mkdir -p ${DATA_DIR}
+URL=https://storage.googleapis.com/ml-research-datasets/convai/trec.zip
+wget -O ${DATA_DIR}/trec.zip $URL
+# TODO: download other datasets
+
 # tf records builder
+
+DATA_STAGGING=${DATA_DIR}/sampledata
 python -m twconvrecusers.data.tfrecords_builder \
    --input_dir=${DATA_STAGGING} \
    --num_distractors=5 \
    --max_sentence_len=10
+
+
+DATA_STAGGING=${DATA_DIR}/staggingdata
+python -m twconvrecusers.data.tfrecords_builder \
+   --input_dir=${DATA_STAGGING} \
+   --num_distractors=9 \
+   --max_sentence_len=160
 
 
