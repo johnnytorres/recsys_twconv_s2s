@@ -87,20 +87,13 @@ def train_model(run_config):
         as_text=False  # change to true if you want to export the model as readable text
     )
 
-    # compute the number of training steps based on num_epoch, train_size, and train_batch_size
-    if HYPER_PARAMS.train_size is not None and HYPER_PARAMS.num_epochs is not None:
-        train_steps = (HYPER_PARAMS.train_size / HYPER_PARAMS.train_batch_size) * \
-                      HYPER_PARAMS.num_epochs
-    else:
-        train_steps = HYPER_PARAMS.train_steps
-
     hooks = []
     if HYPER_PARAMS.debug:
         hooks = [tf_debug.LocalCLIDebugHook()]
 
     train_spec = tf.estimator.TrainSpec(
         train_input_fn,
-        max_steps=int(train_steps),
+        max_steps=HYPER_PARAMS.train_steps,
         hooks=hooks
     )
 
@@ -119,7 +112,7 @@ def train_model(run_config):
     tf.logging.info(("Train size: {}".format(HYPER_PARAMS.train_size)))
     tf.logging.info(("Epoch count: {}".format(HYPER_PARAMS.num_epochs)))
     tf.logging.info(("Train batch size: {}".format(HYPER_PARAMS.train_batch_size)))
-    tf.logging.info(("Training steps: {} ({})".format(int(train_steps),
+    tf.logging.info(("Training steps: {} ({})".format(int(HYPER_PARAMS.train_steps),
                                                       "supplied" if HYPER_PARAMS.train_size is None else "computed")))
     tf.logging.info(("Evaluate every {} seconds".format(HYPER_PARAMS.eval_every_secs)))
     tf.logging.info("===========================")
@@ -180,7 +173,7 @@ def test_model(run_config):
     with open(path, 'w') as f:
         csvwriter = csv.writer(f)
         for instance_prediction in tqdm(predictions):
-            tf.logging.info(str(instance_prediction))
+            #tf.logging.info(str(instance_prediction))
             predictions_probs.append(instance_prediction['logistic'][0])
             count += 1
             if count % num_instances_recall == 0:
@@ -246,21 +239,22 @@ def run_deep_recsys(args):
     model_dir = HYPER_PARAMS.job_dir
     metadata.HYPER_PARAMS = HYPER_PARAMS
 
-    if HYPER_PARAMS.force_tb_logs:
-        run_config = tf.estimator.RunConfig(
-            tf_random_seed=19830610,
-            save_checkpoints_steps=1,  # TODO: allow to config this parameters
-            log_step_count_steps=1,
-            # save_checkpoints_secs=120,  #TODO: param to change if you want to change frequency of saving checkpoints
-            keep_checkpoint_max=3,
-            model_dir=model_dir,
-            save_summary_steps=1,
-        )
-    else:
-        run_config = tf.estimator.RunConfig(
-            tf_random_seed=19830610,
-            model_dir=model_dir,
-        )
+    # compute the number of training steps based on num_epoch, train_size, and train_batch_size
+    if HYPER_PARAMS.train_size is not None and HYPER_PARAMS.num_epochs is not None:
+        HYPER_PARAMS.train_steps = int( (HYPER_PARAMS.train_size / HYPER_PARAMS.train_batch_size) * \
+                      HYPER_PARAMS.num_epochs )
+
+    num_steps_for_checkpoint = int(HYPER_PARAMS.train_steps / HYPER_PARAMS.num_checkpoints)
+
+    run_config = tf.estimator.RunConfig(
+        tf_random_seed=19830610,
+        save_checkpoints_steps=num_steps_for_checkpoint,  # TODO: allow to config this parameters
+        log_step_count_steps=1,
+        # save_checkpoints_secs=120,  #TODO: param to change if you want to change frequency of saving checkpoints
+        #keep_checkpoint_max=3,
+        model_dir=model_dir,
+        save_summary_steps=1,
+    )
 
     run_config = run_config.replace(model_dir=model_dir)
     tf.logging.info(("Model Directory:", run_config.model_dir))
@@ -387,13 +381,18 @@ def initialise_hyper_params(args_parser):
         default=10,
         type=int,
     )
+    args_parser.add_argument(
+        '--num-checkpoints',
+        default=20,
+        type=int,
+    )
     ###########################################
 
     # Experiment arguments - metrics
     args_parser.add_argument(
         '--eval-every-secs',
         help='How long to wait before running the next metrics',
-        default=120,
+        default=1,
         type=int
     )
     args_parser.add_argument(
@@ -595,12 +594,6 @@ def initialise_hyper_params(args_parser):
         action='store_true',
         help='allow to use tfdbg'
     )
-    args_parser.add_argument(
-        '--force-tb-logs',
-        action='store_true',
-        help='allow to save to logs for small datasets'
-    )
-
     args_parser.add_argument(
         '--train',
         action='store_true',

@@ -392,11 +392,12 @@ def create_estimator(config, HYPER_PARAMS):
 
         recall_labels = tf.zeros(shape=(tf.shape(concat_predictions)[0], 1), dtype=tf.int64, name='recall_labels')
 
-        # concat_predictions = tf.Print(
-        #     concat_predictions,
-        #     [concat_predictions, recall_labels],
-        #     'calculating metric recall @k split probs',
-        #     summarize=10)
+        if HYPER_PARAMS.debug:
+            concat_predictions = tf.Print(
+                concat_predictions,
+                [concat_predictions, recall_labels],
+                'calculating metric recall @k split probs',
+                summarize=10)
 
         # TODO: the k metrics depends of the number of distractors
         for k in [1, 2, 5]:  # , 10]:
@@ -428,8 +429,9 @@ def create_estimator(config, HYPER_PARAMS):
         """ model function for the custom estimator"""
         logits = _inference(features)
 
-        if mode == tfc.learn.ModeKeys.EVAL:
-            logits = tf.Print(logits, [logits])
+        if HYPER_PARAMS.debug:
+            if mode == tfc.learn.ModeKeys.EVAL:
+                logits = tf.Print(logits, [logits])
 
         head = tfc.estimator.binary_classification_head(
             loss_reduction=losses.Reduction.MEAN,

@@ -50,10 +50,11 @@ python -m twconvrecusers.task \
   --num-distractors=9 \
   --max-content-len=160 \
   --max-utterance-len=160 \
-  --train-steps=550 \
+  --train-size=35255 \
   --train-batch-size=64 \
   --num-epochs=1 \
-  --eval-every-secs=60 \
-  --eval-batch-size=128 \
-  --eval-steps=313
+  --eval-batch-size=128
+  #--train-steps=550 \ will be calculated automatically
+  #--eval-every-secs=5 \ default 1 will eval each checkpoint
+  #--eval-steps=313 None will use all the dataset
 
