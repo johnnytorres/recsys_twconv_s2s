@@ -2,19 +2,19 @@
 
 python3 -m trainer.task
     --file-encoding=tf
-    --train-files=dataset/convusersec/twconvrsu_tf_politics/train.tfrecords
+    --train-files=datasets/convusersec/twconvrsu_tf_politics/train.tfrecords
     --train-batch-size=8
     --train-steps=1
     --num-epochs=1
-    --eval-files=dataset/convusersec/twconvrsu_tf_politics/eval.tfrecords
+    --eval-files=datasets/convusersec/twconvrsu_tf_politics/eval.tfrecords
     --eval-batch-size=10
     --eval-steps=1
-    --tests-files=dataset/convusersec/twconvrsu_tf_politics/tests.tfrecords
-    --predict-files=dataset/convusersec/twconvrsu_tf_politics/tests.tfrecords
-    --job-dir=dataset/convusersec/twconvrsu_tf_politics/models/
-    --vocab-path=dataset/convusersec/twconvrsu_tf_politics/vocabulary.txt
-    --vocab-proc=dataset/convusersec/twconvrsu_tf_politics/vocab_processor.bin
-    --embedding-path=dataset/convusersec/twconvrsu_tf_politics/embeddings.vec
+    --tests-files=datasets/convusersec/twconvrsu_tf_politics/tests.tfrecords
+    --predict-files=datasets/convusersec/twconvrsu_tf_politics/tests.tfrecords
+    --job-dir=datasets/convusersec/twconvrsu_tf_politics/models/
+    --vocab-path=datasets/convusersec/twconvrsu_tf_politics/vocabulary.txt
+    --vocab-proc=datasets/convusersec/twconvrsu_tf_politics/vocab_processor.bin
+    --embedding-path=datasets/convusersec/twconvrsu_tf_politics/embeddings.vec
     --estimator=lstm
     --embedding-size=300
     --max-content-len=1400
@@ -25,19 +25,19 @@ python3 -m trainer.task
 
 python3 -m trainer.task
     --file-encoding=tf
-    --train-files=dataset/convusersec/twconvrsu_tf_sports/train.tfrecords
+    --train-files=datasets/convusersec/twconvrsu_tf_sports/train.tfrecords
     --train-batch-size=8
     --train-steps=1
     --num-epochs=1
-    --eval-files=dataset/convusersec/twconvrsu_tf_sports/eval.tfrecords
+    --eval-files=datasets/convusersec/twconvrsu_tf_sports/eval.tfrecords
     --eval-batch-size=10
     --eval-steps=1
-    --tests-files=dataset/convusersec/twconvrsu_tf_sports/tests.tfrecords
-    --predict-files=dataset/convusersec/twconvrsu_tf_sports/tests.tfrecords
-    --job-dir=dataset/convusersec/twconvrsu_tf_sports/models/
-    --vocab-path=dataset/convusersec/twconvrsu_tf_sports/vocabulary.txt
-    --vocab-proc=dataset/convusersec/twconvrsu_tf_sports/vocab_processor.bin
-    --embedding-path=dataset/convusersec/twconvrsu_tf_sports/embeddings.vec
+    --tests-files=datasets/convusersec/twconvrsu_tf_sports/tests.tfrecords
+    --predict-files=datasets/convusersec/twconvrsu_tf_sports/tests.tfrecords
+    --job-dir=datasets/convusersec/twconvrsu_tf_sports/models/
+    --vocab-path=datasets/convusersec/twconvrsu_tf_sports/vocabulary.txt
+    --vocab-proc=datasets/convusersec/twconvrsu_tf_sports/vocab_processor.bin
+    --embedding-path=datasets/convusersec/twconvrsu_tf_sports/embeddings.vec
     --estimator=lstm
     --embedding-size=300
     --max-content-len=1400
@@ -49,19 +49,19 @@ python3 -m trainer.task
 
 python3 -m trainer.task
     --file-encoding=tf
-    --train-files=dataset/convusersec/twconvrsu_tf_activism/train.tfrecords
+    --train-files=datasets/convusersec/twconvrsu_tf_activism/train.tfrecords
     --train-batch-size=8
     --train-steps=1
     --num-epochs=1
-    --eval-files=dataset/convusersec/twconvrsu_tf_activism/eval.tfrecords
+    --eval-files=datasets/convusersec/twconvrsu_tf_activism/eval.tfrecords
     --eval-batch-size=10
     --eval-steps=1
-    --tests-files=dataset/convusersec/twconvrsu_tf_activism/tests.tfrecords
-    --predict-files=dataset/convusersec/twconvrsu_tf_activism/tests.tfrecords
-    --job-dir=dataset/convusersec/twconvrsu_tf_activism/models/
-    --vocab-path=dataset/convusersec/twconvrsu_tf_activism/vocabulary.txt
-    --vocab-proc=dataset/convusersec/twconvrsu_tf_activism/vocab_processor.bin
-    --embedding-path=dataset/convusersec/twconvrsu_tf_activism/embeddings.vec
+    --tests-files=datasets/convusersec/twconvrsu_tf_activism/tests.tfrecords
+    --predict-files=datasets/convusersec/twconvrsu_tf_activism/tests.tfrecords
+    --job-dir=datasets/convusersec/twconvrsu_tf_activism/models/
+    --vocab-path=datasets/convusersec/twconvrsu_tf_activism/vocabulary.txt
+    --vocab-proc=datasets/convusersec/twconvrsu_tf_activism/vocab_processor.bin
+    --embedding-path=datasets/convusersec/twconvrsu_tf_activism/embeddings.vec
     --estimator=lstm
     --embedding-size=300
     --max-content-len=1400

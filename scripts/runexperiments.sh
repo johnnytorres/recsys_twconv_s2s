@@ -2,7 +2,7 @@
 # exit on error
 set -e
 
-BASE_DIR=$HOME/dataset
+BASE_DIR=$HOME/data
 DATA_DIR=$BASE_DIR/twconv/trec
 DATA_STAGGING=${DATA_DIR}/staggingdata
 
@@ -13,7 +13,7 @@ python -m twconvrecusers.task \
   --job-dir=${RESULTS_DIR} \
   random
 
-RESULTS_DIR=$DATA_DIR/resultstagging/tfidf
+RESULTS_DIR=$DATA_DIR/staggingresults/tfidf
 mkdir -p ${RESULTS_DIR}
 python -m twconvrecusers.task \
   --data-dir=${DATA_STAGGING} \
@@ -39,7 +39,7 @@ python -m twconvrecusers.task \
 #--eval-batch-size=20
 #--eval-steps=1
 
-RESULTS_DIR=$DATA_DIR/resultstagging/rnn
+RESULTS_DIR=$DATA_DIR/staggingresults/rnn
 mkdir -p ${RESULTS_DIR}
 python -m twconvrecusers.task \
   --data-dir=${DATA_STAGGING} \
@@ -48,13 +48,15 @@ python -m twconvrecusers.task \
   --train \
   --test \
   --num-distractors=9 \
-  --max-content-len=160 \
-  --max-utterance-len=160 \
+  --max-content-len=120 \
+  --max-utterance-len=120 \
   --train-size=35255 \
   --train-batch-size=64 \
   --num-epochs=1 \
-  --eval-batch-size=128
+  --eval-batch-size=128 \
+  --learning-rate=0.001 \
+  --rnn-dim=300
   #--train-steps=550 \ will be calculated automatically
   #--eval-every-secs=5 \ default 1 will eval each checkpoint
-  #--eval-steps=313 None will use all the dataset
+  #--eval-steps=313 None will use all the datasets
 

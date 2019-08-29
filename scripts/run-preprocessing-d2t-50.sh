@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 
-python3 -m dataset.profiles_builder \
-    --input=dataset/convusersec/timelines_raw.csv \
-    --output=dataset/convusersec/timelines50.csv \
+python3 -m datasets.profiles_builder \
+    --input=datasets/convusersec/timelines_raw.csv \
+    --output=datasets/convusersec/timelines50.csv \
     --tokenize-tweets \
     --n=50
 
 #conversations
-# "dialogs" dataset is provided by crawler
+# "dialogs" datasets is provided by crawler
 
 #train
-python3 -m dataset.csv_builder \
-    --dataset-root=dataset/convusersec/dialogs \
-    --profiles-path=dataset/convusersec/timelines50.csv \
-    --output=dataset/convusersec/twconvrsu_csv_v2t_50/train.csv \
+python3 -m datasets.csv_builder \
+    --datasets-root=datasets/convusersec/dialogs \
+    --profiles-path=datasets/convusersec/timelines50.csv \
+    --output=datasets/convusersec/twconvrsu_csv_v2t_50/train.csv \
     --text-field=2 \
     --min-context-length=2 \
     --tokenize-tweets \
@@ -21,10 +21,10 @@ python3 -m dataset.csv_builder \
     train
 
 #valid
-python3 -m dataset.csv_builder \
-    --dataset-root=dataset/convusersec/dialogs \
-    --profiles-path=dataset/convusersec/timelines50.csv \
-    --output=dataset/convusersec/twconvrsu_csv_v2t_50/valid.csv \
+python3 -m datasets.csv_builder \
+    --datasets-root=datasets/convusersec/dialogs \
+    --profiles-path=datasets/convusersec/timelines50.csv \
+    --output=datasets/convusersec/twconvrsu_csv_v2t_50/valid.csv \
     --text-field=2 \
     --min-context-length=2 \
     --tokenize-tweets \
@@ -32,10 +32,10 @@ python3 -m dataset.csv_builder \
     valid
 
 #tests
-python3 -m dataset.csv_builder \
-    --dataset-root=dataset/convusersec/dialogs \
-    --profiles-path=dataset/convusersec/timelines50.csv \
-    --output=dataset/convusersec/twconvrsu_csv_v2t_50/tests.csv \
+python3 -m datasets.csv_builder \
+    --datasets-root=datasets/convusersec/dialogs \
+    --profiles-path=datasets/convusersec/timelines50.csv \
+    --output=datasets/convusersec/twconvrsu_csv_v2t_50/tests.csv \
     --text-field=2 \
     --min-context-length=2 \
     --tokenize-tweets \
@@ -43,13 +43,13 @@ python3 -m dataset.csv_builder \
     tests
 
 # tf records builder
-python3 -m dataset.tfrecords_builder \
-    --input_dir=dataset/convusersec/twconvrsu_csv_v2t_50 \
-    --output_dir=dataset/convusersec/twconvrsu_tf_v2t_50 \
+python3 -m datasets.tfrecords_builder \
+    --input_dir=datasets/convusersec/twconvrsu_csv_v2t_50 \
+    --output_dir=datasets/convusersec/twconvrsu_tf_v2t_50 \
     --max_sentence_len=1400
 
-python3 -m dataset.embeddings_builder \
-    dataset/convusersec/twconvrsu_tf_v2t_50/vocabulary.txt \
+python3 -m datasets.embeddings_builder \
+    datasets/convusersec/twconvrsu_tf_v2t_50/vocabulary.txt \
     embeddings/fasttext/cc.es.300.vec
 
 

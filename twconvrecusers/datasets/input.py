@@ -22,7 +22,7 @@ import tensorflow as tf
 import tensorflow.contrib as tfc
 from tensorflow import data
 
-from twconvrecusers.dataset import featurizer, metadata
+from twconvrecusers.datasets import featurizer, metadata
 
 
 #from twconvrecusers import task
@@ -42,7 +42,7 @@ from twconvrecusers.dataset import featurizer, metadata
 def parse_csv(csv_row, is_serving=False):
     """Takes the string input tensor (csv) and returns a dict of rank-2 tensors.
 
-    Takes a rank-1 tensor and converts it into rank-2 tensor, with respect to its dataset type
+    Takes a rank-1 tensor and converts it into rank-2 tensor, with respect to its datasets type
     (inferred from the metadata)
 
     Args:
@@ -50,7 +50,7 @@ def parse_csv(csv_row, is_serving=False):
         is_serving: boolean to indicate whether this function is called during serving or training
         since the serving csv_row input is different than the training input (i.e., no target column)
     Returns:
-        rank-2 tensor of the correct dataset type
+        rank-2 tensor of the correct datasets type
     """
 
     if is_serving:
@@ -69,7 +69,7 @@ def parse_csv(csv_row, is_serving=False):
 def parse_tf_example(example_proto, HYPER_PARAMS, is_serving=False, mode=tfc.learn.ModeKeys.TRAIN):
     """Takes the string input tensor (example proto) and returns a dict of rank-2 tensors.
 
-    Takes a rank-1 tensor and converts it into rank-2 tensor, with respect to its dataset type
+    Takes a rank-1 tensor and converts it into rank-2 tensor, with respect to its datasets type
     (inferred from the  metadata)
 
     Args:
@@ -77,7 +77,7 @@ def parse_tf_example(example_proto, HYPER_PARAMS, is_serving=False, mode=tfc.lea
         is_serving: boolean to indicate whether this function is called during serving or training
         since the serving csv_row input is different than the training input (i.e., no target column)
     Returns:
-        rank-2 tensor of the correct dataset type
+        rank-2 tensor of the correct datasets type
     """
 
     feature_spec = {}
@@ -251,17 +251,17 @@ def generate_input_fn(file_names_pattern,
                      num_epochs=1,
                      batch_size=200,
                      multi_threading=True):
-    """Generates an input function for reading training and metrics dataset file(s).
-    This uses the tf.dataset APIs.
+    """Generates an input function for reading training and metrics datasets file(s).
+    This uses the tf.datasets APIs.
 
     Args:
-        file_names_pattern: [str] - file name or file name patterns from which to read the dataset.
+        file_names_pattern: [str] - file name or file name patterns from which to read the datasets.
         mode: tf.estimator.ModeKeys - either TRAIN or EVAL.
-            Used to determine whether or not to randomize the order of dataset.
+            Used to determine whether or not to randomize the order of datasets.
         file_encoding: type of the text files. Can be 'csv' or 'tfrecords'
         skip_header_lines: int set to non-zero in order to skip header lines in CSV files.
-        num_epochs: int - how many times through to read the dataset.
-          If None will loop through dataset indefinitely
+        num_epochs: int - how many times through to read the datasets.
+          If None will loop through datasets indefinitely
         batch_size: int - first dimension size of the Tensors returned by input_fn
         multi_threading: boolean - indicator to use multi-threading or not
     Returns:
@@ -279,7 +279,7 @@ def generate_input_fn(file_names_pattern,
         buffer_size = 2 * batch_size + 1
 
         tf.logging.info("")
-        tf.logging.info("* dataset input_fn:")
+        tf.logging.info("* datasets input_fn:")
         tf.logging.info("================")
         tf.logging.info(("Mode: {}".format(mode)))
         tf.logging.info(("Input file(s): {}".format(file_names_pattern)))

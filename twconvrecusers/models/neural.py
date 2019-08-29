@@ -8,7 +8,7 @@ import tensorflow.contrib as tfc
 from tensorflow.python.ops.losses import losses
 
 
-from twconvrecusers.dataset import embeddings, featurizer, metadata
+from twconvrecusers.datasets import embeddings, featurizer, metadata
 
 MODEL_RNN = 'rnn'
 MODEL_LSTM = 'lstm'

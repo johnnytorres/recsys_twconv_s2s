@@ -10,7 +10,7 @@ from tqdm import tqdm
 tf.flags.DEFINE_string(
 	name="input_dir", 
 	default="~/data",
-	help="Input directory contakining original CSV dataset files"
+	help="Input directory contakining original CSV datasets files"
 	)
 tf.flags.DEFINE_integer(
 	name="min_word_frequency", 
@@ -110,7 +110,7 @@ def transform_sentence(sequence, vocab_processor):
 
 def create_example_train(row, vocab):
 	"""
-	Creates a training example for the Ubuntu Dialog Corpus dataset.
+	Creates a training example for the Ubuntu Dialog Corpus datasets.
 	Returnsthe a tensorflow.Example Protocol Buffer object.
 	"""
 	context, utterance, label = row
@@ -132,7 +132,7 @@ def create_example_train(row, vocab):
 
 def create_example_test(row, vocab):
 	"""
-	Creates a tests/validation example for the Ubuntu Dialog Corpus dataset.
+	Creates a tests/validation example for the Ubuntu Dialog Corpus datasets.
 	Returnsthe a tensorflow.Example Protocol Buffer object.
 	"""
 	context, utterance = row[:2]
@@ -173,7 +173,7 @@ def wccount(filename):
 
 def create_tfrecords_file(input_filename, output_filename, example_fn):
 	"""
-	Creates a TFRecords file for the given input dataset and
+	Creates a TFRecords file for the given input datasets and
 	example transofmration function
 	"""
 	writer = tf.io.TFRecordWriter(output_filename)

@@ -2,10 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c25c6c6-8cd1-4139-a355-a4f62ad57c3c" name="Default Changelist" comment="refactor project">
+      <change beforePath="$PROJECT_DIR$/.idea/crisis_conv_recusers.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/crisis_conv_recusers.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/eda_trec.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/eda_trec.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/getdata.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/getdata.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run-cloudml-deploy.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-cloudml-deploy.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run-cloudml-local.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-cloudml-local.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run-local-debug.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-local-debug.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run-local-domains.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-local-domains.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run-preprocessing-d1.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-preprocessing-d1.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run-preprocessing-d2.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-preprocessing-d2.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run-preprocessing-d2i-10k.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-preprocessing-d2i-10k.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run-preprocessing-d2i-20k.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-preprocessing-d2i-20k.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run-preprocessing-d2i-60k.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-preprocessing-d2i-60k.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run-preprocessing-d2t-50.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-preprocessing-d2t-50.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run-preprocessing-domains.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run-preprocessing-domains.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/runexperiments.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/runexperiments.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/dataset/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/datasets/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/dataset/csvreader.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/datasets/csvreader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/dataset/embeddings.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/datasets/embeddings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/dataset/featurizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/datasets/featurizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/dataset/input.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/datasets/input.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/dataset/metadata.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/datasets/metadata.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/dataset/tfrecords.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/datasets/tfrecords.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/twconvrecusers/models/neural.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/neural.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/models/tfidf.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/tfidf.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/twconvrecusers/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/task.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecusers/tests/tfrecords.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/tests/tfrecords.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -308,7 +331,10 @@
       <workItem from="1566578050945" duration="5757000" />
       <workItem from="1566586766540" duration="12002000" />
       <workItem from="1566664906536" duration="6790000" />
-      <workItem from="1566837247787" duration="5181000" />
+      <workItem from="1566837247787" duration="5818000" />
+      <workItem from="1566922771913" duration="2301000" />
+      <workItem from="1567048290563" duration="1343000" />
+      <workItem from="1567101525458" duration="322000" />
     </task>
     <task id="LOCAL-00001" summary="refactor project">
       <created>1562518129393</created>

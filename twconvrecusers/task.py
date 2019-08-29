@@ -9,8 +9,8 @@ from tqdm import tqdm
 import tensorflow as tf
 from tensorflow.python import debug as tf_debug
 
-from twconvrecusers.dataset import input, metadata
-from twconvrecusers.dataset.csvreader import DataHandler
+from twconvrecusers.datasets import input, metadata
+from twconvrecusers.datasets.csvreader import DataHandler
 from twconvrecusers.metrics.recall import RecallEvaluator
 from twconvrecusers.models import neural
 from twconvrecusers.models.factory import get_model
@@ -212,7 +212,7 @@ def run_deep_recsys(args):
     # THIS IS ENTRY POINT FOR THE TRAINER TASK
     # ******************************************************************************
 
-    # fill paths based on dataset directory
+    # fill paths based on datasets directory
     args.train_files = os.path.join(args.data_dir, 'train.tfrecords')
     args.eval_files = os.path.join(args.data_dir, 'valid.tfrecords')
     args.test_files = os.path.join(args.data_dir, 'test.tfrecords')
@@ -295,28 +295,28 @@ def initialise_hyper_params(args_parser):
     # Data files arguments
     args_parser.add_argument(
         '--train-files',
-        help='GCS or local paths to training dataset',
+        help='GCS or local paths to training datasets',
         nargs='+',
         # required=True,
         type=lambda x: os.path.expanduser(x)
     )
     args_parser.add_argument(
         '--eval-files',
-        help='GCS or local paths to metrics dataset',
+        help='GCS or local paths to metrics datasets',
         nargs='+',
         # required=True,
         type=lambda x: os.path.expanduser(x)
     )
     args_parser.add_argument(
         '--tests-files',
-        help='GCS or local paths to tests dataset',
+        help='GCS or local paths to tests datasets',
         nargs='+',
         # required=True,
         type=lambda x: os.path.expanduser(x)
     )
     args_parser.add_argument(
         '--predict-files',
-        help='GCS or local paths to predict dataset',
+        help='GCS or local paths to predict datasets',
         nargs='+',
         # required=True,
         type=lambda x: os.path.expanduser(x)
@@ -374,7 +374,7 @@ def initialise_hyper_params(args_parser):
     args_parser.add_argument(
         '--num-epochs',
         help="""\
-        Maximum number of training dataset epochs on which to train.
+        Maximum number of training datasets epochs on which to train.
         If both --train-size and --num-epochs are specified,
         --train-steps will be: (train-size/train-batch-size) * num-epochs.\
         """,
@@ -399,7 +399,7 @@ def initialise_hyper_params(args_parser):
         '--eval-steps',
         help="""\
         Number of steps to run metrics for at each checkpoint',
-        Set to None to evaluate on the whole metrics dataset
+        Set to None to evaluate on the whole metrics datasets
         """,
         default=None,
         type=int
@@ -412,7 +412,7 @@ def initialise_hyper_params(args_parser):
     )
     args_parser.add_argument(
         '--num-distractors',
-        help='Number of distractors in metrics dataset',
+        help='Number of distractors in metrics datasets',
         type=int,
         default=9
     )
@@ -463,7 +463,7 @@ def initialise_hyper_params(args_parser):
     args_parser.add_argument(
         '--learning-rate',
         help="Learning rate value for the optimizers",
-        default=0.001,
+        default=0.1,
         type=float
     )
     args_parser.add_argument(

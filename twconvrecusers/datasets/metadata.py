@@ -23,7 +23,7 @@ import tensorflow as tf
 HYPER_PARAMS = None
 
 # Task type can be either 'classification', 'regression', or 'custom'
-# This is based on the target feature in the dataset, and whether you use a canned or a custom estimator
+# This is based on the target feature in the datasets, and whether you use a canned or a custom estimator
 TASK_TYPE = 'custom'  # classification | regression | custom
 
 
@@ -32,12 +32,12 @@ def get_text_feature_size():
 	return HYPER_PARAMS.max_content_len
 
 
-# A List of all the columns (header) present in the input dataset file(s) in order to parse it.
+# A List of all the columns (header) present in the input datasets file(s) in order to parse it.
 # Note that, not all the columns present here will be input features to your model.
 HEADER = ['context', 'utterance', 'context_len', 'utterance_len', 'label']
 
-# List of the default values of all the columns present in the input dataset.
-# This helps decoding the dataset types of the columns.
+# List of the default values of all the columns present in the input datasets.
+# This helps decoding the datasets types of the columns.
 HEADER_DEFAULTS = []
 
 # List of the feature names of type int or float.
@@ -51,7 +51,7 @@ def get_input_numeric_features():
 
 
 # Numeric features constructed, if any, in process_features function in input.py module,
-# as part of reading dataset.
+# as part of reading datasets.
 CONSTRUCTED_NUMERIC_FEATURE_NAMES = []
 
 # Dictionary of feature names with int values, but to be treated as categorical features.
@@ -59,7 +59,7 @@ CONSTRUCTED_NUMERIC_FEATURE_NAMES = []
 INPUT_CATEGORICAL_FEATURE_NAMES_WITH_IDENTITY = {}
 
 # Categorical features with identity constructed, if any, in process_features function in input.py module,
-# as part of reading dataset. Usually include constructed boolean flags.
+# as part of reading datasets. Usually include constructed boolean flags.
 CONSTRUCTED_CATEGORICAL_FEATURE_NAMES_WITH_IDENTITY = {}
 
 # Dictionary of categorical features with few nominal values (to be encoded as one-hot indicators).
@@ -95,12 +95,12 @@ WEIGHT_COLUMN_NAME = None
 TARGET_NAME = 'label'
 TARGET_FEATURE = ('label', 1, tf.int64)
 
-# List of the class values (labels) in a classification dataset.
+# List of the class values (labels) in a classification datasets.
 TARGET_LABELS = [0, 1]
 
-# List of the columns expected during serving (which is probably different to the header of the training dataset).
+# List of the columns expected during serving (which is probably different to the header of the training datasets).
 SERVING_COLUMNS = []
 
-# List of the default values of all the columns of the serving dataset.
-# This helps decoding the dataset types of the columns.
+# List of the default values of all the columns of the serving datasets.
+# This helps decoding the datasets types of the columns.
 SERVING_DEFAULTS = []
