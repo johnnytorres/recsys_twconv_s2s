@@ -50,13 +50,32 @@ python -m twconvrecusers.task \
   --num-distractors=9 \
   --max-content-len=120 \
   --max-utterance-len=120 \
-  --train-size=35255 \
+  --train-size=14575 \
   --train-batch-size=64 \
   --num-epochs=1 \
   --eval-batch-size=128 \
-  --learning-rate=0.001 \
+  --learning-rate=0.0001 \
   --rnn-dim=300
   #--train-steps=550 \ will be calculated automatically
   #--eval-every-secs=5 \ default 1 will eval each checkpoint
   #--eval-steps=313 None will use all the datasets
+
+
+RESULTS_DIR=$DATA_DIR/staggingresults/lstm
+mkdir -p ${RESULTS_DIR}
+python -m twconvrecusers.task \
+  --data-dir=${DATA_STAGGING} \
+  --job-dir=${RESULTS_DIR} \
+  lstm \
+  --train \
+  --test \
+  --num-distractors=9 \
+  --max-content-len=120 \
+  --max-utterance-len=120 \
+  --train-size=14575 \
+  --train-batch-size=64 \
+  --num-epochs=1 \
+  --eval-batch-size=128 \
+  --learning-rate=0.0001 \
+  --rnn-dim=300
 
