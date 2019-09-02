@@ -45,17 +45,22 @@ python -m twconvrecusers.task \
   --data-dir=${DATA_STAGGING} \
   --job-dir=${RESULTS_DIR} \
   rnn \
-  --train \
-  --test \
+  --train-files=train.tfrecords \
+  --eval-files=valid.tfrecords \
+  --test-files=test.tfrecords \
+  --vocab-path=vocabulary.txt \
   --num-distractors=9 \
   --max-content-len=120 \
   --max-utterance-len=120 \
   --train-size=14575 \
   --train-batch-size=64 \
-  --num-epochs=1 \
+  --num-epochs=5 \
   --eval-batch-size=128 \
   --learning-rate=0.0001 \
-  --rnn-dim=300
+  --embedding-size=300 \
+  --rnn-dim=300 \
+  --train \
+  --test
   #--train-steps=550 \ will be calculated automatically
   #--eval-every-secs=5 \ default 1 will eval each checkpoint
   #--eval-steps=313 None will use all the datasets
@@ -74,8 +79,28 @@ python -m twconvrecusers.task \
   --max-utterance-len=120 \
   --train-size=14575 \
   --train-batch-size=64 \
-  --num-epochs=1 \
+  --num-epochs=5 \
   --eval-batch-size=128 \
   --learning-rate=0.0001 \
+  --embedding-size=300 \
+  --rnn-dim=300
+
+RESULTS_DIR=$DATA_DIR/staggingresults/bilstm
+mkdir -p ${RESULTS_DIR}
+python -m twconvrecusers.task \
+  --data-dir=${DATA_STAGGING} \
+  --job-dir=${RESULTS_DIR} \
+  bilstm \
+  --train \
+  --test \
+  --num-distractors=9 \
+  --max-content-len=120 \
+  --max-utterance-len=120 \
+  --train-size=14575 \
+  --train-batch-size=64 \
+  --num-epochs=5 \
+  --eval-batch-size=128 \
+  --learning-rate=0.0001 \
+  --embedding-size=300 \
   --rnn-dim=300
 

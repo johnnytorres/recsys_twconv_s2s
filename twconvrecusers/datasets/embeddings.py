@@ -11,14 +11,14 @@ from collections import defaultdict
 
 def load_vocab(filename):
 	vocab_size_path = os.path.join(os.path.split(filename)[0], 'vocab_size.txt')
-	with tf.gfile.GFile(vocab_size_path) as f:
+	with tf.io.gfile.GFile(vocab_size_path) as f:
 		vocab_size = int(f.read())
 	with tf.gfile.GFile(filename) as f:
 		vocab = f.read().splitlines()
 	dct = defaultdict(int)
 	for idx, word in tqdm(enumerate(vocab), 'loading vocabulary', total=vocab_size):
 		dct[word] = idx
-	tf.logging.info('loading vocabulary... found {} words'.format(len(dct)))
+	tf.compat.v1.logging.info('loading vocabulary... found {} words'.format(len(dct)))
 	return [vocab, dct, vocab_size]
 
 
@@ -48,7 +48,7 @@ def load_embedding_vectors(embedding_path, vocab_dict, small_embedding_path=None
 					
 	word_dim = len(entries)
 	num_vectors = len(dct)
-	tf.logging.info("Found embeddings for {} out of {} words in vocabulary".format(num_vectors, len(vocab_dict)))
+	tf.compat.v1.logging.info("Found embeddings for {} out of {} words in vocabulary".format(num_vectors, len(vocab_dict)))
 	
 	if small_embedding_path:
 		with open(small_embedding_path, 'w') as f:
@@ -59,7 +59,7 @@ def load_embedding_vectors(embedding_path, vocab_dict, small_embedding_path=None
 
 
 def run(args):
-	tf.logging.set_verbosity(args.verbosity)
+	tf.compat.v1.logging.set_verbosity(args.verbosity)
 	vocab, vocab_dic, vocab_size = load_vocab(args.vocab_path)
 	reduced_embeddings_path = os.path.join(os.path.split(args.vocab_path)[0], 'embeddings.vec')
 	vectors, vectors_ix = load_embedding_vectors(args.embedding_path, vocab_dic, reduced_embeddings_path)

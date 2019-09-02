@@ -46,7 +46,7 @@ def construct_hidden_units():
             for i in range(num_layers)
         ]
 
-    tf.logging.info(("Hidden units structure: {}".format(hidden_units)))
+    tf.compat.v1.logging.info(("Hidden units structure: {}".format(hidden_units)))
 
     return hidden_units
 
@@ -61,10 +61,10 @@ def update_learning_rate(HYPER_PARAMS):
     decay_steps = HYPER_PARAMS.train_steps  # decay after each training step
     decay_factor = HYPER_PARAMS.learning_rate_decay_factor  # if set to 1, then no decay.
 
-    global_step = tf.train.get_global_step()
+    global_step = tf.compat.v1.train.get_global_step()
 
     # decayed_learning_rate = learning_rate * decay_rate ^ (global_step / decay_steps)
-    learning_rate = tf.train.exponential_decay(initial_learning_rate,
+    learning_rate = tf.compat.v1.train.exponential_decay(initial_learning_rate,
                                                global_step,
                                                decay_steps,
                                                decay_factor)
@@ -123,7 +123,7 @@ def create_classifier(config):
 
     estimator = tf.contrib.estimator.add_metrics(estimator, metric_fn)
 
-    tf.logging.info(("creating a classification model: {}".format(estimator)))
+    tf.compat.v1.logging.info(("creating a classification model: {}".format(estimator)))
 
     return estimator
 
@@ -166,95 +166,122 @@ def create_regressor(config):
 
     estimator = tf.contrib.estimator.add_metrics(estimator, metric_fn)
 
-    tf.logging.info(("creating a regression model: {}".format(estimator)))
+    tf.compat.v1.logging.info(("creating a regression model: {}".format(estimator)))
 
     return estimator
 
 
+def build_initial_embedding_matrix(vocab_dict, embedding_dict, embedding_vectors, embedding_dim):
+    initial_embeddings = np.random.uniform(-0.25, 0.25, (len(vocab_dict), embedding_dim)).astype("float32")
+    for word, glove_word_idx in embedding_dict.items():
+        word_idx = vocab_dict.get(word)
+        initial_embeddings[word_idx, :] = embedding_vectors[glove_word_idx]
+    return initial_embeddings
+
+def build_embedding_layer(HYPER_PARAMS):
+    global vocab_array, vocab_dict, vocab_size, embedding_vectors, embbeding_dict
+
+    if vocab_array is None:
+        vocab_array, vocab_dict, vocab_size = embeddings.load_vocab(HYPER_PARAMS.vocab_path)
+
+    if HYPER_PARAMS.embedding_path:
+        tf.compat.v1.logging.info('loading embeddings...')
+        if embedding_vectors is None:
+            embedding_vectors, embbeding_dict = embeddings.load_embedding_vectors(
+                HYPER_PARAMS.embedding_path, set(vocab_array))
+        initializer = build_initial_embedding_matrix(vocab_dict, embbeding_dict, embedding_vectors,
+                                                     HYPER_PARAMS.embedding_size)
+        embedding_layer = tf.get_variable(
+            name=EMBEDDING_LAYER_NAME,
+            initializer=initializer,
+            trainable=HYPER_PARAMS.embedding_trainable
+        )
+    else:
+        tf.compat.v1.logging.info('No embeddings specified, starting with random embeddings!')
+        initializer = tf.random_normal_initializer(-0.25, 0.25)  # todo: maybe hyperparam?
+        #initializer = tf.glorot_uniform_initializer()
+
+        if HYPER_PARAMS.vocab_size == -1:
+            HYPER_PARAMS.vocab_size = vocab_size
+
+        embedding_layer = tf.compat.v1.get_variable(
+            name=EMBEDDING_LAYER_NAME,
+            shape=[HYPER_PARAMS.vocab_size, HYPER_PARAMS.embedding_size],
+            initializer=initializer
+        )
+
+    return embedding_layer
+
+
+def get_feature(features, key, key_len, max_len):
+    ids = features[key]
+    # ids = tf.squeeze(features[key], [1])
+    ids_len = tf.squeeze(features[key_len], [1])
+    ids_len = tf.minimum(ids_len, tf.constant(max_len, dtype=tf.int64))
+    return ids, ids_len
+
+
+def metric_fn(HYPER_PARAMS, labels, predictions):
+    """ Defines extra metrics metrics to canned and custom estimators.
+    By default, this returns an empty dictionary
+
+    Args:
+        labels: A Tensor of the same shape as predictions
+        predictions: A Tensor of arbitrary shape
+    Returns:
+        dictionary of string:metric
+    """
+    metrics = {}
+
+    num_instances_recall = HYPER_PARAMS.num_distractors + 1
+    # probs = tf.tf.compat.v1.logging.info(predictions, [predictions], 'calculating metric recall @k predictions')
+
+    probs = predictions['logistic']
+
+    split_predictions = tf.split(probs, num_instances_recall, 0)
+    concat_predictions = tf.concat(split_predictions, 1)
+
+    recall_labels = tf.zeros(shape=(tf.shape(concat_predictions)[0], 1), dtype=tf.int64, name='recall_labels')
+
+    if HYPER_PARAMS.debug:
+        concat_predictions = tf.Print(
+            concat_predictions,
+            [concat_predictions, recall_labels],
+            'calculating metric recall @k split probs',
+            summarize=10)
+
+    # TODO: the k metrics depends of the number of distractors
+    for k in [1, 2, 5]:  # , 10]:
+        metric_name = "recall_at_%d" % k
+        metrics[metric_name] = tf.compat.v1.metrics.recall_at_k(
+            recall_labels,
+            concat_predictions,
+            k,
+            name=metric_name
+        )
+
+    # Example of implementing Root Mean Squared Error for regression
+
+    # pred_values = predictions['predictions']
+    # metrics['rmse'] = tf.metrics.root_mean_squared_error(labels=labels,
+    #                                                      predictions=pred_values)
+
+    # Example of implementing Mean per Class Accuracy for classification
+
+    # indices = parse_label_column(labels)
+    # pred_class = predictions['class_ids']
+    # metrics['mirco_accuracy'] = tf.metrics.mean_per_class_accuracy(labels=indices,
+    #                                                                predictions=pred_class,
+    #                                                                num_classes=len(metadata.TARGET_LABELS))
+
+    return metrics
+
+
 def create_estimator(config, HYPER_PARAMS):
-
-    def load_vocab(filename):
-        vocab = None
-        with tf.gfile.GFile(filename) as f:
-            vocab = f.read().splitlines()
-        dct = defaultdict(int)
-        for idx, word in enumerate(vocab):
-            dct[word] = idx
-        return [vocab, dct]
-
-    def load_embedding_vectors(filename, vocab):
-        """
-		Load embedding vectors from a .txt file.
-		Optionally limit the vocabulary to save memory. `vocab` should be a set.
-		"""
-        dct = {}
-        vectors = array.array('d')
-        current_idx = 0
-        with tf.gfile.GFile(filename)as f:  # , encoding="utf-8") as f:
-            for _, line in enumerate(f):
-                tokens = line.split(" ")
-                word = tokens[0]
-                entries = tokens[1:]
-                if not vocab or word in vocab:
-                    dct[word] = current_idx
-                    vectors.extend(float(x) for x in entries)
-                    current_idx += 1
-            word_dim = len(entries)
-            num_vectors = len(dct)
-            tf.logging.info("Found {} words out of {} in embeddings.".format(num_vectors, len(vocab)))
-            return [np.array(vectors).reshape(num_vectors, word_dim), dct]
-
-    def build_initial_embedding_matrix(vocab_dict, embedding_dict, embedding_vectors, embedding_dim):
-        initial_embeddings = np.random.uniform(-0.25, 0.25, (len(vocab_dict), embedding_dim)).astype("float32")
-        for word, glove_word_idx in embedding_dict.items():
-            word_idx = vocab_dict.get(word)
-            initial_embeddings[word_idx, :] = embedding_vectors[glove_word_idx]
-        return initial_embeddings
-
-    def build_embedding_layer():
-        global vocab_array, vocab_dict, vocab_size, embedding_vectors, embbeding_dict
-
-        if vocab_array is None:
-            vocab_array, vocab_dict, vocab_size = embeddings.load_vocab(HYPER_PARAMS.vocab_path)
-
-        if HYPER_PARAMS.embedding_path:
-            tf.logging.info('loading embeddings...')
-            if embedding_vectors is None:
-                embedding_vectors, embbeding_dict = embeddings.load_embedding_vectors(
-                    HYPER_PARAMS.embedding_path, set(vocab_array))
-            initializer = build_initial_embedding_matrix(vocab_dict, embbeding_dict, embedding_vectors,
-                                                         HYPER_PARAMS.embedding_size)
-            embedding_layer = tf.get_variable(
-                name=EMBEDDING_LAYER_NAME,
-                initializer=initializer,
-                trainable=HYPER_PARAMS.embedding_trainable
-            )
-        else:
-            tf.logging.info('No embeddings specified, starting with random embeddings!')
-            initializer = tf.random_normal_initializer(-0.25, 0.25)  # todo: maybe hyperparam?
-            #initializer = tf.glorot_uniform_initializer()
-
-            if HYPER_PARAMS.vocab_size == -1:
-                HYPER_PARAMS.vocab_size = vocab_size
-
-            embedding_layer = tf.get_variable(
-                name=EMBEDDING_LAYER_NAME,
-                shape=[HYPER_PARAMS.vocab_size, HYPER_PARAMS.embedding_size],
-                initializer=initializer
-            )
-
-        return embedding_layer
-
-    def _get_feature(features, key, key_len, max_len):
-        ids = features[key]
-        # ids = tf.squeeze(features[key], [1])
-        ids_len = tf.squeeze(features[key_len], [1])
-        ids_len = tf.minimum(ids_len, tf.constant(max_len, dtype=tf.int64))
-        return ids, ids_len
 
     def _dual_encoder(context, utterance, context_len, utterance_len):
         """ Create the model structure and compute the logits """
-        embeddings_layer = build_embedding_layer()
+        embeddings_layer = build_embedding_layer(HYPER_PARAMS)
         # embed the context and utterances
         context_embedded = tf.nn.embedding_lookup(
             embeddings_layer, context, name='embed_context'
@@ -264,7 +291,7 @@ def create_estimator(config, HYPER_PARAMS):
         )
 
         # create sequence layer based on LSTM
-        with tf.variable_scope('rnn') as vs:
+        with tf.compat.v1.variable_scope('rnn') as vs:
 
             if HYPER_PARAMS.estimator == MODEL_RNN:
                 cell = tf.nn.rnn_cell.BasicRNNCell(
@@ -274,7 +301,7 @@ def create_estimator(config, HYPER_PARAMS):
                 cell = tf.nn.rnn_cell.LSTMCell(
                     num_units=HYPER_PARAMS.rnn_dim,
                     initializer=tf.glorot_uniform_initializer(),
-                    # todo: hyperparameters?
+                    # todo: hyperparameters
                     forget_bias=2.0,
                     use_peepholes=True,
                     state_is_tuple=True
@@ -339,10 +366,10 @@ def create_estimator(config, HYPER_PARAMS):
         """ compute the logits """
         # context=features['context']
         # utterance=features['utterance']
-        context, contex_len = _get_feature(
+        context, contex_len = get_feature(
             features, 'context', 'context_len',
             HYPER_PARAMS.max_content_len)
-        utterance, utterance_len = _get_feature(
+        utterance, utterance_len = get_feature(
             features, 'utterance', 'utterance_len',
             HYPER_PARAMS.max_utterance_len
         )
@@ -356,7 +383,7 @@ def create_estimator(config, HYPER_PARAMS):
         current_learning_rate = update_learning_rate(HYPER_PARAMS)
 
         # Create Optimiser
-        optimizer = tf.train.AdamOptimizer(
+        optimizer = tf.compat.v1.train.AdamOptimizer(
             learning_rate=current_learning_rate
         )
 
@@ -370,60 +397,7 @@ def create_estimator(config, HYPER_PARAMS):
 
         return train_op
 
-    def metric_fn(labels, predictions):
-        """ Defines extra metrics metrics to canned and custom estimators.
-    	By default, this returns an empty dictionary
 
-    	Args:
-    		labels: A Tensor of the same shape as predictions
-    		predictions: A Tensor of arbitrary shape
-    	Returns:
-    		dictionary of string:metric
-    	"""
-        metrics = {}
-
-        num_instances_recall = HYPER_PARAMS.num_distractors + 1
-        # probs = tf.tf.logging.info(predictions, [predictions], 'calculating metric recall @k predictions')
-
-        probs = predictions['logistic']
-
-        split_predictions = tf.split(probs, num_instances_recall, 0)
-        concat_predictions = tf.concat(split_predictions, 1)
-
-        recall_labels = tf.zeros(shape=(tf.shape(concat_predictions)[0], 1), dtype=tf.int64, name='recall_labels')
-
-        if HYPER_PARAMS.debug:
-            concat_predictions = tf.Print(
-                concat_predictions,
-                [concat_predictions, recall_labels],
-                'calculating metric recall @k split probs',
-                summarize=10)
-
-        # TODO: the k metrics depends of the number of distractors
-        for k in [1, 2, 5]:  # , 10]:
-            metric_name = "recall_at_%d" % k
-            metrics[metric_name] = tf.metrics.recall_at_k(
-                recall_labels,
-                concat_predictions,
-                k,
-                name=metric_name
-            )
-
-        # Example of implementing Root Mean Squared Error for regression
-
-        # pred_values = predictions['predictions']
-        # metrics['rmse'] = tf.metrics.root_mean_squared_error(labels=labels,
-        #                                                      predictions=pred_values)
-
-        # Example of implementing Mean per Class Accuracy for classification
-
-        # indices = parse_label_column(labels)
-        # pred_class = predictions['class_ids']
-        # metrics['mirco_accuracy'] = tf.metrics.mean_per_class_accuracy(labels=indices,
-        #                                                                predictions=pred_class,
-        #                                                                num_classes=len(metadata.TARGET_LABELS))
-
-        return metrics
 
     def _model_fn(features, labels, mode):
         """ model function for the custom estimator"""
@@ -445,11 +419,14 @@ def create_estimator(config, HYPER_PARAMS):
             train_op_fn=_train_op_fn
         )
 
-    tf.logging.info("creating a custom model...")
+    tf.compat.v1.logging.info("creating a custom model...")
 
     estimator = tf.estimator.Estimator(model_fn=_model_fn, config=config)
 
-    estimator = tf.contrib.estimator.add_metrics(estimator, metric_fn)
+    #estimator = tf.contrib.estimator.add_metrics(estimator, metric_fn)
+    estimator = tf.contrib.estimator.add_metrics(
+        estimator,
+        lambda labels, predictions: metric_fn(HYPER_PARAMS, labels, predictions))
 
     return estimator
 

@@ -3,7 +3,7 @@
 # exit on error
 set -e
 
-BASE_DIR=$HOME/datasets
+BASE_DIR=$HOME/data
 
 # PREPARE EMBEDDINGS
 EMBEDDINGS_DIR=${BASE_DIR}/embeddings/fasttext
@@ -45,4 +45,7 @@ python -m twconvrecusers.datasets.tfrecords \
    --num_distractors=9 \
    --max_sentence_len=120
 
+python -m twconvrecusers.datasets.embeddings \
+    ${DATA_STAGGING}/vocabulary.txt \
+    ${EMBEDDINGS_DIR}/crawl-300d-2M.vec
 

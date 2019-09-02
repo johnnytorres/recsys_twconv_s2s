@@ -43,9 +43,9 @@ def read_tfrecord():
 	reader = tf.python_io.tf_record_iterator('my_example.tfrecords')
 
 	# feature_spec = {
-	# 	'my_ints': tf.FixedLenFeature(shape=[], dtype=tf.int64),
-	# 	'my_float': tf.FixedLenFeature(shape=[], dtype=tf.float32),
-	# 	'my_bytes': tf.FixedLenFeature(shape=[], dtype=tf.string),
+	# 	'my_ints': tf.io.FixedLenFeature(shape=[], dtype=tf.int64),
+	# 	'my_float': tf.io.FixedLenFeature(shape=[], dtype=tf.float32),
+	# 	'my_bytes': tf.io.FixedLenFeature(shape=[], dtype=tf.string),
 	# }
 	
 	feature_spec = {
@@ -70,15 +70,15 @@ def read_train_file():
 	reader = tf.python_io.tf_record_iterator('/users/johnny/datasets/ubuntu/ubuntu_small/example.tfrecords')
 	
 	# feature_spec = {
-	# 	'my_ints': tf.FixedLenFeature(shape=[], dtype=tf.int64),
-	# 	'my_float': tf.FixedLenFeature(shape=[], dtype=tf.float32),
-	# 	'my_bytes': tf.FixedLenFeature(shape=[], dtype=tf.string),
+	# 	'my_ints': tf.io.FixedLenFeature(shape=[], dtype=tf.int64),
+	# 	'my_float': tf.io.FixedLenFeature(shape=[], dtype=tf.float32),
+	# 	'my_bytes': tf.io.FixedLenFeature(shape=[], dtype=tf.string),
 	# }
 	
 	feature_spec = {
-		'context': tf.FixedLenFeature(shape=160, dtype=tf.int64),
-		'utterance': tf.FixedLenFeature(shape=160, dtype=tf.int64),
-		'label': tf.FixedLenFeature(shape=1,dtype=tf.int64),
+		'context': tf.io.FixedLenFeature(shape=160, dtype=tf.int64),
+		'utterance': tf.io.FixedLenFeature(shape=160, dtype=tf.int64),
+		'label': tf.io.FixedLenFeature(shape=1,dtype=tf.int64),
 	}
 	
 	for ser in reader:

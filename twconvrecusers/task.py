@@ -13,20 +13,21 @@ from twconvrecusers.datasets import input, metadata
 from twconvrecusers.datasets.csvreader import DataHandler
 from twconvrecusers.metrics.recall import RecallEvaluator
 from twconvrecusers.models import neural
+from twconvrecusers.models import mf
 from twconvrecusers.models.factory import get_model
 
 
 def clean_job_dir():
     # If job_dir_reuse is False then remove the job_dir if it exists
-    tf.logging.info(("Resume training:", HYPER_PARAMS.reuse_job_dir))
+    tf.compat.v1.logging.info(("Resume training:", HYPER_PARAMS.reuse_job_dir))
     if not HYPER_PARAMS.reuse_job_dir:
         if tf.io.gfile.exists(HYPER_PARAMS.job_dir):
             tf.io.gfile.rmtree(HYPER_PARAMS.job_dir)
-            tf.logging.info(("Deleted job_dir {} to avoid re-use".format(HYPER_PARAMS.job_dir)))
+            tf.compat.v1.logging.info(("Deleted job_dir {} to avoid re-use".format(HYPER_PARAMS.job_dir)))
         else:
-            tf.logging.info("No job_dir available to delete")
+            tf.compat.v1.logging.info("No job_dir available to delete")
     else:
-        tf.logging.info(("Reusing job_dir {} if it exists".format(HYPER_PARAMS.job_dir)))
+        tf.compat.v1.logging.info(("Reusing job_dir {} if it exists".format(HYPER_PARAMS.job_dir)))
 
 
 def get_train_input_fn():
@@ -106,30 +107,18 @@ def train_model(run_config):
         hooks=hooks
     )
 
-    tf.logging.info("===========================")
-    tf.logging.info("* TRAINING configurations")
-    tf.logging.info("===========================")
-    tf.logging.info(("Train size: {}".format(HYPER_PARAMS.train_size)))
-    tf.logging.info(("Epoch count: {}".format(HYPER_PARAMS.num_epochs)))
-    tf.logging.info(("Train batch size: {}".format(HYPER_PARAMS.train_batch_size)))
-    tf.logging.info(("Training steps: {} ({})".format(int(HYPER_PARAMS.train_steps),
+    tf.compat.v1.logging.info("===========================")
+    tf.compat.v1.logging.info("* TRAINING configurations")
+    tf.compat.v1.logging.info("===========================")
+    tf.compat.v1.logging.info(("Train size: {}".format(HYPER_PARAMS.train_size)))
+    tf.compat.v1.logging.info(("Epoch count: {}".format(HYPER_PARAMS.num_epochs)))
+    tf.compat.v1.logging.info(("Train batch size: {}".format(HYPER_PARAMS.train_batch_size)))
+    tf.compat.v1.logging.info(("Training steps: {} ({})".format(int(HYPER_PARAMS.train_steps),
                                                       "supplied" if HYPER_PARAMS.train_size is None else "computed")))
-    tf.logging.info(("Evaluate every {} seconds".format(HYPER_PARAMS.eval_every_secs)))
-    tf.logging.info("===========================")
+    tf.compat.v1.logging.info(("Evaluate every {} seconds".format(HYPER_PARAMS.eval_every_secs)))
+    tf.compat.v1.logging.info("===========================")
 
-    if metadata.TASK_TYPE == "classification":
-        estimator = neural.create_classifier(
-            config=run_config
-        )
-    elif metadata.TASK_TYPE == "regression":
-        estimator = neural.create_regressor(
-            config=run_config
-        )
-    else:
-        estimator = neural.create_estimator(
-            config=run_config,
-            HYPER_PARAMS=HYPER_PARAMS
-        )
+    estimator = get_estimator(run_config)
 
     # train and evaluate
     tf.estimator.train_and_evaluate(
@@ -139,20 +128,31 @@ def train_model(run_config):
     )
 
 
+def get_estimator(run_config):
+    if HYPER_PARAMS.estimator == "mf":
+        estimator = mf.create_estimator(
+            config=run_config,
+            HYPER_PARAMS=HYPER_PARAMS
+        )
+    else:
+        estimator = neural.create_estimator(
+            config=run_config,
+            HYPER_PARAMS=HYPER_PARAMS
+        )
+    return estimator
+
+
 def test_model(run_config):
     # EVALUATE MODEL WITH TEST DATA
     test_input_fn = get_test_input_fn()
-    tf.logging.info("===========================")
-    tf.logging.info("* TESTING configurations")
-    tf.logging.info("===========================")
-    tf.logging.info(("Test batch size: {}".format(HYPER_PARAMS.eval_batch_size)))
-    tf.logging.info(("Test steps: {} ({})".format(None, "computed (all tests instances)")))
-    tf.logging.info("===========================")
+    tf.compat.v1.logging.info("===========================")
+    tf.compat.v1.logging.info("* TESTING configurations")
+    tf.compat.v1.logging.info("===========================")
+    tf.compat.v1.logging.info(("Test batch size: {}".format(HYPER_PARAMS.eval_batch_size)))
+    tf.compat.v1.logging.info(("Test steps: {} ({})".format(None, "computed (all tests instances)")))
+    tf.compat.v1.logging.info("===========================")
 
-    estimator = neural.create_estimator(
-        config=run_config,
-        HYPER_PARAMS=HYPER_PARAMS
-    )
+    estimator = get_estimator(run_config)
 
     hooks = []
     if HYPER_PARAMS.debug:
@@ -173,7 +173,7 @@ def test_model(run_config):
     with open(path, 'w') as f:
         csvwriter = csv.writer(f)
         for instance_prediction in tqdm(predictions):
-            #tf.logging.info(str(instance_prediction))
+            #tf.compat.v1.logging.info(str(instance_prediction))
             predictions_probs.append(instance_prediction['logistic'][0])
             count += 1
             if count % num_instances_recall == 0:
@@ -186,25 +186,23 @@ def test_model(run_config):
 
 def predict_instances(run_config):
     # PREDICT EXAMPLE INSTANCES
-    tf.logging.info("===========================")
-    tf.logging.info("* PREDICT configurations")
-    tf.logging.info("===========================")
-    tf.logging.info(("Predict batch size: {}".format(HYPER_PARAMS.predict_batch_size)))
-    tf.logging.info(("Predict steps: {} ({})".format(None, "computed (all predict instances)")))
-    tf.logging.info("===========================")
+    tf.compat.v1.logging.info("===========================")
+    tf.compat.v1.logging.info("* PREDICT configurations")
+    tf.compat.v1.logging.info("===========================")
+    tf.compat.v1.logging.info(("Predict batch size: {}".format(HYPER_PARAMS.predict_batch_size)))
+    tf.compat.v1.logging.info(("Predict steps: {} ({})".format(None, "computed (all predict instances)")))
+    tf.compat.v1.logging.info("===========================")
 
     predict_input_fn = get_predict_input_fn()
 
-    estimator = neural.create_estimator(
-        config=run_config
-    )
+    estimator = get_estimator(run_config)
 
     predictions = estimator.predict(input_fn=predict_input_fn)
 
     for instance_prediction in predictions:
-        tf.logging.info(str(instance_prediction))
+        tf.compat.v1.logging.info(str(instance_prediction))
 
-    tf.logging.info("Done.")
+    tf.compat.v1.logging.info("Done.")
 
 
 def run_deep_recsys(args):
@@ -213,27 +211,28 @@ def run_deep_recsys(args):
     # ******************************************************************************
 
     # fill paths based on datasets directory
-    args.train_files = os.path.join(args.data_dir, 'train.tfrecords')
-    args.eval_files = os.path.join(args.data_dir, 'valid.tfrecords')
-    args.test_files = os.path.join(args.data_dir, 'test.tfrecords')
-    args.vocab_path = os.path.join(args.data_dir, 'vocabulary.txt')
-    args.vocab_proc = os.path.join(args.data_dir, 'vocab_processor.bin')
-    embedding_path = os.path.join(args.data_dir, 'embeddings.vec')
-    if os.path.exists(embedding_path):
-        args.embedding_path = embedding_path
+    if args.data_dir:
+        args.train_files = os.path.join(args.data_dir, args.train_files)
+        args.eval_files = os.path.join(args.data_dir, args.eval_files)
+        args.test_files = os.path.join(args.data_dir, args.test_files)
+        args.vocab_path = os.path.join(args.data_dir, args.vocab_path)
+        #args.vocab_proc = os.path.join(args.data_dir, 'vocab_processor.bin')
+        if args.embedding_path:
+            args.embedding_path = os.path.join(args.data_dir, args.embedding_path)
 
     #input.set_hyperparams(HYPER_PARAMS)
 
-    tf.logging.info('---------------------')
-    tf.logging.info('Hyper-parameters:')
-    tf.logging.info(HYPER_PARAMS)
-    tf.logging.info('---------------------')
-
     # Set python level verbosity
-    tf.logging.set_verbosity(HYPER_PARAMS.verbosity)
+    tf.compat.v1.logging.set_verbosity(HYPER_PARAMS.verbosity)
+
+    tf.compat.v1.logging.info('---------------------')
+    tf.compat.v1.logging.info('Hyper-parameters:')
+    tf.compat.v1.logging.info(HYPER_PARAMS)
+    tf.compat.v1.logging.info('---------------------')
+
 
     # Set C++ Graph Execution level verbosity
-    # os.environ['TF_CPP_MIN_LOG_LEVEL'] = str(tf.logging.__dict__[HYPER_PARAMS.verbosity] / 10)
+    # os.environ['TF_CPP_MIN_LOG_LEVEL'] = str(tf.compat.v1.logging.__dict__[HYPER_PARAMS.verbosity] / 10)
 
     # Directory to store output model and checkpoints
     model_dir = HYPER_PARAMS.job_dir
@@ -257,13 +256,13 @@ def run_deep_recsys(args):
     )
 
     run_config = run_config.replace(model_dir=model_dir)
-    tf.logging.info(("Model Directory:", run_config.model_dir))
+    tf.compat.v1.logging.info(("Model Directory:", run_config.model_dir))
 
     # Run the train and evaluate experiment
     time_start = datetime.utcnow()
-    tf.logging.info("")
-    tf.logging.info(("Experiment started at {}".format(time_start.strftime("%H:%M:%S"))))
-    tf.logging.info(".......................................")
+    tf.compat.v1.logging.info("")
+    tf.compat.v1.logging.info(("Experiment started at {}".format(time_start.strftime("%H:%M:%S"))))
+    tf.compat.v1.logging.info(".......................................")
 
     if HYPER_PARAMS.train:
         clean_job_dir()
@@ -274,12 +273,12 @@ def run_deep_recsys(args):
         predict_instances(run_config)
 
     time_end = datetime.utcnow()
-    tf.logging.info(".......................................")
-    tf.logging.info(("Experiment finished at {}".format(time_end.strftime("%H:%M:%S"))))
-    tf.logging.info("")
+    tf.compat.v1.logging.info(".......................................")
+    tf.compat.v1.logging.info(("Experiment finished at {}".format(time_end.strftime("%H:%M:%S"))))
+    tf.compat.v1.logging.info("")
     time_elapsed = time_end - time_start
-    tf.logging.info(("Experiment elapsed time: {} seconds".format(time_elapsed.total_seconds())))
-    tf.logging.info("")
+    tf.compat.v1.logging.info(("Experiment elapsed time: {} seconds".format(time_elapsed.total_seconds())))
+    tf.compat.v1.logging.info("")
 
 
 def initialise_hyper_params(args_parser):
@@ -296,35 +295,35 @@ def initialise_hyper_params(args_parser):
     args_parser.add_argument(
         '--train-files',
         help='GCS or local paths to training datasets',
-        nargs='+',
+        #nargs='+',
         # required=True,
         type=lambda x: os.path.expanduser(x)
     )
     args_parser.add_argument(
         '--eval-files',
         help='GCS or local paths to metrics datasets',
-        nargs='+',
+        #nargs='+',
         # required=True,
         type=lambda x: os.path.expanduser(x)
     )
     args_parser.add_argument(
-        '--tests-files',
+        '--test-files',
         help='GCS or local paths to tests datasets',
-        nargs='+',
+        #nargs='+',
         # required=True,
         type=lambda x: os.path.expanduser(x)
     )
     args_parser.add_argument(
         '--predict-files',
         help='GCS or local paths to predict datasets',
-        nargs='+',
+        #nargs='+',
         # required=True,
         type=lambda x: os.path.expanduser(x)
     )
     args_parser.add_argument(
         '--feature-stats-file',
         help='GCS or local paths to feature statistics json file',
-        nargs='+',
+        #nargs='+',
         default=None
     )
     args_parser.add_argument(
@@ -661,6 +660,12 @@ if __name__ == '__main__':
     initialise_hyper_params(subparser)
     subparser.add_argument('--estimator', default='bilstm')
     subparser.set_defaults(func=run_deep_recsys)
+
+    subparser = subparsers.add_parser('mf')
+    initialise_hyper_params(subparser)
+    subparser.add_argument('--estimator', default='mf')
+    subparser.set_defaults(func=run_deep_recsys)
+
 
     HYPER_PARAMS = parser.parse_args()
     HYPER_PARAMS.func(HYPER_PARAMS)

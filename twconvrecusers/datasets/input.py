@@ -83,25 +83,25 @@ def parse_tf_example(example_proto, HYPER_PARAMS, is_serving=False, mode=tfc.lea
     feature_spec = {}
 
     for feature_name, dimension, dtype in metadata.get_input_features():
-        feature_spec[feature_name] = tf.FixedLenFeature(shape=dimension, dtype=dtype)
+        feature_spec[feature_name] = tf.io.FixedLenFeature(shape=dimension, dtype=dtype)
 
     for feature_name in metadata.INPUT_CATEGORICAL_FEATURES:
-        feature_spec[feature_name] = tf.FixedLenFeature(shape=1, dtype=tf.string)
+        feature_spec[feature_name] = tf.io.FixedLenFeature(shape=1, dtype=tf.string)
         
     if mode == tfc.learn.ModeKeys.EVAL:
         num_distractors = HYPER_PARAMS.num_distractors
         for i in range(num_distractors):
             feature_name = 'distractor_{}'.format(i)
             feature_name_len = 'distractor_{}_len'.format(i)
-            feature_spec[feature_name] = tf.FixedLenFeature(shape=metadata.get_text_feature_size(), dtype=tf.int64)
-            feature_spec[feature_name_len] = tf.FixedLenFeature(shape=1, dtype=tf.int64)
+            feature_spec[feature_name] = tf.io.FixedLenFeature(shape=metadata.get_text_feature_size(), dtype=tf.int64)
+            feature_spec[feature_name_len] = tf.io.FixedLenFeature(shape=1, dtype=tf.int64)
 
     if not is_serving:
         if mode == tfc.learn.ModeKeys.TRAIN:
-            feature_spec[metadata.TARGET_FEATURE[0]] = tf.FixedLenFeature(shape=metadata.TARGET_FEATURE[1], dtype=
+            feature_spec[metadata.TARGET_FEATURE[0]] = tf.io.FixedLenFeature(shape=metadata.TARGET_FEATURE[1], dtype=
             metadata.TARGET_FEATURE[2])
 
-    parsed_features = tf.parse_example(serialized=[example_proto], features=feature_spec)
+    parsed_features = tf.io.parse_example(serialized=[example_proto], features=feature_spec)
 
     return parsed_features
 
@@ -224,7 +224,7 @@ def posprocessing(features, target, mode, HYPER_PARAMS):
         all_utterances_len = tf.concat(all_utterances_len, 0)
         all_targets = tf.concat(all_targets, 0)
 
-        # all_targets = tf.tf.logging.info(all_targets, [all_targets], summarize=100)
+        # all_targets = tf.tf.compat.v1.logging.info(all_targets, [all_targets], summarize=100)
         
         features = {}
         features['context'] = all_context
@@ -278,19 +278,19 @@ def generate_input_fn(file_names_pattern,
 
         buffer_size = 2 * batch_size + 1
 
-        tf.logging.info("")
-        tf.logging.info("* datasets input_fn:")
-        tf.logging.info("================")
-        tf.logging.info(("Mode: {}".format(mode)))
-        tf.logging.info(("Input file(s): {}".format(file_names_pattern)))
-        tf.logging.info(("Files encoding: {}".format(file_encoding)))
-        tf.logging.info(("Data size: {}".format(data_size)))
-        tf.logging.info(("Batch size: {}".format(batch_size)))
-        tf.logging.info(("Epoch count: {}".format(num_epochs)))
-        tf.logging.info(("Thread count: {}".format(num_threads)))
-        tf.logging.info(("Shuffle: {}".format(shuffle)))
-        tf.logging.info("================")
-        tf.logging.info("")
+        tf.compat.v1.logging.info("")
+        tf.compat.v1.logging.info("* datasets input_fn:")
+        tf.compat.v1.logging.info("================")
+        tf.compat.v1.logging.info(("Mode: {}".format(mode)))
+        tf.compat.v1.logging.info(("Input file(s): {}".format(file_names_pattern)))
+        tf.compat.v1.logging.info(("Files encoding: {}".format(file_encoding)))
+        tf.compat.v1.logging.info(("Data size: {}".format(data_size)))
+        tf.compat.v1.logging.info(("Batch size: {}".format(batch_size)))
+        tf.compat.v1.logging.info(("Epoch count: {}".format(num_epochs)))
+        tf.compat.v1.logging.info(("Thread count: {}".format(num_threads)))
+        tf.compat.v1.logging.info(("Shuffle: {}".format(shuffle)))
+        tf.compat.v1.logging.info("================")
+        tf.compat.v1.logging.info("")
 
         file_names = tf.io.matching_files(file_names_pattern)
 
@@ -352,11 +352,11 @@ def load_feature_stats(HYPER_PARAMS):
             with tf.gfile.Open(HYPER_PARAMS.feature_stats_file) as file:
                 content = file.read()
             feature_stats = json.loads(content)
-            tf.logging.info("feature stats were successfully loaded from local file...")
+            tf.compat.v1.logging.info("feature stats were successfully loaded from local file...")
         else:
-            tf.logging.warn("feature stats file not found. numerical columns will not be normalised...")
+            tf.compat.v1.logging.warn("feature stats file not found. numerical columns will not be normalised...")
     except:
-        tf.logging.warn("couldn't load feature stats. numerical columns will not be normalised...")
+        tf.compat.v1.logging.warn("couldn't load feature stats. numerical columns will not be normalised...")
 
     return feature_stats
 
@@ -373,7 +373,7 @@ def json_serving_input_fn():
     inputs = {}
     
     # for feature_name, dimension, dtype in metadata.INPUT_FEATURES:
-    #     feature_spec[feature_name] = tf.FixedLenFeature(shape=dimension, dtype=dtype)
+    #     feature_spec[feature_name] = tf.io.FixedLenFeature(shape=dimension, dtype=dtype)
 
     for column in input_feature_columns:
         if column.name in metadata.INPUT_CATEGORICAL_FEATURE_NAMES_WITH_IDENTITY:
