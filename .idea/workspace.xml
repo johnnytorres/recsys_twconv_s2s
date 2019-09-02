@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c25c6c6-8cd1-4139-a355-a4f62ad57c3c" name="Default Changelist" comment="refactor project">
-      <change afterPath="$PROJECT_DIR$/twconvrecusers/models/nmf.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/experiments.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/experiments.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/models/mf.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/mf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/task.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -315,7 +312,7 @@
       <workItem from="1567048290563" duration="1343000" />
       <workItem from="1567101525458" duration="9653000" />
       <workItem from="1567191407351" duration="159000" />
-      <workItem from="1567372941219" duration="14019000" />
+      <workItem from="1567372941219" duration="14493000" />
     </task>
     <task id="LOCAL-00001" summary="refactor project">
       <created>1562518129393</created>
@@ -371,11 +368,6 @@
           <url>file://$PROJECT_DIR$/twconvrecusers/models/mf.py</url>
           <line>57</line>
           <option name="timeStamp" value="68" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/twconvrecusers/models/nmf.py</url>
-          <line>35</line>
-          <option name="timeStamp" value="69" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

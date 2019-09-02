@@ -112,3 +112,24 @@ python -m twconvrecusers.task \
   --train \
   --test
 
+RESULTS_DIR=$DATA_DIR/staggingresults/nmf
+mkdir -p ${RESULTS_DIR}
+python -m twconvrecusers.task \
+  --data-dir=${DATA_STAGGING} \
+  --job-dir=${RESULTS_DIR} \
+  nmf \
+  --train-files=train.tfrecords \
+  --eval-files=valid.tfrecords \
+  --test-files=test.tfrecords \
+  --vocab-path=vocabulary.txt \
+  --num-distractors=9 \
+  --max-content-len=120 \
+  --max-utterance-len=120 \
+  --train-size=14575 \
+  --train-batch-size=64 \
+  --num-epochs=50 \
+  --eval-batch-size=128 \
+  --learning-rate=0.0001 \
+  --embedding-size=8 \
+  --train \
+  --test
