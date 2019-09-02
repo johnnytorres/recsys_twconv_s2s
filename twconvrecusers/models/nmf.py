@@ -19,19 +19,17 @@ def create_estimator(config, HYPER_PARAMS):
         )
 
         with tf.variable_scope('MF') as vs:
-            # dot product between the generated utterance and the actual utterance
-            context_embedded = tf.contrib.layers.flatten(context_embedded)
-            context_embedded = tf.expand_dims(context_embedded, -1)
-            utterance_embedded = tf.contrib.layers.flatten(utterance_embedded)
-            utterance_embedded = tf.expand_dims(utterance_embedded, -1)
-            logits = tf.matmul(context_embedded, utterance_embedded, transpose_a=True)
-            logits = tf.squeeze(logits, [2], name='conv_logits')
+            context_embedded = tf.keras.layers.Flatten()(context_embedded)
+            utterance_embedded = tf.keras.layers.Flatten()(utterance_embedded)
+            x = tf.keras.layers.Concatenate()([context_embedded, utterance_embedded])
+            x = tf.keras.layers.Dense(units=256)(x)
+            x = tf.keras.layers.Dense(units=128)(x)
+            x = tf.keras.layers.Dense(units=64)(x)
+            logits = tf.keras.layers.Dense(units=1)(x)
             return logits
 
     def _inference(features):
         """ compute the logits """
-        # context=features['context']
-        # utterance=features['utterance']
         context, contex_len = get_feature(
             features, 'context', 'context_len',
             HYPER_PARAMS.max_content_len)

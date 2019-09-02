@@ -105,11 +105,10 @@ python -m twconvrecusers.task \
   --max-utterance-len=120 \
   --train-size=14575 \
   --train-batch-size=64 \
-  --num-epochs=5 \
+  --num-epochs=100 \
   --eval-batch-size=128 \
   --learning-rate=0.0001 \
-  --embedding-size=300 \
-  --rnn-dim=300 \
+  --embedding-size=8 \
   --train \
   --test
 

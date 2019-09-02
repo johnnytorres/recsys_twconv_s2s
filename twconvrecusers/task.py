@@ -14,6 +14,7 @@ from twconvrecusers.datasets.csvreader import DataHandler
 from twconvrecusers.metrics.recall import RecallEvaluator
 from twconvrecusers.models import neural
 from twconvrecusers.models import mf
+from twconvrecusers.models import nmf
 from twconvrecusers.models.factory import get_model
 
 
@@ -131,6 +132,11 @@ def train_model(run_config):
 def get_estimator(run_config):
     if HYPER_PARAMS.estimator == "mf":
         estimator = mf.create_estimator(
+            config=run_config,
+            HYPER_PARAMS=HYPER_PARAMS
+        )
+    elif HYPER_PARAMS.estimator == "nmf":
+        estimator = nmf.create_estimator(
             config=run_config,
             HYPER_PARAMS=HYPER_PARAMS
         )
@@ -667,6 +673,11 @@ if __name__ == '__main__':
     subparser = subparsers.add_parser('mf')
     initialise_hyper_params(subparser)
     subparser.add_argument('--estimator', default='mf')
+    subparser.set_defaults(func=run_deep_recsys)
+
+    subparser = subparsers.add_parser('nmf')
+    initialise_hyper_params(subparser)
+    subparser.add_argument('--estimator', default='nmf')
     subparser.set_defaults(func=run_deep_recsys)
 
 
