@@ -294,38 +294,38 @@ def initialise_hyper_params(args_parser):
     # Data files arguments
     args_parser.add_argument(
         '--train-files',
-        help='GCS or local paths to training datasets',
+        help='GCS or local paths to training datasets, if data-dir is provided, the path is concatenated',
         #nargs='+',
         # required=True,
         type=lambda x: os.path.expanduser(x)
     )
     args_parser.add_argument(
         '--eval-files',
-        help='GCS or local paths to metrics datasets',
+        help='GCS or local paths to metrics datasets, if data-dir is provided, the path is concatenated',
         #nargs='+',
         # required=True,
         type=lambda x: os.path.expanduser(x)
     )
     args_parser.add_argument(
         '--test-files',
-        help='GCS or local paths to tests datasets',
+        help='GCS or local paths to tests datasets, if data-dir is provided, the path is concatenated',
         #nargs='+',
         # required=True,
         type=lambda x: os.path.expanduser(x)
     )
     args_parser.add_argument(
         '--predict-files',
-        help='GCS or local paths to predict datasets',
+        help='GCS or local paths to predict datasets, if data-dir is provided, the path is concatenated',
         #nargs='+',
         # required=True,
         type=lambda x: os.path.expanduser(x)
     )
-    args_parser.add_argument(
-        '--feature-stats-file',
-        help='GCS or local paths to feature statistics json file',
-        #nargs='+',
-        default=None
-    )
+    # args_parser.add_argument(
+    #     '--feature-stats-file',
+    #     help='GCS or local paths to feature statistics json file',
+    #     #nargs='+',
+    #     default=None
+    # )
     args_parser.add_argument(
         '--file-encoding',
         help='file encoding',
@@ -335,12 +335,12 @@ def initialise_hyper_params(args_parser):
 
     args_parser.add_argument(
         '--embedding-path',
-        help='Path to embeddings file',
+        help='Path to embeddings file, if data-dir is provided, the path is concatenated',
         type=lambda x: os.path.expanduser(x)
     )
     args_parser.add_argument(
         '--vocab-path',
-        help='Path to vocabulary file',
+        help='Path to vocabulary file, if data-dir is provided, the path is concatenated',
         type=lambda x: os.path.expanduser(x)
     )
 
@@ -390,7 +390,10 @@ def initialise_hyper_params(args_parser):
     # Experiment arguments - metrics
     args_parser.add_argument(
         '--eval-every-secs',
-        help='How long to wait before running the next metrics',
+        help="""\
+        How long to wait before running the next metrics,
+        default value of 1 will eval each checkpoint (only when new checkpoint is available)
+        """,
         default=1,
         type=int
     )
@@ -398,7 +401,7 @@ def initialise_hyper_params(args_parser):
         '--eval-steps',
         help="""\
         Number of steps to run metrics for at each checkpoint',
-        Set to None to evaluate on the whole metrics datasets
+        Set to None to evaluate on the whole evaluation or test set
         """,
         default=None,
         type=int

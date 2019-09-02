@@ -61,3 +61,23 @@ python -m twconvrecusers.task \
   --eval-every-secs=1 \
   --eval-batch-size=10 \
   --eval-steps=1
+
+
+# NEURAL MODELS
+
+# debug
+#--data-dir=~/data/twconv/trec/sampledata
+#--job-dir=~/data/twconv/trec/sampleresults/rnn
+#rnn
+#--train
+#--test
+#--force-tb-logs
+#--num-distractor=5
+#--max-content-len=10
+#--max-utterance-len=10
+#--train-steps=50
+#--train-batch-size=6
+#--num-epochs=1
+#--eval-every-secs=1
+#--eval-batch-size=20
+#--eval-steps=1
