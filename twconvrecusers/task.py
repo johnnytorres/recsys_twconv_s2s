@@ -626,7 +626,7 @@ def run_baseline_recsys(args):
     predictor = get_model(args)
     train, valid, test = data_handler.load_data(args.data_dir)
     predictor.train(train)
-    y_pred = [predictor.predict(row['context'], row[1:]) for ix, row in test.iterrows()]
+    y_pred = [predictor.predict(row[0], row[1:]) for ix, row in test.iterrows()]
     y_pred = np.array(y_pred)
     y_true = np.zeros(test.shape[0])
     metrics = RecallEvaluator.evaluate(y_true, y_pred)
