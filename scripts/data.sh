@@ -19,6 +19,7 @@ then
     unzip -d ${EMBEDDINGS_DIR} ${EMBEDDINGS_FILE}.zip
 fi
 
+#######################################################
 # PREPARE DATASETS
 # TREC datasets
 DATA_DIR=$BASE_DIR/twconv/trec
@@ -37,6 +38,36 @@ python -m twconvrecusers.datasets.tfrecords \
    --num_distractors=5 \
    --max_sentence_len=10
 
+
+DATA_STAGGING=${DATA_DIR}/staggingdata
+mkdir -p ${DATA_STAGGING}
+python -m twconvrecusers.datasets.tfrecords \
+   --input_dir=${DATA_STAGGING} \
+   --num_distractors=9 \
+   --max_sentence_len=120
+
+python -m twconvrecusers.datasets.embeddings \
+    ${DATA_STAGGING}/vocabulary.txt \
+    ${EMBEDDINGS_DIR}/crawl-300d-2M.vec
+
+
+##################################################################
+# ORIGINAL DATASETS
+
+ZIP_FILE=trec_original_v4.zip
+DATA_DIR=$BASE_DIR/microblog_conversation/trec
+mkdir -p ${DATA_DIR}
+URL=https://storage.googleapis.com/ml-research-datasets/convai/${ZIP_FILE}
+wget -O ${DATA_DIR}/${ZIP_FILE} $URL
+unzip -o ${DATA_DIR}/${ZIP_FILE}  -d ${DATA_DIR}
+
+
+DATA_DIR=$BASE_DIR/microblog_conversation/trec
+DATA_STAGGING=${DATA_DIR}/sampledata
+python -m twconvrecusers.datasets.tfrecords \
+   --input_dir=${DATA_STAGGING} \
+   --num_distractors=5 \
+   --max_sentence_len=10
 
 DATA_STAGGING=${DATA_DIR}/staggingdata
 mkdir -p ${DATA_STAGGING}
