@@ -1,7 +1,8 @@
 # exclude folders
-data/
+./data/
 embeddings/
 results/
+gcloud/
 *.DS_Store
 
 # Byte-compiled / optimized / DLL files

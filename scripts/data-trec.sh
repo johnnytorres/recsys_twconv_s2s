@@ -10,7 +10,7 @@ DATA_DIR=$BASE_DIR/twconv/2011_trec
 if [[ -d ${DATA_DIR} ]]; then rm -rf ${DATA_DIR};fi
 mkdir -p ${DATA_DIR}
 # download file
-ZIP_FILE=2011_trec.v2.zip
+ZIP_FILE=2011_trec.v3.zip
 URL=https://storage.googleapis.com/ml-research-datasets/twconv/${ZIP_FILE}
 wget -O ${DATA_DIR}/${ZIP_FILE} $URL
 unzip -o ${DATA_DIR}/${ZIP_FILE}  -d ${DATA_DIR}

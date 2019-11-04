@@ -64,19 +64,19 @@ unzip -o ${DATA_DIR}/${ZIP_FILE}  -d ${DATA_DIR}
 
 DATA_DIR=$BASE_DIR/microblog_conversation/trec
 DATA_STAGGING=${DATA_DIR}/sampledata
-python -m twconvrecusers.datasets.tfrecords \
+python -m twconvrecusers.data.tfrecords \
    --input_dir=${DATA_STAGGING} \
    --num_distractors=5 \
    --max_sentence_len=10
 
 DATA_STAGGING=${DATA_DIR}/staggingdata
 mkdir -p ${DATA_STAGGING}
-python -m twconvrecusers.datasets.tfrecords \
+python -m twconvrecusers.data.tfrecords \
    --input_dir=${DATA_STAGGING} \
    --num_distractors=9 \
    --max_sentence_len=120
 
-python -m twconvrecusers.datasets.embeddings \
+python -m twconvrecusers.data.embeddings \
     ${DATA_STAGGING}/vocabulary.txt \
     ${EMBEDDINGS_DIR}/crawl-300d-2M.vec
 

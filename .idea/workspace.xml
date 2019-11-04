@@ -2,23 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c25c6c6-8cd1-4139-a355-a4f62ad57c3c" name="Default Changelist" comment="refactor project">
-      <change afterPath="$PROJECT_DIR$/scripts/data-trec.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/crisis_conv_recusers.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/crisis_conv_recusers.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/cloud-config.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/experiments-local.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/eda_trec.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/eda_trec.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/experiments.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/experiments.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/datasets/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/datasets/csvreader.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/datasets/embeddings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/datasets/featurizer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/datasets/input.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/datasets/metadata.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/datasets/tfrecords.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/models/neural.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/neural.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/models/tfidf.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/models/tfidf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecusers/task.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/data-trec.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/data-trec.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/data.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/data.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/experiments.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/experiments-cloud.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +45,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/scripts" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -69,6 +60,12 @@
     <option name="myIpythonEnabled" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts" />
+      <recent name="$PROJECT_DIR$/twconvrecusers/datasets" />
+      <recent name="$PROJECT_DIR$/twconvrecusers/tests" />
+      <recent name="$PROJECT_DIR$/twconvrecusers/models" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/twconvrecusers/tests" />
       <recent name="$PROJECT_DIR$/twconvrecusers/models" />
@@ -76,14 +73,8 @@
       <recent name="$PROJECT_DIR$/twconvrecusers/evaluation" />
       <recent name="$PROJECT_DIR$/twconvrecusers" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/scripts" />
-      <recent name="$PROJECT_DIR$/twconvrecusers/datasets" />
-      <recent name="$PROJECT_DIR$/twconvrecusers/tests" />
-      <recent name="$PROJECT_DIR$/twconvrecusers/models" />
-    </key>
   </component>
-  <component name="RunManager" selected="Python.task -tfidf">
+  <component name="RunManager" selected="Python.tfrecords_builder">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="twittercs" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -357,7 +348,7 @@
       <workItem from="1572218661589" duration="8730000" />
       <workItem from="1572394341952" duration="1057000" />
       <workItem from="1572717660679" duration="180000" />
-      <workItem from="1572831908982" duration="1767000" />
+      <workItem from="1572831908982" duration="3312000" />
     </task>
     <task id="LOCAL-00001" summary="refactor project">
       <created>1562518129393</created>
@@ -407,10 +398,14 @@
     <option name="LAST_COMMIT_MESSAGE" value="refactor project" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1572832829722">
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1572837119082">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1572832829722" />
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1572837119082" />
+    <state x="426" y="260" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1572836272590">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="426" y="260" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1572836272590" />
     <state x="507" y="211" key="FileChooserDialogImpl" timestamp="1572218637811">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -453,6 +448,16 @@
           <url>file://$PROJECT_DIR$/twconvrecusers/models/neural.py</url>
           <line>252</line>
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/twconvrecusers/data/tfrecords.py</url>
+          <line>69</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/twconvrecusers/data/tfrecords.py</url>
+          <line>62</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
