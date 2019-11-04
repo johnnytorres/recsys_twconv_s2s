@@ -140,7 +140,7 @@ BASE_DIR=$HOME/data
 ####################################
 # ORIGINAL TREC DATASET
 
-DATA_DIR=$BASE_DIR/microblog_conversation/trec
+DATA_DIR=$BASE_DIR/twconv/2011_trec
 DATA_STAGGING=${DATA_DIR}/staggingdata
 
 RESULTS_DIR=$DATA_DIR/staggingresults/random

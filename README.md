@@ -1,30 +1,15 @@
-# recommending users to conversations
 
-experiments:
-
-## dataset: twconvusersec
-
-### model: twconvrsu_v1
-
-hyperparams:
-- workpunk tokenizer
-- no embeddings
-
-### model: twconvrsu_v2
-
-hyperparams:
-- workpunk tokenizer
-- embeddings
+# prepare the datasets
 
 
+# prepare the python virtual environment
+
+create the python virtual environment
+
+install prerequisites
+
+enable jupyter inside the virtual environment
+https://janakiev.com/blog/jupyter-virtual-envs/
 
 
-## future work
-
-- learning rate decays
-
-- embeddings sizes
-
-- ngrams
-
-- oov
+ 

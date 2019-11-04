@@ -9,8 +9,8 @@ from tqdm import tqdm
 import tensorflow as tf
 from tensorflow.python import debug as tf_debug
 
-from twconvrecusers.datasets import input, metadata
-from twconvrecusers.datasets.csvreader import DataHandler
+from twconvrecusers.data import input, metadata
+from twconvrecusers.data.csvreader import DataHandler
 from twconvrecusers.metrics.recall import RecallEvaluator
 from twconvrecusers.models import neural
 from twconvrecusers.models import mf
@@ -622,13 +622,16 @@ def initialise_hyper_params(args_parser):
 
 
 def run_baseline_recsys(args):
+    if not os.path.exists(args.job_dir):
+        os.makedirs(args.job_dir, exist_ok=True)
     data_handler = DataHandler()
     predictor = get_model(args)
     train, valid, test = data_handler.load_data(args.data_dir)
     predictor.train(train)
-    y_pred = [predictor.predict(row[0], row[1:]) for ix, row in test.iterrows()]
+    y_pred = [predictor.predict(row[0], row[2:]) for ix, row in test.iterrows()]
     y_pred = np.array(y_pred)
-    y_true = np.zeros(test.shape[0])
+    #y_true = np.zeros(test.shape[0])
+    y_true = test.gtix.values
     metrics = RecallEvaluator.evaluate(y_true, y_pred)
     print(metrics)
     # save predictions

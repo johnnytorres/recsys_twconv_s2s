@@ -8,7 +8,7 @@ import tensorflow.contrib as tfc
 from tensorflow.python.ops.losses import losses
 
 
-from twconvrecusers.datasets import embeddings, featurizer, metadata
+from twconvrecusers.data import embeddings, featurizer, metadata
 
 MODEL_RNN = 'rnn'
 MODEL_LSTM = 'lstm'
@@ -248,6 +248,12 @@ def metric_fn(HYPER_PARAMS, labels, predictions):
             concat_predictions,
             [concat_predictions, recall_labels],
             'calculating metric recall @k split probs',
+            summarize=10)
+
+        labels = tf.Print(
+            labels,
+            [labels],
+            'printing labels in metric recall @k ',
             summarize=10)
 
     # TODO: the k metrics depends of the number of distractors

@@ -2,7 +2,7 @@
 
 import numpy as np
 
-from twconvrecusers.datasets.csvreader import DataHandler
+from twconvrecusers.data.csvreader import DataHandler
 from twconvrecusers.metrics.recall import RecallEvaluator
 from sklearn.feature_extraction.text import TfidfVectorizer
 
