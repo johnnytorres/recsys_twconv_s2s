@@ -1,5 +1,5 @@
-from twconvrecusers.models.random import RandomConversationRecommender
-from twconvrecusers.models.tfidf import TfidfPredictor
+from twconvrecsys.models.random import RandomConversationRecommender
+from twconvrecsys.models.tfidf import TfidfPredictor
 
 
 def get_model(args):

@@ -74,7 +74,7 @@ def textfields_csv_iter(trainfile, testfile=None, validfile=None):
 			reader = csv.reader(csvfile)
 			# Skip the header
 			next(reader)
-			for row in tqdm(reader, f'{os.path.split(path)[1]}', total=num_lines):
+			for row in tqdm(reader, desc=os.path.split(path)[1], total=num_lines):
 				yield ' '.join([row[i] for i in fields])
 
 
@@ -84,7 +84,7 @@ def fields_csv_iter(trainfile):
 	with open(path) as csvfile:
 		reader = csv.reader(csvfile)
 		next(reader)
-		for row in tqdm(reader, f'{os.path.split(path)[1]}', total=num_lines):
+		for row in tqdm(reader, desc=os.path.split(path)[1], total=num_lines):
 			yield row
 
 
@@ -163,7 +163,7 @@ def create_example_test(row, vocab):
 
 
 def wccount(filename):
-	print(f'counting lines in file {filename}')
+	print('counting lines in file {}'.format(filename))
 	out = subprocess.Popen(['wc', '-l', filename],
 	                       stdout=subprocess.PIPE,
 	                       stderr=subprocess.STDOUT

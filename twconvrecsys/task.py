@@ -8,14 +8,15 @@ from tqdm import tqdm
 
 import tensorflow as tf
 from tensorflow.python import debug as tf_debug
+import keras
 
-from twconvrecusers.data import input, metadata
-from twconvrecusers.data.csvreader import DataHandler
-from twconvrecusers.metrics.recall import RecallEvaluator
-from twconvrecusers.models import neural
-from twconvrecusers.models import mf
-from twconvrecusers.models import nmf
-from twconvrecusers.models.factory import get_model
+from twconvrecsys.data import input, metadata
+from twconvrecsys.data.csvreader import DataHandler
+from twconvrecsys.metrics.recall import RecallEvaluator
+from twconvrecsys.models import neural
+from twconvrecsys.models import mf
+from twconvrecsys.models import nmf
+from twconvrecsys.models.factory import get_model
 
 
 def clean_job_dir():
@@ -176,7 +177,7 @@ def test_model(run_config):
 
     count = 0
     path = os.path.join(HYPER_PARAMS.job_dir, 'predictions.csv')
-    with open(path, 'w') as f:
+    with tf.io.gfile.GFile(path, 'w') as f:
         csvwriter = csv.writer(f)
         for instance_prediction in tqdm(predictions):
             #tf.compat.v1.logging.info(str(instance_prediction))
@@ -622,8 +623,19 @@ def initialise_hyper_params(args_parser):
 
 
 def run_baseline_recsys(args):
-    if not os.path.exists(args.job_dir):
+
+    if not args.job_dir.startswith('gs://') and not os.path.exists(args.job_dir):
         os.makedirs(args.job_dir, exist_ok=True)
+
+    if args.dataset_name == 'trec':
+        origin= "https://storage.googleapis.com/ml-research-datasets/twconv/2011_trec.v3.zip"
+        fname = "2011_trec.zip"
+        cache_subdir="datasets/twconv_2011_trec"
+        fpath = keras.utils.get_file(fname, origin, cache_subdir=cache_subdir, extract=True)
+        args.data_dir  = os.path.join( os.path.split(fpath)[0], 'sampledata')
+        # twconv/2011_trec/sampleresults/tfidf
+        args.job_dir = os.path.join( args.job_dir, 'recsys', 'twconv/2011_trec/sampleresults', args.estimator )
+
     data_handler = DataHandler()
     predictor = get_model(args)
     train, valid, test = data_handler.load_data(args.data_dir)
@@ -635,19 +647,21 @@ def run_baseline_recsys(args):
     metrics = RecallEvaluator.evaluate(y_true, y_pred)
     print(metrics)
     # save predictions
-    fname = os.path.join(args.job_dir, f'results_{args.estimator}.csv')
-    with open(fname, 'w') as f:
+    fname = os.path.join(args.job_dir, 'results_{}.csv'.format(args.estimator))
+
+    with tf.io.gfile.GFile(fname, 'w') as f:
         writer = csv.writer(f)
         writer.writerows(y_pred)
     print('done')
 
 
 if __name__ == '__main__':
+
     parser = argparse.ArgumentParser()
     parser.add_argument('--seed', type=int, default=1234) # for reproducibility
     parser.add_argument('--job-dir', required=True, type=lambda x: os.path.expanduser(x))
-    parser.add_argument('--data-dir', type=lambda x: os.path.expanduser(x))
-    #parser.add_argument('--estimator', choices=['random', 'tfidf'])
+    #parser.add_argument('--data-dir', type=lambda x: os.path.expanduser(x))
+    parser.add_argument('--dataset-name', type=str, default='trec')
     subparsers = parser.add_subparsers()
 
     subparser = subparsers.add_parser('random')
@@ -683,7 +697,5 @@ if __name__ == '__main__':
     subparser.add_argument('--estimator', default='nmf')
     subparser.set_defaults(func=run_deep_recsys)
 
-
     HYPER_PARAMS = parser.parse_args()
     HYPER_PARAMS.func(HYPER_PARAMS)
-    # main()

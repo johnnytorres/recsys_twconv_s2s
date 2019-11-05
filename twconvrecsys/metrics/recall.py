@@ -20,7 +20,7 @@ class RecallEvaluator:
 		metrics = []
 		for k in klist:
 			r = RecallEvaluator.calculate_recall(y_true, y_pred, k)
-			print(f'recall@({k}, {num_elements}): {r}')
+			print('recall@({}, {}): {}'.format(k, num_elements, r))
 			metrics.append(['recall', k, num_elements, r])
 		return metrics
 

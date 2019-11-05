@@ -1,13 +1,21 @@
 from setuptools import find_packages
 from setuptools import setup
 
-REQUIRED_PACKAGES = ['tensorflow>=1.7']
+REQUIRED_PACKAGES = [
+    'tensorflow==1.14.0',
+    'Keras==2.2.4',
+    'scikit-learn>=0.21',
+    'pandas>=0.24',
+    'tqdm>=4.32']
+
+# with open('requirements.txt','r') as f:
+#     REQUIRED_PACKAGES.append(f.readlines())
 
 setup(
-    name='',
-    version='',
+    name='twconvrecsys',
+    version='0.1',
     install_requires=REQUIRED_PACKAGES,
     packages=find_packages(),
     include_package_data=True,
-    description=''
+    description='twconvrecsys'
 )

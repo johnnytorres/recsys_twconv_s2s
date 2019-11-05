@@ -2,8 +2,8 @@
 
 import numpy as np
 
-from twconvrecusers.data.csvreader import DataHandler
-from twconvrecusers.metrics.recall import RecallEvaluator
+from twconvrecsys.data.csvreader import DataHandler
+from twconvrecsys.metrics.recall import RecallEvaluator
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 

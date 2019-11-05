@@ -22,17 +22,7 @@ import tensorflow as tf
 import tensorflow.contrib as tfc
 from tensorflow import data
 
-from twconvrecusers.data import featurizer, metadata
-
-
-#from twconvrecusers import task
-
-
-# HYPERPARAMS = None
-#
-# def set_hyperparams(hyperparams):
-#     global HYPERPARAMS
-#     HYPERPARAMS=hyperparams
+from twconvrecsys.data import featurizer, metadata
 
 # **************************************************************************
 # YOU NEED NOT TO CHANGE THESE FUNCTIONS TO PARSE THE INPUT RECORDS

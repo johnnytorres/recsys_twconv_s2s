@@ -18,7 +18,7 @@
 import tensorflow as tf
 from tensorflow.python.feature_column import feature_column
 
-from twconvrecusers.data import input, metadata
+from twconvrecsys.data import input, metadata
 
 
 # **************************************************************************
