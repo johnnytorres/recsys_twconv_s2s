@@ -628,11 +628,11 @@ def run_baseline_recsys(args):
         os.makedirs(args.job_dir, exist_ok=True)
 
     if args.dataset_name == 'trec':
-        origin= "https://storage.googleapis.com/ml-research-datasets/twconv/2011_trec.v3.zip"
-        fname = "2011_trec.zip"
+        fname = "2011_trec.v4.zip"
+        origin= "https://storage.googleapis.com/ml-research-datasets/twconv/{}".format(fname)
         cache_subdir="datasets/twconv_2011_trec"
         fpath = keras.utils.get_file(fname, origin, cache_subdir=cache_subdir, extract=True)
-        args.data_dir  = os.path.join( os.path.split(fpath)[0], 'sampledata')
+        args.data_dir  = os.path.join( os.path.split(fpath)[0], 'staggingdata')
         # twconv/2011_trec/sampleresults/tfidf
         args.job_dir = os.path.join( args.job_dir, 'recsys', 'twconv/2011_trec/sampleresults', args.estimator )
 
@@ -640,10 +640,10 @@ def run_baseline_recsys(args):
     predictor = get_model(args)
     train, valid, test = data_handler.load_data(args.data_dir)
     predictor.train(train)
-    y_pred = [predictor.predict(row[0], row[2:]) for ix, row in test.iterrows()]
+    y_pred = [predictor.predict(row[0], row[1:-1]) for ix, row in test.iterrows()]
     y_pred = np.array(y_pred)
     #y_true = np.zeros(test.shape[0])
-    y_true = test.gtix.values
+    y_true = test.label.values
     metrics = RecallEvaluator.evaluate(y_true, y_pred)
     print(metrics)
     # save predictions

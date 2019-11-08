@@ -2,39 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c25c6c6-8cd1-4139-a355-a4f62ad57c3c" name="Default Changelist" comment="refactor project">
-      <change afterPath="$PROJECT_DIR$/twconvrecsys/models/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twconvrecsys/models/factory.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twconvrecsys/tests/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/crisis_conv_recusers.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/twconvrecsys.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/experiments-cloud.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/experiments-cloud.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/data/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/data/csvreader.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/data/csvreader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/data/embeddings.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/data/embeddings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/data/featurizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/data/featurizer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/data/input.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/data/input.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/data/metadata.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/data/metadata.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/data/tfrecords.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/data/tfrecords.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/metrics/recall.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/metrics/recall.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/data/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/models/factory.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/models/mf.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/models/mf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/models/neural.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/models/neural.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/models/nmf.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/models/nmf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/models/random.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/models/random.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/models/tfidf.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/models/tfidf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/task.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/tests/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/metrics/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/tests/inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/tests/inference.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/tests/latent_dirichlet_allocation_edward2.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/tests/latent_dirichlet_allocation_edward2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/tests/recall.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/tests/recall.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/tests/tf_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/tests/tf_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecusers/tests/tfrecords.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/tests/tfrecords.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecsys/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/task.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +37,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/twconvrecsys/metrics" />
@@ -295,22 +265,6 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
-    <configuration default="true" type="tests" factoryName="py.test">
-      <module name="twconvrecsys" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
     <list>
       <item itemvalue="Python.task -tfidf" />
       <item itemvalue="Python.tfrecords_builder" />
@@ -393,7 +347,10 @@
       <workItem from="1572831908982" duration="5543000" />
       <workItem from="1572894687900" duration="196000" />
       <workItem from="1572895627787" duration="27000" />
-      <workItem from="1572895690599" duration="12598000" />
+      <workItem from="1572895690599" duration="12646000" />
+      <workItem from="1573180514308" duration="1575000" />
+      <workItem from="1573238625025" duration="398000" />
+      <workItem from="1573241229462" duration="2019000" />
     </task>
     <task id="LOCAL-00001" summary="refactor project">
       <created>1562518129393</created>
@@ -443,10 +400,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="refactor project" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1572919139587">
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1573181197901">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1572919139587" />
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1573181197901" />
     <state x="426" y="260" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1572836272590">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -455,36 +412,44 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="408" y="193" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1440.900@0.0.1440.900" timestamp="1572895645411" />
+    <state width="1296" height="466" key="DebuggerActiveHint" timestamp="1573181216426">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1296" height="466" key="DebuggerActiveHint/0.0.1440.900@0.0.1440.900" timestamp="1573181216426" />
     <state x="507" y="211" key="FileChooserDialogImpl" timestamp="1572218637811">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="507" y="211" key="FileChooserDialogImpl/0.0.1440.900@0.0.1440.900" timestamp="1572218637811" />
-    <state width="1398" height="389" key="GridCell.Tab.0.bottom" timestamp="1572911004127">
+    <state width="1398" height="337" key="GridCell.Tab.0.bottom" timestamp="1573244861825">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="389" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1572911004127" />
-    <state width="1398" height="389" key="GridCell.Tab.0.center" timestamp="1572911004125">
+    <state width="1398" height="337" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1573244861825" />
+    <state width="1398" height="337" key="GridCell.Tab.0.center" timestamp="1573244861824">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="389" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1572911004125" />
-    <state width="1398" height="389" key="GridCell.Tab.0.left" timestamp="1572911004125">
+    <state width="1398" height="337" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1573244861824" />
+    <state width="1398" height="337" key="GridCell.Tab.0.left" timestamp="1573244861823">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="389" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1572911004125" />
-    <state width="1398" height="389" key="GridCell.Tab.0.right" timestamp="1572911004126">
+    <state width="1398" height="337" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1573244861823" />
+    <state width="1398" height="337" key="GridCell.Tab.0.right" timestamp="1573244861825">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="389" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1572911004126" />
+    <state width="1398" height="337" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1573244861825" />
     <state x="221" y="89" key="SettingsEditor" timestamp="1572218645292">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1572218645292" />
-    <state x="608" y="216" key="com.intellij.ide.util.TipDialog" timestamp="1572895692205">
+    <state x="608" y="224" key="com.intellij.ide.util.TipDialog" timestamp="1573238969331">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="608" y="216" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1572895692205" />
+    <state x="608" y="224" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1573238969331" />
     <state x="608" y="224" key="com.intellij.ide.util.TipDialog/0.23.1440.839@0.23.1440.839" timestamp="1572894744072" />
     <state x="608" y="216" key="com.intellij.ide.util.TipDialog/2880.1800" timestamp="1572052248725" />
+    <state x="346" y="146" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1573180897129">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="346" y="146" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1440.900@0.0.1440.900" timestamp="1573180897129" />
     <state x="175" y="159" width="847" height="554" key="find.popup" timestamp="1572911664825">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -518,6 +483,26 @@
           <line>636</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/twconvrecsys/data/tfrecords.py</url>
+          <line>137</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/twconvrecsys/data/tfrecords.py</url>
+          <line>77</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/twconvrecsys/data/tfrecords.py</url>
+          <line>84</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/twconvrecsys/task.py</url>
+          <line>638</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint enabled="true" type="python-exception">
@@ -535,6 +520,7 @@
     <SUITE FILE_PATH="coverage/twconvrecusers$tfrecords_builder.coverage" NAME="tfrecords_builder Coverage Results" MODIFIED="1566837650134" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
     <SUITE FILE_PATH="coverage/twconvrecusers$dialogs_builder.coverage" NAME="dialogs_builder Coverage Results" MODIFIED="1564315196823" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
     <SUITE FILE_PATH="coverage/recsys_deepconv$task__tfidf.coverage" NAME="task -tfidf Coverage Results" MODIFIED="1572910941793" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys" />
+    <SUITE FILE_PATH="coverage/twconvrecsys$task__tfidf.coverage" NAME="task -tfidf Coverage Results" MODIFIED="1573244861750" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys" />
     <SUITE FILE_PATH="coverage/crisis_conv_recusers$prepare_data.coverage" NAME="prepare_data Coverage Results" MODIFIED="1562447148991" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/convrecsys/preprocessing" />
     <SUITE FILE_PATH="coverage/crisis_conv_recusers$model_random.coverage" NAME="model_random Coverage Results" MODIFIED="1562446129085" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
     <SUITE FILE_PATH="coverage/twconvrecusers$profiles_builder.coverage" NAME="profiles_builder Coverage Results" MODIFIED="1563854659441" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecusers/preprocessing" />
