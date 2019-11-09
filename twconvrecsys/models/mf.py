@@ -30,13 +30,13 @@ def create_estimator(config, HYPER_PARAMS):
 
     def _inference(features):
         """ compute the logits """
-        # context=features['context']
-        # utterance=features['utterance']
+        # context=features['source']
+        # utterance=features['target']
         context, contex_len = get_feature(
-            features, 'context', 'context_len',
+            features, 'source', 'source_len',
             HYPER_PARAMS.max_content_len)
         utterance, utterance_len = get_feature(
-            features, 'utterance', 'utterance_len',
+            features, 'target', 'target_len',
             HYPER_PARAMS.max_utterance_len
         )
 

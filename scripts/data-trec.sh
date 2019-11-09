@@ -15,18 +15,18 @@ URL=https://storage.googleapis.com/ml-research-datasets/twconv/${ZIP_FILE}
 wget -O ${DATA_DIR}/${ZIP_FILE} $URL
 unzip -o ${DATA_DIR}/${ZIP_FILE}  -d ${DATA_DIR}
 
-DATA_STAGGING=${DATA_DIR}/sampledata
-python -m twconvrecusers.data.tfrecords \
-   --input_dir=${DATA_STAGGING} \
-   --num_distractors=5 \
-   --max_sentence_len=10
-
-DATA_STAGGING=${DATA_DIR}/staggingdata
-mkdir -p ${DATA_STAGGING}
-python -m twconvrecusers.data.tfrecords \
-   --input_dir=${DATA_STAGGING} \
-   --num_distractors=9 \
-   --max_sentence_len=120
+#DATA_STAGGING=${DATA_DIR}/sampledata
+#python -m twconvrecusers.data.tfrecords \
+#   --input_dir=${DATA_STAGGING} \
+#   --num_distractors=5 \
+#   --max_sentence_len=10
+#
+#DATA_STAGGING=${DATA_DIR}/staggingdata
+#mkdir -p ${DATA_STAGGING}
+#python -m twconvrecusers.data.tfrecords \
+#   --input_dir=${DATA_STAGGING} \
+#   --num_distractors=9 \
+#   --max_sentence_len=120
 
 #python -m twconvrecusers.data.embeddings \
 #    ${DATA_STAGGING}/vocabulary.txt \

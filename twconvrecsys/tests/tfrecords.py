@@ -76,8 +76,8 @@ def read_train_file():
 	# }
 	
 	feature_spec = {
-		'context': tf.io.FixedLenFeature(shape=160, dtype=tf.int64),
-		'utterance': tf.io.FixedLenFeature(shape=160, dtype=tf.int64),
+		'source': tf.io.FixedLenFeature(shape=160, dtype=tf.int64),
+		'target': tf.io.FixedLenFeature(shape=160, dtype=tf.int64),
 		'label': tf.io.FixedLenFeature(shape=1,dtype=tf.int64),
 	}
 	

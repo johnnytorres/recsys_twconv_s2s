@@ -13,14 +13,14 @@ class TfidfPredictor:
 
 	def train(self, train_set):
 		m = np.append(
-			train_set.context.values,
-			train_set.profile.values)
+			train_set.source.values,
+			train_set.target.values)
 		self.vectorizer.fit(m)
 
-	def predict(self, context, utterances):
-		context_vec = self.vectorizer.transform([context])
-		utterances_vec = self.vectorizer.transform(utterances)
-		result = np.dot(utterances_vec, context_vec.T)
+	def predict(self, source, targets):
+		source_vec = self.vectorizer.transform([source])
+		targets_vec = self.vectorizer.transform(targets)
+		result = np.dot(targets_vec, source_vec.T)
 		result = result.todense()
 		result = np.asarray(result)
 		result = result.flatten()

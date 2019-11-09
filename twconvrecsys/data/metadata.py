@@ -12,21 +12,28 @@ def get_text_feature_size():
 	return HYPER_PARAMS.max_content_len
 
 
+COL_SOURCE='source'
+COL_SOURCE_LEN='source_len'
+COL_TARGET='target'
+COL_TARGET_LEN='target_len'
+COL_LABEL = 'label'
+
+
 # A List of all the columns (header) present in the input datasets file(s) in order to parse it.
 # Note that, not all the columns present here will be input features to your model.
-HEADER = ['context', 'utterance', 'context_len', 'utterance_len', 'label']
+HEADER = [COL_SOURCE, COL_TARGET, COL_SOURCE_LEN, COL_TARGET_LEN, 'label']
 
 # List of the default values of all the columns present in the input datasets.
 # This helps decoding the datasets types of the columns.
 HEADER_DEFAULTS = []
 
 # List of the feature names of type int or float.
-INPUT_NUMERIC_FEATURE_NAMES = ['context', 'utterance', 'context_len', 'utterance_len']
+INPUT_NUMERIC_FEATURE_NAMES = [COL_SOURCE, COL_TARGET, COL_SOURCE_LEN, COL_TARGET_LEN]
 
 
 def get_input_numeric_features():
-	INPUT_NUMERIC_FEATURES = [('context', get_text_feature_size(), tf.int64), ('context_len', 1, tf.int64),
-	                          ('utterance', get_text_feature_size(), tf.int64), ('utterance_len', 1, tf.int64)]
+	INPUT_NUMERIC_FEATURES = [('source', get_text_feature_size(), tf.int64), ('source_len', 1, tf.int64),
+	                          ('target', get_text_feature_size(), tf.int64), ('target_len', 1, tf.int64)]
 	return INPUT_NUMERIC_FEATURES
 
 
@@ -56,15 +63,13 @@ INPUT_CATEGORICAL_FEATURE_NAMES = list(INPUT_CATEGORICAL_FEATURE_NAMES_WITH_IDEN
                                   + list(INPUT_CATEGORICAL_FEATURE_NAMES_WITH_VOCABULARY.keys()) \
                                   + list(INPUT_CATEGORICAL_FEATURE_NAMES_WITH_HASH_BUCKET.keys())
 
-INPUT_CATEGORICAL_FEATURES = []
-
 # List of all the input feature names to be used in the model.
 # This is programmatically created based on the previous inputs.
 INPUT_FEATURE_NAMES = INPUT_NUMERIC_FEATURE_NAMES + INPUT_CATEGORICAL_FEATURE_NAMES
 
 
 def get_input_features():
-	INPUT_FEATURES = get_input_numeric_features() + INPUT_CATEGORICAL_FEATURES
+	INPUT_FEATURES = get_input_numeric_features()
 	return INPUT_FEATURES
 
 
@@ -72,7 +77,6 @@ def get_input_features():
 WEIGHT_COLUMN_NAME = None
 
 # Target feature name (response or class variable).
-TARGET_NAME = 'label'
 TARGET_FEATURE = ('label', 1, tf.int64)
 
 # List of the class values (labels) in a classification datasets.

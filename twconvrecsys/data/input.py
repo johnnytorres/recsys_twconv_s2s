@@ -72,24 +72,22 @@ def parse_tf_example(example_proto, HYPER_PARAMS, is_serving=False, mode=tfc.lea
 
     feature_spec = {}
 
-    for feature_name, dimension, dtype in metadata.get_input_features():
-        feature_spec[feature_name] = tf.io.FixedLenFeature(shape=dimension, dtype=dtype)
-
-    for feature_name in metadata.INPUT_CATEGORICAL_FEATURES:
-        feature_spec[feature_name] = tf.io.FixedLenFeature(shape=1, dtype=tf.string)
-        
     if mode == tfc.learn.ModeKeys.EVAL:
-        num_distractors = HYPER_PARAMS.num_distractors
-        for i in range(num_distractors):
-            feature_name = 'distractor_{}'.format(i)
-            feature_name_len = 'distractor_{}_len'.format(i)
+        feature_spec['source'] = tf.io.FixedLenFeature(shape=metadata.get_text_feature_size(), dtype=tf.int64)
+        feature_spec['source_len'] = tf.io.FixedLenFeature(shape=1, dtype=tf.int64)
+        num_targets = HYPER_PARAMS.num_distractors + 1
+        for i in range(num_targets):
+            feature_name = 'target_{}'.format(i)
+            feature_name_len = 'target_{}_len'.format(i)
             feature_spec[feature_name] = tf.io.FixedLenFeature(shape=metadata.get_text_feature_size(), dtype=tf.int64)
             feature_spec[feature_name_len] = tf.io.FixedLenFeature(shape=1, dtype=tf.int64)
+        feature_spec[metadata.TARGET_FEATURE[0]] = tf.io.FixedLenFeature(shape=metadata.TARGET_FEATURE[1],dtype=metadata.TARGET_FEATURE[2])
+    else:
+        for feature_name, dimension, dtype in metadata.get_input_features():
+            feature_spec[feature_name] = tf.io.FixedLenFeature(shape=dimension, dtype=dtype)
 
-    if not is_serving:
-        if mode == tfc.learn.ModeKeys.TRAIN:
-            feature_spec[metadata.TARGET_FEATURE[0]] = tf.io.FixedLenFeature(shape=metadata.TARGET_FEATURE[1], dtype=
-            metadata.TARGET_FEATURE[2])
+        if not is_serving:
+            feature_spec[metadata.TARGET_FEATURE[0]] = tf.io.FixedLenFeature(shape=metadata.TARGET_FEATURE[1], dtype=metadata.TARGET_FEATURE[2])
 
     parsed_features = tf.io.parse_example(serialized=[example_proto], features=feature_spec)
 
@@ -112,45 +110,21 @@ def process_features(features, HYPER_PARAMS, mode = tfc.learn.ModeKeys.TRAIN):
         {string:tensors}: extended feature tensors dictionary
     """
 
-    # examples - given:
-    # 'x' and 'y' are two numeric features:
-    # 'alpha' and 'beta' are two categorical features
-    features['context']= tf.squeeze(features['context'], squeeze_dims=[0])
-    features['context_len'] = tf.squeeze(features['context_len'], squeeze_dims=[0])
-    features['utterance'] = tf.squeeze(features['utterance'], squeeze_dims=[0])
-    features['utterance_len'] = tf.squeeze(features['utterance_len'], squeeze_dims=[0])
-
     if mode == tfc.learn.ModeKeys.EVAL:
         num_distractors = HYPER_PARAMS.num_distractors
-        
-        for i in range(num_distractors):
-            feature_name = 'distractor_{}'.format(i)
-            feature_name_len = 'distractor_{}_len'.format(i)
+        features['source'] = tf.squeeze(features['source'], squeeze_dims=[0])
+        features['source_len'] = tf.squeeze(features['source_len'], squeeze_dims=[0])
+
+        for i in range(num_distractors+1):
+            feature_name = 'target_{}'.format(i)
+            feature_name_len = 'target_{}_len'.format(i)
             features[feature_name] = tf.squeeze(features[feature_name], squeeze_dims=[0])
             features[feature_name_len] = tf.squeeze(features[feature_name_len], squeeze_dims=[0])
-
-
-        
-        
-
-    # create new features using custom logic
-    # features['x_2'] = tf.pow(features['x'],2)
-    # features['y_2'] = tf.pow(features['y'], 2)
-    # features['xy'] = features['x'] * features['y']
-    # features['sin_x'] = tf.sin(features['x'])
-    # features['cos_y'] = tf.cos(features['x'])
-    # features['log_xy'] = tf.log(features['xy'])
-    # features['sqrt_xy'] = tf.sqrt(features['xy'])
-
-    # create boolean flags
-    # features['x_grt_y'] = tf.cast(features['x'] > features['y'], tf.int32)
-    # features['alpha_eq_beta'] = features['alpha'] == features['beta']
-
-    # add created features to metadata (if not already defined in metadata.py)
-    # CONSTRUCTED_NUMERIC_FEATURE_NAMES += ['x_2', 'y_2', 'xy', ....]
-    # CONSTRUCTED_CATEGORICAL_FEATURE_NAMES_WITH_IDENTITY['x_grt_y'] = 2
-    # CONSTRUCTED_CATEGORICAL_FEATURE_NAMES_WITH_IDENTITY['alpha_eq_beta'] = 2
-
+    else:
+        features['source'] = tf.squeeze(features['source'], squeeze_dims=[0])
+        features['source_len'] = tf.squeeze(features['source_len'], squeeze_dims=[0])
+        features['target'] = tf.squeeze(features['target'], squeeze_dims=[0])
+        features['target_len'] = tf.squeeze(features['target_len'], squeeze_dims=[0])
     return features
 
 
@@ -165,7 +139,7 @@ def get_features_target_tuple(features, mode=tfc.learn.ModeKeys.TRAIN):
 
     unused_features = list(set(metadata.HEADER) -
                            set(metadata.INPUT_FEATURE_NAMES) -
-                           {metadata.TARGET_NAME} -
+                           {metadata.COL_LABEL} -
                            {metadata.WEIGHT_COLUMN_NAME})
 
     # remove unused columns (if any)
@@ -173,10 +147,10 @@ def get_features_target_tuple(features, mode=tfc.learn.ModeKeys.TRAIN):
         features.pop(column, None)
         
     if mode == tfc.learn.ModeKeys.EVAL:
-        features[metadata.TARGET_NAME] = tf.zeros((1, 1), dtype=tf.int64, name=metadata.TARGET_NAME)
+        features[metadata.COL_LABEL] = tf.zeros((1, 1), dtype=tf.int64, name=metadata.COL_LABEL)
 
     # get target feature
-    target = features.pop(metadata.TARGET_NAME)
+    target = features.pop(metadata.COL_LABEL)
     target = tf.squeeze(target, squeeze_dims=[0])
 
 
@@ -187,41 +161,37 @@ def posprocessing(features, target, mode, HYPER_PARAMS):
     if mode == tfc.learn.ModeKeys.EVAL:
         num_distractors = HYPER_PARAMS.num_distractors
         
-        context = features['context']
-        context_len = features['context_len']
-        utterance = features['utterance']
-        utterance_len = features['utterance_len']
-        all_context = [context]
-        all_context_len = [context_len]
-        all_utterances = [utterance]
-        all_utterances_len = [utterance_len]
-        all_targets = [tf.ones((tf.shape(context)[0], 1), dtype=tf.int64)]
+        source = features['source']
+        source_len = features['source_len']
+        all_source = []
+        all_source_len = []
+        all_target = []
+        all_target_len = []
+        all_label = [] #tf.ones((tf.shape(source)[0], 1), dtype=tf.int64)
         
-        for i in range(num_distractors):
-            feature_name = 'distractor_{}'.format(i)
-            feature_name_len = 'distractor_{}_len'.format(i)
-            distractor = features[feature_name]
-            distractor_len = features[feature_name_len]
-            all_context.append(context)
-            all_context_len.append(context_len)
-            all_utterances.append(distractor)
-            all_utterances_len.append(distractor_len)
-            all_targets.append(tf.zeros((tf.shape(context)[0], 1), dtype=tf.int64))
+        for i in range(num_distractors+1):
+            feature_name = 'target_{}'.format(i)
+            feature_name_len = 'target_{}_len'.format(i)
+            target = features[feature_name]
+            target_len = features[feature_name_len]
+            all_source.append(source)
+            all_source_len.append(source_len)
+            all_target.append(target)
+            all_target_len.append(target_len)
+            all_label.append(tf.zeros((tf.shape(source)[0], 1), dtype=tf.int64))
         
-        all_context = tf.concat(all_context, 0)
-        all_context_len = tf.concat(all_context_len, 0)
-        all_utterances = tf.concat(all_utterances, 0)
-        all_utterances_len = tf.concat(all_utterances_len, 0)
-        all_targets = tf.concat(all_targets, 0)
+        all_source = tf.concat(all_source, 0)
+        all_source_len = tf.concat(all_source_len, 0)
+        all_target = tf.concat(all_target, 0)
+        all_target_len = tf.concat(all_target_len, 0)
+        all_label = tf.concat(all_label, 0)
 
-        # all_targets = tf.tf.compat.v1.logging.info(all_targets, [all_targets], summarize=100)
-        
         features = {}
-        features['context'] = all_context
-        features['context_len'] = all_context_len
-        features['utterance'] = all_utterances
-        features['utterance_len'] = all_utterances_len
-        target = all_targets
+        features['source'] = all_source
+        features['source_len'] = all_source_len
+        features['target'] = all_target
+        features['target_len'] = all_target_len
+        target = all_label
     
     return features, target
 
@@ -390,7 +360,7 @@ def csv_serving_input_fn():
 
     features = parse_csv(csv_row, is_serving=True)
 
-    unused_features = list(set(metadata.SERVING_COLUMNS) - set(metadata.INPUT_FEATURE_NAMES) - {metadata.TARGET_NAME})
+    unused_features = list(set(metadata.SERVING_COLUMNS) - set(metadata.INPUT_FEATURE_NAMES) - {metadata.COL_LABEL})
 
     # Remove unused columns (if any)
     for column in unused_features:
