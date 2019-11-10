@@ -233,15 +233,17 @@ def metric_fn(HYPER_PARAMS, labels, predictions):
     """
     metrics = {}
 
-    num_instances_recall = HYPER_PARAMS.num_distractors + 1
-    # probs = tf.tf.compat.v1.logging.info(predictions, [predictions], 'calculating metric recall @k predictions')
+    num_targets = HYPER_PARAMS.num_distractors + 1
 
     probs = predictions['logistic']
-
-    split_predictions = tf.split(probs, num_instances_recall, 0)
+    split_predictions = tf.split(probs, num_targets, 0)
     concat_predictions = tf.concat(split_predictions, 1)
 
-    recall_labels = tf.zeros(shape=(tf.shape(concat_predictions)[0], 1), dtype=tf.int64, name='recall_labels')
+    #recall_labels = tf.zeros(shape=(tf.shape(concat_predictions)[0], 1), dtype=tf.int64, name='recall_labels')
+    recall_labels = tf.to_int64(labels,name='ToInt64')
+    recall_labels = tf.split(recall_labels, num_targets, axis=0)
+    recall_labels = tf.concat(recall_labels, axis=1)
+    recall_labels = tf.argmax(recall_labels, axis=1)
 
     if HYPER_PARAMS.debug:
         concat_predictions = tf.Print(
@@ -260,9 +262,9 @@ def metric_fn(HYPER_PARAMS, labels, predictions):
     for k in [1, 2, 5]:  # , 10]:
         metric_name = "recall_at_%d" % k
         metrics[metric_name] = tf.compat.v1.metrics.recall_at_k(
-            recall_labels,
-            concat_predictions,
-            k,
+            labels=recall_labels,
+            predictions=concat_predictions,
+            k=k,
             name=metric_name
         )
 

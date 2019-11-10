@@ -146,8 +146,8 @@ def get_features_target_tuple(features, mode=tfc.learn.ModeKeys.TRAIN):
     for column in unused_features:
         features.pop(column, None)
         
-    if mode == tfc.learn.ModeKeys.EVAL:
-        features[metadata.COL_LABEL] = tf.zeros((1, 1), dtype=tf.int64, name=metadata.COL_LABEL)
+    # if mode == tfc.learn.ModeKeys.EVAL:
+    #     features[metadata.COL_LABEL] = tf.zeros((1, 1), dtype=tf.int64, name=metadata.COL_LABEL)
 
     # get target feature
     target = features.pop(metadata.COL_LABEL)
@@ -157,43 +157,48 @@ def get_features_target_tuple(features, mode=tfc.learn.ModeKeys.TRAIN):
     return features, target
 
 
-def posprocessing(features, target, mode, HYPER_PARAMS):
+def posprocessing(features, labels, mode, HYPER_PARAMS):
     if mode == tfc.learn.ModeKeys.EVAL:
         num_distractors = HYPER_PARAMS.num_distractors
         
-        source = features['source']
-        source_len = features['source_len']
-        all_source = []
-        all_source_len = []
-        all_target = []
-        all_target_len = []
-        all_label = [] #tf.ones((tf.shape(source)[0], 1), dtype=tf.int64)
+        sources = features['source']
+        sources_len = features['source_len']
+        all_sources = []
+        all_sources_len = []
+        all_targets = []
+        all_targets_len = []
+        all_labels = []
+        n_instances = num_distractors+1 #  distractors + ground truth
+        labels = tf.one_hot(labels,  depth=n_instances)
         
-        for i in range(num_distractors+1):
+        for i in range(n_instances):
+            all_sources.append(sources)
+            all_sources_len.append(sources_len)
+
             feature_name = 'target_{}'.format(i)
             feature_name_len = 'target_{}_len'.format(i)
             target = features[feature_name]
             target_len = features[feature_name_len]
-            all_source.append(source)
-            all_source_len.append(source_len)
-            all_target.append(target)
-            all_target_len.append(target_len)
-            all_label.append(tf.zeros((tf.shape(source)[0], 1), dtype=tf.int64))
+            all_targets.append(target)
+            all_targets_len.append(target_len)
+
+            current_labels = tf.gather(labels, i, axis=2)
+            all_labels.append(current_labels)
         
-        all_source = tf.concat(all_source, 0)
-        all_source_len = tf.concat(all_source_len, 0)
-        all_target = tf.concat(all_target, 0)
-        all_target_len = tf.concat(all_target_len, 0)
-        all_label = tf.concat(all_label, 0)
+        all_sources = tf.concat(all_sources, 0)
+        all_sources_len = tf.concat(all_sources_len, 0)
+        all_targets = tf.concat(all_targets, 0)
+        all_targets_len = tf.concat(all_targets_len, 0)
+        all_labels = tf.concat(all_labels, 0)
 
         features = {}
-        features['source'] = all_source
-        features['source_len'] = all_source_len
-        features['target'] = all_target
-        features['target_len'] = all_target_len
-        target = all_label
+        features['source'] = all_sources
+        features['source_len'] = all_sources_len
+        features['target'] = all_targets
+        features['target_len'] = all_targets_len
+        labels = all_labels
     
-    return features, target
+    return features, labels
 
 
 # **************************************************************************

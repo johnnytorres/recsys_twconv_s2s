@@ -87,7 +87,7 @@ def create_estimator(config, HYPER_PARAMS):
 
     estimator = tf.estimator.Estimator(model_fn=_model_fn, config=config)
 
-    estimator = tf.contrib.estimator.add_metrics(
+    estimator = tf.compat.v1.estimator.add_metrics(
         estimator,
         lambda labels, predictions: metric_fn(HYPER_PARAMS, labels, predictions) )
 
