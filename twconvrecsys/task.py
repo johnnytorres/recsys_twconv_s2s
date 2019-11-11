@@ -180,16 +180,14 @@ def test_model(run_config):
     path = os.path.join(HYPER_PARAMS.job_dir, 'predictions.csv')
     with tf.io.gfile.GFile(path, 'w') as f:
         csvwriter = csv.writer(f)
-        for instance_prediction in tqdm(predictions):
-            #tf.compat.v1.logging.info(str(instance_prediction))
+        for i, instance_prediction in enumerate(predictions):
             predictions_probs.append(instance_prediction['logistic'][0])
             count += 1
             if count % num_instances_recall == 0:
                 csvwriter.writerow(predictions_probs)
                 predictions_probs = []
-
-    # predictions_probs= np.split(predictions_probs, num_instances_recall, 0)
-    # predictions_probs = np.concatenate(predictions_probs, 1)
+            if count % 1000 == 0:
+                print('predicting {} instances'.format(count), end='\r')
 
 
 def predict_instances(run_config):
@@ -254,8 +252,8 @@ def run_deep_recsys(args):
     num_steps_for_checkpoint = int(HYPER_PARAMS.train_steps / HYPER_PARAMS.num_checkpoints)
 
     run_config = tf.estimator.RunConfig(
-        tf_random_seed=19830610,
-        save_checkpoints_steps=num_steps_for_checkpoint,  # TODO: allow to config this parameters
+        tf_random_seed=19830610,  # TODO: move to hyperparameters
+        save_checkpoints_steps=num_steps_for_checkpoint,  # TODO: move to hyperparameters
         log_step_count_steps=1,
         # save_checkpoints_secs=120,  #TODO: param to change if you want to change frequency of saving checkpoints
         #keep_checkpoint_max=3,
@@ -299,7 +297,7 @@ def run_baseline_recsys(args):
     y_true = test.label.values
     metrics = RecallEvaluator.evaluate(y_true, y_pred)
     print(metrics)
-    fname = os.path.join(args.job_dir, 'results_{}.csv'.format(args.estimator))
+    fname = os.path.join(args.job_dir, 'predictions.csv'.format(args.estimator))
     with tf.io.gfile.GFile(fname, 'w') as f:
         writer = csv.writer(f)
         writer.writerows(y_pred)
