@@ -14,6 +14,8 @@ class RecallEvaluator:
 
 	@staticmethod
 	def evaluate(y_true, y_pred):
+		y_pred = np.argsort(y_pred, axis=1)
+		y_pred = np.fliplr(y_pred)
 		num_elements = y_pred.shape[1]
 		klist = np.array( [1, 2, 5, 10])
 		klist = klist[klist < num_elements]

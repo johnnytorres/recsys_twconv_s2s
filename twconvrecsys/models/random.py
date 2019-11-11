@@ -1,16 +1,14 @@
 
 import numpy as np
 
+from twconvrecsys.models.base import BaseConversationRecommender
 
-class RandomConversationRecommender:
+
+class RandomConversationRecommender(BaseConversationRecommender):
 	def __init__(self):
-		pass
+		super().__init__()
 
-	def train(self, train_set):
-		pass
-
-	def predict(self, context, utterances):
-		n_utt = len(utterances)
+	def _predict(self, source, targets):
+		n_utt = len(targets)
 		return np.random.choice(n_utt, n_utt, replace=False)
-
 

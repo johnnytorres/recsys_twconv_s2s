@@ -292,8 +292,7 @@ def run_baseline_recsys(args):
     predictor = get_model(args)
     train, valid, test = data_handler.load_data(args.data_dir)
     predictor.train(train)
-    y_pred = [predictor.predict(row[0], row[1:-1]) for ix, row in test.iterrows()]
-    y_pred = np.array(y_pred)
+    y_pred = predictor.predict(test)
     y_true = test.label.values
     metrics = RecallEvaluator.evaluate(y_true, y_pred)
     print(metrics)
