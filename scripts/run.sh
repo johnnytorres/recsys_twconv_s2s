@@ -4,10 +4,10 @@ set -e
 
 RUNNER=local
 
-./scripts/experiments.sh ${RUNNER} 2011_trec random
-./scripts/experiments.sh ${RUNNER} 2011_trec tfidf
-./scripts/experiments.sh ${RUNNER} 2011_trec rnn
-./scripts/experiments.sh ${RUNNER} 2011_trec lstm
-./scripts/experiments.sh ${RUNNER} 2011_trec bilstm
-./scripts/experiments.sh ${RUNNER} 2011_trec mf
-./scripts/experiments.sh ${RUNNER} 2011_trec nmf
+./scripts/experiments.sh 2011_trec random ${RUNNER}
+./scripts/experiments.sh 2011_trec tfidf ${RUNNER}
+./scripts/experiments.sh 2011_trec rnn ${RUNNER}
+./scripts/experiments.sh 2011_trec lstm ${RUNNER}
+./scripts/experiments.sh 2011_trec bilstm ${RUNNER}
+./scripts/experiments.sh 2011_trec mf ${RUNNER}
+./scripts/experiments.sh 2011_trec nmf ${RUNNER}

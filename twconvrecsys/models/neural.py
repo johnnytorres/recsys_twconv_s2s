@@ -1,7 +1,7 @@
 
 import array
 from collections import defaultdict
-
+import sys
 import numpy as np
 import tensorflow as tf
 import tensorflow.contrib as tfc
@@ -235,35 +235,47 @@ def metric_fn(HYPER_PARAMS, labels, predictions):
 
     num_targets = HYPER_PARAMS.num_distractors + 1
 
-    probs = predictions['logistic']
-    split_predictions = tf.split(probs, num_targets, 0)
-    concat_predictions = tf.concat(split_predictions, 1)
+    probs = predictions['logits']
+
+    # instances_per_batch = tf.cast( tf.shape(probs)[0] / num_targets, dtype=tf.int32)
+    # instances_per_batch = tf.reshape( instances_per_batch, shape=(1,))
+    # #num_targets = tf.constant(num_targets, shape=(1), dtype=tf.int32)
+    #
+    # instances_per_split = tf.keras.backend.repeat_elements(instances_per_batch, num_targets, 0)
+    # print_op = tf.print("splits:", instances_per_split, output_stream=sys.stdout)
+    # with tf.control_dependencies([print_op]):
+    #     split_predictions = tf.split(probs, instances_per_split, axis=0)
+    #
+    # print_op = tf.print("split_predictions shape:", tf.shape(split_predictions), output_stream=sys.stdout )
+    # with tf.control_dependencies([print_op]):
+    #     concat_predictions = tf.concat(split_predictions, axis=1)
+
+    predictions_probs = tf.split(probs, num_targets, axis=0)
+    predictions_probs = tf.concat(predictions_probs, axis=1)
 
     #recall_labels = tf.zeros(shape=(tf.shape(concat_predictions)[0], 1), dtype=tf.int64, name='recall_labels')
-    recall_labels = tf.to_int64(labels,name='ToInt64')
+    recall_labels = tf.to_int32(labels,name='ToInt32')
     recall_labels = tf.split(recall_labels, num_targets, axis=0)
     recall_labels = tf.concat(recall_labels, axis=1)
     recall_labels = tf.argmax(recall_labels, axis=1)
 
-    if HYPER_PARAMS.debug:
-        concat_predictions = tf.Print(
-            concat_predictions,
-            [concat_predictions, recall_labels],
-            'calculating metric recall @k split probs',
-            summarize=10)
+    #if HYPER_PARAMS.debug:
+    # concat_predictions = tf.print(
+    #     concat_predictions,
+    #     [concat_predictions],
+    #     'calculating metric recall @k split probs',
+    #     summarize=1)
 
-        labels = tf.Print(
-            labels,
-            [labels],
-            'printing labels in metric recall @k ',
-            summarize=10)
 
     # TODO: the k metrics depends of the number of distractors
     for k in [1, 2, 5]:  # , 10]:
+        # print_op = tf.print("probs: ", predictions_probs, output_stream=sys.stdout)
+        # print_op2 = tf.print("labels: ", recall_labels, output_stream=sys.stdout)
+        # with tf.control_dependencies([print_op, print_op2]):
         metric_name = "recall_at_%d" % k
-        metrics[metric_name] = tf.compat.v1.metrics.recall_at_k(
+        metrics[metric_name] = tf.contrib.metrics.streaming_sparse_recall_at_k(
             labels=recall_labels,
-            predictions=concat_predictions,
+            predictions=predictions_probs,
             k=k,
             name=metric_name
         )

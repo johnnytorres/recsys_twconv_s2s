@@ -2,9 +2,9 @@
 # exit on error
 set -e
 
-RUNNER=$1
-DATASET_NAME=$2
-MODEL_NAME=$3 # change to your model name
+DATASET_NAME=$1
+MODEL_NAME=$2 # change to your model name
+RUNNER=$3
 BUCKET="jtresearchbucket"
 PACKAGE_NAME="twconvrecsys"
 JOB_DIR="gs://${BUCKET}/${PACKAGE_NAME}/${DATASET_NAME}/${MODEL_NAME}"

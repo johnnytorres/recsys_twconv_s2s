@@ -172,22 +172,23 @@ def test_model(run_config):
         name='tests'
     )
 
-    predictions = estimator.predict(input_fn=test_input_fn)
-    predictions_probs = []
-    num_instances_recall = HYPER_PARAMS.num_distractors + 1
-
-    count = 0
+    predictions = estimator.predict(input_fn=test_input_fn, yield_single_examples=False)
+    num_targets = HYPER_PARAMS.num_distractors + 1
     path = os.path.join(HYPER_PARAMS.job_dir, 'predictions.csv')
+
     with tf.io.gfile.GFile(path, 'w') as f:
         csvwriter = csv.writer(f)
-        for i, instance_prediction in enumerate(predictions):
-            predictions_probs.append(instance_prediction['logistic'][0])
-            count += 1
-            if count % num_instances_recall == 0:
-                csvwriter.writerow(predictions_probs)
-                predictions_probs = []
-            if count % 1000 == 0:
-                print('predicting {} instances'.format(count), end='\r')
+        for i, instance_prediction in enumerate(predictions, start=1):
+            probs = instance_prediction['logits']
+            probs = np.split(probs, num_targets, 0)
+            probs = np.array(probs)
+            probs = np.concatenate(probs, axis=1)
+            probs = probs.tolist()
+            # if i % num_instances == 0:
+            print(len(probs))
+            csvwriter.writerows(probs)
+            # if i % 1000 == 0:
+            #     print('predicting {} instances'.format(i), end='\r')
 
 
 def predict_instances(run_config):
