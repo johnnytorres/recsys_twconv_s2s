@@ -267,14 +267,21 @@ def initialise_params(args_parser):
     )
 
     args_parser.add_argument(
-        '--max-content-len',
+        '--max-input-len',
         help='Truncate conversations contexts to this length',
         default=160,
         type=int
     )
 
     args_parser.add_argument(
-        '--max-utterance-len',
+        '--max-source-len',
+        help='Truncate conversations contexts to this length',
+        default=160,
+        type=int
+    )
+
+    args_parser.add_argument(
+        '--max-target-len',
         help='Truncate users utterance to this length',
         default=160,
         type=int

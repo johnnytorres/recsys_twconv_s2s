@@ -34,10 +34,10 @@ def create_estimator(config, HYPER_PARAMS):
         # utterance=features['target']
         context, contex_len = get_feature(
             features, 'source', 'source_len',
-            HYPER_PARAMS.max_content_len)
+            HYPER_PARAMS.max_source_len)
         utterance, utterance_len = get_feature(
             features, 'target', 'target_len',
-            HYPER_PARAMS.max_utterance_len
+            HYPER_PARAMS.max_target_len
         )
 
         return _matrix_factorization(context, utterance, contex_len, utterance_len)

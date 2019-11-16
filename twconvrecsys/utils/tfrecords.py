@@ -67,7 +67,7 @@ def read_train_file():
 	import tensorflow as tf
 	tf.enable_eager_execution()
 	
-	reader = tf.python_io.tf_record_iterator('/users/johnny/datasets/ubuntu/ubuntu_small/example.tfrecords')
+	reader = tf.python_io.tf_record_iterator('/Users/johnnytorres/data/twconv/2011_trec/sampledata/train.tfrecords')
 	
 	# feature_spec = {
 	# 	'my_ints': tf.io.FixedLenFeature(shape=[], dtype=tf.int64),

@@ -236,36 +236,13 @@ def metric_fn(HYPER_PARAMS, labels, predictions):
     num_targets = HYPER_PARAMS.num_distractors + 1
 
     probs = predictions['logits']
-
-    # instances_per_batch = tf.cast( tf.shape(probs)[0] / num_targets, dtype=tf.int32)
-    # instances_per_batch = tf.reshape( instances_per_batch, shape=(1,))
-    # #num_targets = tf.constant(num_targets, shape=(1), dtype=tf.int32)
-    #
-    # instances_per_split = tf.keras.backend.repeat_elements(instances_per_batch, num_targets, 0)
-    # print_op = tf.print("splits:", instances_per_split, output_stream=sys.stdout)
-    # with tf.control_dependencies([print_op]):
-    #     split_predictions = tf.split(probs, instances_per_split, axis=0)
-    #
-    # print_op = tf.print("split_predictions shape:", tf.shape(split_predictions), output_stream=sys.stdout )
-    # with tf.control_dependencies([print_op]):
-    #     concat_predictions = tf.concat(split_predictions, axis=1)
-
     predictions_probs = tf.split(probs, num_targets, axis=0)
     predictions_probs = tf.concat(predictions_probs, axis=1)
 
-    #recall_labels = tf.zeros(shape=(tf.shape(concat_predictions)[0], 1), dtype=tf.int64, name='recall_labels')
     recall_labels = tf.to_int32(labels,name='ToInt32')
     recall_labels = tf.split(recall_labels, num_targets, axis=0)
     recall_labels = tf.concat(recall_labels, axis=1)
     recall_labels = tf.argmax(recall_labels, axis=1)
-
-    #if HYPER_PARAMS.debug:
-    # concat_predictions = tf.print(
-    #     concat_predictions,
-    #     [concat_predictions],
-    #     'calculating metric recall @k split probs',
-    #     summarize=1)
-
 
     # TODO: the k metrics depends of the number of distractors
     for k in [1, 2, 5]:  # , 10]:
@@ -299,7 +276,7 @@ def metric_fn(HYPER_PARAMS, labels, predictions):
 
 def create_estimator(config, HYPER_PARAMS):
 
-    def _dual_encoder(context, utterance, context_len, utterance_len):
+    def _inference_model(context, utterance, context_len, utterance_len):
         """ Create the model structure and compute the logits """
         embeddings_layer = build_embedding_layer(HYPER_PARAMS)
         # embed the context and utterances
@@ -388,13 +365,13 @@ def create_estimator(config, HYPER_PARAMS):
         # utterance=features['target']
         context, contex_len = get_feature(
             features, 'source', 'source_len',
-            HYPER_PARAMS.max_content_len)
+            HYPER_PARAMS.max_source_len)
         utterance, utterance_len = get_feature(
             features, 'target', 'target_len',
-            HYPER_PARAMS.max_utterance_len
+            HYPER_PARAMS.max_target_len
         )
 
-        return _dual_encoder(context, utterance, contex_len, utterance_len)
+        return _inference_model(context, utterance, contex_len, utterance_len)
 
     def _train_op_fn(loss):
         """Returns the op to optimize the loss."""

@@ -22,9 +22,9 @@ def create_estimator(config, HYPER_PARAMS):
             context_embedded = tf.keras.layers.Flatten()(context_embedded)
             utterance_embedded = tf.keras.layers.Flatten()(utterance_embedded)
             x = tf.keras.layers.Concatenate()([context_embedded, utterance_embedded])
-            x = tf.keras.layers.Dense(units=256)(x)
             x = tf.keras.layers.Dense(units=128)(x)
             x = tf.keras.layers.Dense(units=64)(x)
+            x = tf.keras.layers.Dense(units=32)(x)
             logits = tf.keras.layers.Dense(units=1)(x)
             return logits
 
@@ -32,10 +32,10 @@ def create_estimator(config, HYPER_PARAMS):
         """ compute the logits """
         context, contex_len = get_feature(
             features, 'source', 'source_len',
-            HYPER_PARAMS.max_content_len)
+            HYPER_PARAMS.max_source_len)
         utterance, utterance_len = get_feature(
             features, 'target', 'target_len',
-            HYPER_PARAMS.max_utterance_len
+            HYPER_PARAMS.max_target_len
         )
 
         return _matrix_factorization(context, utterance, contex_len, utterance_len)

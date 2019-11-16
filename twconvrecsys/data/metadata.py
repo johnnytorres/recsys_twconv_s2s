@@ -9,7 +9,7 @@ HYPER_PARAMS = None
 
 def get_text_feature_size():
 	# TEXT_FEATURE_SIZE = 160
-	return HYPER_PARAMS.max_content_len
+	return HYPER_PARAMS.max_input_len
 
 
 COL_SOURCE='source'

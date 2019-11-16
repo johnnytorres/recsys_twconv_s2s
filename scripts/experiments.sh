@@ -5,6 +5,9 @@ set -e
 DATASET_NAME=$1
 MODEL_NAME=$2 # change to your model name
 RUNNER=$3
+
+echo $EMBEDDING_SIZE
+
 BUCKET="jtresearchbucket"
 PACKAGE_NAME="twconvrecsys"
 JOB_DIR="gs://${BUCKET}/${PACKAGE_NAME}/${DATASET_NAME}/${MODEL_NAME}"
@@ -35,16 +38,16 @@ if [ "${RUNNER}" == "gcloud" ]
 					--eval-files=valid.tfrecords \
 					--test-files=test.tfrecords \
 					--vocab-path=vocabulary.txt \
-					--num-distractors=9 \
-					--max-content-len=120 \
-					--max-utterance-len=120 \
-					--train-size=20385 \
-					--train-batch-size=64 \
-					--num-epochs=15 \
-					--eval-batch-size=128 \
-					--learning-rate=0.0001 \
-					--embedding-size=300 \
-					--rnn-dim=300 \
+					--num-distractors=${NUM_DISTRACTORS} \
+					--max-source-len=${MAX_SOURCE_LEN} \
+					--max-target-len=${MAX_TARGET_LEN} \
+					--train-size=${TRAIN_SIZE} \
+					--train-batch-size=${TRAIN_BATCH_SIZE} \
+					--num-epochs=${NUM_EPOCHS} \
+					--eval-batch-size=${EVAL_BATCH_SIZE} \
+					--learning-rate=${LEARNING_RATE} \
+					--embedding-size=${EMBEDDING_SIZE} \
+					--rnn-dim=${RNN_DIM} \
 					--train \
 					--test
 else
@@ -62,16 +65,16 @@ else
 				--eval-files=valid.tfrecords \
 				--test-files=test.tfrecords \
 				--vocab-path=vocabulary.txt \
-				--num-distractors=9 \
-				--max-content-len=120 \
-				--max-utterance-len=120 \
-				--train-size=20385 \
-				--train-batch-size=64 \
-				--num-epochs=15 \
-				--eval-batch-size=128 \
-				--learning-rate=0.0001 \
-				--embedding-size=300 \
-				--rnn-dim=300 \
+				--num-distractors=${NUM_DISTRACTORS} \
+				--max-source-len=${MAX_SOURCE_LEN} \
+				--max-target-len=${MAX_TARGET_LEN} \
+				--train-size=${TRAIN_SIZE} \
+				--train-batch-size=${TRAIN_BATCH_SIZE} \
+				--num-epochs=${NUM_EPOCHS} \
+				--eval-batch-size=${EVAL_BATCH_SIZE} \
+				--learning-rate=${LEARNING_RATE} \
+				--embedding-size=${EMBEDDING_SIZE} \
+				--rnn-dim=${RNN_DIM} \
 				--train \
 				--test
 	else
@@ -84,16 +87,16 @@ else
 				--eval-files=valid.tfrecords \
 				--test-files=test.tfrecords \
 				--vocab-path=vocabulary.txt \
-				--num-distractors=9 \
-				--max-content-len=120 \
-				--max-utterance-len=120 \
-				--train-size=20385 \
-				--train-batch-size=64 \
-				--num-epochs=15 \
-				--eval-batch-size=128 \
-				--learning-rate=0.0001 \
-				--embedding-size=300 \
-				--rnn-dim=300 \
+				--num-distractors=${NUM_DISTRACTORS} \
+				--max-source-len=${MAX_SOURCE_LEN} \
+				--max-target-len=${MAX_TARGET_LEN} \
+				--train-size=${TRAIN_SIZE} \
+				--train-batch-size=${TRAIN_BATCH_SIZE} \
+				--num-epochs=${NUM_EPOCHS} \
+				--eval-batch-size=${EVAL_BATCH_SIZE} \
+				--learning-rate=${LEARNING_RATE} \
+				--embedding-size=${EMBEDDING_SIZE} \
+				--rnn-dim=${RNN_DIM} \
 				--train \
 				--test
 	fi
