@@ -322,8 +322,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--seed', type=int, default=1234) # for reproducibility
     parser.add_argument('--job-dir', required=True, type=lambda x: os.path.expanduser(x))
-    parser.add_argument('--data-dir', type=lambda x: os.path.expanduser(x))
-    parser.add_argument('--dataset-name', type=str, default=DatasetNames.TREC, choices=[DatasetNames.TREC])
+    parser.add_argument('--data-dir', type=str, help='it can be a local/gcloud path or name')
     initialise_params(parser)
     HYPER_PARAMS = parser.parse_args()
     run(HYPER_PARAMS)

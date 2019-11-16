@@ -22,7 +22,7 @@ def create_estimator(config, HYPER_PARAMS):
             context_embedded = tf.keras.layers.Flatten()(context_embedded)
             utterance_embedded = tf.keras.layers.Flatten()(utterance_embedded)
             x = tf.keras.layers.Concatenate()([context_embedded, utterance_embedded])
-            x = tf.keras.layers.Dense(units=128)(x)
+            #x = tf.keras.layers.Dense(units=128)(x)
             x = tf.keras.layers.Dense(units=64)(x)
             x = tf.keras.layers.Dense(units=32)(x)
             logits = tf.keras.layers.Dense(units=1)(x)

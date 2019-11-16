@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c25c6c6-8cd1-4139-a355-a4f62ad57c3c" name="Default Changelist" comment="refactor project">
-      <change afterPath="$PROJECT_DIR$/scripts/experiments-nmf.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/experiments-nmf.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/experiments-nmf.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/experiments.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/experiments.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/run.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecsys/data/metadata.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/data/metadata.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecsys/models/mf.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/models/mf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecsys/models/neural.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/models/neural.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecsys/data/datasets.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/data/datasets.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/twconvrecsys/models/nmf.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/models/nmf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecsys/parameters.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/parameters.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecsys/utils/tfrecords.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/utils/tfrecords.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecsys/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/task.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -574,7 +570,7 @@
       <workItem from="1573839112677" duration="1885000" />
       <workItem from="1573843116916" duration="7226000" />
       <workItem from="1573861226560" duration="12000" />
-      <workItem from="1573861498991" duration="21448000" />
+      <workItem from="1573861498991" duration="26332000" />
     </task>
     <task id="LOCAL-00001" summary="refactor project">
       <created>1562518129393</created>
@@ -661,25 +657,25 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="507" y="211" key="FileChooserDialogImpl/0.0.1440.900@0.0.1440.900" timestamp="1572218637811" />
-    <state width="1398" height="330" key="GridCell.Tab.0.bottom" timestamp="1573931070840">
+    <state width="1398" height="330" key="GridCell.Tab.0.bottom" timestamp="1573931351880">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="330" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1573931070840" />
+    <state width="1398" height="330" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1573931351880" />
     <state width="1398" height="337" key="GridCell.Tab.0.bottom/0.23.1440.839@0.23.1440.839" timestamp="1573253687261" />
-    <state width="1398" height="330" key="GridCell.Tab.0.center" timestamp="1573931070838">
+    <state width="1398" height="330" key="GridCell.Tab.0.center" timestamp="1573931351878">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="330" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1573931070838" />
+    <state width="1398" height="330" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1573931351878" />
     <state width="1398" height="337" key="GridCell.Tab.0.center/0.23.1440.839@0.23.1440.839" timestamp="1573253687260" />
-    <state width="1398" height="330" key="GridCell.Tab.0.left" timestamp="1573931070837">
+    <state width="1398" height="330" key="GridCell.Tab.0.left" timestamp="1573931351878">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="330" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1573931070837" />
+    <state width="1398" height="330" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1573931351878" />
     <state width="1398" height="337" key="GridCell.Tab.0.left/0.23.1440.839@0.23.1440.839" timestamp="1573253687254" />
-    <state width="1398" height="330" key="GridCell.Tab.0.right" timestamp="1573931070839">
+    <state width="1398" height="330" key="GridCell.Tab.0.right" timestamp="1573931351879">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="330" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1573931070839" />
+    <state width="1398" height="330" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1573931351879" />
     <state width="1398" height="337" key="GridCell.Tab.0.right/0.23.1440.839@0.23.1440.839" timestamp="1573253687261" />
     <state x="221" y="89" key="SettingsEditor" timestamp="1572218645292">
       <screen x="0" y="0" width="1440" height="900" />
@@ -703,10 +699,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="346" y="146" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1440.900@0.0.1440.900" timestamp="1573180897129" />
-    <state x="435" y="228" width="847" height="554" key="find.popup" timestamp="1573930344595">
+    <state x="435" y="228" width="847" height="554" key="find.popup" timestamp="1573943823544">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="435" y="228" width="847" height="554" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1573930344595" />
+    <state x="435" y="228" width="847" height="554" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1573943823544" />
     <state x="482" y="88" key="refactoring.ChangeSignatureDialog" timestamp="1573472764226">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

@@ -4,9 +4,15 @@ set -e
 
 DATASET_NAME=$1
 MODEL_NAME=$2 # change to your model name
-RUNNER=$3
+RUN_MODE=$3
 
-echo $EMBEDDING_SIZE
+[ "${DATASET_NAME}" == "" ] && echo "must specify dataset" && exit 1;
+[ "${MODEL_NAME}" == "" ] && echo "must specify model" && exit 1;
+[ "${RUN_MODE}" == "" ] && echo "must specify run mode" && exit 1;
+
+# set defaults
+[[ "${RNN_DIM}" == "" ]] && RNN_DIM=50
+
 
 BUCKET="jtresearchbucket"
 PACKAGE_NAME="twconvrecsys"
@@ -19,26 +25,27 @@ JOB_NAME=train_${PACKAGE_NAME}_${DATASET_NAME}_${MODEL_NAME}_${CURRENT_DATE}
 
 echo "Job: ${JOB_NAME}"
 
-if [ "${RUNNER}" == "gcloud" ]
+if [ "${RUN_MODE}" == "gcloud" ]
 	then
 	echo 'running gcloud'
 	gcloud auth activate-service-account --key-file=gcloud/credentials.json
 	gcloud ai-platform jobs submit training ${JOB_NAME} \
 					--stream-logs \
 					--region=${REGION} \
-					--runtime-version="1.7" \
+					--runtime-version="1.14" \
 					--module-name=${PACKAGE_PATH}.task \
 					--package-path=${PACKAGE_PATH}  \
 					--config=config.yaml \
 					--job-dir=${JOB_DIR} \
 					-- \
-					--dataset-name=${DATASET_NAME} \
+					--data-dir=${DATASET_NAME} \
 					--estimator=${MODEL_NAME} \
 					--train-files=train.tfrecords \
 					--eval-files=valid.tfrecords \
 					--test-files=test.tfrecords \
 					--vocab-path=vocabulary.txt \
 					--num-distractors=${NUM_DISTRACTORS} \
+					--max-input-len=${MAX_INPUT_LEN} \
 					--max-source-len=${MAX_SOURCE_LEN} \
 					--max-target-len=${MAX_TARGET_LEN} \
 					--train-size=${TRAIN_SIZE} \
@@ -51,7 +58,7 @@ if [ "${RUNNER}" == "gcloud" ]
 					--train \
 					--test
 else
-	if [ "${RUNNER}" == "glocal" ]
+	if [ "${RUN_MODE}" == "glocal" ]
 		then
 		echo 'running gcloud locally'
 		gcloud ai-platform local train \
@@ -59,13 +66,14 @@ else
 				--package-path=${PACKAGE_PATH}  \
 				--job-dir=${LOCAL_JOB_DIR} \
 				-- \
-				--dataset-name=${DATASET_NAME} \
+				--data-dir=${DATASET_NAME} \
 				--estimator=${MODEL_NAME} \
 				--train-files=train.tfrecords \
 				--eval-files=valid.tfrecords \
 				--test-files=test.tfrecords \
 				--vocab-path=vocabulary.txt \
 				--num-distractors=${NUM_DISTRACTORS} \
+				--max-input-len=${MAX_INPUT_LEN} \
 				--max-source-len=${MAX_SOURCE_LEN} \
 				--max-target-len=${MAX_TARGET_LEN} \
 				--train-size=${TRAIN_SIZE} \
@@ -80,7 +88,7 @@ else
 	else
 		echo 'running locally'
 		python -m twconvrecsys.task \
-				--dataset-name=${DATASET_NAME} \
+				--data-dir=${DATASET_NAME} \
 				--job-dir=${LOCAL_JOB_DIR} \
 				--estimator=${MODEL_NAME} \
 				--train-files=train.tfrecords \
@@ -88,6 +96,7 @@ else
 				--test-files=test.tfrecords \
 				--vocab-path=vocabulary.txt \
 				--num-distractors=${NUM_DISTRACTORS} \
+				--max-input-len=${MAX_INPUT_LEN} \
 				--max-source-len=${MAX_SOURCE_LEN} \
 				--max-target-len=${MAX_TARGET_LEN} \
 				--train-size=${TRAIN_SIZE} \
