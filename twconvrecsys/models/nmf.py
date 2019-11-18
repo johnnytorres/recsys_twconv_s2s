@@ -7,25 +7,55 @@ from twconvrecsys.models.neural import build_embedding_layer, update_learning_ra
 
 def create_estimator(config, HYPER_PARAMS):
 
-    def _matrix_factorization(context, utterance, context_len, utterance_len):
+    def _matrix_factorization(source, target, source_len, target_len):
         """ Create the model structure and compute the logits """
         embeddings_layer = build_embedding_layer(HYPER_PARAMS)
         # embed the context and utterances
-        context_embedded = tf.nn.embedding_lookup(
-            embeddings_layer, context, name='embed_context'
+        source_embedded = tf.nn.embedding_lookup(
+            embeddings_layer, source, name='embed_context'
         )
-        utterance_embedded = tf.nn.embedding_lookup(
-            embeddings_layer, utterance, name='embed_utterance'
+        target_embedded = tf.nn.embedding_lookup(
+            embeddings_layer, target, name='embed_utterance'
         )
 
+        with tf.compat.v1.variable_scope('rnn') as vs:
+            cell = tf.nn.rnn_cell.BasicRNNCell(
+                num_units=HYPER_PARAMS.rnn_dim,
+            )
+            _, source_encoded = tf.nn.dynamic_rnn(
+                cell=cell,
+                inputs=source_embedded,
+                sequence_length=source_len,
+                dtype=tf.float32
+            )
+
+            _, target_encoded = tf.nn.dynamic_rnn(
+                cell=cell,
+                inputs=target_embedded,
+                sequence_length=target_len,
+                dtype=tf.float32
+            )
+
+            #source_encoded, target_encoded = tf.split(rnn_states, 2, 0)
+            # rnn_outputs, rnn_states = tf.nn.dynamic_rnn(
+            #     cell=cell,
+            #     inputs=source_embedded,
+            #     sequence_length=source_len,
+            #     dtype=tf.float32
+            # )
+            # source_embedded = rnn_states
+
         with tf.variable_scope('MF') as vs:
-            context_embedded = tf.keras.layers.Flatten()(context_embedded)
-            utterance_embedded = tf.keras.layers.Flatten()(utterance_embedded)
-            x = tf.keras.layers.Concatenate()([context_embedded, utterance_embedded])
-            #x = tf.keras.layers.Dense(units=128)(x)
-            x = tf.keras.layers.Dense(units=64)(x)
-            x = tf.keras.layers.Dense(units=32)(x)
-            logits = tf.keras.layers.Dense(units=1)(x)
+            #source_embedded = tf.keras.layers.Flatten()(source_embedded)
+            #target_embedded = tf.keras.layers.Flatten()(target_embedded)
+            #x = tf.keras.layers.Concatenate()([source_embedded, target_embedded])
+            x = tf.keras.layers.Concatenate()([source_encoded, target_encoded])
+            #x = tf.keras.layers.Dropout(0.5)(x)
+            x = tf.keras.layers.Dense(units=512, activation='tanh')(x)
+            #x = tf.keras.layers.Dense(units=128, activation='relu')(x)
+            #logits = tf.keras.layers.Dot(axes=1, normalize=True)([source_encoded, target_encoded])
+            #x = tf.keras.layers.Dense(units=64)(x)
+            logits = tf.keras.layers.Dense(units=1, activation='sigmoid')(x)
             return logits
 
     def _inference(features):

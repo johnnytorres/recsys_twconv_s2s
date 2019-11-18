@@ -217,18 +217,6 @@ def run_deep_recsys(args):
     # THIS IS ENTRY POINT FOR THE TRAINER TASK
     # ******************************************************************************
 
-    # fill paths based on datasets directory
-    if args.data_dir:
-        args.train_files = os.path.join(args.data_dir, args.train_files)
-        args.eval_files = os.path.join(args.data_dir, args.eval_files)
-        args.test_files = os.path.join(args.data_dir, args.test_files)
-        args.vocab_path = os.path.join(args.data_dir, args.vocab_path)
-        #args.vocab_proc = os.path.join(args.data_dir, 'vocab_processor.bin')
-        if args.embedding_path:
-            args.embedding_path = os.path.join(args.data_dir, args.embedding_path)
-
-    #input.set_hyperparams(HYPER_PARAMS)
-
     # Set python level verbosity
     tf.compat.v1.logging.set_verbosity(HYPER_PARAMS.verbosity)
 
@@ -253,7 +241,7 @@ def run_deep_recsys(args):
     num_steps_for_checkpoint = int(HYPER_PARAMS.train_steps / HYPER_PARAMS.num_checkpoints)
 
     run_config = tf.estimator.RunConfig(
-        tf_random_seed=19830610,  # TODO: move to hyperparameters
+        #tf_random_seed=19830610,  # TODO: move to hyperparameters
         save_checkpoints_steps=num_steps_for_checkpoint,  # TODO: move to hyperparameters
         log_step_count_steps=1,
         # save_checkpoints_secs=120,  #TODO: param to change if you want to change frequency of saving checkpoints
@@ -322,7 +310,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--seed', type=int, default=1234) # for reproducibility
     parser.add_argument('--job-dir', required=True, type=lambda x: os.path.expanduser(x))
-    parser.add_argument('--data-dir', type=str, help='it can be a local/gcloud path or name')
+    parser.add_argument('--data-dir', required=True, type=lambda x: os.path.expanduser(x), help='it can be a local/gcloud path or name')
     initialise_params(parser)
     HYPER_PARAMS = parser.parse_args()
     run(HYPER_PARAMS)
