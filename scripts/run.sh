@@ -2,7 +2,7 @@
 # exit on error
 set -e
 
-DATASET=2011_trec
+DATASET=twconv_2011_trec
 MODEL=nmf
 RUNNER=gcloud
 
