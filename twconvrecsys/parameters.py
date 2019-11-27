@@ -13,6 +13,12 @@ def initialise_params(args_parser):
         args_parser
     """
 
+    args_parser.add_argument('--seed', type=int, default=1234) # for reproducibility
+    args_parser.add_argument('--job-dir', type=lambda x: os.path.expanduser(x))
+    args_parser.add_argument('--data-dir', required=True, type=lambda x: os.path.expanduser(x), help='it can be a local/gcloud path or name')
+    args_parser.add_argument('--data-subdir', default='sampledata', type=lambda x: os.path.expanduser(x))
+
+
     # Data files arguments
     args_parser.add_argument(
         '--train-files',

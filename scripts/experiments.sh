@@ -7,21 +7,19 @@ MODEL_NAME=$2 # change to your model name
 RUN_MODE=$3
 
 [ "${DATASET_NAME}" == "" ] && echo "must specify dataset" && exit 1;
+[ "${SUBSET}" == "" ] && echo "must specify subset" && exit 1;
 [ "${MODEL_NAME}" == "" ] && echo "must specify model" && exit 1;
 [ "${RUN_MODE}" == "" ] && echo "must specify run mode" && exit 1;
-
-# set defaults
-[[ "${RNN_DIM}" == "" ]] && RNN_DIM=50
-
+[ "${TAG}" == "" ] && TAG=""
 
 BUCKET="jtresearchbucket"
 PACKAGE_NAME="twconvrecsys"
-JOB_DIR="gs://${BUCKET}/${PACKAGE_NAME}/${DATASET_NAME}/${MODEL_NAME}"
+JOB_DIR="gs://${BUCKET}/${PACKAGE_NAME}/${DATASET_NAME}/${MODEL_NAME}${TAG}"
 LOCAL_JOB_DIR=${HOME}/data/results/${PACKAGE_NAME}/${DATASET_NAME}/${MODEL_NAME}
 REGION="us-central1"
 PACKAGE_PATH=${PACKAGE_NAME} # this can be a gcs location to a zipped and uploaded package
 CURRENT_DATE=`date +%Y%m%d_%H%M%S`
-JOB_NAME=train_${PACKAGE_NAME}_${DATASET_NAME}_${MODEL_NAME}_${CURRENT_DATE}
+JOB_NAME=train_${PACKAGE_NAME}_${DATASET_NAME}_${SUBSET}_${MODEL_NAME}${TAG}_${CURRENT_DATE}
 
 echo "Job: ${JOB_NAME}"
 
@@ -39,6 +37,7 @@ if [ "${RUN_MODE}" == "gcloud" ]
 					--job-dir=${JOB_DIR} \
 					-- \
 					--data-dir=${DATASET_NAME} \
+					--data-subdir=${SUBSET} \
 					--estimator=${MODEL_NAME} \
 					--train-files=train.tfrecords \
 					--eval-files=valid.tfrecords \
@@ -67,6 +66,7 @@ else
 				--job-dir=${LOCAL_JOB_DIR} \
 				-- \
 				--data-dir=${DATASET_NAME} \
+				--data-subdir=${SUBSET} \
 				--estimator=${MODEL_NAME} \
 				--train-files=train.tfrecords \
 				--eval-files=valid.tfrecords \
@@ -89,6 +89,7 @@ else
 		echo 'running locally'
 		python -m twconvrecsys.task \
 				--data-dir=${DATASET_NAME} \
+				--data-subdir=${SUBSET} \
 				--job-dir=${LOCAL_JOB_DIR} \
 				--estimator=${MODEL_NAME} \
 				--train-files=train.tfrecords \
@@ -110,6 +111,3 @@ else
 				--test
 	fi
 fi
-
-
-

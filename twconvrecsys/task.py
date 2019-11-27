@@ -11,7 +11,7 @@ from tensorflow.python import debug as tf_debug
 
 from twconvrecsys.data import input, metadata
 from twconvrecsys.data.csvreader import DataHandler
-from twconvrecsys.data.datasets import prepare_dataset, DatasetNames
+from twconvrecsys.data.datasets import prepare_dataset
 from twconvrecsys.metrics.recall import RecallEvaluator
 from twconvrecsys.models import neural
 from twconvrecsys.models import mf
@@ -71,7 +71,7 @@ def get_predict_input_fn():
     predict_input_fn = input.generate_input_fn(
         file_names_pattern=HYPER_PARAMS.predict_files,
         file_encoding=HYPER_PARAMS.file_encoding,
-        mode=tf.estimator.ModeKeys.TRAIN,
+        mode=tf.estimator.ModeKeys.PREDICT,
         batch_size=HYPER_PARAMS.predict_batch_size
     )
     return predict_input_fn
@@ -185,7 +185,6 @@ def test_model(run_config):
             probs = np.concatenate(probs, axis=1)
             probs = probs.tolist()
             # if i % num_instances == 0:
-            print(len(probs))
             csvwriter.writerows(probs)
             # if i % 1000 == 0:
             #     print('predicting {} instances'.format(i), end='\r')
@@ -308,9 +307,6 @@ def run(args):
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--seed', type=int, default=1234) # for reproducibility
-    parser.add_argument('--job-dir', required=True, type=lambda x: os.path.expanduser(x))
-    parser.add_argument('--data-dir', required=True, type=lambda x: os.path.expanduser(x), help='it can be a local/gcloud path or name')
     initialise_params(parser)
     HYPER_PARAMS = parser.parse_args()
     run(HYPER_PARAMS)

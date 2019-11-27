@@ -18,7 +18,7 @@ class TfidfPredictor(RandomConversationRecommender):
 
 	def _predict(self, source, targets):
 		source_vec = self.vectorizer.transform([source])
-		targets_vec = self.vectorizer.transform(targets)
+		targets_vec = self.vectorizer.transform(targets.fillna(' '))
 		result = np.dot(targets_vec, source_vec.T)
 		result = result.todense()
 		result = np.asarray(result)
