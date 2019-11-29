@@ -398,11 +398,13 @@ def create_estimator(config, HYPER_PARAMS):
 
     def _model_fn(features, labels, mode):
         """ model function for the custom estimator"""
+
+        # print_op = tf.print("input: ", features, output_stream=sys.stdout)
+        # with tf.control_dependencies([print_op]):
         logits = _inference(features)
 
-        if HYPER_PARAMS.debug:
-            if mode == tfc.learn.ModeKeys.EVAL:
-                logits = tf.Print(logits, [logits])
+        #if HYPER_PARAMS.debug:
+
 
         head = tfc.estimator.binary_classification_head(
             loss_reduction=losses.Reduction.MEAN,
@@ -421,9 +423,10 @@ def create_estimator(config, HYPER_PARAMS):
     estimator = tf.estimator.Estimator(model_fn=_model_fn, config=config)
 
     #estimator = tf.contrib.estimator.add_metrics(estimator, metric_fn)
-    estimator = tf.contrib.estimator.add_metrics(
-        estimator,
-        lambda labels, predictions: metric_fn(HYPER_PARAMS, labels, predictions))
+    if not HYPER_PARAMS.predict:
+        estimator = tf.contrib.estimator.add_metrics(
+            estimator,
+            lambda labels, predictions: metric_fn(HYPER_PARAMS, labels, predictions))
 
     return estimator
 

@@ -71,7 +71,6 @@ def initialise_params(args_parser):
         help='Path to vocabulary file, if data-dir is provided, the path is concatenated',
         type=lambda x: os.path.expanduser(x)
     )
-
     ###########################################
 
     # Experiment arguments - training

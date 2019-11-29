@@ -66,3 +66,13 @@ rnn r@k
 [3, 4, 2, 5, 1, 0, 2],
 [5, 4, 3, 2, 1, 0, 4],1
 
+
+for predictions
+
+{'source': <tf.Tensor 'IteratorGetNext:0' shape=(?, 10) dtype=int64>, 'source_len': <tf.Tensor 'IteratorGetNext:1' shape=(?, 1) dtype=int64>, 'target': <tf.Tensor 'IteratorGetNext:2' shape=(?, 10) dtype=int64>, 'target_len': <tf.Tensor 'IteratorGetNext:3' shape=(?, 1) dtype=int64>}
+
+
+experiments
+```shell script
+./scripts/experiments-rnn.sh twconv_2011_trec_v3 alldata 24592
+```

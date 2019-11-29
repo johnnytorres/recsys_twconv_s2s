@@ -24,7 +24,9 @@ def expand_dirs(args):
         args.train_files = os.path.join(args.data_dir, args.train_files)
         args.eval_files = os.path.join(args.data_dir, args.eval_files)
         args.test_files = os.path.join(args.data_dir, args.test_files)
+        args.predict_files = os.path.join(args.data_dir, args.predict_files) if args.predict_files else None
         args.vocab_path = os.path.join(args.data_dir, args.vocab_path)
+        args.vocab_processor_path = os.path.join(args.data_dir, 'vocab_processor.bin')
 
     if args.embedding_path:
         args.embedding_path = os.path.join(args.data_dir, args.embedding_path)

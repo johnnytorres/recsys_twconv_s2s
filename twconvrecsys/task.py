@@ -58,8 +58,8 @@ def get_eval_input_fn():
 
 def get_test_input_fn():
     test_input_fn = input.generate_input_fn(
-        file_names_pattern=HYPER_PARAMS.test_files,
         HYPER_PARAMS=HYPER_PARAMS,
+        file_names_pattern=HYPER_PARAMS.test_files,
         file_encoding=HYPER_PARAMS.file_encoding,
         mode=tf.estimator.ModeKeys.EVAL,
         batch_size=HYPER_PARAMS.eval_batch_size
@@ -69,6 +69,7 @@ def get_test_input_fn():
 
 def get_predict_input_fn():
     predict_input_fn = input.generate_input_fn(
+        HYPER_PARAMS=HYPER_PARAMS,
         file_names_pattern=HYPER_PARAMS.predict_files,
         file_encoding=HYPER_PARAMS.file_encoding,
         mode=tf.estimator.ModeKeys.PREDICT,
@@ -205,10 +206,104 @@ def predict_instances(run_config):
 
     predictions = estimator.predict(input_fn=predict_input_fn)
 
-    for instance_prediction in predictions:
-        tf.compat.v1.logging.info(str(instance_prediction))
+    for ix, instance_prediction in enumerate(predictions):
+        print(str(instance_prediction))
 
+    tf.compat.v1.logging.info("{} predictions done.".format(ix+1))
+
+def predict_allusers(run_config):
+    # PREDICT EXAMPLE INSTANCES
+    tf.compat.v1.logging.info("===========================")
+    tf.compat.v1.logging.info("* PREDICT configurations")
+    tf.compat.v1.logging.info("===========================")
+    tf.compat.v1.logging.info(("Predict batch size: {}".format(HYPER_PARAMS.predict_batch_size)))
+    tf.compat.v1.logging.info(("Predict steps: {} ({})".format(None, "computed (all predict instances)")))
+    tf.compat.v1.logging.info("===========================")
+
+    import tensorflow.contrib as tfcontrib
+
+    text_processor = tfcontrib.learn.preprocessing.VocabularyProcessor.restore(HYPER_PARAMS.vocab_processor_path)
+
+    import pandas as pd
+    from sklearn.metrics import accuracy_score
+    fpath = os.path.join(HYPER_PARAMS.data_dir, 'train_dialogs.csv')
+    train_dialogs = pd.read_csv(fpath)
+    fpath = os.path.join(HYPER_PARAMS.data_dir, 'dialogs_texts.csv')
+    dialogs = pd.read_csv(fpath)
+    fpath = os.path.join(HYPER_PARAMS.data_dir, 'test_interactions.csv')
+    test_interactions = pd.read_csv(fpath)
+
+    def get_all_users_conversations_fn(user_id, y_true):
+        sources = []
+        targets = []
+        sources_len = []
+        targets_len = []
+        source_len = HYPER_PARAMS.max_source_len
+        target_len = HYPER_PARAMS.max_target_len
+
+        dialogs = train_dialogs.groupby('dialog_id')
+        for dialog_id, dialog in dialogs:
+            dialog_text = dialog['text'].str.cat(sep=' ')
+            dialog_min_tweet = dialog.id.min()
+            user_text = train_dialogs[train_dialogs.user_id == user_id ]
+            user_text = user_text[user_text.id < dialog_min_tweet]
+            user_text = user_text['text'].str.cat(sep=' ').strip()
+
+            if len(user_text) == 0:
+                continue
+
+            source_text = next(text_processor.transform([user_text])).tolist()
+            target_text = next(text_processor.transform([dialog_text])).tolist()
+            sources.append(source_text)
+            targets.append(target_text)
+            sources_len.append(source_len)
+            targets_len.append(target_len)
+
+            if user_id in dialog.user_id.unique():
+                y_true.append(1)
+            else:
+                y_true.append(0)
+
+
+
+        sources = np.array(sources)
+        targets = np.array(targets)
+        sources_len = np.expand_dims( np.array(sources_len), 1)
+        targets_len = np.expand_dims(np.array(targets_len), 1)
+        features = {
+            # 'source': tf.constant(sources, dtype=tf.int64),
+            # 'source_len': tf.constant(sources_len, dtype=tf.int64),
+            # 'target': tf.constant(targets, dtype=tf.int64),
+            # 'target_len': tf.constant(targets_len, dtype=tf.int64),
+            'source': sources,
+            'source_len': sources_len,
+            'target': targets,
+            'target_len': targets_len
+        }
+
+        features=tf.data.Dataset.from_tensor_slices(dict(features)).batch(64)
+        return features
+
+    estimator = get_estimator(run_config)
+    users_acc = []
+
+    for ix, user_id in enumerate(train_dialogs.user_id.unique()):
+        y_true = []
+        predictions = estimator.predict(input_fn=lambda : get_all_users_conversations_fn(user_id, y_true))
+        y_pred = []
+
+        for ix, instance_prediction in enumerate(predictions):
+            y_pred.append( instance_prediction['logistic'][0] )
+
+        y_pred = np.rint(y_pred)
+        user_acc = accuracy_score(y_true, y_pred)
+        users_acc.append(user_acc)
+        print("user {} acc {}", ix, user_acc)
+
+    mean_acc = np.mean(users_acc)
+    print('users mean acc: {}'.format(mean_acc))
     tf.compat.v1.logging.info("Done.")
+
 
 
 def run_deep_recsys(args):
@@ -264,7 +359,7 @@ def run_deep_recsys(args):
     if HYPER_PARAMS.test:
         test_model(run_config)
     if HYPER_PARAMS.predict:
-        predict_instances(run_config)
+        predict_allusers(run_config)
 
     time_end = datetime.utcnow()
     tf.compat.v1.logging.info(".......................................")
