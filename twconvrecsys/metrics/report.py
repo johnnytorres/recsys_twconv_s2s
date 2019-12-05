@@ -2,10 +2,10 @@
 import os
 import argparse
 import pandas as pd
-import numpy as np
 
 from twconvrecsys.data.csvreader import DataHandler
 from twconvrecsys.metrics.recall import RecallEvaluator
+from twconvrecsys.metrics.precision import PrecisionEvaluator
 
 
 def generate_benchmark(args):
@@ -42,9 +42,12 @@ def generate_benchmark(args):
 
         y_pred = ds.values
         y_true = test.label.values
-        metrics = RecallEvaluator.evaluate(y_true, y_pred)
+        recall_metrics = RecallEvaluator.calculate(y_true, y_pred)
+        precision_metrics = PrecisionEvaluator.calculate(y_true, y_pred)
+        #print(recall_metrics)
 
-        print(metrics)
+        print('done')
+
 
         # for model in models:
         #     metricsds = pd.DataFrame.from_dict(metrics[model])

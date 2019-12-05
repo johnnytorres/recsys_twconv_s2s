@@ -12,7 +12,7 @@ RUN_MODE=$3
 [ "${RUN_MODE}" == "" ] && echo "must specify run mode" && exit 1;
 [ "${TAG}" == "" ] && TAG=""
 
-BUCKET="jtresearchbucket"
+BUCKET="mlresearchbucket"
 PACKAGE_NAME="twconvrecsys"
 JOB_DIR="gs://${BUCKET}/${PACKAGE_NAME}/${DATASET_NAME}/${MODEL_NAME}${TAG}"
 LOCAL_JOB_DIR=${HOME}/data/results/${PACKAGE_NAME}/${DATASET_NAME}/${MODEL_NAME}

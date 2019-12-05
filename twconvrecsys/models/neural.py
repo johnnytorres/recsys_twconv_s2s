@@ -422,11 +422,9 @@ def create_estimator(config, HYPER_PARAMS):
 
     estimator = tf.estimator.Estimator(model_fn=_model_fn, config=config)
 
-    #estimator = tf.contrib.estimator.add_metrics(estimator, metric_fn)
-    if not HYPER_PARAMS.predict:
-        estimator = tf.contrib.estimator.add_metrics(
-            estimator,
-            lambda labels, predictions: metric_fn(HYPER_PARAMS, labels, predictions))
+    estimator = tf.contrib.estimator.add_metrics(
+        estimator,
+        lambda labels, predictions: metric_fn(HYPER_PARAMS, labels, predictions))
 
     return estimator
 

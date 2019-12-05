@@ -15,7 +15,7 @@ class TestCaseTfidf(unittest.TestCase):
         predictor.train(train)
         y_pred = predictor.predict(test)
         y_true = test.label.values
-        metrics = RecallEvaluator.evaluate(y_true, y_pred)
+        metrics = RecallEvaluator.calculate(y_true, y_pred)
         self.assertAlmostEqual(metrics[0][3], 0.42857142857142855)
         self.assertAlmostEqual(metrics[1][3], 0.5714285714285714)
 
