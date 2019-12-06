@@ -5,11 +5,10 @@ set -e
 [[ "$1" != "" ]] && DATASET=$1 || ( echo "error: specify dataset (ej twconv_2011_trec or twconv_2016_usersec)" && exit 1 )
 [[ "$2" != "" ]] && SUBSET=$2 || ( echo "error: specify subset (sample or alldata)" && exit 1 )
 [[ "$3" != "" ]] && TRAIN_SIZE=$3 || ( echo "error: specify training size" && exit 1 )
+[[ "$4" != "" ]] && MODEL=$4 || ( echo "error: specify the model (rnn, lstm, bilstm)" && exit 1 )
 
-
-MODEL=rnn
+#MODEL=rnn
 RUN_MODE=gcloud
-
 export TAG=""
 
 if [ ${SUBSET} == "sample" ]; then

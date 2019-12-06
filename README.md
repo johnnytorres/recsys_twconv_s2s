@@ -74,5 +74,7 @@ for predictions
 
 experiments
 ```shell script
-./scripts/experiments-rnn.sh twconv_2011_trec_v3 alldata 24592
+./scripts/experiments-rnn.sh twconv_2011_trec_v4 alldata 122960 rnn
+./scripts/experiments-rnn.sh twconv_2011_trec_v4 alldata 122960 lstm
+./scripts/experiments-rnn.sh twconv_2011_trec_v4 alldata 122960 bilstm
 ```
