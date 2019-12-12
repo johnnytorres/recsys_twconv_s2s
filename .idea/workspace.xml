@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c25c6c6-8cd1-4139-a355-a4f62ad57c3c" name="Default Changelist" comment="refactor project">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/experiments-rnn.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/experiments-rnn.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/eda_trec.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/eda_trec.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/results.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/results.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -244,7 +245,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/twconvrecsys/metrics/report.py" />
-      <option name="PARAMETERS" value="--data-dir=~/data/twconv/twconv_2011_trec/alldata --job-dir=~/data/results/twconvrecsys/twconv_2011_trec_v4/rnn" />
+      <option name="PARAMETERS" value="--data-dir=~/data/twconv/twconv_2011_trec/alldata --job-dir=~/data/results/twconvrecsys/twconv_2011_trec_v5/lstm" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -511,20 +512,20 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.task tfidf" />
-      <item itemvalue="Python.task rnn" />
-      <item itemvalue="Python.task lstm" />
+      <item itemvalue="Python.report mf" />
+      <item itemvalue="Python.report rnn" />
+      <item itemvalue="Python.report tfidf" />
       <item itemvalue="Python.task bilstm" />
+      <item itemvalue="Python.task lstm" />
       <item itemvalue="Python.task mf" />
       <item itemvalue="Python.task nmf" />
-      <item itemvalue="Python.report rnn" />
-      <item itemvalue="Python.report mf" />
-      <item itemvalue="Python.report tfidf" />
-      <item itemvalue="Python.tfrecords" />
+      <item itemvalue="Python.task rnn" />
+      <item itemvalue="Python.task tfidf" />
       <item itemvalue="Python.dataset" />
-      <item itemvalue="Python.tf_utils" />
-      <item itemvalue="Python.recall (1)" />
       <item itemvalue="Python.precision" />
+      <item itemvalue="Python.recall (1)" />
+      <item itemvalue="Python.tf_utils" />
+      <item itemvalue="Python.tfrecords" />
     </list>
     <recent_temporary>
       <list>
@@ -636,7 +637,11 @@
       <workItem from="1575044189434" duration="22105000" />
       <workItem from="1575479355255" duration="4500000" />
       <workItem from="1575489229690" duration="6459000" />
-      <workItem from="1575592008076" duration="6027000" />
+      <workItem from="1575592008076" duration="6358000" />
+      <workItem from="1575757908562" duration="733000" />
+      <workItem from="1575841782440" duration="1070000" />
+      <workItem from="1575844741931" duration="364000" />
+      <workItem from="1576032251178" duration="1976000" />
     </task>
     <task id="LOCAL-00001" summary="refactor project">
       <created>1562518129393</created>
@@ -686,10 +691,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="refactor project" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575603848615">
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576067224570">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1575603848615" />
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1576067224570" />
     <state x="426" y="260" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1572836272590">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -728,25 +733,25 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="507" y="211" key="FileChooserDialogImpl/0.0.1440.900@0.0.1440.900" timestamp="1572218637811" />
-    <state width="1398" height="467" key="GridCell.Tab.0.bottom" timestamp="1575604291768">
+    <state width="1398" height="467" key="GridCell.Tab.0.bottom" timestamp="1576067252556">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="467" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1575604291768" />
+    <state width="1398" height="467" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1576067252556" />
     <state width="1398" height="337" key="GridCell.Tab.0.bottom/0.23.1440.839@0.23.1440.839" timestamp="1573253687261" />
-    <state width="1398" height="467" key="GridCell.Tab.0.center" timestamp="1575604291766">
+    <state width="1398" height="467" key="GridCell.Tab.0.center" timestamp="1576067252552">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="467" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1575604291766" />
+    <state width="1398" height="467" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1576067252552" />
     <state width="1398" height="337" key="GridCell.Tab.0.center/0.23.1440.839@0.23.1440.839" timestamp="1573253687260" />
-    <state width="1398" height="467" key="GridCell.Tab.0.left" timestamp="1575604291766">
+    <state width="1398" height="467" key="GridCell.Tab.0.left" timestamp="1576067252549">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="467" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1575604291766" />
+    <state width="1398" height="467" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1576067252549" />
     <state width="1398" height="337" key="GridCell.Tab.0.left/0.23.1440.839@0.23.1440.839" timestamp="1573253687254" />
-    <state width="1398" height="467" key="GridCell.Tab.0.right" timestamp="1575604291767">
+    <state width="1398" height="467" key="GridCell.Tab.0.right" timestamp="1576067252554">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="467" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1575604291767" />
+    <state width="1398" height="467" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1576067252554" />
     <state width="1398" height="337" key="GridCell.Tab.0.right/0.23.1440.839@0.23.1440.839" timestamp="1573253687261" />
     <state x="221" y="89" key="SettingsEditor" timestamp="1575044172402">
       <screen x="0" y="0" width="1440" height="900" />
@@ -861,7 +866,7 @@
     <SUITE FILE_PATH="coverage/twconvrecsys$report.coverage" NAME="report Coverage Results" MODIFIED="1573478559418" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys/metrics" />
     <SUITE FILE_PATH="coverage/twconvrecsys$task_rnn.coverage" NAME="task rnn Coverage Results" MODIFIED="1575502393984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys" />
     <SUITE FILE_PATH="coverage/twconvrecsys$concat.coverage" NAME="concat Coverage Results" MODIFIED="1573405324549" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys/tests" />
-    <SUITE FILE_PATH="coverage/twconvrecsys$report_rnn.coverage" NAME="report rnn Coverage Results" MODIFIED="1575603967427" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys/metrics" />
+    <SUITE FILE_PATH="coverage/twconvrecsys$report_rnn.coverage" NAME="report rnn Coverage Results" MODIFIED="1576067195332" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys/metrics" />
     <SUITE FILE_PATH="coverage/twconvrecsys$pytest_in_tfidf_py.coverage" NAME="pytest in tfidf.py Coverage Results" MODIFIED="1573474031555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys/tests" />
     <SUITE FILE_PATH="coverage/twconvrecsys$report_tfidf.coverage" NAME="report tfidf Coverage Results" MODIFIED="1573997358193" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys/metrics" />
     <SUITE FILE_PATH="coverage/twconvrecsys$task_lstm.coverage" NAME="task lstm Coverage Results" MODIFIED="1573421381898" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys" />

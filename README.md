@@ -77,4 +77,8 @@ experiments
 ./scripts/experiments-rnn.sh twconv_2011_trec_v4 alldata 122960 rnn
 ./scripts/experiments-rnn.sh twconv_2011_trec_v4 alldata 122960 lstm
 ./scripts/experiments-rnn.sh twconv_2011_trec_v4 alldata 122960 bilstm
+
+./scripts/experiments-rnn.sh twconv_2016_usersec_v2 alldata 74570 rnn
+./scripts/experiments-rnn.sh twconv_2016_usersec_v2 alldata 74570 lstm
+./scripts/experiments-rnn.sh twconv_2016_usersec_v2 alldata 74570 bilstm
 ```

@@ -18,5 +18,12 @@ gsutil cp -r gs://jtresearchbucket/twconvrecsys/twconv_2011_trec_v3/rnn \
 
 #mkdir ~/data/results/twconvrecsys/twconv_2011_trec_v4
 
-gsutil cp -r gs://mlresearchbucket/twconvrecsys/twconv_2011_trec_v4/rnn \
-	~/data/results/twconvrecsys/twconv_2011_trec_v4
+DATASET='twconv_2011_trec_v5'
+gsutil cp -r gs://mlresearchbucket/twconvrecsys/${DATASET}/rnn/predictions.csv \
+	~/data/results/twconvrecsys/rnn
+mkdir -p 	~/data/results/twconvrecsys/${DATASET}/lstm/
+gsutil cp -r gs://mlresearchbucket/twconvrecsys/${DATASET}/lstm/predictions.csv \
+	~/data/results/twconvrecsys/${DATASET}/lstm/
+mkdir -p 	~/data/results/twconvrecsys/${DATASET}/bilstm/
+gsutil cp -r gs://mlresearchbucket/twconvrecsys/${DATASET}/bilstm/predictions.csv \
+	~/data/results/twconvrecsys/${DATASET}/bilstm/
