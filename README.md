@@ -74,11 +74,35 @@ for predictions
 
 experiments
 ```shell script
-./scripts/experiments-rnn.sh twconv_2011_trec_v4 alldata 122960 rnn
-./scripts/experiments-rnn.sh twconv_2011_trec_v4 alldata 122960 lstm
-./scripts/experiments-rnn.sh twconv_2011_trec_v4 alldata 122960 bilstm
+./scripts/experiments-base.sh twconv_2011_trec_v6 alldata random
+./scripts/experiments-base.sh twconv_2011_trec_v8 alldata tfidf
+./scripts/experiments-rnn.sh twconv_2011_trec_v7 alldata 122960 rnn
+./scripts/experiments-rnn.sh twconv_2011_trec_v7 alldata 122960 lstm
+./scripts/experiments-rnn.sh twconv_2011_trec_v7 alldata 122960 bilstm
 
-./scripts/experiments-rnn.sh twconv_2016_usersec_v2 alldata 74570 rnn
-./scripts/experiments-rnn.sh twconv_2016_usersec_v2 alldata 74570 lstm
-./scripts/experiments-rnn.sh twconv_2016_usersec_v2 alldata 74570 bilstm
+./scripts/experiments-rnn.sh twconv_2011_trec_v8 alldata 221328 rnn
+./scripts/experiments-rnn.sh twconv_2011_trec_v8 alldata 221328 lstm
+./scripts/experiments-rnn.sh twconv_2011_trec_v8 alldata 221328 bilstm
+
+
+./scripts/experiments-base.sh twconv_2016_usersec_v7 alldata random
+./scripts/experiments-base.sh twconv_2016_usersec_v7 alldata tfidf
+./scripts/experiments-rnn.sh twconv_2016_usersec_v7 alldata 74570 rnn
+./scripts/experiments-rnn.sh twconv_2016_usersec_v7 alldata 74570 lstm
+./scripts/experiments-rnn.sh twconv_2016_usersec_v7 alldata 74570 bilstm
+
+./scripts/experiments-base.sh twconv_2016_usersec_v8 alldata random
+./scripts/experiments-base.sh twconv_2016_usersec_v8 alldata tfidf
+./scripts/experiments-rnn.sh twconv_2016_usersec_v8 alldata 134226 rnn
+./scripts/experiments-rnn.sh twconv_2016_usersec_v8 alldata 134226 lstm
+./scripts/experiments-rnn.sh twconv_2016_usersec_v8 alldata 134226 bilstm
+
+
+
+./scripts/experiments-rnn.sh twconv_2016_electionus_v1 alldata 67881 rnn
+```
+
+metrics
+```shell script
+./scripts/results.sh
 ```

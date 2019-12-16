@@ -4,6 +4,7 @@ import argparse
 import pandas as pd
 
 from twconvrecsys.data.csvreader import DataHandler
+from twconvrecsys.metrics.ndgc import NdgcEvaluator
 from twconvrecsys.metrics.recall import RecallEvaluator
 from twconvrecsys.metrics.precision import PrecisionEvaluator
 
@@ -14,12 +15,14 @@ def generate_benchmark(args):
     results_path = os.path.join(base_results_dir, 'benchmarking.csv')
 
     data_handler = DataHandler()
-    train, valid, test = data_handler.load_data(args.data_dir)
+    test = data_handler.load_test_data(args.data_dir)
 
     if os.path.exists(results_path):
         os.remove(results_path)
 
-    print('processing...', end='')
+    print('processing...')
+
+    benchmark_ds = None
 
     for d in os.walk(base_results_dir):
         results_dir = d[0]
@@ -32,9 +35,9 @@ def generate_benchmark(args):
         if not os.path.exists(path):
             continue
 
-        model = os.path.split(path)[0]
-        model = os.path.split(model)[1]
-        print(model.upper())
+        dataset, model = os.path.split(results_dir)
+        _, dataset = os.path.split(dataset)
+        print(f'{dataset.upper()} - {model.upper()}')
 
         ds = pd.read_csv(path, header=None)
         col_names = ['target_{}'.format(i) for i in ds.columns]
@@ -42,34 +45,22 @@ def generate_benchmark(args):
 
         y_pred = ds.values
         y_true = test.label.values
-        recall_metrics = RecallEvaluator.calculate(y_true, y_pred)
-        precision_metrics = PrecisionEvaluator.calculate(y_true, y_pred)
-        #print(recall_metrics)
+        metrics = RecallEvaluator.calculate(y_true, y_pred)
+        metrics_ds = pd.DataFrame(metrics, columns=['metric', 'k', 'N', 'value'])
 
-        print('done')
+        metrics = PrecisionEvaluator.calculate(y_true, y_pred)
+        metrics_ds = metrics_ds.append(pd.DataFrame(metrics, columns=['metric', 'k', 'N', 'value']), ignore_index=True)
 
+        metrics = NdgcEvaluator.calculate(y_true, y_pred)
+        metrics_ds = metrics_ds.append(pd.DataFrame(metrics, columns=['metric', 'k', 'N', 'value']), ignore_index=True)
 
-        # for model in models:
-        #     metricsds = pd.DataFrame.from_dict(metrics[model])
-        #     metricsds = metricsds.reset_index()
-        #     metricsds.rename(columns={'index': 'metric'}, inplace=True)
-        #     metricsds = pd.pivot_table(metricsds, columns='metric')
-        #     metricsds = metricsds.reset_index()
-        #     metricsds = metricsds.reset_index(drop=True)
-        #     metricsds.rename(columns={'index': 'label'}, inplace=True)
-        #     metricsds['model'] = model
-        #     # print(metricsds)
-        #     # metricsds[['model', 'label'] + ['precision','recall','fscore','auc']]
-        #     if mds is None:
-        #         mds = metricsds
-        #     else:
-        #         mds = mds.append(metricsds, ignore_index=False)
-        #
-        # mds['folder'] = os.path.basename(os.path.dirname(path))
-        # # fpath = os.path.join(base_results_dir, 'benchmarking.csv')
-        # write_header = not os.path.exists(results_path)
-        # with open(results_path, 'a') as f:
-        #     mds.to_csv(f, index=False, header=write_header)
+        metrics_ds['dataset'] = dataset
+        metrics_ds['model'] = model
+
+        benchmark_ds = metrics_ds if benchmark_ds is None else benchmark_ds.append(metrics_ds, ignore_index=True)
+
+    cols = ['dataset', 'model', 'metric', 'k', 'N', 'value']
+    benchmark_ds[cols].to_csv(results_path, index=False)
     print('[OK]')
 
 

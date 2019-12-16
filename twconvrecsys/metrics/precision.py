@@ -20,8 +20,8 @@ class PrecisionEvaluator:
 		y_pred = np.array(y_pred) >= 0.5
 		y_pred = y_pred.astype(int)
 
-
-		enc = OneHotEncoder()
+		n_values = len(y_pred[0])
+		enc = OneHotEncoder(n_values=n_values)
 		y_true = np.array(y_true)
 		y_true = y_true.reshape(-1, 1)
 		y_true = enc.fit_transform(y_true)
@@ -34,7 +34,7 @@ class PrecisionEvaluator:
 		for k in klist:
 			r = PrecisionEvaluator._calculate(y_true, y_pred, k)
 			print('precision@({}, {}): {}'.format(k, num_elements, r))
-			metrics.append(['recall', k, num_elements, r])
+			metrics.append(['precision', k, num_elements, r])
 		return metrics
 
 

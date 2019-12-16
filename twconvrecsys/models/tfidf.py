@@ -11,9 +11,9 @@ class TfidfPredictor(RandomConversationRecommender):
 		self.vectorizer = TfidfVectorizer()
 
 	def train(self, train):
-		m = np.append(
-			train.source.values,
-			train.target.values)
+		source = train.source.values
+		target = train.target.values
+		m = np.append(source,target)
 		self.vectorizer.fit(m)
 
 	def _predict(self, source, targets):
@@ -23,14 +23,7 @@ class TfidfPredictor(RandomConversationRecommender):
 		result = result.todense()
 		result = np.asarray(result)
 		result = result.flatten()
-		# result = np.argsort(result, axis=0)
-		# result = result[::-1]
 		return result
-
-	# def predict(self, test):
-	# 	y_pred = [self._predict(row[0], row[1:-1]) for ix, row in test.iterrows()]
-	# 	y_pred = np.array(y_pred)
-	# 	return y_pred
 
 
 

@@ -14,3 +14,8 @@ class DataHandler:
 		test = pd.read_csv(os.path.join(folder, 'test.csvrecords'))
 		return train, valid, test
 
+	@staticmethod
+	def load_test_data(folder):
+		folder = os.path.expanduser(folder)
+		test = pd.read_csv(os.path.join(folder, 'test.csvrecords'))
+		return test

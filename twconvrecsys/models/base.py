@@ -13,8 +13,11 @@ class BaseConversationRecommender:
 		pass
 
 	def predict(self, test):
-		y_pred = [self._predict(row[0], row[1:-1]) for ix, row in test.iterrows()]
-		y_pred = np.array(y_pred)
-		return y_pred
+		predictions = []
+		for ix, row in test.iterrows():
+			y_pred = self._predict(row[0], row[1:-1])
+			predictions.append(y_pred)
+		predictions = np.array(predictions)
+		return predictions
 
 
