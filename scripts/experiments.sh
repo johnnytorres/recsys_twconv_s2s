@@ -2,112 +2,95 @@
 # exit on error
 set -e
 
-DATASET_NAME=$1
-MODEL_NAME=$2 # change to your model name
-RUN_MODE=$3
-
-[ "${DATASET_NAME}" == "" ] && echo "must specify dataset" && exit 1;
+[ "${DATASET}" == "" ] && echo "must specify dataset" && exit 1;
 [ "${SUBSET}" == "" ] && echo "must specify subset" && exit 1;
-[ "${MODEL_NAME}" == "" ] && echo "must specify model" && exit 1;
-[ "${RUN_MODE}" == "" ] && echo "must specify run mode" && exit 1;
+[ "${MODEL}" == "" ] && echo "must specify model" && exit 1;
+[ "${RUN}" == "" ] && echo "must specify run mode" && exit 1;
 [ "${TAG}" == "" ] && TAG=""
+[ "${EMBEDDING_PATH}" == "" ] && EMBEDDING_PATH="embeddings.vec"
+[ "${EMBEDDING_ENABLED}" == "" ] && EMBEDDING_ENABLED=0
+[ "${EMBEDDING_TRAINABLE}" == "" ] && EMBEDDING_TRAINABLE=0
+[ "${REUSE_JOBDIR}" == "" ] && REUSE_JOBDIR=0
+[ "${STORE}" == "" ] && STORE="local"
 
 BUCKET="mlresearchbucket"
 PACKAGE_NAME="twconvrecsys"
-JOB_DIR="gs://${BUCKET}/${PACKAGE_NAME}/${DATASET_NAME}/${MODEL_NAME}${TAG}"
-LOCAL_JOB_DIR=${HOME}/data/results/${PACKAGE_NAME}/${DATASET_NAME}/${MODEL_NAME}
-REGION="us-central1"
-PACKAGE_PATH=${PACKAGE_NAME} # this can be a gcs location to a zipped and uploaded package
-CURRENT_DATE=`date +%Y%m%d_%H%M%S`
-JOB_NAME=train_${PACKAGE_NAME}_${DATASET_NAME}_${SUBSET}_${MODEL_NAME}${TAG}_${CURRENT_DATE}
 
-echo "Job: ${JOB_NAME}"
-
-if [ "${RUN_MODE}" == "gcloud" ]
-	then
-	echo 'running gcloud'
-	gcloud auth activate-service-account --key-file=gcloud/credentials.json
-	gcloud ai-platform jobs submit training ${JOB_NAME} \
-					--stream-logs \
-					--region=${REGION} \
-					--runtime-version="1.14" \
-					--module-name=${PACKAGE_PATH}.task \
-					--package-path=${PACKAGE_PATH}  \
-					--config=config.yaml \
-					--job-dir=${JOB_DIR} \
-					-- \
-					--data-dir=${DATASET_NAME} \
-					--data-subdir=${SUBSET} \
-					--estimator=${MODEL_NAME} \
-					--train-files=train.tfrecords \
-					--eval-files=valid.tfrecords \
-					--test-files=test.tfrecords \
-					--vocab-path=vocabulary.txt \
-					--num-distractors=${NUM_DISTRACTORS} \
-					--max-input-len=${MAX_INPUT_LEN} \
-					--max-source-len=${MAX_SOURCE_LEN} \
-					--max-target-len=${MAX_TARGET_LEN} \
-					--train-size=${TRAIN_SIZE} \
-					--train-batch-size=${TRAIN_BATCH_SIZE} \
-					--num-epochs=${NUM_EPOCHS} \
-					--eval-batch-size=${EVAL_BATCH_SIZE} \
-					--learning-rate=${LEARNING_RATE} \
-					--embedding-size=${EMBEDDING_SIZE} \
-					--rnn-dim=${RNN_DIM} \
-					--train \
-					--test
+if [ ${STORE} == "gcloud" ]; then
+	JOB_DIR="gs://${BUCKET}/${PACKAGE_NAME}/${DATASET}_${SUBSET}/${MODEL}_${TAG}"
+	echo "storing results on google cloud: $JOB_DIR"
 else
-	if [ "${RUN_MODE}" == "glocal" ]
+	JOB_DIR=${HOME}/data/results/${PACKAGE_NAME}/${DATASET}_${SUBSET}/${MODEL}_${TAG}
+	echo "storing results locally: $JOB_DIR"
+fi
+
+
+
+if [ "${RUN}" == "gcloud" ]
 		then
-		echo 'running gcloud locally'
-		gcloud ai-platform local train \
-				--module-name=${PACKAGE_PATH}.task \
-				--package-path=${PACKAGE_PATH}  \
-				--job-dir=${LOCAL_JOB_DIR} \
+		echo 'training model on google cloud'
+		CURRENT_DATE=`date +%Y%m%d_%H%M%S`
+		JOB_NAME=train_${PACKAGE_NAME}_${DATASET}_${SUBSET}_${MODEL}_${TAG}_${CURRENT_DATE}
+		echo "Job: ${JOB_NAME}"
+		gcloud auth activate-service-account --key-file=gcloud/credentials.json
+		#--stream-logs \
+		gcloud ai-platform jobs submit training ${JOB_NAME} \
+				--region="us-central1" \
+				--runtime-version="1.14" \
+				--module-name=${PACKAGE_NAME}.task \
+				--package-path=${PACKAGE_NAME}  \
+				--config=config.yaml \
+				--scale-tier=BASIC_GPU \
+				--job-dir=${JOB_DIR} \
 				-- \
-				--data-dir=${DATASET_NAME} \
+				--data-dir=${DATASET} \
 				--data-subdir=${SUBSET} \
-				--estimator=${MODEL_NAME} \
+				--estimator=${MODEL} \
 				--train-files=train.tfrecords \
 				--eval-files=valid.tfrecords \
 				--test-files=test.tfrecords \
 				--vocab-path=vocabulary.txt \
+				--embedding-path=${EMBEDDING_PATH} \
+				--embedding-size=${EMBEDDING_SIZE} \
+				--embedding-trainable=${EMBEDDING_TRAINABLE} \
+				--embedding-enabled=${EMBEDDING_ENABLED} \
 				--num-distractors=${NUM_DISTRACTORS} \
 				--max-input-len=${MAX_INPUT_LEN} \
 				--max-source-len=${MAX_SOURCE_LEN} \
 				--max-target-len=${MAX_TARGET_LEN} \
-				--train-size=${TRAIN_SIZE} \
 				--train-batch-size=${TRAIN_BATCH_SIZE} \
 				--num-epochs=${NUM_EPOCHS} \
 				--eval-batch-size=${EVAL_BATCH_SIZE} \
 				--learning-rate=${LEARNING_RATE} \
-				--embedding-size=${EMBEDDING_SIZE} \
 				--rnn-dim=${RNN_DIM} \
+				--reuse-job-dir=${REUSE_JOBDIR} \
 				--train \
 				--test
-	else
-		echo 'running locally'
+else
+		echo 'training model locally'
 		python -m twconvrecsys.task \
-				--data-dir=${DATASET_NAME} \
+				--data-dir=${DATASET} \
 				--data-subdir=${SUBSET} \
-				--job-dir=${LOCAL_JOB_DIR} \
-				--estimator=${MODEL_NAME} \
+				--job-dir=${JOB_DIR} \
+				--estimator=${MODEL} \
 				--train-files=train.tfrecords \
 				--eval-files=valid.tfrecords \
 				--test-files=test.tfrecords \
 				--vocab-path=vocabulary.txt \
+				--embedding-path=${EMBEDDING_PATH} \
+				--embedding-size=${EMBEDDING_SIZE} \
+				--embedding-trainable=${EMBEDDING_TRAINABLE} \
+				--embedding-enabled=${EMBEDDING_ENABLED} \
 				--num-distractors=${NUM_DISTRACTORS} \
 				--max-input-len=${MAX_INPUT_LEN} \
 				--max-source-len=${MAX_SOURCE_LEN} \
 				--max-target-len=${MAX_TARGET_LEN} \
-				--train-size=${TRAIN_SIZE} \
 				--train-batch-size=${TRAIN_BATCH_SIZE} \
 				--num-epochs=${NUM_EPOCHS} \
 				--eval-batch-size=${EVAL_BATCH_SIZE} \
 				--learning-rate=${LEARNING_RATE} \
-				--embedding-size=${EMBEDDING_SIZE} \
 				--rnn-dim=${RNN_DIM} \
+				--reuse-job-dir=${REUSE_JOBDIR} \
 				--train \
 				--test
-	fi
 fi

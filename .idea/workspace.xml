@@ -2,21 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c25c6c6-8cd1-4139-a355-a4f62ad57c3c" name="Default Changelist" comment="refactor project">
-      <change afterPath="$PROJECT_DIR$/scripts/experiments-base.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twconvrecsys/metrics/ndgc.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/analysis/conversationstypes.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/eda_trec.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/eda_trec.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/eda_twconv_2011_trec.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/eda_twconv_2016_usersec.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/eda_twconv_2016_usersec.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/data.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/data.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/experiments-tfidf.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/data_spliting.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/use_case_sample_conversations.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/use_case_sample_conversations.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/data.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/experiments-base.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/experiments-rnn.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/experiments.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/experiments.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/results.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/results.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run-cloudml-deploy.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run-cloudml-local.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/twconvrecsys/data/csvreader.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/data/csvreader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecsys/metrics/precision.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/metrics/precision.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecsys/data/datasets.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/data/datasets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecsys/data/embeddings.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/data/embeddings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/twconvrecsys/metrics/report.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/metrics/report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecsys/models/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/models/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twconvrecsys/models/tfidf.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/models/tfidf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecsys/models/neural.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/models/neural.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecsys/parameters.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/parameters.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twconvrecsys/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/twconvrecsys/task.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +61,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/twconvrecsys/metrics" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -69,13 +76,6 @@
     <option name="myIpythonEnabled" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/gcloud" />
-      <recent name="$PROJECT_DIR$/scripts" />
-      <recent name="$PROJECT_DIR$/twconvrecusers/tests" />
-      <recent name="$PROJECT_DIR$/twconvrecusers/models" />
-      <recent name="$PROJECT_DIR$/twconvrecusers/io" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/twconvrecsys/metrics" />
       <recent name="$PROJECT_DIR$/scripts" />
@@ -83,8 +83,15 @@
       <recent name="$PROJECT_DIR$/twconvrecsys/models" />
       <recent name="$PROJECT_DIR$/twconvrecusers/datasets" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/gcloud" />
+      <recent name="$PROJECT_DIR$/twconvrecusers/tests" />
+      <recent name="$PROJECT_DIR$/twconvrecusers/models" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python.task random">
+  <component name="RunManager" selected="Python.task tfidf">
     <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
       <module name="twittercs" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -453,7 +460,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/twconvrecsys/task.py" />
-      <option name="PARAMETERS" value="--data-dir=~/data/twconv/twconv_2011_trec --data-subdir=sampledata --train-files=train.tfrecords --eval-files=valid.tfrecords --test-files=test.tfrecords --predict-files=train.tfrecords --vocab-path=vocabulary.txt --embedding-trainable --num-distractor=5 --max-input-len=10 --max-source-len=10 --max-target-len=10 --train-size=91 --train-batch-size=8 --num-epochs=2 --num-checkpoints=4 --eval-batch-size=20 --estimator=rnn --rnn-dim=300 --embedding-size=300 --train --test" />
+      <option name="PARAMETERS" value="--data-dir=~/data/twconv/twconv_2011_trec --data-subdir=sampledataconvs --train-files=train.tfrecords --eval-files=valid.tfrecords --test-files=test.tfrecords --predict-files=train.tfrecords --vocab-path=vocabulary.txt --embedding-path=embeddings.vec --embedding-trainable=0 --embedding-enabled=0 --embedding-size=50 --num-distractor=5 --max-input-len=10 --max-source-len=10 --max-target-len=10 --train-size=211 --train-batch-size=8 --num-epochs=2 --num-checkpoints=4 --eval-batch-size=20 --estimator=rnn --rnn-dim=300 --train --test" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -475,7 +482,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/twconvrecsys/task.py" />
-      <option name="PARAMETERS" value="--data-dir=~/data/twconv/twconv_2011_trec --data-subdir=alldata --estimator=tfidf" />
+      <option name="PARAMETERS" value="--data-dir=~/data/twconv/twconv_2011_trec --data-subdir=alldataconvs --estimator=tfidf" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -698,7 +705,15 @@
       <workItem from="1575841782440" duration="1070000" />
       <workItem from="1575844741931" duration="364000" />
       <workItem from="1576032251178" duration="2036000" />
-      <workItem from="1576215717958" duration="29884000" />
+      <workItem from="1576215717958" duration="30042000" />
+      <workItem from="1576517538185" duration="620000" />
+      <workItem from="1576607174905" duration="830000" />
+      <workItem from="1576608097766" duration="1499000" />
+      <workItem from="1576630220767" duration="13267000" />
+      <workItem from="1576807316842" duration="1136000" />
+      <workItem from="1576876079423" duration="9060000" />
+      <workItem from="1576888450184" duration="6134000" />
+      <workItem from="1576933631504" duration="3913000" />
     </task>
     <task id="LOCAL-00001" summary="refactor project">
       <created>1562518129393</created>
@@ -748,10 +763,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="refactor project" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576513879566">
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576946305486">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1576513879566" />
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1576946305486" />
     <state x="426" y="260" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1572836272590">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -776,10 +791,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="608" y="160" key="#xdebugger.evaluate/0.0.1440.900@0.0.1440.900" timestamp="1573310022179" />
-    <state width="1296" height="466" key="DebuggerActiveHint" timestamp="1575218745702">
+    <state width="1296" height="466" key="DebuggerActiveHint" timestamp="1576946057374">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1296" height="466" key="DebuggerActiveHint/0.0.1440.900@0.0.1440.900" timestamp="1575218745702" />
+    <state width="1296" height="466" key="DebuggerActiveHint/0.0.1440.900@0.0.1440.900" timestamp="1576946057374" />
     <state width="1296" height="466" key="DebuggerActiveHint/0.23.1440.839@0.23.1440.839" timestamp="1574983445929" />
     <state x="17" y="17" width="1406" height="866" maximized="true" key="DiffContextDialog" timestamp="1574791430561">
       <screen x="0" y="23" width="1440" height="839" />
@@ -790,25 +805,25 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="507" y="211" key="FileChooserDialogImpl/0.0.1440.900@0.0.1440.900" timestamp="1572218637811" />
-    <state width="1398" height="356" key="GridCell.Tab.0.bottom" timestamp="1576476024625">
+    <state width="1398" height="356" key="GridCell.Tab.0.bottom" timestamp="1576946319174">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="356" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1576476024625" />
+    <state width="1398" height="356" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1576946319174" />
     <state width="1398" height="337" key="GridCell.Tab.0.bottom/0.23.1440.839@0.23.1440.839" timestamp="1573253687261" />
-    <state width="1398" height="356" key="GridCell.Tab.0.center" timestamp="1576476024624">
+    <state width="1398" height="356" key="GridCell.Tab.0.center" timestamp="1576946319173">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="356" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1576476024624" />
+    <state width="1398" height="356" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1576946319173" />
     <state width="1398" height="337" key="GridCell.Tab.0.center/0.23.1440.839@0.23.1440.839" timestamp="1573253687260" />
-    <state width="1398" height="356" key="GridCell.Tab.0.left" timestamp="1576476024623">
+    <state width="1398" height="356" key="GridCell.Tab.0.left" timestamp="1576946319172">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="356" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1576476024623" />
+    <state width="1398" height="356" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1576946319172" />
     <state width="1398" height="337" key="GridCell.Tab.0.left/0.23.1440.839@0.23.1440.839" timestamp="1573253687254" />
-    <state width="1398" height="356" key="GridCell.Tab.0.right" timestamp="1576476024624">
+    <state width="1398" height="356" key="GridCell.Tab.0.right" timestamp="1576946319174">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="356" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1576476024624" />
+    <state width="1398" height="356" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1576946319174" />
     <state width="1398" height="337" key="GridCell.Tab.0.right/0.23.1440.839@0.23.1440.839" timestamp="1573253687261" />
     <state x="221" y="89" key="SettingsEditor" timestamp="1575044172402">
       <screen x="0" y="0" width="1440" height="900" />
@@ -826,10 +841,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="720" height="450" key="XDebugger.FullValuePopup/0.0.1440.900@0.0.1440.900" timestamp="1575067069873" />
-    <state x="608" y="224" key="com.intellij.ide.util.TipDialog" timestamp="1575593169791">
+    <state x="608" y="224" key="com.intellij.ide.util.TipDialog" timestamp="1576888453620">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="608" y="224" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1575593169791" />
+    <state x="608" y="224" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1576888453620" />
     <state x="608" y="224" key="com.intellij.ide.util.TipDialog/0.23.1440.839@0.23.1440.839" timestamp="1573861500111" />
     <state x="608" y="216" key="com.intellij.ide.util.TipDialog/2880.1800" timestamp="1572052248725" />
     <state x="346" y="146" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1573180897129">
@@ -840,10 +855,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="229" y="62" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1440.900@0.0.1440.900" timestamp="1576262616942" />
-    <state x="435" y="228" width="847" height="554" key="find.popup" timestamp="1575420920819">
+    <state x="435" y="228" width="847" height="554" key="find.popup" timestamp="1576936199564">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="435" y="228" width="847" height="554" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1575420920819" />
+    <state x="435" y="228" width="847" height="554" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1576936199564" />
     <state x="482" y="88" key="refactoring.ChangeSignatureDialog" timestamp="1573472764226">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -855,6 +870,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/twconvrecsys/models/neural.py</url>
+          <line>190</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint enabled="true" type="python-exception">
           <properties notifyOnTerminate="true" ignoreLibraries="true" exception="BaseException">
@@ -882,7 +904,7 @@
     <SUITE FILE_PATH="coverage/twconvrecsys$recall.coverage" NAME="recall Coverage Results" MODIFIED="1573874187524" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys/utils" />
     <SUITE FILE_PATH="coverage/twconvrecsys$tf_utils.coverage" NAME="tf_utils Coverage Results" MODIFIED="1575053938033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys/utils" />
     <SUITE FILE_PATH="coverage/twconvrecsys$inference.coverage" NAME="inference Coverage Results" MODIFIED="1573405276940" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys/tests" />
-    <SUITE FILE_PATH="coverage/twconvrecsys$task_tfidf.coverage" NAME="task tfidf Coverage Results" MODIFIED="1576454486194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys" />
+    <SUITE FILE_PATH="coverage/twconvrecsys$task_tfidf.coverage" NAME="task tfidf Coverage Results" MODIFIED="1576946238724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys" />
     <SUITE FILE_PATH="coverage/twconvrecsys$recall__1_.coverage" NAME="recall (1) Coverage Results" MODIFIED="1575475924933" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys/metrics" />
     <SUITE FILE_PATH="coverage/twconvrecsys$task__tfidf.coverage" NAME="task -tfidf Coverage Results" MODIFIED="1573244861750" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys" />
     <SUITE FILE_PATH="coverage/twconvrecsys$dataset.coverage" NAME="dataset Coverage Results" MODIFIED="1574990014870" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys/utils" />
@@ -891,7 +913,7 @@
     <SUITE FILE_PATH="coverage/twconvrecusers$profiles_builder.coverage" NAME="profiles_builder Coverage Results" MODIFIED="1563854659441" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecusers/preprocessing" />
     <SUITE FILE_PATH="coverage/twconvrecsys$task_bilstm.coverage" NAME="task bilstm Coverage Results" MODIFIED="1573422906076" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys" />
     <SUITE FILE_PATH="coverage/twconvrecsys$report.coverage" NAME="report Coverage Results" MODIFIED="1573478559418" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys/metrics" />
-    <SUITE FILE_PATH="coverage/twconvrecsys$task_rnn.coverage" NAME="task rnn Coverage Results" MODIFIED="1575502393984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys" />
+    <SUITE FILE_PATH="coverage/twconvrecsys$task_rnn.coverage" NAME="task rnn Coverage Results" MODIFIED="1576890013065" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys" />
     <SUITE FILE_PATH="coverage/twconvrecsys$concat.coverage" NAME="concat Coverage Results" MODIFIED="1573405324549" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys/tests" />
     <SUITE FILE_PATH="coverage/twconvrecsys$report_rnn.coverage" NAME="report rnn Coverage Results" MODIFIED="1576263744068" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys/metrics" />
     <SUITE FILE_PATH="coverage/twconvrecsys$pytest_in_tfidf_py.coverage" NAME="pytest in tfidf.py Coverage Results" MODIFIED="1573474031555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/twconvrecsys/tests" />

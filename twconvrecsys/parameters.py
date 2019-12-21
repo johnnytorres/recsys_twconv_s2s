@@ -61,16 +61,7 @@ def initialise_params(args_parser):
         default='tf'
     )
 
-    args_parser.add_argument(
-        '--embedding-path',
-        help='Path to embeddings file, if data-dir is provided, the path is concatenated',
-        type=lambda x: os.path.expanduser(x)
-    )
-    args_parser.add_argument(
-        '--vocab-path',
-        help='Path to vocabulary file, if data-dir is provided, the path is concatenated',
-        type=lambda x: os.path.expanduser(x)
-    )
+
     ###########################################
 
     # Experiment arguments - training
@@ -157,25 +148,46 @@ def initialise_params(args_parser):
     # Features processing arguments
 
     args_parser.add_argument(
-        '--embedding-size',
-        help='Number of embedding dimensions for categorical columns. value of 0 means no embedding',
-        default=50,
-        type=int
+        '--vocab-path',
+        help='Path to vocabulary file, if data-dir is provided, the path is concatenated',
+        type=lambda x: os.path.expanduser(x)
     )
-    args_parser.add_argument(
-        '--embedding-trainable',
-        help="""\
-            If set to True, the embeddings will be fine tuned during training
-            """,
-        action='store_true',
-        #default=True,
-    )
+
     args_parser.add_argument(
         '--vocab-size',
         help='Max number of features to use (-1: use all)',  # todo: pending implementation
         default=-1,
         type=int
     )
+
+    args_parser.add_argument(
+        '--embedding-path',
+        help='Path to embeddings file, if data-dir is provided, the path is concatenated',
+        type=lambda x: os.path.expanduser(x)
+    )
+    args_parser.add_argument(
+        '--embedding-size',
+        help='Number of embedding dimensions for categorical columns. value of 0 means no embedding',
+        default=50,
+        type=int
+    )
+    args_parser.add_argument(
+        '--embedding-enabled',
+        type=lambda x: bool(int(x)),
+        default=False,
+        help="""\
+            If set to True, the embeddings will be used training
+            """
+    )
+    args_parser.add_argument(
+        '--embedding-trainable',
+        type=lambda x: bool(int(x)),
+        default=False,
+        help="""\
+            If set to True, the embeddings will be fine tuned during training
+            """
+    )
+
 
     ###########################################
 
@@ -303,7 +315,7 @@ def initialise_params(args_parser):
     # )
     args_parser.add_argument(
         '--reuse-job-dir',
-        action='store_true',
+        type=lambda x: bool(int(x)),
         default=False,
         help="""\
             Flag to decide if the model checkpoint should

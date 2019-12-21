@@ -4,9 +4,9 @@ from setuptools import setup
 REQUIRED_PACKAGES = [
     'tensorflow==1.14.0',
     'Keras==2.2.4',
-    'scikit-learn>=0.21',
-    'pandas>=0.24',
-    'tqdm>=4.32']
+    'scikit-learn==0.21',
+    'pandas==0.24',
+]
 
 # with open('requirements.txt','r') as f:
 #     REQUIRED_PACKAGES.append(f.readlines())

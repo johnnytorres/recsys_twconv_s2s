@@ -19,7 +19,7 @@ vocab_array = None
 vocab_dict = None
 vocab_size = None
 embedding_vectors = None
-embbeding_dict = None
+embedding_dict = None
 
 
 
@@ -174,12 +174,13 @@ def create_regressor(config):
 def build_initial_embedding_matrix(vocab_dict, embedding_dict, embedding_vectors, embedding_dim):
     initial_embeddings = np.random.uniform(-0.25, 0.25, (len(vocab_dict), embedding_dim)).astype("float32")
     for word, glove_word_idx in embedding_dict.items():
-        word_idx = vocab_dict.get(word)
+        word_idx = vocab_dict[word]
         initial_embeddings[word_idx, :] = embedding_vectors[glove_word_idx]
     return initial_embeddings
 
+
 def build_embedding_layer(HYPER_PARAMS):
-    global vocab_array, vocab_dict, vocab_size, embedding_vectors, embbeding_dict
+    global vocab_array, vocab_dict, vocab_size, embedding_vectors, embedding_dict
 
     if vocab_array is None:
         vocab_array, vocab_dict, vocab_size = embeddings.load_vocab(HYPER_PARAMS.vocab_path)
@@ -187,9 +188,9 @@ def build_embedding_layer(HYPER_PARAMS):
     if HYPER_PARAMS.embedding_path:
         tf.compat.v1.logging.info('loading embeddings...')
         if embedding_vectors is None:
-            embedding_vectors, embbeding_dict = embeddings.load_embedding_vectors(
+            embedding_vectors, embedding_dict = embeddings.load_embedding_vectors(
                 HYPER_PARAMS.embedding_path, set(vocab_array))
-        initializer = build_initial_embedding_matrix(vocab_dict, embbeding_dict, embedding_vectors,
+        initializer = build_initial_embedding_matrix(vocab_dict, embedding_dict, embedding_vectors,
                                                      HYPER_PARAMS.embedding_size)
         embedding_layer = tf.get_variable(
             name=EMBEDDING_LAYER_NAME,
@@ -198,8 +199,7 @@ def build_embedding_layer(HYPER_PARAMS):
         )
     else:
         tf.compat.v1.logging.info('No embeddings specified, starting with random embeddings!')
-        initializer = tf.random_normal_initializer(-0.25, 0.25)  # todo: maybe hyperparam?
-        #initializer = tf.glorot_uniform_initializer()
+        initializer = tf.random_normal_initializer(-0.25, 0.25)
 
         if HYPER_PARAMS.vocab_size == -1:
             HYPER_PARAMS.vocab_size = vocab_size

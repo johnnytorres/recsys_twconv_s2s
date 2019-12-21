@@ -72,37 +72,74 @@ for predictions
 {'source': <tf.Tensor 'IteratorGetNext:0' shape=(?, 10) dtype=int64>, 'source_len': <tf.Tensor 'IteratorGetNext:1' shape=(?, 1) dtype=int64>, 'target': <tf.Tensor 'IteratorGetNext:2' shape=(?, 10) dtype=int64>, 'target_len': <tf.Tensor 'IteratorGetNext:3' shape=(?, 1) dtype=int64>}
 
 
-experiments
+sample data experiments
 ```shell script
-./scripts/experiments-base.sh twconv_2011_trec_v6 alldata random
-./scripts/experiments-base.sh twconv_2011_trec_v8 alldata tfidf
-./scripts/experiments-rnn.sh twconv_2011_trec_v7 alldata 122960 rnn
-./scripts/experiments-rnn.sh twconv_2011_trec_v7 alldata 122960 lstm
-./scripts/experiments-rnn.sh twconv_2011_trec_v7 alldata 122960 bilstm
-
-./scripts/experiments-rnn.sh twconv_2011_trec_v8 alldata 221328 rnn
-./scripts/experiments-rnn.sh twconv_2011_trec_v8 alldata 221328 lstm
-./scripts/experiments-rnn.sh twconv_2011_trec_v8 alldata 221328 bilstm
-
-
-./scripts/experiments-base.sh twconv_2016_usersec_v7 alldata random
-./scripts/experiments-base.sh twconv_2016_usersec_v7 alldata tfidf
-./scripts/experiments-rnn.sh twconv_2016_usersec_v7 alldata 74570 rnn
-./scripts/experiments-rnn.sh twconv_2016_usersec_v7 alldata 74570 lstm
-./scripts/experiments-rnn.sh twconv_2016_usersec_v7 alldata 74570 bilstm
-
-./scripts/experiments-base.sh twconv_2016_usersec_v8 alldata random
-./scripts/experiments-base.sh twconv_2016_usersec_v8 alldata tfidf
-./scripts/experiments-rnn.sh twconv_2016_usersec_v8 alldata 134226 rnn
-./scripts/experiments-rnn.sh twconv_2016_usersec_v8 alldata 134226 lstm
-./scripts/experiments-rnn.sh twconv_2016_usersec_v8 alldata 134226 bilstm
-
-
-
-./scripts/experiments-rnn.sh twconv_2016_electionus_v1 alldata 67881 rnn
+make run \
+    DATASET=twconv_2011_trec_v10 \
+    SUBSET=sampledataconvs \
+    MODEL=rnn \
+    TRAIN_BATCH_SIZE=8 \
+    NUM_EPOCHS=2 \
+    MAX_INPUT_LEN=10 \
+    MAX_SOURCE_LEN=10 \
+    MAX_TARGET_LEN=10 \
+    NUM_DISTRACTORS=5 \
+    EMBEDDING_SIZE=300 \
+    EMBEDDING_ENABLED=1 \
+    EMBEDDING_TRAINABLE=1 \
+    RNN_DIM=50
 ```
 
-metrics
+experiments for benchmarking models
+```shell script
+make run DATASET=twconv_2011_trec_v9 SUBSET=alldataconvs MODEL=random
+make run DATASET=twconv_2011_trec_v9 SUBSET=alldataconvs MODEL=tfidf
+make run DATASET=twconv_2011_trec_v9 SUBSET=alldataconvs MODEL=rnn
+make run DATASET=twconv_2011_trec_v9 SUBSET=alldataconvs MODEL=lstm
+make run DATASET=twconv_2011_trec_v9 SUBSET=alldataconvs MODEL=bilstm
+
+make run DATASET=twconv_2011_trec_v9 SUBSET=alldatausers MODEL=random
+make run DATASET=twconv_2011_trec_v9 SUBSET=alldatausers MODEL=tfidf
+make run DATASET=twconv_2011_trec_v9 SUBSET=alldatausers rnn
+make run DATASET=twconv_2011_trec_v9 SUBSET=alldatausers lstm
+make run DATASET=twconv_2011_trec_v9 SUBSET=alldatausers bilstm
+
+make run DATASET=twconv_2016_usersec_v9 SUBSET=alldataconvs random
+make run DATASET=twconv_2016_usersec_v9 SUBSET=alldataconvs tfidf
+make run DATASET=twconv_2016_usersec_v9 SUBSET=alldataconvs rnn
+make run DATASET=twconv_2016_usersec_v9 SUBSET=alldataconvs lstm
+make run DATASET=twconv_2016_usersec_v9 SUBSET=alldataconvs bilstm
+
+make run DATASET=twconv_2016_usersec_v9 SUBSET=alldatausers random
+make run DATASET=twconv_2016_usersec_v9 SUBSET=alldatausers tfidf
+make run DATASET=twconv_2016_usersec_v9 SUBSET=alldatausers rnn
+make run DATASET=twconv_2016_usersec_v9 SUBSET=alldatausers lstm
+make run DATASET=twconv_2016_usersec_v9 SUBSET=alldatausers bilstm
+
+
+```
+
+experiments for embeddings
+```shell script
+make run DATASET=twconv_2011_trec_v10 SUBSET=alldataconvs MODEL=rnn EMBEDDING_ENABLED=1 EMBEDDING_TRAINABLE=0 RUN=gcloud STORE=gcloud TAG="embeddings"
+make run DATASET=twconv_2011_trec_v10 SUBSET=alldataconvs MODEL=rnn EMBEDDING_ENABLED=1 EMBEDDING_TRAINABLE=1 RUN=gcloud STORE=gcloud TAG="embeddings_trainable"
+
+make run DATASET=twconv_2016_usersec_v10 SUBSET=alldataconvs MODEL=rnn EMBEDDING_ENABLED=1 EMBEDDING_TRAINABLE=0 RUN=gcloud STORE=gcloud TAG="embeddings"
+make run DATASET=twconv_2016_usersec_v10 SUBSET=alldataconvs MODEL=rnn EMBEDDING_ENABLED=1 EMBEDDING_TRAINABLE=1 RUN=gcloud STORE=gcloud TAG="embeddings_trainable"
+```
+
+experiments for train size
+```shell script
+make run DATASET=twconv_2011_trec_v10 SUBSET=alldataconvs_test20 MODEL=rnn RUN=gcloud STORE=gcloud
+make run DATASET=twconv_2011_trec_v10 SUBSET=alldataconvs_test30 MODEL=rnn RUN=gcloud STORE=gcloud
+make run DATASET=twconv_2011_trec_v10 SUBSET=alldataconvs_test40 MODEL=rnn RUN=gcloud STORE=gcloud
+
+make run DATASET=twconv_2016_usersec_v10 SUBSET=alldataconvs_test20 MODEL=rnn RUN=gcloud STORE=gcloud
+make run DATASET=twconv_2016_usersec_v10 SUBSET=alldataconvs_test30 MODEL=rnn RUN=gcloud STORE=gcloud
+make run DATASET=twconv_2016_usersec_v10 SUBSET=alldataconvs_test40 MODEL=rnn RUN=gcloud STORE=gcloud
+```
+
+collect results and calculate metrics
 ```shell script
 ./scripts/results.sh
 ```

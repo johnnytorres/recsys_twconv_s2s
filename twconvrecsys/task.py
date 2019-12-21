@@ -4,7 +4,6 @@ import argparse
 from datetime import datetime
 
 import numpy as np
-from tqdm import tqdm
 
 import tensorflow as tf
 from tensorflow.python import debug as tf_debug
@@ -388,7 +387,7 @@ def run_deep_recsys(args):
 def run_baseline_recsys(args):
     data_handler = DataHandler()
     predictor = get_model(args)
-    train, valid, test = data_handler.load_data(args.data_dir)
+    train, valid, test = data_handler.load_data(args)
     predictor.train(train)
     y_pred = predictor.predict(test)
     y_true = test.label.values

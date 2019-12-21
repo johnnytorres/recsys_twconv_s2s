@@ -1,11 +1,8 @@
 
 import os
-import csv
-import argparse
 import array
 import numpy as np
 import tensorflow as tf
-from tqdm import tqdm
 from collections import defaultdict
 
 
@@ -16,7 +13,8 @@ def load_vocab(filename):
 	with tf.gfile.GFile(filename) as f:
 		vocab = f.read().splitlines()
 	dct = defaultdict(int)
-	for idx, word in tqdm(enumerate(vocab), 'loading vocabulary', total=vocab_size):
+	tf.compat.v1.logging.info('loading vocabulary...')
+	for idx, word in enumerate(vocab):
 		dct[word] = idx
 	tf.compat.v1.logging.info('loading vocabulary... found {} words'.format(len(dct)))
 	return [vocab, dct, vocab_size]
@@ -36,7 +34,8 @@ def load_embedding_vectors(embedding_path, vocab_dict, small_embedding_path=None
 	with tf.gfile.GFile(embedding_path) as f:
 		num_embeddings, embeddings_dim  = next(f).split(' ')
 		num_embeddings=int(num_embeddings)
-		for _, line in tqdm( enumerate(f), 'loading embeddings' , total=num_embeddings):
+		tf.compat.v1.logging.info('loading embeddings...')
+		for _, line in enumerate(f):
 			tokens = line.rstrip().split(" ")
 			word = tokens[0]
 			entries = tokens[1:]
@@ -58,40 +57,5 @@ def load_embedding_vectors(embedding_path, vocab_dict, small_embedding_path=None
 	return [np.array(vectors).reshape(num_vectors, word_dim), dct]
 
 
-def run(args):
-	tf.compat.v1.logging.set_verbosity(args.verbosity)
-	vocab, vocab_dic, vocab_size = load_vocab(args.vocab_path)
-	reduced_embeddings_path = os.path.join(os.path.split(args.vocab_path)[0], 'embeddings.vec')
-	vectors, vectors_ix = load_embedding_vectors(args.embedding_path, vocab_dic, reduced_embeddings_path)
-	oov = []
-	
-	for word in tqdm(vocab, 'extracting oov', total=vocab_size):
-		if word not in vectors_ix:
-			oov.append([word])
-			
-	oov_path = os.path.join(os.path.split(args.vocab_path)[0], 'oov_words.txt')
-
-	with open(oov_path, 'w') as f:
-		csvwriter = csv.writer(f)
-		csvwriter.writerows(oov)
-	
-	print('done')
 
 
-if __name__=='__main__':
-	parser = argparse.ArgumentParser()
-	parser.add_argument('vocab_path', type=lambda x: os.path.expanduser(x))
-	parser.add_argument('embedding_path', type=lambda x: os.path.expanduser(x))
-	parser.add_argument(
-		'--verbosity',
-		choices=[
-			'DEBUG',
-			'ERROR',
-			'FATAL',
-			'INFO',
-			'WARN'
-		],
-		default='INFO',
-	)
-	
-	run(parser.parse_args())

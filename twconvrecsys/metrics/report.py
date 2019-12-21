@@ -15,7 +15,7 @@ def generate_benchmark(args):
     results_path = os.path.join(base_results_dir, 'benchmarking.csv')
 
     data_handler = DataHandler()
-    test = data_handler.load_test_data(args.data_dir)
+    test = data_handler.load_test_data(args)
 
     if os.path.exists(results_path):
         os.remove(results_path)
