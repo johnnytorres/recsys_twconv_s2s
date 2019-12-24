@@ -67,6 +67,7 @@ def generate_benchmark(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--data-dir', type=lambda path: os.path.expanduser(path))
+    parser.add_argument('--data-subdir', type=lambda path: os.path.expanduser(path))
     parser.add_argument('--job-dir', type=lambda path: os.path.expanduser(path))
     generate_benchmark(parser.parse_args())
 

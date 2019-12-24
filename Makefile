@@ -11,9 +11,10 @@ SUBSET=sampledataconvs # specify subset (sample or alldata)
 MODEL=rnn # specify the model (rnn, lstm, bilstm)
 RUN="local" # local or gcloud
 STORE="local" # store results local or gcloud
-REUSE_JOBDIR=0
+REUSE_JOBDIR=1
 EMBEDDING_ENABLED=0
 EMBEDDING_TRAINABLE=0
+TAG=
 
 TRAIN_BATCH_SIZE=64
 EVAL_BATCH_SIZE=128
@@ -32,6 +33,7 @@ export MODEL
 export RUN
 export STORE
 export REUSE_JOBDIR
+export TAG
 export EMBEDDING_ENABLED
 export EMBEDDING_TRAINABLE
 export TRAIN_BATCH_SIZE
@@ -53,6 +55,6 @@ docker-build:
 	docker build -f Dockerfile -t ${IMAGE_URI} .
 
 run:
-	./scripts/experiments.sh
+	./scripts/run.sh
 
 

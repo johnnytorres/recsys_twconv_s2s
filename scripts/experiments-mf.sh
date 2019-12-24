@@ -17,4 +17,4 @@ export NUM_DISTRACTORS=9
 export EMBEDDING_SIZE=16
 export LEARNING_RATE=0.0001
 
-./scripts/experiments.sh ${DATASET} ${MODEL} ${RUN_MODE}
+./scripts/run.sh ${DATASET} ${MODEL} ${RUN_MODE}

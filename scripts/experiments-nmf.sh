@@ -18,4 +18,4 @@ export EMBEDDING_SIZE=300
 export RNN_DIM=300
 export LEARNING_RATE=0.0001
 
-./scripts/experiments.sh ${DATASET} ${MODEL} ${RUN_MODE}
+./scripts/run.sh ${DATASET} ${MODEL} ${RUN_MODE}
