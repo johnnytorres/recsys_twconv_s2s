@@ -5,10 +5,10 @@
       <change afterPath="$PROJECT_DIR$/../../stats/powerlaw/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../stats/powerlaw/.idea/modules.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../stats/powerlaw/.idea/powerlaw.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/twconvrecsys.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/twconvrecsys.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/conversationstypes.json" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/conversationstypes.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/eda_conversations-Copy1.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/use_case_sample_conversations.ipynb" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -698,7 +698,7 @@
       <workItem from="1576807316842" duration="1136000" />
       <workItem from="1576876079423" duration="9060000" />
       <workItem from="1576888450184" duration="6134000" />
-      <workItem from="1576933631504" duration="21644000" />
+      <workItem from="1576933631504" duration="22117000" />
     </task>
     <task id="LOCAL-00001" summary="refactor project">
       <created>1562518129393</created>
