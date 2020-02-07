@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c25c6c6-8cd1-4139-a355-a4f62ad57c3c" name="Default Changelist" comment="refactor project">
-      <change afterPath="$PROJECT_DIR$/../../stats/powerlaw/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../stats/powerlaw/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../stats/powerlaw/.idea/powerlaw.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/conversationstypes.json" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/conversationstypes.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/eda_conversations-Copy1.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/use_case_sample_conversations.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/usernetwork.json" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/usernetwork.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +27,7 @@
         <option value="johnnytorres &lt;johnnytorres83@gmail.com&gt;" />
       </list>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../stats/powerlaw" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JupyterTrust" id="8aaa88a7-ca39-4e22-8651-2e4ab22ce09f" />
   <component name="ProjectId" id="1OGKCuv8ccUk0Ho9Mr9E8M9XxAq" />
@@ -53,7 +51,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/twconvrecsys/models/neural.py" />
   </component>
   <component name="PyConsoleOptionsProvider">
@@ -558,22 +556,22 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.dataset" />
+      <item itemvalue="Python.ndgc" />
+      <item itemvalue="Python.precision" />
+      <item itemvalue="Python.recall (1)" />
+      <item itemvalue="Python.report cft" />
       <item itemvalue="Python.report mf" />
       <item itemvalue="Python.report rnn" />
-      <item itemvalue="Python.report cft" />
       <item itemvalue="Python.report tfidf" />
       <item itemvalue="Python.task bilstm" />
       <item itemvalue="Python.task lstm" />
       <item itemvalue="Python.task mf" />
       <item itemvalue="Python.task nmf" />
+      <item itemvalue="Python.task random" />
       <item itemvalue="Python.task rnn" />
       <item itemvalue="Python.task tfidf" />
-      <item itemvalue="Python.task random" />
-      <item itemvalue="Python.dataset" />
-      <item itemvalue="Python.precision" />
-      <item itemvalue="Python.recall (1)" />
       <item itemvalue="Python.tf_utils" />
-      <item itemvalue="Python.ndgc" />
     </list>
     <recent_temporary>
       <list>
@@ -698,7 +696,9 @@
       <workItem from="1576807316842" duration="1136000" />
       <workItem from="1576876079423" duration="9060000" />
       <workItem from="1576888450184" duration="6134000" />
-      <workItem from="1576933631504" duration="22117000" />
+      <workItem from="1576933631504" duration="22195000" />
+      <workItem from="1577419456482" duration="495000" />
+      <workItem from="1581105801414" duration="559000" />
     </task>
     <task id="LOCAL-00001" summary="refactor project">
       <created>1562518129393</created>
@@ -744,6 +744,9 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/../../stats/powerlaw" />
+    </ignored-roots>
     <MESSAGE value="refactor project" />
     <option name="LAST_COMMIT_MESSAGE" value="refactor project" />
   </component>
@@ -786,34 +789,30 @@
     </state>
     <state x="17" y="17" width="1406" height="866" maximized="true" key="DiffContextDialog/0.0.1440.900@0.0.1440.900" timestamp="1574791408882" />
     <state x="100" y="100" width="1240" height="700" maximized="true" key="DiffContextDialog/0.23.1440.839@0.23.1440.839" timestamp="1574791430561" />
-    <state x="507" y="211" key="FileChooserDialogImpl" timestamp="1572218637811">
+    <state width="1398" height="356" key="GridCell.Tab.0.bottom" timestamp="1577175164595">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="507" y="211" key="FileChooserDialogImpl/0.0.1440.900@0.0.1440.900" timestamp="1572218637811" />
-    <state width="1398" height="356" key="GridCell.Tab.0.bottom" timestamp="1577068386722">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="1398" height="356" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1577068386722" />
+    <state width="1398" height="356" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1577175164595" />
     <state width="1398" height="337" key="GridCell.Tab.0.bottom/0.23.1440.839@0.23.1440.839" timestamp="1573253687261" />
-    <state width="1398" height="356" key="GridCell.Tab.0.center" timestamp="1577068386720">
+    <state width="1398" height="356" key="GridCell.Tab.0.center" timestamp="1577175164594">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="356" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1577068386720" />
+    <state width="1398" height="356" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1577175164594" />
     <state width="1398" height="337" key="GridCell.Tab.0.center/0.23.1440.839@0.23.1440.839" timestamp="1573253687260" />
-    <state width="1398" height="356" key="GridCell.Tab.0.left" timestamp="1577068386719">
+    <state width="1398" height="356" key="GridCell.Tab.0.left" timestamp="1577175164593">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="356" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1577068386719" />
+    <state width="1398" height="356" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1577175164593" />
     <state width="1398" height="337" key="GridCell.Tab.0.left/0.23.1440.839@0.23.1440.839" timestamp="1573253687254" />
-    <state width="1398" height="356" key="GridCell.Tab.0.right" timestamp="1577068386721">
+    <state width="1398" height="356" key="GridCell.Tab.0.right" timestamp="1577175164594">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="356" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1577068386721" />
+    <state width="1398" height="356" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1577175164594" />
     <state width="1398" height="337" key="GridCell.Tab.0.right/0.23.1440.839@0.23.1440.839" timestamp="1573253687261" />
-    <state x="221" y="89" key="SettingsEditor" timestamp="1575044172402">
+    <state x="221" y="89" key="SettingsEditor" timestamp="1581105820516">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1575044172402" />
+    <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1581105820516" />
     <state x="484" y="161" key="VCS.ChangeListViewerDialog" timestamp="1573308234356">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -826,12 +825,11 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="720" height="450" key="XDebugger.FullValuePopup/0.0.1440.900@0.0.1440.900" timestamp="1575067069873" />
-    <state x="608" y="224" key="com.intellij.ide.util.TipDialog" timestamp="1576888453620">
+    <state x="608" y="224" key="com.intellij.ide.util.TipDialog" timestamp="1581105803314">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="608" y="224" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1576888453620" />
+    <state x="608" y="224" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1581105803314" />
     <state x="608" y="224" key="com.intellij.ide.util.TipDialog/0.23.1440.839@0.23.1440.839" timestamp="1573861500111" />
-    <state x="608" y="216" key="com.intellij.ide.util.TipDialog/2880.1800" timestamp="1572052248725" />
     <state x="346" y="146" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1573180897129">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
