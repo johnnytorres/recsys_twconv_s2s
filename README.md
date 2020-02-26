@@ -1,6 +1,6 @@
 
 
-Code for implementation of the model in our paper:
+Code for implementation of the model in our paper "Seq2Seq models for recommending short text conversations":
 https://doi.org/10.1016/j.eswa.2020.113270
  
 To run the experiments, we recommend to create the python virtual environment and install prerequisites including Tensorflow.
